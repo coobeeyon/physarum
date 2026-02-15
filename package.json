@@ -1,0 +1,25 @@
+{
+  "name": "coobeyon-physarum",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "build": "tsc --noEmit",
+    "test": "bun test",
+    "lint": "biome check src/",
+    "lint:fix": "biome check --write src/",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "canvas": "3.1.0",
+    "viem": "2.27.2",
+    "@zoralabs/protocol-sdk": "0.13.15",
+    "@neynar/nodejs-sdk": "3.131.0",
+    "pinata": "2.0.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/bun": "1.2.4",
+    "typescript": "5.7.3"
+  }
+}
