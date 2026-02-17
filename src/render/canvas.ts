@@ -1,15 +1,21 @@
 import { createCanvas, type ImageData as CanvasImageData } from "canvas"
-import { applyColormap } from "#engine/colormap.ts"
-import type { ColormapName } from "#types/physarum.ts"
-import { type Result, ok, err } from "#types/result.ts"
+import { applyColormap, applyColorTrail, applyMultiPopulationColors } from "#engine/colormap.ts"
+import type { ColormapName, FoodImageData, SimulationResult } from "#types/physarum.ts"
+import { type Result, ok } from "#types/result.ts"
 
 export const renderPng = (
-	trailMap: Float32Array,
-	width: number,
-	height: number,
-	colormap: ColormapName,
+	result: SimulationResult,
+	colormap?: ColormapName,
+	foodImageRgb?: FoodImageData,
 ): Result<{ png: Buffer }> => {
-	const rgba = applyColormap(trailMap, width, height, colormap)
+	const { trailMaps, populations, populationCount, width, height, colorTrailR, colorTrailG, colorTrailB } = result
+
+	const rgba = colorTrailR && colorTrailG && colorTrailB
+		? applyColorTrail(colorTrailR, colorTrailG, colorTrailB, width, height, foodImageRgb)
+		: populationCount > 1
+			? applyMultiPopulationColors(trailMaps, populations, width, height)
+			: applyColormap(trailMaps[0], width, height, colormap ?? "magma")
+
 	const canvas = createCanvas(width, height)
 	const ctx = canvas.getContext("2d")
 	const imageData = ctx.createImageData(width, height)

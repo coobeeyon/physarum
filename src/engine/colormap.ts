@@ -1,4 +1,5 @@
-import type { ColormapName } from "#types/physarum.ts"
+import type { ColormapName, PopulationConfig } from "#types/physarum.ts"
+import type { FoodImageData } from "#engine/food.ts"
 
 type LUT = ReadonlyArray<readonly [number, number, number]>
 
@@ -90,6 +91,128 @@ export const applyColormap = (
 		rgba[outIdx] = lut[lutIdx]
 		rgba[outIdx + 1] = lut[lutIdx + 1]
 		rgba[outIdx + 2] = lut[lutIdx + 2]
+		rgba[outIdx + 3] = 255
+	}
+
+	return rgba
+}
+
+/** Additive blend of multiple population trail maps using per-population colors */
+export const applyMultiPopulationColors = (
+	trailMaps: Float32Array[],
+	populations: readonly PopulationConfig[],
+	width: number,
+	height: number,
+): Uint8ClampedArray => {
+	const size = width * height
+	const rgba = new Uint8ClampedArray(size * 4)
+
+	for (let i = 0; i < size; i++) {
+		let r = 0
+		let g = 0
+		let b = 0
+
+		for (let p = 0; p < trailMaps.length; p++) {
+			const intensity = trailMaps[p][i]
+			const [pr, pg, pb] = populations[p].color
+			r += intensity * pr
+			g += intensity * pg
+			b += intensity * pb
+		}
+
+		const outIdx = i * 4
+		rgba[outIdx] = Math.min(r, 255)
+		rgba[outIdx + 1] = Math.min(g, 255)
+		rgba[outIdx + 2] = Math.min(b, 255)
+		rgba[outIdx + 3] = 255
+	}
+
+	return rgba
+}
+
+/** Two-pass separable box blur on a [0,1] channel */
+const blurChannel = (src: Float32Array, width: number, height: number, radius: number): Float32Array => {
+	const size = width * height
+	const tmp = new Float32Array(size)
+	const out = new Float32Array(size)
+	const diam = radius * 2 + 1
+
+	// Horizontal pass
+	for (let y = 0; y < height; y++) {
+		const row = y * width
+		let sum = 0
+		// Seed the running sum with clamped left edge
+		for (let dx = -radius; dx <= radius; dx++) {
+			sum += src[row + Math.max(0, Math.min(dx, width - 1))]
+		}
+		tmp[row] = sum / diam
+		for (let x = 1; x < width; x++) {
+			const add = Math.min(x + radius, width - 1)
+			const drop = Math.max(x - radius - 1, 0)
+			sum += src[row + add] - src[row + drop]
+			tmp[row + x] = sum / diam
+		}
+	}
+
+	// Vertical pass
+	for (let x = 0; x < width; x++) {
+		let sum = 0
+		for (let dy = -radius; dy <= radius; dy++) {
+			sum += tmp[Math.max(0, Math.min(dy, height - 1)) * width + x]
+		}
+		out[x] = sum / diam
+		for (let y = 1; y < height; y++) {
+			const add = Math.min(y + radius, height - 1)
+			const drop = Math.max(y - radius - 1, 0)
+			sum += tmp[add * width + x] - tmp[drop * width + x]
+			out[y * width + x] = sum / diam
+		}
+	}
+
+	return out
+}
+
+/** Convert normalized [0,1] RGB color trail maps to RGBA pixels.
+ *  When foodImageRgb is provided, an ultra-blurred version is composited as background. */
+export const applyColorTrail = (
+	r: Float32Array,
+	g: Float32Array,
+	b: Float32Array,
+	width: number,
+	height: number,
+	foodImageRgb?: FoodImageData,
+): Uint8ClampedArray => {
+	const size = width * height
+	const rgba = new Uint8ClampedArray(size * 4)
+
+	// Blur food image for background
+	let bgR: Float32Array | undefined
+	let bgG: Float32Array | undefined
+	let bgB: Float32Array | undefined
+	if (foodImageRgb) {
+		const radius = Math.round(Math.max(width, height) * 0.025)
+		bgR = blurChannel(foodImageRgb.r, width, height, radius)
+		bgG = blurChannel(foodImageRgb.g, width, height, radius)
+		bgB = blurChannel(foodImageRgb.b, width, height, radius)
+	}
+
+	const BG_STRENGTH = 0.3
+
+	for (let i = 0; i < size; i++) {
+		const outIdx = i * 4
+		let pr = r[i]
+		let pg = g[i]
+		let pb = b[i]
+
+		if (bgR) {
+			pr += bgR[i] * BG_STRENGTH
+			pg += bgG![i] * BG_STRENGTH
+			pb += bgB![i] * BG_STRENGTH
+		}
+
+		rgba[outIdx] = Math.min(pr * 255, 255)
+		rgba[outIdx + 1] = Math.min(pg * 255, 255)
+		rgba[outIdx + 2] = Math.min(pb * 255, 255)
 		rgba[outIdx + 3] = 255
 	}
 

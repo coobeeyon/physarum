@@ -8,6 +8,7 @@ const parseArgs = (args: ReadonlyArray<string>) => {
 		postOnly: false,
 		dryRun: false,
 		seedOverride: undefined as number | undefined,
+		foodImageSource: undefined as string | undefined,
 	}
 
 	for (let i = 0; i < args.length; i++) {
@@ -20,6 +21,10 @@ const parseArgs = (args: ReadonlyArray<string>) => {
 			flags.seedOverride = Number.parseInt(args[i + 1], 10)
 			i++
 		}
+		else if (arg === "--food-image" && i + 1 < args.length) {
+			flags.foodImageSource = args[i + 1]
+			i++
+		}
 	}
 
 	return flags
@@ -29,9 +34,9 @@ const main = async () => {
 	const args = process.argv.slice(2)
 	const flags = parseArgs(args)
 
-	// generate-only doesn't need env vars (except for IPFS/chain/social)
-	const envResult = flags.generateOnly
-		? { ok: true as const, value: { walletPrivateKey: "0x0" as `0x${string}`, pinataJwt: "", neynarApiKey: "", neynarSignerUuid: "", baseRpcUrl: "" } }
+	// generate-only and dry-run don't need all env vars
+	const envResult = flags.generateOnly || flags.dryRun
+		? { ok: true as const, value: { walletPrivateKey: "0x0" as `0x${string}`, pinataJwt: "", farcasterFid: 0, farcasterSignerKey: new Uint8Array(32), hubUrl: "", baseRpcUrl: "" } }
 		: loadEnv()
 
 	if (!envResult.ok) {

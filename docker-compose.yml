@@ -1,0 +1,7 @@
+services:
+  physarum:
+    build: .
+    env_file: .env
+    volumes:
+      - ./output:/app/output
+      - ./state.json:/app/state.json

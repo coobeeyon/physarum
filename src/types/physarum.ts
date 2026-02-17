@@ -1,4 +1,13 @@
+export type { FoodImageData } from "#engine/food.ts"
+
 export type ColormapName = "magma" | "viridis" | "inferno" | "plasma" | "cividis"
+
+export type FoodPlacementStrategy = "clusters" | "rings" | "gradient" | "grid" | "mixed" | "image"
+
+export type PopulationConfig = {
+	readonly color: readonly [number, number, number]
+	readonly agentFraction: number
+}
 
 export type PhysarumParams = {
 	readonly seed: number
@@ -13,4 +22,24 @@ export type PhysarumParams = {
 	readonly depositAmount: number
 	readonly decayFactor: number
 	readonly colormap: ColormapName
+	readonly populationCount: number
+	readonly populations: readonly PopulationConfig[]
+	readonly repulsionStrength: number
+	readonly foodWeight: number
+	readonly foodPlacement: FoodPlacementStrategy
+	readonly foodDensity: number
+	readonly foodClusterCount: number
+	readonly foodImageSource?: string
+}
+
+export type SimulationResult = {
+	readonly trailMaps: Float32Array[]
+	readonly foodMap: Float32Array
+	readonly populationCount: number
+	readonly populations: readonly PopulationConfig[]
+	readonly width: number
+	readonly height: number
+	readonly colorTrailR?: Float32Array
+	readonly colorTrailG?: Float32Array
+	readonly colorTrailB?: Float32Array
 }

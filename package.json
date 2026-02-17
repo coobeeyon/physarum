@@ -11,11 +11,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "canvas": "3.1.0",
-    "viem": "2.27.2",
+    "@farcaster/hub-nodejs": "^0.15.10",
     "@zoralabs/protocol-sdk": "0.13.15",
-    "@neynar/nodejs-sdk": "3.131.0",
-    "pinata": "2.0.1"
+    "canvas": "3.1.0",
+    "pinata": "2.0.1",
+    "viem": "2.27.2"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",

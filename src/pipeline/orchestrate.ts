@@ -3,15 +3,16 @@ import { join } from "node:path"
 import type { EnvConfig } from "#config/env.ts"
 import { DEFAULT_PARAMS } from "#config/params.ts"
 import { simulate } from "#engine/physarum.ts"
+import { loadFoodImage, type FoodImageData } from "#engine/food.ts"
 import { renderPng } from "#render/canvas.ts"
 import { createPinataClient, uploadImage, uploadMetadata } from "#ipfs/upload.ts"
 import { createClients } from "#chain/client.ts"
 import { deployEdition } from "#chain/zora.ts"
-import { createNeynarClient, postCast } from "#social/farcaster.ts"
+import { createHubClient, postCast, type HubConfig } from "#social/farcaster.ts"
 import { loadState, saveState } from "#pipeline/state.ts"
 import type { NftMetadata } from "#types/metadata.ts"
 import type { PhysarumParams } from "#types/physarum.ts"
-import { type Result, ok, err } from "#types/result.ts"
+import { type Result, ok } from "#types/result.ts"
 
 const IPFS_GATEWAY = "https://gateway.pinata.cloud/ipfs"
 const OUTPUT_DIR = join(import.meta.dirname, "../../output")
@@ -22,6 +23,7 @@ type PipelineOptions = {
 	readonly postOnly?: boolean
 	readonly dryRun?: boolean
 	readonly seedOverride?: number
+	readonly foodImageSource?: string
 }
 
 export const runPipeline = async (
@@ -40,14 +42,34 @@ export const runPipeline = async (
 
 	// 1. Simulate
 	console.log("simulating physarum...")
-	const params: PhysarumParams = { ...DEFAULT_PARAMS, seed }
+	let params: PhysarumParams = {
+		...DEFAULT_PARAMS,
+		seed,
+		...(options.foodImageSource ? { foodPlacement: "image" as const, foodImageSource: options.foodImageSource } : {}),
+	}
+
+	let preloadedFoodMap: Float32Array | undefined
+	let foodImageRgb: FoodImageData | undefined
+	if (params.foodPlacement === "image" && params.foodImageSource) {
+		console.log(`  loading food image: ${params.foodImageSource}`)
+		const foodData = await loadFoodImage(params.foodImageSource, Math.max(params.width, params.height))
+		preloadedFoodMap = foodData.luminance
+		foodImageRgb = foodData
+		// Adopt the food image's dimensions, scale agents proportionally to area
+		const defaultArea = params.width * params.height
+		const imageArea = foodData.width * foodData.height
+		const scaledAgents = Math.round(params.agentCount * (imageArea / defaultArea))
+		params = { ...params, width: foodData.width, height: foodData.height, agentCount: scaledAgents }
+		console.log(`  image dimensions: ${foodData.width}x${foodData.height} (${scaledAgents} agents)`)
+	}
+
 	const t0 = performance.now()
-	const trailMap = simulate(params)
+	const simResult = simulate(params, preloadedFoodMap, foodImageRgb)
 	console.log(`  done in ${((performance.now() - t0) / 1000).toFixed(1)}s`)
 
 	// 2. Render
 	console.log("rendering PNG...")
-	const renderResult = renderPng(trailMap, params.width, params.height, params.colormap)
+	const renderResult = renderPng(simResult, params.colormap, foodImageRgb)
 	if (!renderResult.ok) return renderResult
 	const { png } = renderResult.value
 
@@ -76,7 +98,7 @@ export const runPipeline = async (
 
 	const metadata: NftMetadata = {
 		name: `coobeyon #${edition}`,
-		description: `Physarum simulation | seed ${seed} | ${params.width}x${params.height} | ${params.agentCount} agents | ${params.iterations} iterations`,
+		description: `Physarum simulation | seed ${seed} | ${params.width}x${params.height} | ${params.agentCount} agents | ${params.populationCount} populations | ${params.iterations} iterations | food: ${params.foodPlacement}`,
 		image: `ipfs://${imageCid}`,
 		external_url: "https://coobeyon.xyz",
 		attributes: [
@@ -85,6 +107,8 @@ export const runPipeline = async (
 			{ trait_type: "Agents", value: params.agentCount },
 			{ trait_type: "Iterations", value: params.iterations },
 			{ trait_type: "Resolution", value: `${params.width}x${params.height}` },
+			{ trait_type: "Populations", value: params.populationCount },
+			{ trait_type: "Food Strategy", value: params.foodPlacement },
 		],
 	}
 
@@ -145,10 +169,16 @@ export const runPipeline = async (
 		console.log(`  image: ${imageUrl}`)
 		console.log(`  mint: ${mintUrl}`)
 	} else {
-		const neynar = createNeynarClient(config.neynarApiKey)
+		const hubConfig: HubConfig = {
+			hubUrl: config.hubUrl,
+			hubApiKey: config.hubApiKey,
+			fid: config.farcasterFid,
+			signerKey: config.farcasterSignerKey,
+		}
+		const hub = createHubClient(hubConfig)
 		const castResult = await postCast(
-			neynar,
-			config.neynarSignerUuid,
+			hub,
+			hubConfig,
 			imageUrl,
 			mintUrl,
 			edition,
