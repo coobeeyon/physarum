@@ -101,7 +101,7 @@ export const runPipeline = async (
 		name: `coobeyon #${edition}`,
 		description: `Physarum simulation | seed ${seed} | ${params.width}x${params.height} | ${params.agentCount} agents | ${params.populationCount} populations | ${params.iterations} iterations | food: ${params.foodPlacement}`,
 		image: `ipfs://${imageCid}`,
-		external_url: "https://coobeyon.xyz",
+		external_url: "https://stigmergence.art",
 		attributes: [
 			{ trait_type: "Seed", value: seed },
 			{ trait_type: "Colormap", value: params.colormap },
