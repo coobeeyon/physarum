@@ -39,7 +39,7 @@ export const runPipeline = async (
 	const edition = state.lastEdition + 1
 	const seed = options.seedOverride ?? edition * 7919 // prime-based seed
 
-	console.log(`\n--- coobeyon #${edition} | seed ${seed} ---\n`)
+	console.log(`\n--- stigmergence #${edition} | seed ${seed} ---\n`)
 
 	// 1. Simulate
 	console.log("simulating physarum...")
@@ -74,7 +74,7 @@ export const runPipeline = async (
 	if (!renderResult.ok) return renderResult
 	const { png } = renderResult.value
 
-	const pngPath = join(OUTPUT_DIR, `coobeyon-${edition}.png`)
+	const pngPath = join(OUTPUT_DIR, `stigmergence-${edition}.png`)
 	writeFileSync(pngPath, png)
 	console.log(`  saved to ${pngPath}`)
 
@@ -92,13 +92,13 @@ export const runPipeline = async (
 
 	const imageResult = options.dryRun
 		? ok({ imageCid: "dry-run-image-cid" })
-		: await uploadImage(pinata, png, `coobeyon-${edition}`)
+		: await uploadImage(pinata, png, `stigmergence-${edition}`)
 	if (!imageResult.ok) return imageResult
 	const { imageCid } = imageResult.value
 	console.log(`  image CID: ${imageCid}`)
 
 	const metadata: NftMetadata = {
-		name: `coobeyon #${edition}`,
+		name: `stigmergence #${edition}`,
 		description: `Physarum simulation | seed ${seed} | ${params.width}x${params.height} | ${params.agentCount} agents | ${params.populationCount} populations | ${params.iterations} iterations | food: ${params.foodPlacement}`,
 		image: `ipfs://${imageCid}`,
 		external_url: "https://stigmergence.art",
@@ -115,7 +115,7 @@ export const runPipeline = async (
 
 	const metaResult = options.dryRun
 		? ok({ metadataCid: "dry-run-metadata-cid" })
-		: await uploadMetadata(pinata, metadata, `coobeyon-${edition}`)
+		: await uploadMetadata(pinata, metadata, `stigmergence-${edition}`)
 	if (!metaResult.ok) return metaResult
 	const { metadataCid } = metaResult.value
 	console.log(`  metadata CID: ${metadataCid}`)
@@ -166,7 +166,7 @@ export const runPipeline = async (
 	let castHash = "0x0"
 	if (options.dryRun) {
 		console.log("  [dry-run] skipping Farcaster post")
-		console.log(`  would post: coobeyon #${edition}`)
+		console.log(`  would post: stigmergence #${edition}`)
 		console.log(`  image: ${imageUrl}`)
 		console.log(`  mint: ${mintUrl}`)
 	} else {
@@ -209,6 +209,6 @@ export const runPipeline = async (
 	const saveResult = saveState(newState)
 	if (!saveResult.ok) return saveResult
 
-	console.log(`\n--- coobeyon #${edition} complete ---\n`)
+	console.log(`\n--- stigmergence #${edition} complete ---\n`)
 	return ok({ edition })
 }
