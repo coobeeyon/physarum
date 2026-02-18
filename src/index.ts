@@ -9,6 +9,7 @@ const parseArgs = (args: ReadonlyArray<string>) => {
 		dryRun: false,
 		seedOverride: undefined as number | undefined,
 		foodImageSource: undefined as string | undefined,
+		channel: undefined as string | undefined,
 	}
 
 	for (let i = 0; i < args.length; i++) {
@@ -25,6 +26,10 @@ const parseArgs = (args: ReadonlyArray<string>) => {
 			flags.foodImageSource = args[i + 1]
 			i++
 		}
+		else if (arg === "--channel" && i + 1 < args.length) {
+			flags.channel = args[i + 1]
+			i++
+		}
 	}
 
 	return flags
@@ -36,7 +41,7 @@ const main = async () => {
 
 	// generate-only and dry-run don't need all env vars
 	const envResult = flags.generateOnly || flags.dryRun
-		? { ok: true as const, value: { walletPrivateKey: "0x0" as `0x${string}`, pinataJwt: "", farcasterFid: 0, farcasterSignerKey: new Uint8Array(32), hubUrl: "", baseRpcUrl: "" } }
+		? { ok: true as const, value: { walletPrivateKey: "0x0" as `0x${string}`, pinataJwt: "", farcasterFid: 0, neynarApiKey: "", neynarSignerUuid: "", baseRpcUrl: "" } }
 		: loadEnv()
 
 	if (!envResult.ok) {

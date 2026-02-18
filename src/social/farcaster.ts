@@ -1,65 +1,49 @@
-import {
-	getSSLHubRpcClient,
-	makeCastAdd,
-	NobleEd25519Signer,
-	FarcasterNetwork,
-	type HubRpcClient,
-	createDefaultMetadataKeyInterceptor,
-} from "@farcaster/hub-nodejs"
 import { type Result, ok, err } from "#types/result.ts"
 
-const DEFAULT_HUB_URL = "snapchain-grpc-api.neynar.com:443"
+const NEYNAR_API = "https://api.neynar.com/v2/farcaster"
 
-export type HubConfig = {
-	readonly hubUrl: string
-	readonly hubApiKey?: string
+export type NeynarConfig = {
+	readonly neynarApiKey: string
+	readonly signerUuid: string
 	readonly fid: number
-	readonly signerKey: Uint8Array
-}
-
-export const createHubClient = (config: HubConfig): HubRpcClient => {
-	const interceptors = config.hubApiKey
-		? [createDefaultMetadataKeyInterceptor("x-api-key", config.hubApiKey)]
-		: []
-
-	return getSSLHubRpcClient(config.hubUrl, {
-		interceptors,
-		"grpc.max_receive_message_length": 20 * 1024 * 1024,
-	})
 }
 
 export const postCast = async (
-	client: HubRpcClient,
-	config: HubConfig,
+	config: NeynarConfig,
 	imageUrl: string,
 	mintUrl: string,
 	edition: number,
 	seed: number,
+	channel?: string,
 ): Promise<Result<{ castHash: string }>> => {
 	const text = `coobeyon #${edition}\nphysarum simulation | seed ${seed}\nmint: ${mintUrl}`
-	const signer = new NobleEd25519Signer(config.signerKey)
 
-	const castResult = await makeCastAdd(
-		{
-			text,
-			embeds: [{ url: imageUrl }, { url: mintUrl }],
-			embedsDeprecated: [],
-			mentions: [],
-			mentionsPositions: [],
-			type: 0, // CastType.CAST
+	const body: Record<string, unknown> = {
+		signer_uuid: config.signerUuid,
+		text,
+		embeds: [{ url: imageUrl }, { url: mintUrl }],
+	}
+	if (channel) {
+		body.channel_id = channel
+	}
+
+	const resp = await fetch(`${NEYNAR_API}/cast`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			"x-api-key": config.neynarApiKey,
 		},
-		{ fid: config.fid, network: FarcasterNetwork.MAINNET },
-		signer,
-	)
+		body: JSON.stringify(body),
+	})
 
-	if (castResult.isErr()) return err(`Failed to create cast message: ${castResult.error.message}`)
+	if (!resp.ok) {
+		const detail = await resp.text()
+		return err(`Neynar cast failed (HTTP ${resp.status}): ${detail}`)
+	}
 
-	const submitResult = await client.submitMessage(castResult.value)
+	const data = (await resp.json()) as { cast?: { hash?: string } }
+	const hash = data.cast?.hash
+	if (!hash) return err(`Neynar cast response missing hash: ${JSON.stringify(data)}`)
 
-	if (submitResult.isErr()) return err(`Failed to submit cast: ${submitResult.error.message}`)
-
-	const hash = Buffer.from(submitResult.value.hash).toString("hex")
-	return ok({ castHash: `0x${hash}` })
+	return ok({ castHash: hash })
 }
-
-export { DEFAULT_HUB_URL }

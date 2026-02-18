@@ -8,7 +8,7 @@ import { renderPng } from "#render/canvas.ts"
 import { createPinataClient, uploadImage, uploadMetadata } from "#ipfs/upload.ts"
 import { createClients } from "#chain/client.ts"
 import { deployEdition } from "#chain/zora.ts"
-import { createHubClient, postCast, type HubConfig } from "#social/farcaster.ts"
+import { postCast, type NeynarConfig } from "#social/farcaster.ts"
 import { loadState, saveState } from "#pipeline/state.ts"
 import type { NftMetadata } from "#types/metadata.ts"
 import type { PhysarumParams } from "#types/physarum.ts"
@@ -24,6 +24,7 @@ type PipelineOptions = {
 	readonly dryRun?: boolean
 	readonly seedOverride?: number
 	readonly foodImageSource?: string
+	readonly channel?: string
 }
 
 export const runPipeline = async (
@@ -169,20 +170,18 @@ export const runPipeline = async (
 		console.log(`  image: ${imageUrl}`)
 		console.log(`  mint: ${mintUrl}`)
 	} else {
-		const hubConfig: HubConfig = {
-			hubUrl: config.hubUrl,
-			hubApiKey: config.hubApiKey,
+		const neynarConfig: NeynarConfig = {
+			neynarApiKey: config.neynarApiKey,
+			signerUuid: config.neynarSignerUuid,
 			fid: config.farcasterFid,
-			signerKey: config.farcasterSignerKey,
 		}
-		const hub = createHubClient(hubConfig)
 		const castResult = await postCast(
-			hub,
-			hubConfig,
+			neynarConfig,
 			imageUrl,
 			mintUrl,
 			edition,
 			seed,
+			options.channel,
 		)
 		if (!castResult.ok) return castResult
 		castHash = castResult.value.castHash
