@@ -203,8 +203,10 @@ export const runPipeline = async (
 				imageCid,
 				metadataCid,
 				timestamp: new Date().toISOString(),
+				genome: null,
 			},
 		],
+		reflections: state.reflections,
 	}
 	const saveResult = saveState(newState)
 	if (!saveResult.ok) return saveResult

@@ -1,5 +1,7 @@
 import { loadEnv } from "#config/env.ts"
 import { runPipeline } from "#pipeline/orchestrate.ts"
+import { loadState } from "#pipeline/state.ts"
+import { readEngagement } from "#social/engagement.ts"
 
 const parseArgs = (args: ReadonlyArray<string>) => {
 	const flags = {
@@ -7,6 +9,7 @@ const parseArgs = (args: ReadonlyArray<string>) => {
 		deployOnly: false,
 		postOnly: false,
 		dryRun: false,
+		readEngagement: false,
 		seedOverride: undefined as number | undefined,
 		foodImageSource: undefined as string | undefined,
 		channel: undefined as string | undefined,
@@ -18,6 +21,7 @@ const parseArgs = (args: ReadonlyArray<string>) => {
 		else if (arg === "--deploy-only") flags.deployOnly = true
 		else if (arg === "--post-only") flags.postOnly = true
 		else if (arg === "--dry-run") flags.dryRun = true
+		else if (arg === "--read-engagement") flags.readEngagement = true
 		else if (arg === "--seed" && i + 1 < args.length) {
 			flags.seedOverride = Number.parseInt(args[i + 1], 10)
 			i++
@@ -38,6 +42,32 @@ const parseArgs = (args: ReadonlyArray<string>) => {
 const main = async () => {
 	const args = process.argv.slice(2)
 	const flags = parseArgs(args)
+
+	if (flags.readEngagement) {
+		const apiKey = process.env.NEYNAR_API_KEY
+		if (!apiKey) {
+			console.error("NEYNAR_API_KEY not set")
+			process.exit(1)
+		}
+
+		const stateResult = loadState()
+		if (!stateResult.ok) {
+			console.error(`State error: ${stateResult.error}`)
+			process.exit(1)
+		}
+
+		const result = await readEngagement(apiKey, stateResult.value.history)
+		if (!result.ok) {
+			console.error(`Engagement error: ${result.error}`)
+			process.exit(1)
+		}
+
+		for (const w of result.value.warnings) {
+			console.error(`warning: ${w}`)
+		}
+		console.log(JSON.stringify(result.value.engagement, null, 2))
+		return
+	}
 
 	// generate-only and dry-run don't need all env vars
 	const envResult = flags.generateOnly || flags.dryRun

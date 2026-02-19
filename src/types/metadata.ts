@@ -1,3 +1,5 @@
+import type { Genome, ReflectionRecord } from "#types/evolution.ts"
+
 export type NftMetadata = {
 	readonly name: string
 	readonly description: string
@@ -9,17 +11,21 @@ export type NftMetadata = {
 	}>
 }
 
+export type HistoryEntry = {
+	readonly edition: number
+	readonly seed: number
+	readonly tokenId: string
+	readonly txHash: string
+	readonly castHash: string
+	readonly imageCid: string
+	readonly metadataCid: string
+	readonly timestamp: string
+	readonly genome: Genome | null
+}
+
 export type PipelineState = {
 	readonly contractAddress: string | null
 	readonly lastEdition: number
-	readonly history: ReadonlyArray<{
-		readonly edition: number
-		readonly seed: number
-		readonly tokenId: string
-		readonly txHash: string
-		readonly castHash: string
-		readonly imageCid: string
-		readonly metadataCid: string
-		readonly timestamp: string
-	}>
+	readonly history: ReadonlyArray<HistoryEntry>
+	readonly reflections: ReadonlyArray<ReflectionRecord>
 }

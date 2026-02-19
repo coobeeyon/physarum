@@ -2,7 +2,6 @@ import { describe, expect, test, afterEach } from "bun:test"
 import { writeFileSync, unlinkSync, existsSync } from "node:fs"
 import { join } from "node:path"
 
-// State module uses import.meta.dirname, so we test the logic directly
 import type { PipelineState } from "#types/metadata.ts"
 
 const TEST_STATE_PATH = join(import.meta.dirname, "test-state.json")
@@ -26,8 +25,10 @@ describe("state round-trip", () => {
 					imageCid: "QmImage",
 					metadataCid: "QmMeta",
 					timestamp: "2024-01-01T00:00:00.000Z",
+					genome: null,
 				},
 			],
+			reflections: [],
 		}
 
 		writeFileSync(TEST_STATE_PATH, JSON.stringify(state, null, 2))
@@ -38,5 +39,30 @@ describe("state round-trip", () => {
 		expect(loaded.lastEdition).toBe(5)
 		expect(loaded.history.length).toBe(1)
 		expect(loaded.history[0].seed).toBe(7919)
+		expect(loaded.history[0].genome).toBeNull()
+		expect(loaded.reflections).toEqual([])
+	})
+})
+
+describe("state migration", () => {
+	afterEach(() => {
+		if (existsSync(TEST_STATE_PATH)) unlinkSync(TEST_STATE_PATH)
+	})
+
+	test("migrates old state without genome or reflections", async () => {
+		// loadState reads from the hardcoded STATE_PATH which points at
+		// the real state.json — it has old-format entries without genome/reflections.
+		// Migration should backfill those fields.
+		const { loadState } = await import("#pipeline/state.ts")
+
+		const result = loadState()
+		expect(result.ok).toBe(true)
+		if (!result.ok) return
+		for (const entry of result.value.history) {
+			expect(entry).toHaveProperty("genome")
+			expect(entry.genome).toBeNull()
+		}
+		expect(result.value).toHaveProperty("reflections")
+		expect(Array.isArray(result.value.reflections)).toBe(true)
 	})
 })

@@ -1,6 +1,6 @@
 import { type Result, ok, err } from "#types/result.ts"
 
-const NEYNAR_API = "https://api.neynar.com/v2/farcaster"
+export const NEYNAR_API = "https://api.neynar.com/v2/farcaster"
 
 export type NeynarConfig = {
 	readonly neynarApiKey: string
