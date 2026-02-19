@@ -1,6 +1,8 @@
+import { join } from "node:path"
 import { loadEnv } from "#config/env.ts"
+import { executeReflection } from "#agent/evolve.ts"
 import { runPipeline } from "#pipeline/orchestrate.ts"
-import { loadState } from "#pipeline/state.ts"
+import { loadState, saveState } from "#pipeline/state.ts"
 import { readEngagement } from "#social/engagement.ts"
 
 const parseArgs = (args: ReadonlyArray<string>) => {
@@ -10,6 +12,7 @@ const parseArgs = (args: ReadonlyArray<string>) => {
 		postOnly: false,
 		dryRun: false,
 		readEngagement: false,
+		reflect: false,
 		seedOverride: undefined as number | undefined,
 		foodImageSource: undefined as string | undefined,
 		channel: undefined as string | undefined,
@@ -22,6 +25,7 @@ const parseArgs = (args: ReadonlyArray<string>) => {
 		else if (arg === "--post-only") flags.postOnly = true
 		else if (arg === "--dry-run") flags.dryRun = true
 		else if (arg === "--read-engagement") flags.readEngagement = true
+		else if (arg === "--reflect") flags.reflect = true
 		else if (arg === "--seed" && i + 1 < args.length) {
 			flags.seedOverride = Number.parseInt(args[i + 1], 10)
 			i++
@@ -66,6 +70,65 @@ const main = async () => {
 			console.error(`warning: ${w}`)
 		}
 		console.log(JSON.stringify(result.value.engagement, null, 2))
+		return
+	}
+
+	if (flags.reflect) {
+		const anthropicKey = process.env.ANTHROPIC_API_KEY
+		const neynarKey = process.env.NEYNAR_API_KEY
+		if (!anthropicKey) {
+			console.error("ANTHROPIC_API_KEY not set")
+			process.exit(1)
+		}
+		if (!neynarKey) {
+			console.error("NEYNAR_API_KEY not set")
+			process.exit(1)
+		}
+
+		const stateResult = loadState()
+		if (!stateResult.ok) {
+			console.error(`State error: ${stateResult.error}`)
+			process.exit(1)
+		}
+
+		const engResult = await readEngagement(neynarKey, stateResult.value.history)
+		if (!engResult.ok) {
+			console.error(`Engagement error: ${engResult.error}`)
+			process.exit(1)
+		}
+
+		for (const w of engResult.value.warnings) {
+			console.error(`warning: ${w}`)
+		}
+
+		const projectRoot = join(import.meta.dirname, "..")
+		const outcome = await executeReflection(
+			anthropicKey,
+			stateResult.value,
+			engResult.value.engagement,
+			projectRoot,
+		)
+		if (!outcome.ok) {
+			console.error(`Reflection error: ${outcome.error}`)
+			process.exit(1)
+		}
+
+		const state = stateResult.value
+		const updated = {
+			...state,
+			reflections: [...state.reflections, outcome.value.record],
+		}
+		const saveResult = saveState(updated)
+		if (!saveResult.ok) {
+			console.error(`Save error: ${saveResult.error}`)
+			process.exit(1)
+		}
+
+		console.log(`\nReflection complete:`)
+		console.log(`  Applied: ${outcome.value.applied}`)
+		console.log(`  Committed: ${outcome.value.committed}`)
+		console.log(`  Changes: ${outcome.value.record.changes.length} file(s)`)
+		console.log(`  Reasoning: ${outcome.value.reasoning.slice(0, 200)}`)
 		return
 	}
 

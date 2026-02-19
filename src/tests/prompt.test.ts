@@ -188,7 +188,7 @@ describe("assembleContext", () => {
 					edition: 2,
 					genome: makeState().history[2].genome!,
 					engagement: makeEngagement({ edition: 2 }),
-					changes: ["increased agentCount to 400000", "switched colormap to viridis"],
+					changes: ["src/config/params.ts"],
 					reasoning: "The trails felt sparse, needed more density.",
 				},
 			],
@@ -197,8 +197,7 @@ describe("assembleContext", () => {
 
 		expect(result).toContain("After Edition #2")
 		expect(result).toContain("trails felt sparse")
-		expect(result).toContain("increased agentCount")
-		expect(result).toContain("switched colormap to viridis")
+		expect(result).toContain("src/config/params.ts")
 	})
 
 	test("shows first reflection message when no reflections", () => {
