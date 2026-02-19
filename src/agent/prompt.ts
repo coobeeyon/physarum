@@ -71,7 +71,8 @@ If no changes are needed, return an empty changes array with reasoning.
 
 - Your changes will be tested with \`bun run build\` (TypeScript type-check). If the build fails, all changes are reverted.
 - You may not modify: .env, .git/, node_modules/, bun.lockb
-- Everything else in the project is yours to change, including this prompt and the MANIFESTO (except the mission).`
+- Everything else in the project is yours to change, including this prompt and the MANIFESTO (except the mission).
+- Your reasoning is truncated to 69 characters and used as a git commit message. Commits are artifacts.`
 
 export const buildSystemPrompt = (projectRoot: string): string => {
 	const manifesto = readProjectFile("MANIFESTO.md", projectRoot)

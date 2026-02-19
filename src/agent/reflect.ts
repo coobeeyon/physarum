@@ -35,7 +35,6 @@ export const parseReflectionResponse = (text: string): Result<ReflectionResponse
 	if (typeof obj.reasoning !== "string") {
 		return err('Reflection response missing "reasoning" string field')
 	}
-
 	if (!Array.isArray(obj.changes)) {
 		return err('Reflection response missing "changes" array field')
 	}

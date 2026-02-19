@@ -38,33 +38,44 @@ const makeEngagement = (overrides: Partial<EngagementData> = {}): EngagementData
 })
 
 describe("composeCastText", () => {
-	test("formats first edition correctly (no engagement)", () => {
+	test("includes edition number", () => {
 		const text = composeCastText(1, 7919, makeGenome(), null)
 
 		expect(text).toContain("stigmergence #1")
+	})
+
+	test("multi-population uses competing intro and particle count", () => {
+		const text = composeCastText(1, 7919, makeGenome(), null)
+
+		expect(text).toContain("300,000 particles")
+		expect(text).toContain("border neither planned")
+	})
+
+	test("single population uses single intro and agent count", () => {
+		const genome = makeGenome({ populationCount: 1, populations: [{ color: [255, 255, 255], agentFraction: 1 }] })
+		const text = composeCastText(1, 100, genome, null)
+
 		expect(text).toContain("300,000 agents")
 		expect(text).toContain("300 steps")
-		expect(text).not.toContain("prev #")
 	})
 
-	test("formats with previous engagement data", () => {
+	test("acknowledges notable engagement (total > 3)", () => {
 		const text = composeCastText(3, 23757, makeGenome(), makeEngagement())
 
-		expect(text).toContain("prev #2: 5♥ 2↺ 3✦")
+		expect(text).toContain("edition #2 found an audience")
 	})
 
-	test("handles all genome params", () => {
-		const text = composeCastText(3, 23757, makeGenome(), null)
+	test("ignores low engagement (total <= 3)", () => {
+		const text = composeCastText(3, 23757, makeGenome(), makeEngagement({ likes: 1, recasts: 0, replies: 0 }))
 
-		expect(text).toContain("angle 0.79r")
-		expect(text).toContain("distance 9")
-		expect(text).toContain("turn 0.79r")
-		expect(text).toContain("decay 0.95")
-		expect(text).toContain("deposit 15")
-		expect(text).toContain("food: mixed")
-		expect(text).toContain("density 0.8")
-		expect(text).toContain("3 competing colonies")
-		expect(text).toContain("repulsion: 0.5")
+		expect(text).not.toContain("found an audience")
+	})
+
+	test("includes meta-awareness line", () => {
+		const text = composeCastText(1, 7919, makeGenome(), null)
+
+		// Should contain one of the META_LINES
+		expect(text).toMatch(/AI/)
 	})
 
 	test("output stays under 1024 chars", () => {
@@ -80,28 +91,14 @@ describe("composeCastText", () => {
 		expect(lines[lines.length - 1]).toBe("https://stigmergence.art")
 	})
 
-	test("handles food placement image", () => {
-		const genome = makeGenome({ foodPlacement: "image" })
-		const text = composeCastText(1, 100, genome, null)
+	test("different seeds produce different intros", () => {
+		const text1 = composeCastText(1, 100, makeGenome(), null)
+		const text2 = composeCastText(1, 101, makeGenome(), null)
 
-		expect(text).toContain("food: image")
-		expect(text).not.toContain("density")
-		expect(text).not.toContain("clusters")
-	})
-
-	test("shows colormap for single population", () => {
-		const genome = makeGenome({ populationCount: 1, populations: [{ color: [255, 255, 255], agentFraction: 1 }] })
-		const text = composeCastText(1, 100, genome, null)
-
-		expect(text).toContain("colormap: magma")
-		expect(text).not.toContain("repulsion")
-	})
-
-	test("displays angles as radians with 2 decimal places", () => {
-		const genome = makeGenome({ sensorAngle: 1.23456, turnAngle: 0.98765 })
-		const text = composeCastText(1, 100, genome, null)
-
-		expect(text).toContain("angle 1.23r")
-		expect(text).toContain("turn 0.99r")
+		// At minimum, the intro or meta line should differ for different seeds
+		const lines1 = text1.split("\n").filter((l) => l.length > 0)
+		const lines2 = text2.split("\n").filter((l) => l.length > 0)
+		const differ = lines1.some((l, i) => l !== lines2[i])
+		expect(differ).toBe(true)
 	})
 })
