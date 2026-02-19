@@ -148,7 +148,8 @@ describe("assembleContext", () => {
 		expect(result).toContain("## Current Genome")
 		expect(result).toContain("## Engagement History")
 		expect(result).toContain("## Past Reflections")
-		expect(result).toContain("## Your Source Code")
+		expect(result).toContain("## Project Structure")
+		expect(result).toContain("## Source Code")
 	})
 
 	test("shows current genome from latest edition", () => {
@@ -212,6 +213,8 @@ describe("assembleContext", () => {
 		expect(result).toContain("### src/config/params.ts")
 		expect(result).toContain("### src/types/physarum.ts")
 		expect(result).toContain("### src/social/narrative.ts")
+		expect(result).toContain("### MANIFESTO.md")
+		expect(result).toContain("### src/agent/prompt.ts")
 		expect(result).toContain("DEFAULT_PARAMS")
 		expect(result).toContain("PhysarumParams")
 		expect(result).toContain("composeCastText")

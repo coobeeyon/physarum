@@ -21,6 +21,16 @@ describe("validateChangePaths", () => {
 		expect(result.ok).toBe(true)
 	})
 
+	test("accepts project root files", () => {
+		const result = validateChangePaths([
+			{ file: "package.json", action: "edit", content: "" },
+			{ file: "MANIFESTO.md", action: "edit", content: "" },
+			{ file: "state.json", action: "edit", content: "" },
+			{ file: "tsconfig.json", action: "edit", content: "" },
+		])
+		expect(result.ok).toBe(true)
+	})
+
 	test("rejects absolute paths", () => {
 		const result = validateChangePaths([
 			{ file: "/etc/passwd", action: "edit", content: "" },
@@ -36,23 +46,7 @@ describe("validateChangePaths", () => {
 		])
 		expect(result.ok).toBe(false)
 		if (result.ok) return
-		expect(result.error).toContain("outside src/")
-	})
-
-	test("rejects paths outside src/", () => {
-		const result = validateChangePaths([
-			{ file: "package.json", action: "edit", content: "" },
-		])
-		expect(result.ok).toBe(false)
-		if (result.ok) return
-		expect(result.error).toContain("outside src/")
-	})
-
-	test("rejects state.json", () => {
-		const result = validateChangePaths([
-			{ file: "state.json", action: "edit", content: "" },
-		])
-		expect(result.ok).toBe(false)
+		expect(result.error).toContain("Protected file")
 	})
 
 	test("rejects .env", () => {
@@ -60,6 +54,26 @@ describe("validateChangePaths", () => {
 			{ file: ".env", action: "edit", content: "" },
 		])
 		expect(result.ok).toBe(false)
+		if (result.ok) return
+		expect(result.error).toContain("Protected file")
+	})
+
+	test("rejects .git/ paths", () => {
+		const result = validateChangePaths([
+			{ file: ".git/config", action: "edit", content: "" },
+		])
+		expect(result.ok).toBe(false)
+		if (result.ok) return
+		expect(result.error).toContain("Protected directory")
+	})
+
+	test("rejects node_modules/ paths", () => {
+		const result = validateChangePaths([
+			{ file: "node_modules/foo/index.js", action: "edit", content: "" },
+		])
+		expect(result.ok).toBe(false)
+		if (result.ok) return
+		expect(result.error).toContain("Protected directory")
 	})
 
 	test("accepts empty changes", () => {

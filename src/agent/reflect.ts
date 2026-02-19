@@ -2,7 +2,7 @@ import Anthropic from "@anthropic-ai/sdk"
 import { type Result, ok, err } from "#types/result.ts"
 import type { PipelineState } from "#types/metadata.ts"
 import type { EngagementData } from "#types/evolution.ts"
-import { SYSTEM_PROMPT, assembleContext } from "#agent/prompt.ts"
+import { buildSystemPrompt, assembleContext } from "#agent/prompt.ts"
 
 const DEFAULT_MODEL = "claude-sonnet-4-6"
 
@@ -69,6 +69,7 @@ export const runReflection = async (
 	engagement: ReadonlyArray<EngagementData>,
 	projectRoot: string,
 ): Promise<Result<ReflectionResponse>> => {
+	const systemPrompt = buildSystemPrompt(projectRoot)
 	const context = assembleContext(state, engagement, projectRoot)
 	const client = new Anthropic({ apiKey })
 
@@ -78,8 +79,8 @@ export const runReflection = async (
 	try {
 		message = await client.messages.create({
 			model,
-			max_tokens: 4096,
-			system: SYSTEM_PROMPT,
+			max_tokens: 16384,
+			system: systemPrompt,
 			messages: [{ role: "user", content: context }],
 		})
 	} catch (e) {

@@ -17,6 +17,9 @@ export type ReflectionOutcome = {
 	readonly reasoning: string
 }
 
+const PROTECTED_FILES = new Set([".env", ".env.example", "bun.lock"])
+const PROTECTED_PREFIXES = [".git/", ".git\\", "node_modules/", "node_modules\\"]
+
 export const validateChangePaths = (
 	changes: ReadonlyArray<ChangeProposal>,
 ): Result<void> => {
@@ -29,8 +32,11 @@ export const validateChangePaths = (
 		if (normalized.startsWith("..") || normalized.includes("/..") || normalized.includes("\\..")) {
 			return err(`Path traversal rejected: ${p}`)
 		}
-		if (!normalized.startsWith("src/") && !normalized.startsWith("src\\")) {
-			return err(`Path outside src/ rejected: ${p}`)
+		if (PROTECTED_FILES.has(normalized)) {
+			return err(`Protected file rejected: ${p}`)
+		}
+		if (PROTECTED_PREFIXES.some((prefix) => normalized.startsWith(prefix))) {
+			return err(`Protected directory rejected: ${p}`)
 		}
 	}
 	return ok(undefined)
