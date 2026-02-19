@@ -1,7 +1,47 @@
-import { createCreatorClient } from "@zoralabs/protocol-sdk"
-import type { PublicClient, WalletClient, Account, Chain, Transport } from "viem"
+import {
+	create1155,
+	createNew1155Token,
+	new1155ContractVersion,
+	type IContractGetter,
+} from "@zoralabs/protocol-sdk"
+import { zoraCreator1155ImplABI } from "@zoralabs/protocol-deployments"
+import type { Address, PublicClient, WalletClient, Account, Chain, Transport } from "viem"
 import { base } from "viem/chains"
 import { type Result, ok, err } from "#types/result.ts"
+
+class OnchainContractGetter implements IContractGetter {
+	constructor(
+		private readonly publicClient: PublicClient<Transport, Chain>,
+		private readonly chainId: number,
+	) {}
+
+	async getContractInfo({ contractAddress }: { contractAddress: Address }) {
+		const [nextTokenId, mintFee, name] = await Promise.all([
+			this.publicClient.readContract({
+				address: contractAddress,
+				abi: zoraCreator1155ImplABI,
+				functionName: "nextTokenId",
+			}),
+			this.publicClient.readContract({
+				address: contractAddress,
+				abi: zoraCreator1155ImplABI,
+				functionName: "mintFee",
+			}),
+			this.publicClient.readContract({
+				address: contractAddress,
+				abi: zoraCreator1155ImplABI,
+				functionName: "name",
+			}),
+		])
+
+		return {
+			nextTokenId: nextTokenId as bigint,
+			mintFee: mintFee as bigint,
+			name: name as string,
+			contractVersion: new1155ContractVersion(this.chainId),
+		}
+	}
+}
 
 type DeployResult = {
 	readonly contractAddress: string
@@ -15,16 +55,17 @@ export const deployEdition = async (
 	metadataUri: string,
 	existingContractAddress?: string,
 ): Promise<Result<DeployResult>> => {
-	const creatorClient = createCreatorClient({ chainId: base.id, publicClient })
-
 	if (existingContractAddress) {
-		// Add new token to existing contract
-		const { parameters, tokenId } = await creatorClient.create1155OnExistingContract({
+		// Add new token to existing contract — uses on-chain reads instead of dead subgraph
+		const contractGetter = new OnchainContractGetter(publicClient, base.id)
+		const { parameters, tokenId } = await createNew1155Token({
 			contractAddress: existingContractAddress as `0x${string}`,
 			token: {
 				tokenMetadataURI: metadataUri,
 			},
 			account: walletClient.account,
+			chainId: base.id,
+			contractGetter,
 		})
 
 		const txHash = await walletClient.writeContract(parameters)
@@ -38,7 +79,7 @@ export const deployEdition = async (
 	}
 
 	// Create new contract + first token
-	const { parameters, contractAddress, tokenId } = await creatorClient.create1155({
+	const { parameters, contractAddress, tokenId } = await create1155({
 		contract: {
 			name: "coobeyon",
 			uri: metadataUri,
@@ -47,6 +88,7 @@ export const deployEdition = async (
 			tokenMetadataURI: metadataUri,
 		},
 		account: walletClient.account,
+		publicClient,
 	})
 
 	const txHash = await walletClient.writeContract(parameters)

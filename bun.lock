@@ -6,7 +6,7 @@
       "name": "coobeyon-physarum",
       "dependencies": {
         "@anthropic-ai/sdk": "^0.77.0",
-        "@zoralabs/protocol-sdk": "0.13.15",
+        "@zoralabs/protocol-sdk": "0.13.18",
         "canvas": "3.1.0",
         "pinata": "2.0.1",
         "viem": "2.27.2",
@@ -59,9 +59,9 @@
 
     "@types/ws": ["@types/ws@8.5.14", "", { "dependencies": { "@types/node": "*" } }, "sha512-bd/YFLW+URhBzMXurx7lWByOu+xzU9+kb3RboOteXYDfW+tr+JZa99OyNmPINEGB/ahzKrEuc8rcv4gnpJmxTw=="],
 
-    "@zoralabs/protocol-deployments": ["@zoralabs/protocol-deployments@0.6.5", "", {}, "sha512-4SrsNAQaCFvphV3lH8eAaM2yqKIitQcOnVTCLQPrcydVmtWPuP4H8RP4xJRL3i52oCDyiDhwFR8uLkzXaI3oIw=="],
+    "@zoralabs/protocol-deployments": ["@zoralabs/protocol-deployments@0.7.2", "", {}, "sha512-111yygoTKPFSd+iAnUNJDUC3mZBDW2xidpFZHN+q2ZT8H3SvN2jlmS1WJxPgvfE9tfdfDoTTT098dYuOuaU6pg=="],
 
-    "@zoralabs/protocol-sdk": ["@zoralabs/protocol-sdk@0.13.15", "", { "dependencies": { "@zoralabs/protocol-deployments": "^0.6.5" }, "peerDependencies": { "abitype": "^1.0.2", "viem": "^2.21.21" } }, "sha512-ITTKhVRuyvhUoRgzJPeH6V/nQQ/oPgMoYv5h6N7YL8Hoh7ATdeUyRZ1eCtlQBtccyTZQrLtp0Kn8RTtsTU3XzQ=="],
+    "@zoralabs/protocol-sdk": ["@zoralabs/protocol-sdk@0.13.18", "", { "dependencies": { "@zoralabs/protocol-deployments": "^0.7.2" }, "peerDependencies": { "abitype": "^1.0.2", "viem": "2.22.12" } }, "sha512-9IeMF0SElPpDXGiUr7suh2DSLPI5QDHvDUu8oLRvw2Q+Wg64akcqPya+45FMJ7o+GknYHJxQayNJDXOH1gVnrQ=="],
 
     "abitype": ["abitype@1.0.8", "", { "peerDependencies": { "typescript": ">=5.0.4", "zod": "^3 >=3.22.0" }, "optionalPeers": ["typescript", "zod"] }, "sha512-ZeiI6h3GnW06uYDLx0etQtX/p8E24UaHHBj57RSjK7YBFe7iuVn07EDpOeP451D06sF27VOz9JJPlIKJmXgkEg=="],
 
