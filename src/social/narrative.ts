@@ -7,28 +7,44 @@ export const composeCastText = (
 	engagement: EngagementData | null,
 	mintUrl: string,
 ): string => {
-	const lines: string[] = [
-		`stigmergence #${edition}`,
-		`physarum simulation | seed ${seed}`,
-		`agents: ${genome.agentCount} | iterations: ${genome.iterations}`,
-		`sensor: ${genome.sensorAngle.toFixed(3)} / ${genome.sensorDistance} | turn: ${genome.turnAngle.toFixed(3)}`,
-		`decay: ${genome.decayFactor} | deposit: ${genome.depositAmount}`,
-	]
+	const lines: string[] = []
 
+	// Identity line
+	lines.push(`stigmergence #${edition}`)
+
+	// Brief biological framing
+	if (genome.populationCount === 1) {
+		lines.push(`a single colony extends its network — ${genome.agentCount.toLocaleString()} agents, ${genome.iterations} steps`)
+	} else {
+		lines.push(`${genome.populationCount} competing colonies — ${genome.agentCount.toLocaleString()} agents, ${genome.iterations} steps`)
+	}
+
+	// Sensing geometry
+	lines.push(`sensing: angle ${genome.sensorAngle.toFixed(2)}r · distance ${genome.sensorDistance} · turn ${genome.turnAngle.toFixed(2)}r`)
+
+	// Trail dynamics
+	lines.push(`trail: deposit ${genome.depositAmount} · decay ${genome.decayFactor} · step ${genome.stepSize}`)
+
+	// Food environment
 	if (genome.foodPlacement === "image") {
-		lines.push("food: image")
+		lines.push(`food: image-guided growth`)
 	} else {
-		lines.push(`food: ${genome.foodPlacement} (density ${genome.foodDensity}, clusters ${genome.foodClusterCount})`)
+		lines.push(`food: ${genome.foodPlacement} · density ${genome.foodDensity}`)
 	}
 
+	// Visual palette
 	if (genome.populationCount > 1) {
-		lines.push(`populations: ${genome.populationCount} | repulsion: ${genome.repulsionStrength}`)
+		lines.push(`repulsion: ${genome.repulsionStrength} · colormap: ${genome.colormap}`)
 	} else {
-		lines.push(`colormap: ${genome.colormap}`)
+		lines.push(`colormap: ${genome.colormap} · seed: ${seed}`)
 	}
 
+	// Prior engagement reflection
 	if (engagement) {
-		lines.push(`prev #${engagement.edition}: ${engagement.likes} likes \u00b7 ${engagement.recasts} recasts \u00b7 ${engagement.replies} replies`)
+		const total = engagement.likes + engagement.recasts + engagement.replies
+		if (total > 0) {
+			lines.push(`prev #${engagement.edition}: ${engagement.likes}♥ ${engagement.recasts}↺ ${engagement.replies}✦`)
+		}
 	}
 
 	lines.push(mintUrl)
