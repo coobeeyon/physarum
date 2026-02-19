@@ -33,6 +33,8 @@ const CONTEXT_FILES = [
 	"src/config/params.ts",
 	"src/config/env.ts",
 	"src/types/physarum.ts",
+	"src/types/evolution.ts",
+	"src/types/metadata.ts",
 	"src/social/narrative.ts",
 	"src/social/farcaster.ts",
 	"src/social/engagement.ts",
