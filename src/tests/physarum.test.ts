@@ -1,8 +1,6 @@
 import { describe, expect, test } from "bun:test"
 import { simulate } from "#engine/physarum.ts"
 import type { PhysarumParams } from "#types/physarum.ts"
-import { DEFAULT_POPULATIONS } from "#config/params.ts"
-
 const SMALL_PARAMS: PhysarumParams = {
 	seed: 42,
 	width: 64,
@@ -17,7 +15,11 @@ const SMALL_PARAMS: PhysarumParams = {
 	decayFactor: 0.9,
 	colormap: "magma",
 	populationCount: 3,
-	populations: DEFAULT_POPULATIONS,
+	populations: [
+		{ color: [255, 60, 40], agentFraction: 0.34 },
+		{ color: [40, 200, 255], agentFraction: 0.33 },
+		{ color: [60, 255, 100], agentFraction: 0.33 },
+	],
 	repulsionStrength: 0.5,
 	foodWeight: 2.0,
 	foodPlacement: "mixed",

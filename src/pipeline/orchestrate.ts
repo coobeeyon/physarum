@@ -13,6 +13,7 @@ import { composeCastText } from "#social/narrative.ts"
 import { readEngagement } from "#social/engagement.ts"
 import type { EngagementData } from "#types/evolution.ts"
 import { loadState, saveState } from "#pipeline/state.ts"
+import { updateGallery } from "#pipeline/gallery.ts"
 import type { NftMetadata } from "#types/metadata.ts"
 import type { PhysarumParams } from "#types/physarum.ts"
 import { type Result, ok } from "#types/result.ts"
@@ -185,7 +186,7 @@ export const runPipeline = async (
 	}
 
 	// Compose narrative text
-	const castText = composeCastText(edition, seed, genome, prevEngagement, mintUrl)
+	const castText = composeCastText(edition, seed, genome, prevEngagement)
 
 	let castHash = "0x0"
 	if (options.dryRun) {
@@ -209,7 +210,23 @@ export const runPipeline = async (
 		console.log(`  cast: ${castHash}`)
 	}
 
-	// 6. Save state
+	// 6. Update gallery
+	if (!options.dryRun) {
+		const galleryResult = await updateGallery({
+			edition,
+			seed,
+			width: params.width,
+			height: params.height,
+			genome,
+			contractAddress: contractAddress!,
+			tokenId,
+		})
+		if (!galleryResult.ok) {
+			console.warn(`  gallery update failed: ${galleryResult.error}`)
+		}
+	}
+
+	// 7. Save state
 	const newState = {
 		contractAddress: contractAddress ?? null,
 		lastEdition: edition,

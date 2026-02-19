@@ -15,6 +15,7 @@
     "@zoralabs/protocol-sdk": "0.13.18",
     "canvas": "3.1.0",
     "pinata": "2.0.1",
+    "sharp": "^0.33.0",
     "viem": "2.27.2"
   },
   "devDependencies": {

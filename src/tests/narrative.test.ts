@@ -37,54 +37,52 @@ const makeEngagement = (overrides: Partial<EngagementData> = {}): EngagementData
 	...overrides,
 })
 
-const MINT_URL = "https://zora.co/collect/base:0x584eB68F93bEcf6E463E7F259605c82Ef35c21e3/3"
-
 describe("composeCastText", () => {
 	test("formats first edition correctly (no engagement)", () => {
-		const text = composeCastText(1, 7919, makeGenome(), null, MINT_URL)
+		const text = composeCastText(1, 7919, makeGenome(), null)
 
 		expect(text).toContain("stigmergence #1")
-		expect(text).toContain("seed 7919")
-		expect(text).toContain("agents: 300000")
-		expect(text).toContain("iterations: 300")
+		expect(text).toContain("300,000 agents")
+		expect(text).toContain("300 steps")
 		expect(text).not.toContain("prev #")
 	})
 
 	test("formats with previous engagement data", () => {
-		const text = composeCastText(3, 23757, makeGenome(), makeEngagement(), MINT_URL)
+		const text = composeCastText(3, 23757, makeGenome(), makeEngagement())
 
-		expect(text).toContain("prev #2: 5 likes \u00b7 2 recasts \u00b7 3 replies")
+		expect(text).toContain("prev #2: 5♥ 2↺ 3✦")
 	})
 
 	test("handles all genome params", () => {
-		const text = composeCastText(3, 23757, makeGenome(), null, MINT_URL)
+		const text = composeCastText(3, 23757, makeGenome(), null)
 
-		expect(text).toContain("sensor: 0.785")
-		expect(text).toContain("/ 9")
-		expect(text).toContain("turn: 0.785")
-		expect(text).toContain("decay: 0.95")
-		expect(text).toContain("deposit: 15")
-		expect(text).toContain("food: mixed (density 0.8, clusters 12)")
-		expect(text).toContain("populations: 3")
+		expect(text).toContain("angle 0.79r")
+		expect(text).toContain("distance 9")
+		expect(text).toContain("turn 0.79r")
+		expect(text).toContain("decay 0.95")
+		expect(text).toContain("deposit 15")
+		expect(text).toContain("food: mixed")
+		expect(text).toContain("density 0.8")
+		expect(text).toContain("3 competing colonies")
 		expect(text).toContain("repulsion: 0.5")
 	})
 
 	test("output stays under 1024 chars", () => {
-		const text = composeCastText(3, 23757, makeGenome(), makeEngagement(), MINT_URL)
+		const text = composeCastText(3, 23757, makeGenome(), makeEngagement())
 
 		expect(text.length).toBeLessThan(1024)
 	})
 
-	test("mint URL appears as last line", () => {
-		const text = composeCastText(3, 23757, makeGenome(), makeEngagement(), MINT_URL)
+	test("site URL appears as last line", () => {
+		const text = composeCastText(3, 23757, makeGenome(), makeEngagement())
 		const lines = text.split("\n")
 
-		expect(lines[lines.length - 1]).toBe(MINT_URL)
+		expect(lines[lines.length - 1]).toBe("https://stigmergence.art")
 	})
 
 	test("handles food placement image", () => {
 		const genome = makeGenome({ foodPlacement: "image" })
-		const text = composeCastText(1, 100, genome, null, MINT_URL)
+		const text = composeCastText(1, 100, genome, null)
 
 		expect(text).toContain("food: image")
 		expect(text).not.toContain("density")
@@ -93,17 +91,17 @@ describe("composeCastText", () => {
 
 	test("shows colormap for single population", () => {
 		const genome = makeGenome({ populationCount: 1, populations: [{ color: [255, 255, 255], agentFraction: 1 }] })
-		const text = composeCastText(1, 100, genome, null, MINT_URL)
+		const text = composeCastText(1, 100, genome, null)
 
 		expect(text).toContain("colormap: magma")
 		expect(text).not.toContain("repulsion")
 	})
 
-	test("displays angles as radians with 3 decimal places", () => {
+	test("displays angles as radians with 2 decimal places", () => {
 		const genome = makeGenome({ sensorAngle: 1.23456, turnAngle: 0.98765 })
-		const text = composeCastText(1, 100, genome, null, MINT_URL)
+		const text = composeCastText(1, 100, genome, null)
 
-		expect(text).toContain("sensor: 1.235")
-		expect(text).toContain("turn: 0.988")
+		expect(text).toContain("angle 1.23r")
+		expect(text).toContain("turn 0.99r")
 	})
 })

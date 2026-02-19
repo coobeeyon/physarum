@@ -5,7 +5,6 @@ export const composeCastText = (
 	seed: number,
 	genome: Genome,
 	engagement: EngagementData | null,
-	mintUrl: string,
 ): string => {
 	const lines: string[] = []
 
@@ -47,7 +46,7 @@ export const composeCastText = (
 		}
 	}
 
-	lines.push(mintUrl)
+	lines.push("https://stigmergence.art")
 
 	return lines.join("\n")
 }
