@@ -7,6 +7,7 @@ export type EnvConfig = {
 	readonly neynarApiKey: string
 	readonly neynarSignerUuid: string
 	readonly baseRpcUrl: string
+	readonly farcasterChannel?: string
 }
 
 const DEFAULT_BASE_RPC = "https://mainnet.base.org"
@@ -18,6 +19,7 @@ export const loadEnv = (): Result<EnvConfig> => {
 	const neynarApiKey = process.env.NEYNAR_API_KEY
 	const neynarSignerUuid = process.env.NEYNAR_SIGNER_UUID
 	const baseRpcUrl = process.env.BASE_RPC_URL || DEFAULT_BASE_RPC
+	const farcasterChannel = process.env.FARCASTER_CHANNEL?.trim() || undefined
 
 	if (!walletPrivateKey) return err("WALLET_PRIVATE_KEY is required")
 	if (!walletPrivateKey.startsWith("0x")) return err("WALLET_PRIVATE_KEY must start with 0x")
@@ -36,5 +38,6 @@ export const loadEnv = (): Result<EnvConfig> => {
 		neynarApiKey,
 		neynarSignerUuid,
 		baseRpcUrl,
+		farcasterChannel,
 	})
 }

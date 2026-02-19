@@ -9,6 +9,9 @@ import { createPinataClient, uploadImage, uploadMetadata } from "#ipfs/upload.ts
 import { createClients } from "#chain/client.ts"
 import { deployEdition } from "#chain/zora.ts"
 import { postCast, type NeynarConfig } from "#social/farcaster.ts"
+import { composeCastText } from "#social/narrative.ts"
+import { readEngagement } from "#social/engagement.ts"
+import type { EngagementData } from "#types/evolution.ts"
 import { loadState, saveState } from "#pipeline/state.ts"
 import type { NftMetadata } from "#types/metadata.ts"
 import type { PhysarumParams } from "#types/physarum.ts"
@@ -163,12 +166,31 @@ export const runPipeline = async (
 	const imageUrl = `${IPFS_GATEWAY}/${imageCid}`
 	const mintUrl = `https://zora.co/collect/base:${contractAddress}/${tokenId}`
 
+	// Extract genome (everything except seed/width/height)
+	const { seed: _seed, width: _width, height: _height, ...genome } = params
+
+	// Fetch engagement for previous edition
+	let prevEngagement: EngagementData | null = null
+	if (state.history.length > 0 && config.neynarApiKey) {
+		const lastEntry = state.history[state.history.length - 1]
+		const engResult = await readEngagement(config.neynarApiKey, [lastEntry])
+		if (engResult.ok) {
+			for (const w of engResult.value.warnings) {
+				console.warn(`  engagement: ${w}`)
+			}
+			if (engResult.value.engagement.length > 0) {
+				prevEngagement = engResult.value.engagement[0]
+			}
+		}
+	}
+
+	// Compose narrative text
+	const castText = composeCastText(edition, seed, genome, prevEngagement, mintUrl)
+
 	let castHash = "0x0"
 	if (options.dryRun) {
 		console.log("  [dry-run] skipping Farcaster post")
-		console.log(`  would post: stigmergence #${edition}`)
-		console.log(`  image: ${imageUrl}`)
-		console.log(`  mint: ${mintUrl}`)
+		console.log(`  narrative:\n${castText}`)
 	} else {
 		const neynarConfig: NeynarConfig = {
 			neynarApiKey: config.neynarApiKey,
@@ -177,11 +199,10 @@ export const runPipeline = async (
 		}
 		const castResult = await postCast(
 			neynarConfig,
+			castText,
 			imageUrl,
 			mintUrl,
-			edition,
-			seed,
-			options.channel,
+			options.channel ?? config.farcasterChannel,
 		)
 		if (!castResult.ok) return castResult
 		castHash = castResult.value.castHash
@@ -203,7 +224,7 @@ export const runPipeline = async (
 				imageCid,
 				metadataCid,
 				timestamp: new Date().toISOString(),
-				genome: null,
+				genome,
 			},
 		],
 		reflections: state.reflections,

@@ -52,7 +52,7 @@ describe("state migration", () => {
 	test("migrates old state without genome or reflections", async () => {
 		// loadState reads from the hardcoded STATE_PATH which points at
 		// the real state.json — it has old-format entries without genome/reflections.
-		// Migration should backfill those fields.
+		// Migration should backfill those fields. Newer entries may have genome set.
 		const { loadState } = await import("#pipeline/state.ts")
 
 		const result = loadState()
@@ -60,7 +60,6 @@ describe("state migration", () => {
 		if (!result.ok) return
 		for (const entry of result.value.history) {
 			expect(entry).toHaveProperty("genome")
-			expect(entry.genome).toBeNull()
 		}
 		expect(result.value).toHaveProperty("reflections")
 		expect(Array.isArray(result.value.reflections)).toBe(true)

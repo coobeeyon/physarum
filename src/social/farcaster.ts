@@ -10,14 +10,11 @@ export type NeynarConfig = {
 
 export const postCast = async (
 	config: NeynarConfig,
+	text: string,
 	imageUrl: string,
 	mintUrl: string,
-	edition: number,
-	seed: number,
 	channel?: string,
 ): Promise<Result<{ castHash: string }>> => {
-	const text = `coobeyon #${edition}\nphysarum simulation | seed ${seed}\nmint: ${mintUrl}`
-
 	const body: Record<string, unknown> = {
 		signer_uuid: config.signerUuid,
 		text,

@@ -71,7 +71,7 @@ const main = async () => {
 
 	// generate-only and dry-run don't need all env vars
 	const envResult = flags.generateOnly || flags.dryRun
-		? { ok: true as const, value: { walletPrivateKey: "0x0" as `0x${string}`, pinataJwt: "", farcasterFid: 0, neynarApiKey: "", neynarSignerUuid: "", baseRpcUrl: "" } }
+		? { ok: true as const, value: { walletPrivateKey: "0x0" as `0x${string}`, pinataJwt: "", farcasterFid: 0, neynarApiKey: "", neynarSignerUuid: "", baseRpcUrl: "", farcasterChannel: process.env.FARCASTER_CHANNEL?.trim() || undefined } }
 		: loadEnv()
 
 	if (!envResult.ok) {
@@ -79,7 +79,10 @@ const main = async () => {
 		process.exit(1)
 	}
 
-	const result = await runPipeline(envResult.value, flags)
+	const result = await runPipeline(envResult.value, {
+		...flags,
+		channel: flags.channel ?? envResult.value.farcasterChannel,
+	})
 
 	if (!result.ok) {
 		console.error(`Pipeline error: ${result.error}`)
