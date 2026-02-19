@@ -4,7 +4,7 @@ import type { PipelineState } from "#types/metadata.ts"
 import type { EngagementData } from "#types/evolution.ts"
 import { SYSTEM_PROMPT, assembleContext } from "#agent/prompt.ts"
 
-const DEFAULT_MODEL = "claude-sonnet-4-6-20250514"
+const DEFAULT_MODEL = "claude-sonnet-4-6"
 
 export type ChangeProposal = {
 	readonly file: string
