@@ -1,5 +1,5 @@
 import { execSync } from "node:child_process"
-import { existsSync, readFileSync, writeFileSync } from "node:fs"
+import { existsSync, readFileSync, statSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import sharp from "sharp"
 import { loadState } from "#pipeline/state.ts"
@@ -173,11 +173,15 @@ export async function updateGallery(current?: GalleryOptions): Promise<Result<vo
 
 	console.log("updating gallery...")
 
+	// Stub webps are committed as placeholders (< 1000 bytes). Replace them when the real PNG is available.
+	const needsConversion = (webpPath: string): boolean =>
+		!existsSync(webpPath) || statSync(webpPath).size < 1000
+
 	// 1. Convert PNGs → WebP for all historical editions
 	for (const h of state.history) {
 		const pngPath = join(OUTPUT_DIR, `stigmergence-${h.edition}.png`)
 		const webpPath = join(SITE_DIR, "img", `stigmergence-${h.edition}.webp`)
-		if (existsSync(pngPath) && !existsSync(webpPath)) {
+		if (existsSync(pngPath) && needsConversion(webpPath)) {
 			console.log(`  converting edition ${h.edition} to webp...`)
 			await sharp(pngPath).webp({ quality: 85 }).toFile(webpPath)
 		}

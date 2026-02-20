@@ -1,5 +1,6 @@
 import { writeFileSync } from "node:fs"
 import { join } from "node:path"
+import { varyGenome } from "#agent/evolve.ts"
 import { createClients } from "#chain/client.ts"
 import { deployEdition } from "#chain/zora.ts"
 import type { EnvConfig } from "#config/env.ts"
@@ -47,8 +48,12 @@ export const runPipeline = async (
 
 	// 1. Simulate
 	console.log("simulating physarum...")
+	const { width, height, ...defaultGenome } = DEFAULT_PARAMS
+	const variedGenome = varyGenome(edition, defaultGenome)
 	let params: PhysarumParams = {
-		...DEFAULT_PARAMS,
+		width,
+		height,
+		...variedGenome,
 		seed,
 		...(options.foodImageSource
 			? { foodPlacement: "image" as const, foodImageSource: options.foodImageSource }

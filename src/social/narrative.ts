@@ -1,10 +1,17 @@
 import type { EngagementData, Genome } from "#types/evolution.ts"
 
-const COMPETING_INTROS = [
+const COMPETING_INTROS_2 = [
 	"two colonies, no communication — only chemical avoidance.",
 	"two populations building separate networks in the same space.",
 	"competing colonies that never negotiate, never touch.",
 	"two swarms following the same rules, avoiding each other anyway.",
+]
+
+const COMPETING_INTROS_3 = [
+	"three colonies with no way to speak, only to avoid.",
+	"three populations converging on the same space, repelling each other.",
+	"three swarms. no communication. no plan. competing for the same food.",
+	"red, blue, green — three colonies building networks that share nothing but space.",
 ]
 
 const SINGLE_INTROS = [
@@ -36,8 +43,13 @@ export const composeCastText = (
 	lines.push("")
 
 	// Emergent behavior description
-	if (genome.populationCount > 1) {
-		lines.push(pickFrom(COMPETING_INTROS, seed))
+	if (genome.populationCount >= 3) {
+		lines.push(pickFrom(COMPETING_INTROS_3, seed))
+		lines.push(
+			`${genome.agentCount.toLocaleString()} particles building networks that share a border neither planned.`,
+		)
+	} else if (genome.populationCount === 2) {
+		lines.push(pickFrom(COMPETING_INTROS_2, seed))
 		lines.push(
 			`${genome.agentCount.toLocaleString()} particles building networks that share a border neither planned.`,
 		)
