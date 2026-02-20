@@ -54,32 +54,58 @@ const likeCast = async (config: NeynarConfig, castHash: string): Promise<boolean
 	}
 }
 
+const followArtists = async (config: NeynarConfig, fids: number[]): Promise<number> => {
+	if (fids.length === 0) return 0
+	try {
+		const resp = await fetch(`${NEYNAR_API}/user/follow`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"x-api-key": config.neynarApiKey,
+			},
+			body: JSON.stringify({
+				signer_uuid: config.signerUuid,
+				target_fids: fids,
+			}),
+		})
+		if (!resp.ok) {
+			console.warn(`  discover: follow request failed: HTTP ${resp.status}`)
+			return 0
+		}
+		return fids.length
+	} catch {
+		return 0
+	}
+}
+
 /**
  * Engage with the generative art community on Farcaster.
  *
- * Strategy: like a handful of posts from /art and /genart channels each run.
- * Each like sends a notification to the post author, who may check our profile.
- * Over time this builds organic discovery without spamming.
+ * Strategy: like posts from /art and /genart channels, then follow a subset
+ * of those artists. Likes send notifications; follows create persistent
+ * visibility in follower lists and are more likely to generate reciprocal
+ * follows over time.
  *
- * Only likes posts from other accounts (not our own), and prefers posts
- * that already have some traction (at least 1 like) to avoid appearing
- * to carpet-bomb zero-engagement posts.
+ * Only interacts with posts from other accounts (not our own), and prefers
+ * posts with at least 1 like to avoid appearing to target zero-engagement posts.
  */
 export const engageWithCommunity = async (
 	config: NeynarConfig,
 	channels: string[] = ["art", "genart"],
-	maxLikes = 4,
-): Promise<Result<{ liked: number; channels: string[] }>> => {
+	maxLikes = 6,
+	maxFollows = 3,
+): Promise<Result<{ liked: number; followed: number; channels: string[] }>> => {
 	console.log("engaging with community...")
 	let liked = 0
 	const engagedChannels: string[] = []
+	const followCandidateFids: number[] = []
 
 	for (const channel of channels) {
 		if (liked >= maxLikes) break
 
 		const casts = await fetchChannelFeed(config.neynarApiKey, channel, 30)
 
-		// Filter: not our own posts, and prefer posts with some engagement
+		// Filter: not our own posts, prefer posts with some engagement
 		const candidates = casts
 			.filter((c) => c.author.fid !== config.fid)
 			.filter((c) => c.reactions.likes_count >= 1)
@@ -93,10 +119,25 @@ export const engageWithCommunity = async (
 				const preview = cast.text.slice(0, 60).replace(/\n/g, " ")
 				console.log(`  liked /${channel} @${cast.author.username}: "${preview}"`)
 				if (!engagedChannels.includes(channel)) engagedChannels.push(channel)
+				// Queue artist for following (deduplicated, up to maxFollows)
+				if (
+					followCandidateFids.length < maxFollows &&
+					!followCandidateFids.includes(cast.author.fid)
+				) {
+					followCandidateFids.push(cast.author.fid)
+				}
 			}
 		}
 	}
 
-	console.log(`  engagement done: ${liked} likes across ${engagedChannels.join(", ") || "no channels"}`)
-	return ok({ liked, channels: engagedChannels })
+	// Follow artists whose work we liked — creates persistent visibility
+	const followed = await followArtists(config, followCandidateFids)
+	if (followed > 0) {
+		console.log(`  followed ${followed} artists`)
+	}
+
+	console.log(
+		`  engagement done: ${liked} likes, ${followed} follows across ${engagedChannels.join(", ") || "no channels"}`,
+	)
+	return ok({ liked, followed, channels: engagedChannels })
 }

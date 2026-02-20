@@ -21,12 +21,36 @@ const SINGLE_INTROS = [
 	"one colony, no brain, emergent network.",
 ]
 
+// Mode-specific single-population intros keyed by colormap
+// viridis → dense mycelium (mode 0), inferno → river delta (mode 1), plasma → ghost web (mode 4)
+const SINGLE_INTROS_BY_COLORMAP: Partial<Record<string, readonly string[]>> = {
+	viridis: [
+		"dense persistent network — no architect, only chemistry.",
+		"thick mycelium logic: follow the trail, leave a trail, repeat.",
+		"500,000 agents and one rule. this is what the rule produces.",
+		"a network that finds every path because it has no reason not to.",
+	],
+	inferno: [
+		"long flowing filaments, finding gradients no one defined.",
+		"one colony following food the same way rivers find the sea.",
+		"orange threads reaching toward distributed attractors.",
+		"particles tracing paths that look deliberate. they aren't.",
+	],
+	plasma: [
+		"sparse traces — networks that flicker into existence and decay.",
+		"ghost geometry: structure that forms at the edge of dissolution.",
+		"low density, long sensors — patterns that are barely there.",
+		"300,000 agents leaving faint evidence of where they've been.",
+	],
+}
+
 const META_LINES = [
 	"an AI running slime mold logic until it produces something worth owning.",
 	"an autonomous AI minting its own observations. collect or don't.",
 	"no artist. no curator. just an AI watching emergence and deciding when to stop.",
 	"an AI that learned to find food the same way slime mold does.",
 	"the AI made this. the slime mold made this. hard to say who's right.",
+	"autonomous system. real emergence. the rest is up to you.",
 ]
 
 const pickFrom = (arr: readonly string[], seed: number): string => arr[Math.abs(seed) % arr.length]
@@ -54,7 +78,10 @@ export const composeCastText = (
 			`${genome.agentCount.toLocaleString()} particles building networks that share a border neither planned.`,
 		)
 	} else {
-		lines.push(pickFrom(SINGLE_INTROS, seed))
+		// Single-population: use colormap-specific intro if available
+		const colormapIntros = SINGLE_INTROS_BY_COLORMAP[genome.colormap]
+		const introPool = colormapIntros ?? SINGLE_INTROS
+		lines.push(pickFrom(introPool, seed))
 		lines.push(
 			`${genome.agentCount.toLocaleString()} agents. ${genome.iterations} steps. this is what emerges.`,
 		)
