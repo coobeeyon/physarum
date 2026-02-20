@@ -2,7 +2,7 @@
 set -euo pipefail
 
 script_dir="$(cd "$(dirname "$0")" && pwd)"
-delay="${1:-900}"
+delay="${1:-5400}"
 run=0
 
 echo "=== Reflection loop: run every ${delay}s (Ctrl-C to stop) ==="
