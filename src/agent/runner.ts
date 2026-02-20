@@ -23,7 +23,7 @@ export const runClaudeReflection = async (
 	projectRoot: string,
 ): Promise<Result<void>> => {
 	const model = process.env.REFLECT_MODEL || "sonnet"
-	const maxTurns = process.env.REFLECT_MAX_TURNS || "30"
+	const maxTurns = process.env.REFLECT_MAX_TURNS || "100"
 
 	const prompt = buildReflectionPrompt(state, engagement, projectRoot)
 
