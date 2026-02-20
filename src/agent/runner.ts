@@ -36,19 +36,26 @@ export const runClaudeReflection = async (
 
 	const prompt = buildReflectionPrompt(state, engagement, projectRoot)
 
-	const baseArgs = ["claude", "-p", prompt, "--model", model, "--max-turns", maxTurns, "--output-format", "json"]
+	const baseArgs = [
+		"claude",
+		"-p",
+		prompt,
+		"--model",
+		model,
+		"--max-turns",
+		maxTurns,
+		"--output-format",
+		"json",
+	]
 	const sandboxArgs = isContainer()
 		? ["--dangerously-skip-permissions"]
 		: ["--allowedTools", ALLOWED_TOOLS]
 
-	const proc = Bun.spawn(
-		[...baseArgs, ...sandboxArgs],
-		{
-			cwd: projectRoot,
-			stdout: "pipe",
-			stderr: "inherit",
-		},
-	)
+	const proc = Bun.spawn([...baseArgs, ...sandboxArgs], {
+		cwd: projectRoot,
+		stdout: "pipe",
+		stderr: "inherit",
+	})
 
 	const exitCode = await proc.exited
 	const stdout = await new Response(proc.stdout).text()

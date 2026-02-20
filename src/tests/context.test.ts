@@ -91,7 +91,10 @@ describe("buildReflectionPrompt", () => {
 	test("includes requests from requests.json", () => {
 		const dir = makeTmpDir()
 		try {
-			writeFileSync(join(dir, "requests.json"), JSON.stringify(["try warmer colors", "more agents"]))
+			writeFileSync(
+				join(dir, "requests.json"),
+				JSON.stringify(["try warmer colors", "more agents"]),
+			)
 			const result = buildReflectionPrompt(makeState(), [], dir)
 
 			expect(result).toContain("try warmer colors")
