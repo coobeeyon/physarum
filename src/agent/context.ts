@@ -8,8 +8,7 @@ const readRequests = (projectRoot: string): string => {
 		const raw = readFileSync(join(projectRoot, "requests.json"), "utf-8")
 		const requests = JSON.parse(raw)
 		if (!Array.isArray(requests) || requests.length === 0) return "none"
-		return requests.map((r: unknown) => `- ${String(r)}`).join("
-")
+		return requests.map((r: unknown) => `- ${String(r)}`).join("\n")
 	} catch {
 		return "none"
 	}
@@ -37,8 +36,7 @@ const formatEngagement = (engagement: ReadonlyArray<EngagementData>): string => 
 		lines.push(`  Trend: ${delta > 0 ? "improving" : delta < 0 ? "declining" : "stable"} (${delta > 0 ? "+" : ""}${delta})`)
 	}
 
-	return lines.join("
-")
+	return lines.join("\n")
 }
 
 const formatReflections = (state: PipelineState): string => {
@@ -47,11 +45,9 @@ const formatReflections = (state: PipelineState): string => {
 	return state.reflections
 		.map(
 			(r) =>
-				`  After Edition #${r.edition}: ${r.reasoning}
-    Changed: ${r.changes.join(", ")}`,
+				`  After Edition #${r.edition}: ${r.reasoning}\n    Changed: ${r.changes.join(", ")}`,
 		)
-		.join("
-")
+		.join("\n")
 }
 
 export const buildReflectionPrompt = (
