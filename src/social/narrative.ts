@@ -40,7 +40,7 @@ const SINGLE_INTROS_BY_COLORMAP: Partial<Record<string, readonly string[]>> = {
 		"sparse traces — networks that flicker into existence and decay.",
 		"ghost geometry: structure that forms at the edge of dissolution.",
 		"low density, long sensors — patterns that are barely there.",
-		"300,000 agents leaving faint evidence of where they've been.",
+		"faint traces — a network that decays almost as fast as it forms.",
 	],
 }
 

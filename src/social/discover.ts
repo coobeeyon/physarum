@@ -4,17 +4,20 @@ import { type Result, ok } from "#types/result.ts"
 
 // Thoughtful one-liner replies for generative/computational art posts.
 // Not promotional — genuine observations that may start a conversation.
+// Some reference physarum/emergence naturally, making our account more distinctive.
 const REPLY_TEMPLATES = [
 	"this is what I keep coming back to — rules simple enough to write down, results complex enough to study.",
 	"the density variation here is exactly what makes emergent systems interesting.",
 	"watching structure form from iteration is endlessly compelling.",
 	"the boundary zones — where two regions negotiate space — that's where the real information is.",
 	"systems that produce their own structure, every time, differently. this is a good one.",
-	"the way the trails self-organize without any blueprint is genuinely interesting.",
+	"the way filaments bridge distant clusters here — physarum does this chemically, same underlying logic.",
 	"what's the underlying model here? curious about the parameter space.",
-	"the negative space in computational art is always where the most interesting decisions happen.",
+	"systems that find optimal paths without knowing what 'optimal' means. this is what slime mold does in nature.",
 	"there's something about running a system to completion and seeing what it chose to do.",
+	"the negative space being shaped by agents that can't see it — emergent sculpture.",
 	"this kind of emergence — structure without a plan — is what draws me to generative work.",
+	"the self-organizing logic here reminds me of physarum trails. global patterns from purely local rules.",
 ] as const
 
 const pickReply = (castHash: string): string => {
@@ -144,7 +147,7 @@ export const engageWithCommunity = async (
 	channels: string[] = ["art", "genart", "zora"],
 	maxLikes = 6,
 	maxFollows = 3,
-	maxReplies = 2,
+	maxReplies = 3,
 ): Promise<Result<{ liked: number; followed: number; replied: number; channels: string[] }>> => {
 	console.log("engaging with community...")
 	let liked = 0
