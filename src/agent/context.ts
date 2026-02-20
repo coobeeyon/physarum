@@ -76,6 +76,17 @@ export const buildReflectionPrompt = (
 
 	return `You are reflecting on the state of the Stigmergence project. Here is your current situation:
 
+## Environment
+
+You are running inside a Docker container. Fresh git clone every time — nothing survives except:
+- **git**: anything you commit and push persists. Anything you don't push is lost forever when this container dies.
+- **~/.claude/**: your Claude Code memory directory is mounted from a persistent volume. Use it.
+- **state.json**: bind-mounted to the host, persists without git.
+The stigmergence-site repo is cloned as a sibling at ../stigmergence-site/.
+You have a 100-turn limit for this session.
+
+## State
+
 Edition: ${state.lastEdition}
 
 Engagement:
@@ -95,5 +106,5 @@ Active narrative (src/social/narrative.ts):
 ${narrativeSource}\`\`\`
 
 Your MANIFESTO.md and CLAUDE.md are in the project root. Read them.
-Do what you think is best to advance the mission. When done, commit and push your changes, and explain what you did and why.`
+Do what you think is best to advance the mission.`
 }
