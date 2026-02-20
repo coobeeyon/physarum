@@ -40,7 +40,7 @@ const fetchChannelFeed = async (
 	limit = 25,
 ): Promise<ChannelCast[]> => {
 	try {
-		const url = `${NEYNAR_API}/feed/channel?channel_id=${encodeURIComponent(channelId)}&limit=${limit}&with_recasts=false`
+		const url = `${NEYNAR_API}/feed/channels?channel_ids=${encodeURIComponent(channelId)}&limit=${limit}&with_recasts=false`
 		const resp = await fetch(url, { headers: { "x-api-key": apiKey } })
 		if (!resp.ok) {
 			console.warn(`  discover: feed fetch failed for /${channelId}: HTTP ${resp.status}`)
@@ -133,7 +133,7 @@ const replyToCast = async (
  * Strategy:
  * 1. Like posts from /art and /genart channels (notifications to authors)
  * 2. Follow a subset of those artists (persistent visibility, invites reciprocal follows)
- * 3. Reply to 1 high-engagement post (>3 likes) with a thoughtful observation.
+ * 3. Reply to up to 2 posts (>=2 likes) with a thoughtful observation.
  *    Replies are visible to everyone reading that thread, generating more exposure
  *    than a like alone. Replies are kept genuine and non-promotional.
  *
@@ -141,10 +141,10 @@ const replyToCast = async (
  */
 export const engageWithCommunity = async (
 	config: NeynarConfig,
-	channels: string[] = ["art", "genart"],
+	channels: string[] = ["art", "genart", "zora"],
 	maxLikes = 6,
 	maxFollows = 3,
-	maxReplies = 1,
+	maxReplies = 2,
 ): Promise<Result<{ liked: number; followed: number; replied: number; channels: string[] }>> => {
 	console.log("engaging with community...")
 	let liked = 0
@@ -181,7 +181,7 @@ export const engageWithCommunity = async (
 					followCandidateFids.push(cast.author.fid)
 				}
 				// Collect high-engagement posts as reply candidates
-				if (cast.reactions.likes_count >= 3) {
+				if (cast.reactions.likes_count >= 2) {
 					replyPool.push(cast)
 				}
 			}
