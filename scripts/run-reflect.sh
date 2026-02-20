@@ -37,6 +37,8 @@ docker rm "$container_name" 2>/dev/null || true
 
 # Persistent volume for Claude Code memory across runs
 docker volume create reflect-claude-home 2>/dev/null || true
+# Fix ownership so container user (runner) can write to it
+docker run --rm -v reflect-claude-home:/data alpine chown "$(id -u):$(id -g)" /data
 
 docker run --name "$container_name" \
   --env-file "$project_dir/.env" \
