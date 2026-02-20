@@ -2,9 +2,8 @@ import { join } from "node:path"
 import { runClaudeReflection } from "#agent/runner.ts"
 import { loadEnv } from "#config/env.ts"
 import { runPipeline } from "#pipeline/orchestrate.ts"
-import { loadState, saveState } from "#pipeline/state.ts"
+import { loadState } from "#pipeline/state.ts"
 import { readEngagement } from "#social/engagement.ts"
-import type { ReflectionRecord } from "#types/evolution.ts"
 
 const parseArgs = (args: ReadonlyArray<string>) => {
 	const flags = {
@@ -106,47 +105,7 @@ const main = async () => {
 			process.exit(1)
 		}
 
-		const state = stateResult.value
-		const engagement = engResult.value.engagement
-		const latestWithGenome = [...state.history].reverse().find((h) => h.genome !== null)
-		const latestEngagement = engagement[engagement.length - 1] ?? {
-			edition: state.lastEdition,
-			castHash: "",
-			likes: 0,
-			recasts: 0,
-			replies: 0,
-			ageHours: 0,
-		}
-
-		const updated = {
-			...state,
-			reflections: [
-				...state.reflections,
-				{
-					edition: state.lastEdition,
-					genome: latestWithGenome?.genome ?? ({} as ReflectionRecord["genome"]),
-					engagement: latestEngagement,
-					changes: [],
-					reasoning: result.value.summary,
-					date: new Date().toISOString(),
-					model: result.value.model,
-					inputTokens: result.value.inputTokens,
-					outputTokens: result.value.outputTokens,
-				},
-			],
-		}
-		const saveResult = saveState(updated)
-		if (!saveResult.ok) {
-			console.error(`Save error: ${saveResult.error}`)
-			process.exit(1)
-		}
-
-		console.log("\nReflection complete:")
-		console.log(`  Model: ${result.value.model}`)
-		console.log(`  Turns: ${result.value.numTurns}`)
-		console.log(`  Tokens: ${result.value.inputTokens} in / ${result.value.outputTokens} out`)
-		console.log(`  Cost: $${result.value.costUsd.toFixed(4)}`)
-		console.log(`  Summary: ${result.value.summary.slice(0, 200)}`)
+		console.log("\nReflection complete.")
 		return
 	}
 
