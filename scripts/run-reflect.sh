@@ -37,8 +37,6 @@ docker rm "$container_name" 2>/dev/null || true
 
 docker run --name "$container_name" \
   --env-file "$project_dir/.env" \
-  -e ANTHROPIC_API_KEY \
-  -e NEYNAR_API_KEY \
   -e REFLECT_MODEL="${REFLECT_MODEL:-}" \
   -e REFLECT_MAX_TURNS="${REFLECT_MAX_TURNS:-}" \
   -e CONTAINER=true \
