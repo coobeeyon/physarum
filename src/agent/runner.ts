@@ -45,7 +45,7 @@ export const runClaudeReflection = async (
 		"--max-turns",
 		maxTurns,
 		"--output-format",
-		"json",
+		"stream-json",
 	]
 	const sandboxArgs = isContainer()
 		? ["--dangerously-skip-permissions"]
