@@ -31,6 +31,7 @@ export const runClaudeReflection = async (
 		"claude",
 		"-p",
 		prompt,
+		"--verbose",
 		"--model",
 		model,
 		"--max-turns",
