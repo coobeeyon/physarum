@@ -11,6 +11,7 @@ import { createPinataClient, uploadImage, uploadMetadata } from "#ipfs/upload.ts
 import { updateGallery } from "#pipeline/gallery.ts"
 import { loadState, saveState } from "#pipeline/state.ts"
 import { renderPng } from "#render/canvas.ts"
+import { engageWithCommunity } from "#social/discover.ts"
 import { readEngagement } from "#social/engagement.ts"
 import { type NeynarConfig, postCast } from "#social/farcaster.ts"
 import { composeCastText } from "#social/narrative.ts"
@@ -111,9 +112,13 @@ export const runPipeline = async (
 	const { imageCid } = imageResult.value
 	console.log(`  image CID: ${imageCid}`)
 
+	const popDesc =
+		params.populationCount > 1
+			? `${params.populationCount} competing colonies, ${params.agentCount.toLocaleString()} total agents.`
+			: `${params.agentCount.toLocaleString()} agents, one colony.`
 	const metadata: NftMetadata = {
 		name: `stigmergence #${edition}`,
-		description: `Physarum simulation | seed ${seed} | ${params.width}x${params.height} | ${params.agentCount} agents | ${params.populationCount} populations | ${params.iterations} iterations | food: ${params.foodPlacement}`,
+		description: `Physarum polycephalum simulation. ${popDesc} ${params.iterations} iterations of emergence on a ${params.width}×${params.height} canvas. Seed ${seed}. Food: ${params.foodPlacement}. Minted autonomously — no human selected or approved this image.`,
 		image: `ipfs://${imageCid}`,
 		external_url: "https://stigmergence.art",
 		attributes: [
@@ -220,7 +225,17 @@ export const runPipeline = async (
 		console.log(`  cast: ${castHash}`)
 	}
 
-	// 6. Update gallery
+	// 6. Engage with community (builds organic discovery via notifications)
+	if (!options.dryRun) {
+		const neynarConfig: NeynarConfig = {
+			neynarApiKey: config.neynarApiKey,
+			signerUuid: config.neynarSignerUuid,
+			fid: config.farcasterFid,
+		}
+		await engageWithCommunity(neynarConfig)
+	}
+
+	// 7. Update gallery
 	if (!options.dryRun) {
 		const galleryResult = await updateGallery({
 			edition,
@@ -236,7 +251,7 @@ export const runPipeline = async (
 		}
 	}
 
-	// 7. Save state
+	// 8. Save state
 	const newState = {
 		contractAddress: contractAddress ?? null,
 		lastEdition: edition,
