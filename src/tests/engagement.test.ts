@@ -1,4 +1,4 @@
-import { describe, expect, test, beforeEach, mock } from "bun:test"
+import { beforeEach, describe, expect, mock, test } from "bun:test"
 import { readEngagement } from "#social/engagement.ts"
 import type { HistoryEntry } from "#types/metadata.ts"
 
@@ -29,8 +29,8 @@ describe("readEngagement", () => {
 
 	test("fetches engagement for valid cast hash", async () => {
 		const originalFetch = globalThis.fetch
-		globalThis.fetch = mock(async () =>
-			new Response(JSON.stringify(neynarResponse(5, 2, 3)), { status: 200 }),
+		globalThis.fetch = mock(
+			async () => new Response(JSON.stringify(neynarResponse(5, 2, 3)), { status: 200 }),
 		) as typeof fetch
 
 		const result = await readEngagement("test-key", [makeEntry()])
@@ -52,9 +52,7 @@ describe("readEngagement", () => {
 			throw new Error("should not be called")
 		}) as typeof fetch
 
-		const result = await readEngagement("test-key", [
-			makeEntry({ castHash: "0x0" }),
-		])
+		const result = await readEngagement("test-key", [makeEntry({ castHash: "0x0" })])
 
 		expect(result.ok).toBe(true)
 		if (!result.ok) return
@@ -66,9 +64,7 @@ describe("readEngagement", () => {
 	})
 
 	test("skips short hash", async () => {
-		const result = await readEngagement("test-key", [
-			makeEntry({ castHash: "0xabc" }),
-		])
+		const result = await readEngagement("test-key", [makeEntry({ castHash: "0xabc" })])
 
 		expect(result.ok).toBe(true)
 		if (!result.ok) return
@@ -78,9 +74,7 @@ describe("readEngagement", () => {
 
 	test("handles HTTP error as warning", async () => {
 		const originalFetch = globalThis.fetch
-		globalThis.fetch = mock(async () =>
-			new Response("Not Found", { status: 404 }),
-		) as typeof fetch
+		globalThis.fetch = mock(async () => new Response("Not Found", { status: 404 })) as typeof fetch
 
 		const result = await readEngagement("test-key", [makeEntry()])
 
@@ -112,14 +106,12 @@ describe("readEngagement", () => {
 
 	test("calculates ageHours from timestamp", async () => {
 		const originalFetch = globalThis.fetch
-		globalThis.fetch = mock(async () =>
-			new Response(JSON.stringify(neynarResponse(0, 0, 0)), { status: 200 }),
+		globalThis.fetch = mock(
+			async () => new Response(JSON.stringify(neynarResponse(0, 0, 0)), { status: 200 }),
 		) as typeof fetch
 
 		const twoHoursAgo = new Date(Date.now() - 2 * 3_600_000).toISOString()
-		const result = await readEngagement("test-key", [
-			makeEntry({ timestamp: twoHoursAgo }),
-		])
+		const result = await readEngagement("test-key", [makeEntry({ timestamp: twoHoursAgo })])
 
 		expect(result.ok).toBe(true)
 		if (!result.ok) return

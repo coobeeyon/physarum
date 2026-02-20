@@ -1,4 +1,4 @@
-import { type Result, ok, err } from "#types/result.ts"
+import { type Result, err, ok } from "#types/result.ts"
 
 export type EnvConfig = {
 	readonly walletPrivateKey: `0x${string}`

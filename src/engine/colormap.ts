@@ -1,42 +1,102 @@
-import type { ColormapName, PopulationConfig } from "#types/physarum.ts"
 import type { FoodImageData } from "#engine/food.ts"
+import type { ColormapName, PopulationConfig } from "#types/physarum.ts"
 
 type LUT = ReadonlyArray<readonly [number, number, number]>
 
 // 16-stop colormaps interpolated to 256 entries at runtime
 const MAGMA_STOPS: LUT = [
-	[0, 0, 4], [1, 0, 11], [4, 3, 30], [14, 8, 57],
-	[32, 12, 86], [56, 15, 110], [82, 18, 124], [110, 27, 128],
-	[139, 38, 125], [167, 51, 115], [192, 68, 99], [215, 90, 78],
-	[233, 118, 56], [247, 152, 42], [254, 194, 58], [252, 253, 191],
+	[0, 0, 4],
+	[1, 0, 11],
+	[4, 3, 30],
+	[14, 8, 57],
+	[32, 12, 86],
+	[56, 15, 110],
+	[82, 18, 124],
+	[110, 27, 128],
+	[139, 38, 125],
+	[167, 51, 115],
+	[192, 68, 99],
+	[215, 90, 78],
+	[233, 118, 56],
+	[247, 152, 42],
+	[254, 194, 58],
+	[252, 253, 191],
 ]
 
 const VIRIDIS_STOPS: LUT = [
-	[68, 1, 84], [72, 20, 103], [71, 38, 117], [65, 55, 124],
-	[57, 70, 125], [48, 84, 124], [40, 97, 120], [33, 110, 114],
-	[28, 123, 106], [25, 136, 96], [32, 149, 83], [53, 161, 66],
-	[86, 173, 44], [127, 183, 22], [177, 191, 10], [253, 231, 37],
+	[68, 1, 84],
+	[72, 20, 103],
+	[71, 38, 117],
+	[65, 55, 124],
+	[57, 70, 125],
+	[48, 84, 124],
+	[40, 97, 120],
+	[33, 110, 114],
+	[28, 123, 106],
+	[25, 136, 96],
+	[32, 149, 83],
+	[53, 161, 66],
+	[86, 173, 44],
+	[127, 183, 22],
+	[177, 191, 10],
+	[253, 231, 37],
 ]
 
 const INFERNO_STOPS: LUT = [
-	[0, 0, 4], [2, 1, 15], [10, 5, 40], [26, 10, 72],
-	[49, 11, 99], [74, 12, 113], [101, 17, 115], [129, 27, 107],
-	[156, 40, 91], [181, 56, 72], [203, 77, 50], [222, 103, 30],
-	[237, 134, 14], [247, 170, 9], [250, 209, 33], [252, 255, 164],
+	[0, 0, 4],
+	[2, 1, 15],
+	[10, 5, 40],
+	[26, 10, 72],
+	[49, 11, 99],
+	[74, 12, 113],
+	[101, 17, 115],
+	[129, 27, 107],
+	[156, 40, 91],
+	[181, 56, 72],
+	[203, 77, 50],
+	[222, 103, 30],
+	[237, 134, 14],
+	[247, 170, 9],
+	[250, 209, 33],
+	[252, 255, 164],
 ]
 
 const PLASMA_STOPS: LUT = [
-	[13, 8, 135], [38, 6, 149], [63, 4, 156], [88, 1, 155],
-	[110, 3, 148], [130, 15, 137], [148, 30, 123], [163, 47, 108],
-	[177, 63, 92], [189, 79, 76], [200, 96, 60], [210, 114, 44],
-	[220, 135, 27], [229, 160, 10], [237, 189, 4], [240, 249, 33],
+	[13, 8, 135],
+	[38, 6, 149],
+	[63, 4, 156],
+	[88, 1, 155],
+	[110, 3, 148],
+	[130, 15, 137],
+	[148, 30, 123],
+	[163, 47, 108],
+	[177, 63, 92],
+	[189, 79, 76],
+	[200, 96, 60],
+	[210, 114, 44],
+	[220, 135, 27],
+	[229, 160, 10],
+	[237, 189, 4],
+	[240, 249, 33],
 ]
 
 const CIVIDIS_STOPS: LUT = [
-	[0, 32, 77], [0, 42, 93], [0, 52, 105], [18, 63, 108],
-	[46, 73, 106], [65, 83, 103], [82, 93, 100], [98, 103, 99],
-	[114, 113, 98], [131, 124, 95], [149, 135, 88], [168, 146, 78],
-	[187, 157, 63], [207, 170, 43], [228, 183, 15], [253, 232, 37],
+	[0, 32, 77],
+	[0, 42, 93],
+	[0, 52, 105],
+	[18, 63, 108],
+	[46, 73, 106],
+	[65, 83, 103],
+	[82, 93, 100],
+	[98, 103, 99],
+	[114, 113, 98],
+	[131, 124, 95],
+	[149, 135, 88],
+	[168, 146, 78],
+	[187, 157, 63],
+	[207, 170, 43],
+	[228, 183, 15],
+	[253, 232, 37],
 ]
 
 const ALL_STOPS: Record<ColormapName, LUT> = {
@@ -131,7 +191,12 @@ export const applyMultiPopulationColors = (
 }
 
 /** Two-pass separable box blur on a [0,1] channel */
-const blurChannel = (src: Float32Array, width: number, height: number, radius: number): Float32Array => {
+const blurChannel = (
+	src: Float32Array,
+	width: number,
+	height: number,
+	radius: number,
+): Float32Array => {
 	const size = width * height
 	const tmp = new Float32Array(size)
 	const out = new Float32Array(size)
@@ -186,15 +251,16 @@ export const applyColorTrail = (
 	const rgba = new Uint8ClampedArray(size * 4)
 
 	// Blur food image for background
-	let bgR: Float32Array | undefined
-	let bgG: Float32Array | undefined
-	let bgB: Float32Array | undefined
-	if (foodImageRgb) {
-		const radius = Math.round(Math.max(width, height) * 0.025)
-		bgR = blurChannel(foodImageRgb.r, width, height, radius)
-		bgG = blurChannel(foodImageRgb.g, width, height, radius)
-		bgB = blurChannel(foodImageRgb.b, width, height, radius)
-	}
+	const bg = foodImageRgb
+		? (() => {
+				const radius = Math.round(Math.max(width, height) * 0.025)
+				return {
+					r: blurChannel(foodImageRgb.r, width, height, radius),
+					g: blurChannel(foodImageRgb.g, width, height, radius),
+					b: blurChannel(foodImageRgb.b, width, height, radius),
+				}
+			})()
+		: null
 
 	const BG_STRENGTH = 0.3
 
@@ -204,10 +270,10 @@ export const applyColorTrail = (
 		let pg = g[i]
 		let pb = b[i]
 
-		if (bgR) {
-			pr += bgR[i] * BG_STRENGTH
-			pg += bgG![i] * BG_STRENGTH
-			pb += bgB![i] * BG_STRENGTH
+		if (bg) {
+			pr += bg.r[i] * BG_STRENGTH
+			pg += bg.g[i] * BG_STRENGTH
+			pb += bg.b[i] * BG_STRENGTH
 		}
 
 		rgba[outIdx] = Math.min(pr * 255, 255)

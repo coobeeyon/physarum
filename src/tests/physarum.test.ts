@@ -59,7 +59,7 @@ describe("physarum simulation", () => {
 		const result = simulate(SMALL_PARAMS)
 		for (const trail of result.trailMaps) {
 			let max = 0
-			let min = Infinity
+			let min = Number.POSITIVE_INFINITY
 			for (const v of trail) {
 				if (v > max) max = v
 				if (v < min) min = v
@@ -74,7 +74,10 @@ describe("physarum simulation", () => {
 		let anyNonZero = false
 		for (const trail of result.trailMaps) {
 			for (const v of trail) {
-				if (v > 0) { anyNonZero = true; break }
+				if (v > 0) {
+					anyNonZero = true
+					break
+				}
 			}
 			if (anyNonZero) break
 		}
@@ -134,7 +137,10 @@ describe("physarum simulation", () => {
 		let anyNonZero = false
 		for (const trail of result.trailMaps) {
 			for (const v of trail) {
-				if (v > 0) { anyNonZero = true; break }
+				if (v > 0) {
+					anyNonZero = true
+					break
+				}
 			}
 			if (anyNonZero) break
 		}
@@ -156,18 +162,29 @@ describe("physarum simulation", () => {
 			b[i] = 0.1
 		}
 
-		const result = simulate(SMALL_PARAMS, foodMap, { width: SMALL_PARAMS.width, height: SMALL_PARAMS.height, luminance: foodMap, r, g, b })
+		const result = simulate(SMALL_PARAMS, foodMap, {
+			width: SMALL_PARAMS.width,
+			height: SMALL_PARAMS.height,
+			luminance: foodMap,
+			r,
+			g,
+			b,
+		})
 		expect(result.colorTrailR).toBeDefined()
 		expect(result.colorTrailG).toBeDefined()
 		expect(result.colorTrailB).toBeDefined()
-		expect(result.colorTrailR!.length).toBe(size)
-		expect(result.colorTrailG!.length).toBe(size)
-		expect(result.colorTrailB!.length).toBe(size)
+		expect(result.colorTrailR?.length).toBe(size)
+		expect(result.colorTrailG?.length).toBe(size)
+		expect(result.colorTrailB?.length).toBe(size)
 
 		// At least some color values should be non-zero
 		let anyNonZero = false
 		for (let i = 0; i < size; i++) {
-			if (result.colorTrailR![i] > 0 || result.colorTrailG![i] > 0 || result.colorTrailB![i] > 0) {
+			if (
+				(result.colorTrailR?.[i] ?? 0) > 0 ||
+				(result.colorTrailG?.[i] ?? 0) > 0 ||
+				(result.colorTrailB?.[i] ?? 0) > 0
+			) {
 				anyNonZero = true
 				break
 			}

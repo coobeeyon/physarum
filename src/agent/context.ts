@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs"
 import { join } from "node:path"
-import type { PipelineState } from "#types/metadata.ts"
 import type { EngagementData } from "#types/evolution.ts"
+import type { PipelineState } from "#types/metadata.ts"
 
 const readRequests = (projectRoot: string): string => {
 	try {
@@ -27,25 +27,32 @@ const formatEngagement = (engagement: ReadonlyArray<EngagementData>): string => 
 	}
 
 	if (engagement.length >= 2) {
-		const scored = engagement.map((e) => ({ edition: e.edition, total: e.likes + e.recasts + e.replies }))
+		const scored = engagement.map((e) => ({
+			edition: e.edition,
+			total: e.likes + e.recasts + e.replies,
+		}))
 		const sorted = [...scored].sort((a, b) => b.total - a.total)
-		lines.push(`  Best: #${sorted[0].edition} (${sorted[0].total}), Worst: #${sorted[sorted.length - 1].edition} (${sorted[sorted.length - 1].total})`)
+		lines.push(
+			`  Best: #${sorted[0].edition} (${sorted[0].total}), Worst: #${sorted[sorted.length - 1].edition} (${sorted[sorted.length - 1].total})`,
+		)
 		const recent = scored[scored.length - 1]
 		const prev = scored[scored.length - 2]
 		const delta = recent.total - prev.total
-		lines.push(`  Trend: ${delta > 0 ? "improving" : delta < 0 ? "declining" : "stable"} (${delta > 0 ? "+" : ""}${delta})`)
+		lines.push(
+			`  Trend: ${delta > 0 ? "improving" : delta < 0 ? "declining" : "stable"} (${delta > 0 ? "+" : ""}${delta})`,
+		)
 	}
 
 	return lines.join("\n")
 }
 
 const formatReflections = (state: PipelineState): string => {
-	if (state.reflections.length === 0) return "No prior reflections. This is your first time reflecting."
+	if (state.reflections.length === 0)
+		return "No prior reflections. This is your first time reflecting."
 
 	return state.reflections
 		.map(
-			(r) =>
-				`  After Edition #${r.edition}: ${r.reasoning}\n    Changed: ${r.changes.join(", ")}`,
+			(r) => `  After Edition #${r.edition}: ${r.reasoning}\n    Changed: ${r.changes.join(", ")}`,
 		)
 		.join("\n")
 }

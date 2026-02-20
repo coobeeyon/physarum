@@ -75,7 +75,7 @@ describe("multi-population colors", () => {
 		]
 		const rgba = applyMultiPopulationColors(trailMaps, populations, 1, 1)
 		expect(rgba[0]).toBe(255) // R from pop 0
-		expect(rgba[1]).toBe(0)   // G from neither
+		expect(rgba[1]).toBe(0) // G from neither
 		expect(rgba[2]).toBe(255) // B from pop 1
 		expect(rgba[3]).toBe(255) // alpha
 	})

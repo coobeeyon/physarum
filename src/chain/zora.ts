@@ -1,13 +1,13 @@
+import { zoraCreator1155ImplABI } from "@zoralabs/protocol-deployments"
 import {
+	type IContractGetter,
 	create1155,
 	createNew1155Token,
 	new1155ContractVersion,
-	type IContractGetter,
 } from "@zoralabs/protocol-sdk"
-import { zoraCreator1155ImplABI } from "@zoralabs/protocol-deployments"
-import type { Address, PublicClient, WalletClient, Account, Chain, Transport } from "viem"
+import type { Account, Address, Chain, PublicClient, Transport, WalletClient } from "viem"
 import { base } from "viem/chains"
-import { type Result, ok, err } from "#types/result.ts"
+import { type Result, err, ok } from "#types/result.ts"
 
 class OnchainContractGetter implements IContractGetter {
 	constructor(

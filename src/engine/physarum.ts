@@ -1,10 +1,10 @@
-import { createPrng } from "#engine/prng.ts"
 import { generateFoodMap } from "#engine/food.ts"
 import type { FoodImageData } from "#engine/food.ts"
+import { createPrng } from "#engine/prng.ts"
 import type { PhysarumParams, SimulationResult } from "#types/physarum.ts"
 
 const TWO_PI = Math.PI * 2
-const clamp = (v: number, max: number) => v < 0 ? 0 : v >= max ? max - 1 : v
+const clamp = (v: number, max: number) => (v < 0 ? 0 : v >= max ? max - 1 : v)
 
 const diffuseChannel = (
 	channel: Float32Array,
@@ -38,20 +38,38 @@ const diffuseChannel = (
  * Returns SimulationResult with per-population trail maps.
  * When foodImageRgb is provided, agents carry RGB color sampled from the food image.
  */
-export const simulate = (params: PhysarumParams, preloadedFoodMap?: Float32Array, foodImageRgb?: FoodImageData): SimulationResult => {
+export const simulate = (
+	params: PhysarumParams,
+	preloadedFoodMap?: Float32Array,
+	foodImageRgb?: FoodImageData,
+): SimulationResult => {
 	const {
-		width, height, agentCount, iterations,
-		sensorAngle, sensorDistance, turnAngle, stepSize,
-		depositAmount, decayFactor, seed,
-		populationCount, populations, repulsionStrength, foodWeight,
-		foodPlacement, foodDensity, foodClusterCount,
+		width,
+		height,
+		agentCount,
+		iterations,
+		sensorAngle,
+		sensorDistance,
+		turnAngle,
+		stepSize,
+		depositAmount,
+		decayFactor,
+		seed,
+		populationCount,
+		populations,
+		repulsionStrength,
+		foodWeight,
+		foodPlacement,
+		foodDensity,
+		foodClusterCount,
 	} = params
 	const rng = createPrng(seed)
 	const size = width * height
-	const hasColor = !!foodImageRgb
 
 	// Use preloaded food map or generate one
-	const foodMap = preloadedFoodMap ?? generateFoodMap(rng, width, height, foodPlacement, foodDensity, foodClusterCount)
+	const foodMap =
+		preloadedFoodMap ??
+		generateFoodMap(rng, width, height, foodPlacement, foodDensity, foodClusterCount)
 
 	// Initialize per-population trail maps (double-buffered)
 	const trailMaps: Float32Array[] = []
@@ -61,35 +79,33 @@ export const simulate = (params: PhysarumParams, preloadedFoodMap?: Float32Array
 		trailNextMaps.push(new Float32Array(size))
 	}
 
-	// Color trail maps (only when food image RGB provided)
-	let colorTrailR: Float32Array | undefined
-	let colorTrailG: Float32Array | undefined
-	let colorTrailB: Float32Array | undefined
-	let colorNextR: Float32Array | undefined
-	let colorNextG: Float32Array | undefined
-	let colorNextB: Float32Array | undefined
-	if (hasColor) {
-		colorTrailR = new Float32Array(size)
-		colorTrailG = new Float32Array(size)
-		colorTrailB = new Float32Array(size)
-		colorNextR = new Float32Array(size)
-		colorNextG = new Float32Array(size)
-		colorNextB = new Float32Array(size)
-	}
+	// Color data grouped so a single null check narrows everything
+	const color = foodImageRgb
+		? {
+				rgb: foodImageRgb,
+				trailR: new Float32Array(size),
+				trailG: new Float32Array(size),
+				trailB: new Float32Array(size),
+				nextR: new Float32Array(size),
+				nextG: new Float32Array(size),
+				nextB: new Float32Array(size),
+			}
+		: null
 
 	// Split agents across populations by agentFraction
 	const popAgentCounts: number[] = []
 	let assigned = 0
 	for (let p = 0; p < populationCount; p++) {
-		const count = p < populationCount - 1
-			? Math.round(agentCount * populations[p].agentFraction)
-			: agentCount - assigned
+		const count =
+			p < populationCount - 1
+				? Math.round(agentCount * populations[p].agentFraction)
+				: agentCount - assigned
 		popAgentCounts.push(count)
 		assigned += count
 	}
 
 	// Agent stride: 3 floats [x, y, angle] or 6 floats [x, y, angle, r, g, b]
-	const stride = hasColor ? 6 : 3
+	const stride = color ? 6 : 3
 	const COLOR_BLEND = 0.05
 
 	// Initialize agents per population
@@ -104,11 +120,11 @@ export const simulate = (params: PhysarumParams, preloadedFoodMap?: Float32Array
 			agents[idx] = ax
 			agents[idx + 1] = ay
 			agents[idx + 2] = rng() * TWO_PI
-			if (hasColor) {
+			if (color) {
 				const pi = Math.floor(clamp(ay, height)) * width + Math.floor(clamp(ax, width))
-				agents[idx + 3] = foodImageRgb!.r[pi]
-				agents[idx + 4] = foodImageRgb!.g[pi]
-				agents[idx + 5] = foodImageRgb!.b[pi]
+				agents[idx + 3] = color.rgb.r[pi]
+				agents[idx + 4] = color.rgb.g[pi]
+				agents[idx + 5] = color.rgb.b[pi]
 			}
 		}
 		popAgents.push(agents)
@@ -129,19 +145,46 @@ export const simulate = (params: PhysarumParams, preloadedFoodMap?: Float32Array
 
 				// Sense at three directions with multi-population awareness
 				const senseLeft = senseEffective(
-					trailMaps, foodMap, p, populationCount,
-					x, y, angle - sensorAngle, sensorDistance,
-					width, height, repulsionStrength, foodWeight,
+					trailMaps,
+					foodMap,
+					p,
+					populationCount,
+					x,
+					y,
+					angle - sensorAngle,
+					sensorDistance,
+					width,
+					height,
+					repulsionStrength,
+					foodWeight,
 				)
 				const senseCenter = senseEffective(
-					trailMaps, foodMap, p, populationCount,
-					x, y, angle, sensorDistance,
-					width, height, repulsionStrength, foodWeight,
+					trailMaps,
+					foodMap,
+					p,
+					populationCount,
+					x,
+					y,
+					angle,
+					sensorDistance,
+					width,
+					height,
+					repulsionStrength,
+					foodWeight,
 				)
 				const senseRight = senseEffective(
-					trailMaps, foodMap, p, populationCount,
-					x, y, angle + sensorAngle, sensorDistance,
-					width, height, repulsionStrength, foodWeight,
+					trailMaps,
+					foodMap,
+					p,
+					populationCount,
+					x,
+					y,
+					angle + sensorAngle,
+					sensorDistance,
+					width,
+					height,
+					repulsionStrength,
+					foodWeight,
 				)
 
 				// Rotate
@@ -165,11 +208,11 @@ export const simulate = (params: PhysarumParams, preloadedFoodMap?: Float32Array
 					agents[idx] = x
 					agents[idx + 1] = y
 					agents[idx + 2] = angle
-					if (hasColor) {
+					if (color) {
 						const pi = Math.floor(clamp(y, height)) * width + Math.floor(clamp(x, width))
-						agents[idx + 3] = foodImageRgb!.r[pi]
-						agents[idx + 4] = foodImageRgb!.g[pi]
-						agents[idx + 5] = foodImageRgb!.b[pi]
+						agents[idx + 3] = color.rgb.r[pi]
+						agents[idx + 4] = color.rgb.g[pi]
+						agents[idx + 5] = color.rgb.b[pi]
 					}
 					continue
 				}
@@ -185,22 +228,22 @@ export const simulate = (params: PhysarumParams, preloadedFoodMap?: Float32Array
 				trail[pi] += depositAmount
 
 				// Color: blend toward food color at current position, then deposit
-				if (hasColor) {
+				if (color) {
 					const ar = agents[idx + 3]
 					const ag = agents[idx + 4]
 					const ab = agents[idx + 5]
-					const fr = foodImageRgb!.r[pi]
-					const fg = foodImageRgb!.g[pi]
-					const fb = foodImageRgb!.b[pi]
+					const fr = color.rgb.r[pi]
+					const fg = color.rgb.g[pi]
+					const fb = color.rgb.b[pi]
 					const nr = ar + (fr - ar) * COLOR_BLEND
 					const ng = ag + (fg - ag) * COLOR_BLEND
 					const nb = ab + (fb - ab) * COLOR_BLEND
 					agents[idx + 3] = nr
 					agents[idx + 4] = ng
 					agents[idx + 5] = nb
-					colorTrailR![pi] += nr * depositAmount
-					colorTrailG![pi] += ng * depositAmount
-					colorTrailB![pi] += nb * depositAmount
+					color.trailR[pi] += nr * depositAmount
+					color.trailG[pi] += ng * depositAmount
+					color.trailB[pi] += nb * depositAmount
 				}
 			}
 		}
@@ -232,10 +275,10 @@ export const simulate = (params: PhysarumParams, preloadedFoodMap?: Float32Array
 		}
 
 		// Diffuse color trails
-		if (hasColor) {
-			diffuseChannel(colorTrailR!, colorNextR!, width, height, decayFactor)
-			diffuseChannel(colorTrailG!, colorNextG!, width, height, decayFactor)
-			diffuseChannel(colorTrailB!, colorNextB!, width, height, decayFactor)
+		if (color) {
+			diffuseChannel(color.trailR, color.nextR, width, height, decayFactor)
+			diffuseChannel(color.trailG, color.nextG, width, height, decayFactor)
+			diffuseChannel(color.trailB, color.nextB, width, height, decayFactor)
 		}
 	}
 
@@ -255,33 +298,43 @@ export const simulate = (params: PhysarumParams, preloadedFoodMap?: Float32Array
 	}
 
 	// Normalize color trails: preserve hue by dividing all channels by the same max intensity
-	if (hasColor) {
+	if (color) {
 		let maxIntensity = 0
 		for (let i = 0; i < size; i++) {
-			const total = colorTrailR![i] + colorTrailG![i] + colorTrailB![i]
+			const total = color.trailR[i] + color.trailG[i] + color.trailB[i]
 			if (total > maxIntensity) maxIntensity = total
 		}
 		if (maxIntensity > 0) {
 			const inv = 1 / maxIntensity
 			for (let i = 0; i < size; i++) {
-				colorTrailR![i] = Math.sqrt(colorTrailR![i] * inv)
-				colorTrailG![i] = Math.sqrt(colorTrailG![i] * inv)
-				colorTrailB![i] = Math.sqrt(colorTrailB![i] * inv)
+				color.trailR[i] = Math.sqrt(color.trailR[i] * inv)
+				color.trailG[i] = Math.sqrt(color.trailG[i] * inv)
+				color.trailB[i] = Math.sqrt(color.trailB[i] * inv)
 			}
 		}
 	}
 
 	return {
-		trailMaps, foodMap, populationCount, populations, width, height,
-		...(hasColor ? { colorTrailR, colorTrailG, colorTrailB } : {}),
+		trailMaps,
+		foodMap,
+		populationCount,
+		populations,
+		width,
+		height,
+		...(color
+			? { colorTrailR: color.trailR, colorTrailG: color.trailG, colorTrailB: color.trailB }
+			: {}),
 	}
 }
 
 const sampleAt = (
 	map: Float32Array,
-	x: number, y: number,
-	angle: number, distance: number,
-	width: number, height: number,
+	x: number,
+	y: number,
+	angle: number,
+	distance: number,
+	width: number,
+	height: number,
 ) => {
 	const sx = clamp(Math.floor(x + Math.cos(angle) * distance), width)
 	const sy = clamp(Math.floor(y + Math.sin(angle) * distance), height)
@@ -293,9 +346,12 @@ const senseEffective = (
 	foodMap: Float32Array,
 	popIdx: number,
 	populationCount: number,
-	x: number, y: number,
-	angle: number, distance: number,
-	width: number, height: number,
+	x: number,
+	y: number,
+	angle: number,
+	distance: number,
+	width: number,
+	height: number,
 	repulsionStrength: number,
 	foodWeight: number,
 ) => {

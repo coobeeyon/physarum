@@ -1,9 +1,9 @@
 import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs"
-import { dirname, join, normalize, isAbsolute } from "node:path"
-import { type Result, ok, err } from "#types/result.ts"
-import type { PipelineState } from "#types/metadata.ts"
-import type { EngagementData, ReflectionRecord } from "#types/evolution.ts"
+import { dirname, isAbsolute, join, normalize } from "node:path"
 import { type ChangeProposal, runReflection } from "#agent/reflect.ts"
+import type { EngagementData, ReflectionRecord } from "#types/evolution.ts"
+import type { PipelineState } from "#types/metadata.ts"
+import { type Result, err, ok } from "#types/result.ts"
 
 export type FileBackup = {
 	readonly path: string
@@ -20,9 +20,7 @@ export type ReflectionOutcome = {
 const PROTECTED_FILES = new Set([".env", ".env.example", "bun.lock"])
 const PROTECTED_PREFIXES = [".git/", ".git\\", "node_modules/", "node_modules\\"]
 
-export const validateChangePaths = (
-	changes: ReadonlyArray<ChangeProposal>,
-): Result<void> => {
+export const validateChangePaths = (changes: ReadonlyArray<ChangeProposal>): Result<void> => {
 	for (const change of changes) {
 		const p = change.file
 		if (isAbsolute(p)) {
@@ -65,7 +63,10 @@ export const applyChanges = (
 			mkdirSync(dirname(fullPath), { recursive: true })
 			writeFileSync(fullPath, change.content)
 		} else if (change.action === "create") {
-			backups.push({ path: change.file, originalContent: existsSync(fullPath) ? readFileSync(fullPath, "utf-8") : null })
+			backups.push({
+				path: change.file,
+				originalContent: existsSync(fullPath) ? readFileSync(fullPath, "utf-8") : null,
+			})
 			mkdirSync(dirname(fullPath), { recursive: true })
 			writeFileSync(fullPath, change.content)
 		}
@@ -74,10 +75,7 @@ export const applyChanges = (
 	return ok(backups)
 }
 
-export const revertChanges = (
-	backups: ReadonlyArray<FileBackup>,
-	projectRoot: string,
-): void => {
+export const revertChanges = (backups: ReadonlyArray<FileBackup>, projectRoot: string): void => {
 	for (const backup of backups) {
 		const fullPath = join(projectRoot, backup.path)
 		try {
@@ -160,9 +158,7 @@ export const executeReflection = async (
 	const { reasoning, changes } = reflectionResult.value
 
 	// Build the base record
-	const latestWithGenome = [...state.history]
-		.reverse()
-		.find((h) => h.genome !== null)
+	const latestWithGenome = [...state.history].reverse().find((h) => h.genome !== null)
 
 	const record: ReflectionRecord = {
 		edition: state.lastEdition,

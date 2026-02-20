@@ -1,4 +1,4 @@
-import type { Genome, EngagementData } from "#types/evolution.ts"
+import type { EngagementData, Genome } from "#types/evolution.ts"
 
 const COMPETING_INTROS = [
 	"two colonies, no communication — only chemical avoidance.",
@@ -22,8 +22,7 @@ const META_LINES = [
 	"the AI made this. the slime mold made this. hard to say who's right.",
 ]
 
-const pickFrom = (arr: readonly string[], seed: number): string =>
-	arr[Math.abs(seed) % arr.length]
+const pickFrom = (arr: readonly string[], seed: number): string => arr[Math.abs(seed) % arr.length]
 
 export const composeCastText = (
 	edition: number,

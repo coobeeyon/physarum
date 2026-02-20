@@ -1,6 +1,6 @@
 import { join } from "node:path"
-import { loadEnv } from "#config/env.ts"
 import { executeReflection } from "#agent/evolve.ts"
+import { loadEnv } from "#config/env.ts"
 import { runPipeline } from "#pipeline/orchestrate.ts"
 import { loadState, saveState } from "#pipeline/state.ts"
 import { readEngagement } from "#social/engagement.ts"
@@ -29,12 +29,10 @@ const parseArgs = (args: ReadonlyArray<string>) => {
 		else if (arg === "--seed" && i + 1 < args.length) {
 			flags.seedOverride = Number.parseInt(args[i + 1], 10)
 			i++
-		}
-		else if (arg === "--food-image" && i + 1 < args.length) {
+		} else if (arg === "--food-image" && i + 1 < args.length) {
 			flags.foodImageSource = args[i + 1]
 			i++
-		}
-		else if (arg === "--channel" && i + 1 < args.length) {
+		} else if (arg === "--channel" && i + 1 < args.length) {
 			flags.channel = args[i + 1]
 			i++
 		}
@@ -124,7 +122,7 @@ const main = async () => {
 			process.exit(1)
 		}
 
-		console.log(`\nReflection complete:`)
+		console.log("\nReflection complete:")
 		console.log(`  Applied: ${outcome.value.applied}`)
 		console.log(`  Committed: ${outcome.value.committed}`)
 		console.log(`  Changes: ${outcome.value.record.changes.length} file(s)`)
@@ -133,9 +131,21 @@ const main = async () => {
 	}
 
 	// generate-only and dry-run don't need all env vars
-	const envResult = flags.generateOnly || flags.dryRun
-		? { ok: true as const, value: { walletPrivateKey: "0x0" as `0x${string}`, pinataJwt: "", farcasterFid: 0, neynarApiKey: "", neynarSignerUuid: "", baseRpcUrl: "", farcasterChannel: process.env.FARCASTER_CHANNEL?.trim() || undefined } }
-		: loadEnv()
+	const envResult =
+		flags.generateOnly || flags.dryRun
+			? {
+					ok: true as const,
+					value: {
+						walletPrivateKey: "0x0" as `0x${string}`,
+						pinataJwt: "",
+						farcasterFid: 0,
+						neynarApiKey: "",
+						neynarSignerUuid: "",
+						baseRpcUrl: "",
+						farcasterChannel: process.env.FARCASTER_CHANNEL?.trim() || undefined,
+					},
+				}
+			: loadEnv()
 
 	if (!envResult.ok) {
 		console.error(`Config error: ${envResult.error}`)

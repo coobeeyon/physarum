@@ -132,7 +132,7 @@ describe("parseReflectionResponse", () => {
 
 		expect(result.ok).toBe(false)
 		if (result.ok) return
-		expect(result.error).toContain("invalid \"action\"")
+		expect(result.error).toContain('invalid "action"')
 	})
 
 	test("rejects change missing file field", () => {

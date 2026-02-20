@@ -1,6 +1,6 @@
-import { readFileSync, writeFileSync, existsSync } from "node:fs"
+import { existsSync, readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
-import type { PipelineState, HistoryEntry } from "#types/metadata.ts"
+import type { HistoryEntry, PipelineState } from "#types/metadata.ts"
 import { type Result, ok } from "#types/result.ts"
 
 const STATE_PATH = join(import.meta.dirname, "../../state.json")
@@ -14,7 +14,7 @@ const DEFAULT_STATE: PipelineState = {
 
 const migrateState = (raw: unknown): PipelineState => {
 	const obj = raw as Record<string, unknown>
-	const history = (obj.history as Record<string, unknown>[] ?? []).map(
+	const history = ((obj.history as Record<string, unknown>[]) ?? []).map(
 		(entry): HistoryEntry => ({
 			edition: entry.edition as number,
 			seed: entry.seed as number,

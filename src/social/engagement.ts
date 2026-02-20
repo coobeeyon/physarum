@@ -1,6 +1,6 @@
 import { NEYNAR_API } from "#social/farcaster.ts"
-import type { HistoryEntry } from "#types/metadata.ts"
 import type { EngagementData } from "#types/evolution.ts"
+import type { HistoryEntry } from "#types/metadata.ts"
 import { type Result, ok } from "#types/result.ts"
 
 const isValidCastHash = (hash: string): boolean =>
@@ -18,18 +18,23 @@ const fetchCastEngagement = async (
 	entry: HistoryEntry,
 ): Promise<{ engagement: EngagementData | null; warning: string | null }> => {
 	if (!isValidCastHash(entry.castHash)) {
-		return { engagement: null, warning: `edition ${entry.edition}: skipped (placeholder hash "${entry.castHash}")` }
+		return {
+			engagement: null,
+			warning: `edition ${entry.edition}: skipped (placeholder hash "${entry.castHash}")`,
+		}
 	}
 
 	try {
-		const resp = await fetch(
-			`${NEYNAR_API}/cast?identifier=${entry.castHash}&type=hash`,
-			{ headers: { "x-api-key": apiKey } },
-		)
+		const resp = await fetch(`${NEYNAR_API}/cast?identifier=${entry.castHash}&type=hash`, {
+			headers: { "x-api-key": apiKey },
+		})
 
 		if (!resp.ok) {
 			const detail = await resp.text()
-			return { engagement: null, warning: `edition ${entry.edition}: HTTP ${resp.status} — ${detail}` }
+			return {
+				engagement: null,
+				warning: `edition ${entry.edition}: HTTP ${resp.status} — ${detail}`,
+			}
 		}
 
 		const data = (await resp.json()) as NeynarCastResponse

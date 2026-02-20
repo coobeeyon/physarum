@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test"
 import { join } from "node:path"
-import { summarizeEngagement, assembleContext } from "#agent/prompt.ts"
-import type { EngagementData } from "#types/evolution.ts"
+import { assembleContext, summarizeEngagement } from "#agent/prompt.ts"
+import type { EngagementData, Genome } from "#types/evolution.ts"
 import type { PipelineState } from "#types/metadata.ts"
 
 const PROJECT_ROOT = join(import.meta.dirname, "../..")
@@ -187,7 +187,7 @@ describe("assembleContext", () => {
 			reflections: [
 				{
 					edition: 2,
-					genome: makeState().history[2].genome!,
+					genome: makeState().history[2].genome as Genome,
 					engagement: makeEngagement({ edition: 2 }),
 					changes: ["src/config/params.ts"],
 					reasoning: "The trails felt sparse, needed more density.",

@@ -1,6 +1,6 @@
 import { PinataSDK } from "pinata"
 import type { NftMetadata } from "#types/metadata.ts"
-import { type Result, ok, err } from "#types/result.ts"
+import { type Result, err, ok } from "#types/result.ts"
 
 export const createPinataClient = (jwt: string) => new PinataSDK({ pinataJwt: jwt })
 

@@ -1,8 +1,8 @@
 import { describe, expect, test } from "bun:test"
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
-import { join } from "node:path"
 import { tmpdir } from "node:os"
-import { validateChangePaths, applyChanges, revertChanges, selfTest } from "#agent/evolve.ts"
+import { join } from "node:path"
+import { applyChanges, revertChanges, selfTest, validateChangePaths } from "#agent/evolve.ts"
 import type { ChangeProposal } from "#agent/reflect.ts"
 
 const makeTmpDir = (): string => {
@@ -32,36 +32,28 @@ describe("validateChangePaths", () => {
 	})
 
 	test("rejects absolute paths", () => {
-		const result = validateChangePaths([
-			{ file: "/etc/passwd", action: "edit", content: "" },
-		])
+		const result = validateChangePaths([{ file: "/etc/passwd", action: "edit", content: "" }])
 		expect(result.ok).toBe(false)
 		if (result.ok) return
 		expect(result.error).toContain("Absolute path")
 	})
 
 	test("rejects .. traversal", () => {
-		const result = validateChangePaths([
-			{ file: "src/../.env", action: "edit", content: "" },
-		])
+		const result = validateChangePaths([{ file: "src/../.env", action: "edit", content: "" }])
 		expect(result.ok).toBe(false)
 		if (result.ok) return
 		expect(result.error).toContain("Protected file")
 	})
 
 	test("rejects .env", () => {
-		const result = validateChangePaths([
-			{ file: ".env", action: "edit", content: "" },
-		])
+		const result = validateChangePaths([{ file: ".env", action: "edit", content: "" }])
 		expect(result.ok).toBe(false)
 		if (result.ok) return
 		expect(result.error).toContain("Protected file")
 	})
 
 	test("rejects .git/ paths", () => {
-		const result = validateChangePaths([
-			{ file: ".git/config", action: "edit", content: "" },
-		])
+		const result = validateChangePaths([{ file: ".git/config", action: "edit", content: "" }])
 		expect(result.ok).toBe(false)
 		if (result.ok) return
 		expect(result.error).toContain("Protected directory")
@@ -127,9 +119,7 @@ describe("applyChanges", () => {
 			mkdirSync(join(dir, "src"), { recursive: true })
 			writeFileSync(join(dir, "src/old.ts"), "to be deleted")
 
-			const changes: ChangeProposal[] = [
-				{ file: "src/old.ts", action: "delete", content: "" },
-			]
+			const changes: ChangeProposal[] = [{ file: "src/old.ts", action: "delete", content: "" }]
 			const result = applyChanges(changes, dir)
 
 			expect(result.ok).toBe(true)
@@ -149,10 +139,7 @@ describe("revertChanges", () => {
 			mkdirSync(join(dir, "src"), { recursive: true })
 			writeFileSync(join(dir, "src/file.ts"), "modified content")
 
-			revertChanges(
-				[{ path: "src/file.ts", originalContent: "original content" }],
-				dir,
-			)
+			revertChanges([{ path: "src/file.ts", originalContent: "original content" }], dir)
 
 			expect(readFileSync(join(dir, "src/file.ts"), "utf-8")).toBe("original content")
 		} finally {
@@ -166,10 +153,7 @@ describe("revertChanges", () => {
 			mkdirSync(join(dir, "src"), { recursive: true })
 			writeFileSync(join(dir, "src/new.ts"), "created by apply")
 
-			revertChanges(
-				[{ path: "src/new.ts", originalContent: null }],
-				dir,
-			)
+			revertChanges([{ path: "src/new.ts", originalContent: null }], dir)
 
 			expect(existsSync(join(dir, "src/new.ts"))).toBe(false)
 		} finally {
@@ -182,19 +166,25 @@ describe("selfTest", () => {
 	test("passes with valid TypeScript project", async () => {
 		const dir = makeTmpDir()
 		try {
-			writeFileSync(join(dir, "tsconfig.json"), JSON.stringify({
-				compilerOptions: {
-					target: "ESNext",
-					module: "ESNext",
-					moduleResolution: "bundler",
-					strict: true,
-					noEmit: true,
-				},
-				include: ["src/**/*.ts"],
-			}))
-			writeFileSync(join(dir, "package.json"), JSON.stringify({
-				scripts: { build: "tsc --noEmit" },
-			}))
+			writeFileSync(
+				join(dir, "tsconfig.json"),
+				JSON.stringify({
+					compilerOptions: {
+						target: "ESNext",
+						module: "ESNext",
+						moduleResolution: "bundler",
+						strict: true,
+						noEmit: true,
+					},
+					include: ["src/**/*.ts"],
+				}),
+			)
+			writeFileSync(
+				join(dir, "package.json"),
+				JSON.stringify({
+					scripts: { build: "tsc --noEmit" },
+				}),
+			)
 			mkdirSync(join(dir, "src"), { recursive: true })
 			writeFileSync(join(dir, "src/valid.ts"), "export const x: number = 42\n")
 
@@ -208,19 +198,25 @@ describe("selfTest", () => {
 	test("fails with type error", async () => {
 		const dir = makeTmpDir()
 		try {
-			writeFileSync(join(dir, "tsconfig.json"), JSON.stringify({
-				compilerOptions: {
-					target: "ESNext",
-					module: "ESNext",
-					moduleResolution: "bundler",
-					strict: true,
-					noEmit: true,
-				},
-				include: ["src/**/*.ts"],
-			}))
-			writeFileSync(join(dir, "package.json"), JSON.stringify({
-				scripts: { build: "tsc --noEmit" },
-			}))
+			writeFileSync(
+				join(dir, "tsconfig.json"),
+				JSON.stringify({
+					compilerOptions: {
+						target: "ESNext",
+						module: "ESNext",
+						moduleResolution: "bundler",
+						strict: true,
+						noEmit: true,
+					},
+					include: ["src/**/*.ts"],
+				}),
+			)
+			writeFileSync(
+				join(dir, "package.json"),
+				JSON.stringify({
+					scripts: { build: "tsc --noEmit" },
+				}),
+			)
 			mkdirSync(join(dir, "src"), { recursive: true })
 			writeFileSync(join(dir, "src/broken.ts"), "export const x: number = 'not a number'\n")
 

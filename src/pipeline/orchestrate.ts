@@ -1,19 +1,19 @@
 import { writeFileSync } from "node:fs"
 import { join } from "node:path"
-import type { EnvConfig } from "#config/env.ts"
-import { DEFAULT_PARAMS } from "#config/params.ts"
-import { simulate } from "#engine/physarum.ts"
-import { loadFoodImage, type FoodImageData } from "#engine/food.ts"
-import { renderPng } from "#render/canvas.ts"
-import { createPinataClient, uploadImage, uploadMetadata } from "#ipfs/upload.ts"
 import { createClients } from "#chain/client.ts"
 import { deployEdition } from "#chain/zora.ts"
-import { postCast, type NeynarConfig } from "#social/farcaster.ts"
-import { composeCastText } from "#social/narrative.ts"
-import { readEngagement } from "#social/engagement.ts"
-import type { EngagementData } from "#types/evolution.ts"
-import { loadState, saveState } from "#pipeline/state.ts"
+import type { EnvConfig } from "#config/env.ts"
+import { DEFAULT_PARAMS } from "#config/params.ts"
+import { type FoodImageData, loadFoodImage } from "#engine/food.ts"
+import { simulate } from "#engine/physarum.ts"
+import { createPinataClient, uploadImage, uploadMetadata } from "#ipfs/upload.ts"
 import { updateGallery } from "#pipeline/gallery.ts"
+import { loadState, saveState } from "#pipeline/state.ts"
+import { renderPng } from "#render/canvas.ts"
+import { readEngagement } from "#social/engagement.ts"
+import { type NeynarConfig, postCast } from "#social/farcaster.ts"
+import { composeCastText } from "#social/narrative.ts"
+import type { EngagementData } from "#types/evolution.ts"
 import type { NftMetadata } from "#types/metadata.ts"
 import type { PhysarumParams } from "#types/physarum.ts"
 import { type Result, ok } from "#types/result.ts"
@@ -50,14 +50,19 @@ export const runPipeline = async (
 	let params: PhysarumParams = {
 		...DEFAULT_PARAMS,
 		seed,
-		...(options.foodImageSource ? { foodPlacement: "image" as const, foodImageSource: options.foodImageSource } : {}),
+		...(options.foodImageSource
+			? { foodPlacement: "image" as const, foodImageSource: options.foodImageSource }
+			: {}),
 	}
 
 	let preloadedFoodMap: Float32Array | undefined
 	let foodImageRgb: FoodImageData | undefined
 	if (params.foodPlacement === "image" && params.foodImageSource) {
 		console.log(`  loading food image: ${params.foodImageSource}`)
-		const foodData = await loadFoodImage(params.foodImageSource, Math.max(params.width, params.height))
+		const foodData = await loadFoodImage(
+			params.foodImageSource,
+			Math.max(params.width, params.height),
+		)
 		preloadedFoodMap = foodData.luminance
 		foodImageRgb = foodData
 		// Adopt the food image's dimensions, scale agents proportionally to area
@@ -218,7 +223,7 @@ export const runPipeline = async (
 			width: params.width,
 			height: params.height,
 			genome,
-			contractAddress: contractAddress!,
+			contractAddress: contractAddress ?? "",
 			tokenId,
 		})
 		if (!galleryResult.ok) {

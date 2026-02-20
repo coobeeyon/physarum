@@ -52,7 +52,10 @@ describe("composeCastText", () => {
 	})
 
 	test("single population uses single intro and agent count", () => {
-		const genome = makeGenome({ populationCount: 1, populations: [{ color: [255, 255, 255], agentFraction: 1 }] })
+		const genome = makeGenome({
+			populationCount: 1,
+			populations: [{ color: [255, 255, 255], agentFraction: 1 }],
+		})
 		const text = composeCastText(1, 100, genome, null)
 
 		expect(text).toContain("300,000 agents")
@@ -66,7 +69,12 @@ describe("composeCastText", () => {
 	})
 
 	test("ignores low engagement (total <= 3)", () => {
-		const text = composeCastText(3, 23757, makeGenome(), makeEngagement({ likes: 1, recasts: 0, replies: 0 }))
+		const text = composeCastText(
+			3,
+			23757,
+			makeGenome(),
+			makeEngagement({ likes: 1, recasts: 0, replies: 0 }),
+		)
 
 		expect(text).not.toContain("found an audience")
 	})

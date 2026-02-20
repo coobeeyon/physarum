@@ -31,14 +31,17 @@ describe("food map", () => {
 
 	test("different strategies produce different patterns", () => {
 		const strategies: FoodPlacementStrategy[] = ["clusters", "rings", "gradient", "grid"]
-		const maps = strategies.map(s => generateFoodMap(createPrng(42), W, H, s, 0.6, 8))
+		const maps = strategies.map((s) => generateFoodMap(createPrng(42), W, H, s, 0.6, 8))
 
 		// Each pair should differ
 		for (let a = 0; a < maps.length; a++) {
 			for (let b = a + 1; b < maps.length; b++) {
 				let differs = false
 				for (let i = 0; i < maps[a].length; i++) {
-					if (maps[a][i] !== maps[b][i]) { differs = true; break }
+					if (maps[a][i] !== maps[b][i]) {
+						differs = true
+						break
+					}
 				}
 				expect(differs).toBe(true)
 			}
@@ -49,7 +52,10 @@ describe("food map", () => {
 		const map = generateFoodMap(createPrng(42), W, H, "clusters", 0.6, 8)
 		let hasNonZero = false
 		for (const v of map) {
-			if (v > 0) { hasNonZero = true; break }
+			if (v > 0) {
+				hasNonZero = true
+				break
+			}
 		}
 		expect(hasNonZero).toBe(true)
 	})
@@ -58,7 +64,10 @@ describe("food map", () => {
 		const map = generateFoodMap(createPrng(42), W, H, "mixed", 0.6, 8)
 		let hasNonZero = false
 		for (const v of map) {
-			if (v > 0) { hasNonZero = true; break }
+			if (v > 0) {
+				hasNonZero = true
+				break
+			}
 		}
 		expect(hasNonZero).toBe(true)
 	})
@@ -68,7 +77,10 @@ describe("food map", () => {
 		const map2 = generateFoodMap(createPrng(99), W, H, "clusters", 0.6, 8)
 		let differs = false
 		for (let i = 0; i < map1.length; i++) {
-			if (map1[i] !== map2[i]) { differs = true; break }
+			if (map1[i] !== map2[i]) {
+				differs = true
+				break
+			}
 		}
 		expect(differs).toBe(true)
 	})
@@ -136,7 +148,7 @@ describe("loadFoodImage", () => {
 
 		// All luminance values should be ~0.5 (mid-gray)
 		for (const v of data.luminance) {
-			expect(v).toBeCloseTo(0.502, 1)  // 128/255
+			expect(v).toBeCloseTo(0.502, 1) // 128/255
 		}
 	})
 })

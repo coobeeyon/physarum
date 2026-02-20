@@ -1,11 +1,11 @@
-import sharp from "sharp"
+import { execSync } from "node:child_process"
 import { existsSync, readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
-import { execSync } from "node:child_process"
+import sharp from "sharp"
 import { loadState } from "#pipeline/state.ts"
-import { type Result, ok, err } from "#types/result.ts"
 import type { Genome } from "#types/evolution.ts"
 import type { HistoryEntry } from "#types/metadata.ts"
+import { type Result, err, ok } from "#types/result.ts"
 
 const SITE_DIR = join(import.meta.dirname, "../../../stigmergence-site")
 const OUTPUT_DIR = join(import.meta.dirname, "../../output")
@@ -56,9 +56,7 @@ function formatParams(genome: Genome, width: number, height: number): EditionEnt
 function buildEntry(entry: HistoryEntry, contractAddress: string): EditionEntry {
 	// Edition 1 was pre-Zora
 	const zora =
-		entry.edition === 1
-			? null
-			: `https://zora.co/collect/base:${contractAddress}/${entry.tokenId}`
+		entry.edition === 1 ? null : `https://zora.co/collect/base:${contractAddress}/${entry.tokenId}`
 	return {
 		edition: entry.edition,
 		seed: entry.seed,
@@ -118,7 +116,7 @@ function generateScriptJs(entries: readonly EditionEntry[]): string {
 		"    }",
 		"",
 		"    const paramRows = Object.entries(ed.params)",
-		"      .map(([k, v]) => `<div class=\"param\"><span class=\"param-key\">${k}</span><span class=\"param-val\">${v}</span></div>`)",
+		'      .map(([k, v]) => `<div class="param"><span class="param-key">${k}</span><span class="param-val">${v}</span></div>`)',
 		'      .join("");',
 		"",
 		"    link.innerHTML = `",

@@ -14,10 +14,16 @@ type Rng = () => number
 
 const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v)
 
-const generateClusters = (rng: Rng, w: number, h: number, density: number, clusterCount: number): Float32Array => {
+const generateClusters = (
+	rng: Rng,
+	w: number,
+	h: number,
+	density: number,
+	clusterCount: number,
+): Float32Array => {
 	const map = new Float32Array(w * h)
 	const minRadius = Math.min(w, h) * 0.02
-	const maxRadius = Math.min(w, h) * 0.10
+	const maxRadius = Math.min(w, h) * 0.1
 
 	for (let c = 0; c < clusterCount; c++) {
 		const cx = rng() * w
@@ -122,14 +128,21 @@ const generateGrid = (rng: Rng, w: number, h: number, density: number): Float32A
 	return map
 }
 
-const STRATEGIES: Record<Exclude<FoodPlacementStrategy, "mixed" | "image">, (rng: Rng, w: number, h: number, density: number, clusterCount: number) => Float32Array> = {
-	clusters: (rng, w, h, density, clusterCount) => generateClusters(rng, w, h, density, clusterCount),
+const STRATEGIES: Record<
+	Exclude<FoodPlacementStrategy, "mixed" | "image">,
+	(rng: Rng, w: number, h: number, density: number, clusterCount: number) => Float32Array
+> = {
+	clusters: (rng, w, h, density, clusterCount) =>
+		generateClusters(rng, w, h, density, clusterCount),
 	rings: (rng, w, h, density) => generateRings(rng, w, h, density),
 	gradient: (rng, w, h, density) => generateGradient(rng, w, h, density),
 	grid: (rng, w, h, density) => generateGrid(rng, w, h, density),
 }
 
-const STRATEGY_NAMES = Object.keys(STRATEGIES) as Exclude<FoodPlacementStrategy, "mixed" | "image">[]
+const STRATEGY_NAMES = Object.keys(STRATEGIES) as Exclude<
+	FoodPlacementStrategy,
+	"mixed" | "image"
+>[]
 
 export const generateFoodMap = (
 	rng: Rng,

@@ -1,8 +1,8 @@
 import Anthropic from "@anthropic-ai/sdk"
-import { type Result, ok, err } from "#types/result.ts"
-import type { PipelineState } from "#types/metadata.ts"
+import { assembleContext, buildSystemPrompt } from "#agent/prompt.ts"
 import type { EngagementData } from "#types/evolution.ts"
-import { buildSystemPrompt, assembleContext } from "#agent/prompt.ts"
+import type { PipelineState } from "#types/metadata.ts"
+import { type Result, err, ok } from "#types/result.ts"
 
 const DEFAULT_MODEL = "claude-sonnet-4-6"
 

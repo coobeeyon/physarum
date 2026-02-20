@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync } from "node:fs"
 import { join, relative } from "node:path"
-import type { PipelineState } from "#types/metadata.ts"
 import type { EngagementData, Genome } from "#types/evolution.ts"
+import type { PipelineState } from "#types/metadata.ts"
 
 const EXCLUDED_DIRS = new Set(["node_modules", ".git", ".beads", "output", ".claude"])
 
@@ -79,9 +79,7 @@ export const buildSystemPrompt = (projectRoot: string): string => {
 	return `${manifesto}\n\n${OUTPUT_FORMAT}`
 }
 
-export const summarizeEngagement = (
-	engagement: ReadonlyArray<EngagementData>,
-): string => {
+export const summarizeEngagement = (engagement: ReadonlyArray<EngagementData>): string => {
 	if (engagement.length === 0) return "No engagement data available yet."
 
 	const lines: string[] = []
@@ -100,9 +98,7 @@ export const summarizeEngagement = (
 
 	if (scored.length >= 2) {
 		const sorted = [...scored].sort((a, b) => b.total - a.total)
-		lines.push(
-			`\nBest: Edition #${sorted[0].edition} (${sorted[0].total} total)`,
-		)
+		lines.push(`\nBest: Edition #${sorted[0].edition} (${sorted[0].total} total)`)
 		lines.push(
 			`Lowest: Edition #${sorted[sorted.length - 1].edition} (${sorted[sorted.length - 1].total} total)`,
 		)
@@ -121,9 +117,7 @@ export const summarizeEngagement = (
 
 const formatGenome = (genome: Genome): string => {
 	const { populations, ...rest } = genome
-	const pops = populations.map(
-		(p) => `  [${p.color.join(",")}] fraction=${p.agentFraction}`,
-	)
+	const pops = populations.map((p) => `  [${p.color.join(",")}] fraction=${p.agentFraction}`)
 	const entries = Object.entries(rest)
 		.map(([k, v]) => `  ${k}: ${v}`)
 		.join("\n")
@@ -141,9 +135,7 @@ export const assembleContext = (
 	sections.push(`# Current State\nEdition: ${state.lastEdition}`)
 
 	// Current genome
-	const latestWithGenome = [...state.history]
-		.reverse()
-		.find((h) => h.genome !== null)
+	const latestWithGenome = [...state.history].reverse().find((h) => h.genome !== null)
 	if (latestWithGenome?.genome) {
 		sections.push(
 			`## Current Genome (Edition #${latestWithGenome.edition})\n${formatGenome(latestWithGenome.genome)}`,
