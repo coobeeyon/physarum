@@ -24,6 +24,8 @@ const ALLOWED_TOOLS = [
 	"Edit",
 ].join(",")
 
+const isContainer = () => process.env.CONTAINER === "true"
+
 export const runClaudeReflection = async (
 	state: PipelineState,
 	engagement: ReadonlyArray<EngagementData>,
@@ -34,20 +36,13 @@ export const runClaudeReflection = async (
 
 	const prompt = buildReflectionPrompt(state, engagement, projectRoot)
 
+	const baseArgs = ["claude", "-p", prompt, "--model", model, "--max-turns", maxTurns, "--output-format", "json"]
+	const sandboxArgs = isContainer()
+		? ["--dangerously-skip-permissions"]
+		: ["--allowedTools", ALLOWED_TOOLS]
+
 	const proc = Bun.spawn(
-		[
-			"claude",
-			"-p",
-			prompt,
-			"--allowedTools",
-			ALLOWED_TOOLS,
-			"--model",
-			model,
-			"--max-turns",
-			maxTurns,
-			"--output-format",
-			"json",
-		],
+		[...baseArgs, ...sandboxArgs],
 		{
 			cwd: projectRoot,
 			stdout: "pipe",
