@@ -15,15 +15,22 @@ git config --global --add safe.directory /workspace
 logdir="/workspace/logs/epic-runs"
 mkdir -p "$logdir"
 
-# --- Initialize and start beads ---
+# --- Install dependencies from pre-built cache ---
+echo "Installing project dependencies..."
+if [ -d /deps/physarum/node_modules ]; then
+  cp -a /deps/physarum/node_modules .
+else
+  bun install --frozen-lockfile
+fi
+echo "Dependencies installed."
+
+# --- Initialize beads ---
 echo "Initializing beads..."
-bd init
+bd init --prefix physarum
 bd config set beads.role maintainer
-bd setup claude
 yes | bd doctor --fix || true
-bd sync --import-only || true
-bd daemon start || true
-sleep 1
+rm -f .beads/dolt/*/.dolt/noms/LOCK
+bd import
 
 # Verify the epic exists before starting
 if ! bd show "$epic" > /dev/null 2>&1; then
@@ -42,31 +49,18 @@ feature_branch="${bead_id}-${slug}"
 echo "Creating feature branch: $feature_branch"
 git checkout -b "$feature_branch"
 
-# --- Install project dependencies ---
-echo "Installing project dependencies..."
-if [ -f bun.lock ] || [ -f bun.lockb ]; then
-  bun install --frozen-lockfile
-fi
-echo "Dependencies installed."
-echo ""
-
-# --- Beads sync helper ---
-beads_worktree=".git/beads-worktrees/beads-sync"
-sync_beads() {
-  bd sync  # export JSONL
-  if git -C "$beads_worktree" diff --quiet .beads/issues.jsonl 2>/dev/null; then
-    echo "  beads: no changes to sync"
-    return 0
-  fi
-  git -C "$beads_worktree" add .beads/issues.jsonl
-  git -C "$beads_worktree" commit -m "bd sync: $epic task $task_num"
-  git -C "$beads_worktree" push origin beads-sync
-  echo "  beads: synced to remote"
-}
-
 # --- Task loop ---
 remaining() {
   bd show --children "$epic" | grep -c '○' || true
+}
+
+sync_and_push() {
+  bd export
+  git add .beads/issues.jsonl 2>/dev/null || true
+  if ! git diff --cached --quiet 2>/dev/null; then
+    git commit -m "bd sync: $epic task $task_num"
+  fi
+  git push -u origin "$feature_branch"
 }
 
 task_num=0
@@ -95,8 +89,7 @@ while [ "$(remaining)" -gt 0 ]; do
   else
     failures=0
     echo "--- Task $task_num succeeded, pushing to remote..."
-    git push -u origin "$feature_branch"
-    sync_beads
+    sync_and_push
   fi
 
   if [ "$failures" -ge "$max_failures" ]; then
@@ -112,6 +105,5 @@ done
 echo ""
 echo "All tasks in $epic complete."
 echo "Final push to remote..."
-sync_beads
-git push origin "$feature_branch"
+sync_and_push
 echo "Done. Merge branch '$feature_branch' into '$branch' when ready."
