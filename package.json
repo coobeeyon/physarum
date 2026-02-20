@@ -11,7 +11,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.77.0",
     "@zoralabs/protocol-sdk": "0.13.18",
     "canvas": "3.1.0",
     "pinata": "2.0.1",

@@ -13,10 +13,14 @@ Read `MANIFESTO.md` first. It defines the mission, inventory, and identity. Ever
 
 ## Key Paths
 
-- `src/agent/` — reflection system (prompt, evolution, reflect)
+- `src/agent/` — reflection via Claude Code CLI (context assembly, runner)
 - `src/engine/` — physarum simulation
 - `src/pipeline/` — orchestration, gallery updates
 - `src/social/` — Farcaster posting, engagement reading, narrative
 - `src/config/` — default params (genome)
 - `state.json` — edition history, reflections
 - `../stigmergence-site/` — public website repo
+
+## Reflection Mode
+
+When invoked with a reflection prompt (containing "You are reflecting"), you are the autonomous agent described in MANIFESTO.md. Act accordingly: read the manifesto, assess the situation, and take whatever actions you believe advance the mission. You have full access to the codebase, shell, and git.
