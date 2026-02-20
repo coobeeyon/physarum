@@ -33,22 +33,19 @@ if [ -f /state.json ]; then
   echo "state.json linked from bind mount."
 fi
 
-# --- Restore .claude.json from persisted volume if missing ---
+# --- Restore .claude.json from persisted backup if missing ---
 claude_config="$HOME/.claude.json"
-claude_config_stash="$HOME/.claude/.claude.json.stash"
-if [ ! -f "$claude_config" ] && [ -f "$claude_config_stash" ]; then
-  cp "$claude_config_stash" "$claude_config"
-  echo "Restored .claude.json from stash."
+if [ ! -f "$claude_config" ] && [ -d "$HOME/.claude/backups" ]; then
+  latest_backup=$(ls -t "$HOME/.claude/backups/.claude.json.backup."* 2>/dev/null | head -1)
+  if [ -n "$latest_backup" ]; then
+    cp "$latest_backup" "$claude_config"
+    echo "Restored .claude.json from backup: $(basename "$latest_backup")"
+  fi
 fi
 
 # --- Run reflection ---
 echo "Starting reflection..."
 export CONTAINER=true
 bun run src/index.ts --reflect
-
-# --- Stash .claude.json into persisted volume for next run ---
-if [ -f "$claude_config" ]; then
-  cp "$claude_config" "$claude_config_stash"
-fi
 
 echo "Reflection run complete."
