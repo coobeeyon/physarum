@@ -208,7 +208,7 @@ export const runPipeline = async (
 			castText,
 			imageUrl,
 			mintUrl,
-			options.channel ?? config.farcasterChannel,
+			options.channel ?? config.farcasterChannel ?? "art",
 		)
 		if (!castResult.ok) return castResult
 		castHash = castResult.value.castHash

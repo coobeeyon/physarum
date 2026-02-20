@@ -14,6 +14,14 @@ const readRequests = (projectRoot: string): string => {
 	}
 }
 
+const readSource = (projectRoot: string, relPath: string): string => {
+	try {
+		return readFileSync(join(projectRoot, relPath), "utf-8")
+	} catch {
+		return "(unavailable)"
+	}
+}
+
 const formatEngagement = (engagement: ReadonlyArray<EngagementData>): string => {
 	if (engagement.length === 0) return "No engagement data yet."
 
@@ -63,6 +71,8 @@ export const buildReflectionPrompt = (
 	projectRoot: string,
 ): string => {
 	const requests = readRequests(projectRoot)
+	const paramsSource = readSource(projectRoot, "src/config/params.ts")
+	const narrativeSource = readSource(projectRoot, "src/social/narrative.ts")
 
 	return `You are reflecting on the state of the Stigmergence project. Here is your current situation:
 
@@ -75,6 +85,14 @@ Past reflections:
 ${formatReflections(state)}
 
 Pending human requests: ${requests}
+
+Active genome (src/config/params.ts):
+\`\`\`ts
+${paramsSource}\`\`\`
+
+Active narrative (src/social/narrative.ts):
+\`\`\`ts
+${narrativeSource}\`\`\`
 
 Your MANIFESTO.md and CLAUDE.md are in the project root. Read them.
 Do what you think is best to advance the mission. When done, commit and push your changes, and explain what you did and why.`
