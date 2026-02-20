@@ -77,5 +77,5 @@ ${formatReflections(state)}
 Pending human requests: ${requests}
 
 Your MANIFESTO.md and CLAUDE.md are in the project root. Read them.
-Do what you think is best to advance the mission. When done, commit your changes and explain what you did and why.`
+Do what you think is best to advance the mission. When done, commit and push your changes, and explain what you did and why.`
 }
