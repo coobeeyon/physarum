@@ -5,6 +5,22 @@ script_dir="$(cd "$(dirname "$0")" && pwd)"
 project_dir="$(cd "$script_dir/.." && pwd)"
 runner_dir="$script_dir/epic-runner"
 
+# --- Parse flags ---
+raw_mode=false
+for arg in "$@"; do
+  case "$arg" in
+    --raw) raw_mode=true ;;
+    *) echo "Unknown flag: $arg"; exit 1 ;;
+  esac
+done
+
+# --- Set up logging ---
+log_dir="$project_dir/logs"
+mkdir -p "$log_dir"
+log_file="$log_dir/reflect-$(date +%Y%m%d-%H%M%S).jsonl"
+
+echo "Log file: $log_file"
+
 # --- Preflight: clean working tree ---
 if ! git -C "$project_dir" diff --quiet || ! git -C "$project_dir" diff --cached --quiet; then
   echo "ERROR: Working tree has uncommitted changes. Commit or stash first."
@@ -40,20 +56,40 @@ docker volume create reflect-claude-home 2>/dev/null || true
 # Fix ownership so container user (runner) can write to it
 docker run --rm -v reflect-claude-home:/data alpine chown "$(id -u):$(id -g)" /data
 
-docker run --name "$container_name" \
-  --env-file "$project_dir/.env" \
-  -e REFLECT_MODEL="${REFLECT_MODEL:-}" \
-  -e REFLECT_MAX_TURNS="${REFLECT_MAX_TURNS:-}" \
-  -e CONTAINER=true \
-  -e REPO_URL="$repo_url" \
-  -e BRANCH="$branch" \
-  -v "${SSH_AUTH_SOCK}:/ssh-agent" \
-  -e SSH_AUTH_SOCK=/ssh-agent \
-  -v "$runner_dir/run-reflect.sh:/run-reflect.sh:ro" \
-  -v "$state_file:/state.json" \
-  -v "reflect-claude-home:/home/runner/.claude" \
-  epic-runner /run-reflect.sh
+if [ "$raw_mode" = true ]; then
+  docker run --name "$container_name" \
+    --env-file "$project_dir/.env" \
+    -e REFLECT_MODEL="${REFLECT_MODEL:-}" \
+    -e REFLECT_MAX_TURNS="${REFLECT_MAX_TURNS:-}" \
+    -e CONTAINER=true \
+    -e REPO_URL="$repo_url" \
+    -e BRANCH="$branch" \
+    -v "${SSH_AUTH_SOCK}:/ssh-agent" \
+    -e SSH_AUTH_SOCK=/ssh-agent \
+    -v "$runner_dir/run-reflect.sh:/run-reflect.sh:ro" \
+    -v "$state_file:/state.json" \
+    -v "reflect-claude-home:/home/runner/.claude" \
+    epic-runner /run-reflect.sh 2>&1 | tee "$log_file"
+else
+  docker run --name "$container_name" \
+    --env-file "$project_dir/.env" \
+    -e REFLECT_MODEL="${REFLECT_MODEL:-}" \
+    -e REFLECT_MAX_TURNS="${REFLECT_MAX_TURNS:-}" \
+    -e CONTAINER=true \
+    -e REPO_URL="$repo_url" \
+    -e BRANCH="$branch" \
+    -v "${SSH_AUTH_SOCK}:/ssh-agent" \
+    -e SSH_AUTH_SOCK=/ssh-agent \
+    -v "$runner_dir/run-reflect.sh:/run-reflect.sh:ro" \
+    -v "$state_file:/state.json" \
+    -v "reflect-claude-home:/home/runner/.claude" \
+    epic-runner /run-reflect.sh 2>&1 | tee "$log_file" | bun run "$script_dir/reflect-stream-fmt.ts"
+fi
 
+# Update latest symlink
+ln -sf "$(basename "$log_file")" "$log_dir/latest.jsonl"
+
+echo ""
 echo "Container $container_name finished. Cleaning up..."
 docker rm "$container_name"
 
@@ -62,3 +98,4 @@ echo "Pulling code changes from remote..."
 git -C "$project_dir" pull --ff-only || echo "No new commits to pull."
 
 echo "Done. state.json updated in-place, code changes (if any) pulled."
+echo "Log saved: $log_file"
