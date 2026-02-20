@@ -19,6 +19,12 @@ else
 fi
 echo "Dependencies installed."
 
+# --- Clone stigmergence-site as sibling (for gallery updates) ---
+site_url="$(echo "$repo_url" | sed 's|physarum\.git|stigmergence.git|')"
+echo "Cloning $site_url..."
+git clone "$site_url" /workspace/../stigmergence-site || echo "Warning: could not clone stigmergence-site"
+git config --global --add safe.directory /workspace/../stigmergence-site
+
 # --- Symlink bind-mounted state.json if present ---
 # Host bind-mounts state.json to /state.json; link it into the repo
 if [ -f /state.json ]; then
