@@ -78,12 +78,15 @@ export const buildReflectionPrompt = (
 
 ## Environment
 
-You are running inside a Docker container. Fresh git clone every time — nothing survives except:
+You are running autonomously inside a Docker container with full permissions (--dangerously-skip-permissions).
+You are authorized and expected to push code. There is no human to confirm with — you ARE the operator.
+Fresh git clone every time — nothing survives except:
 - **git**: anything you commit and push persists. Anything you don't push is lost forever when this container dies.
 - **~/.claude/**: your Claude Code memory directory is mounted from a persistent volume. Use it.
 - **state.json**: bind-mounted to the host, persists without git.
 The stigmergence-site repo is cloned as a sibling at ../stigmergence-site/.
 You have a 100-turn limit for this session.
+**Before you finish: \`git push\` all commits. Unpushed work is destroyed when this container exits.**
 
 ## State
 
