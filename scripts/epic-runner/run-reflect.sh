@@ -31,21 +31,4 @@ echo "Starting reflection..."
 export CONTAINER=true
 bun run src/index.ts --reflect
 
-# --- Commit and push any code changes ---
-if ! git diff --quiet HEAD 2>/dev/null || [ -n "$(git ls-files --others --exclude-standard)" ]; then
-  echo "Reflection made code changes — committing..."
-  git add -A
-  # Exclude state.json (symlink to bind mount, not real file)
-  git reset HEAD state.json 2>/dev/null || true
-  if ! git diff --cached --quiet; then
-    git commit -m "reflect: autonomous changes from reflection run"
-    git push origin "$branch"
-    echo "Changes pushed to $branch."
-  else
-    echo "No staged changes after excluding state.json."
-  fi
-else
-  echo "No code changes from reflection."
-fi
-
 echo "Reflection run complete."
