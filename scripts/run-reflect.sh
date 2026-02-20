@@ -35,6 +35,9 @@ echo "Container name: $container_name"
 # Remove stale container with same name if it exists
 docker rm "$container_name" 2>/dev/null || true
 
+# Persistent volume for Claude Code memory across runs
+docker volume create reflect-claude-home 2>/dev/null || true
+
 docker run --name "$container_name" \
   --env-file "$project_dir/.env" \
   -e REFLECT_MODEL="${REFLECT_MODEL:-}" \
@@ -46,6 +49,7 @@ docker run --name "$container_name" \
   -e SSH_AUTH_SOCK=/ssh-agent \
   -v "$runner_dir/run-reflect.sh:/run-reflect.sh:ro" \
   -v "$state_file:/state.json" \
+  -v "reflect-claude-home:/home/runner/.claude" \
   epic-runner /run-reflect.sh
 
 echo "Container $container_name finished. Cleaning up..."
