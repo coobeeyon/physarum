@@ -1,9 +1,10 @@
 import { join } from "node:path"
-import { executeReflection } from "#agent/evolve.ts"
+import { runClaudeReflection } from "#agent/runner.ts"
 import { loadEnv } from "#config/env.ts"
 import { runPipeline } from "#pipeline/orchestrate.ts"
 import { loadState, saveState } from "#pipeline/state.ts"
 import { readEngagement } from "#social/engagement.ts"
+import type { ReflectionRecord } from "#types/evolution.ts"
 
 const parseArgs = (args: ReadonlyArray<string>) => {
 	const flags = {
@@ -72,12 +73,7 @@ const main = async () => {
 	}
 
 	if (flags.reflect) {
-		const anthropicKey = process.env.ANTHROPIC_API_KEY
 		const neynarKey = process.env.NEYNAR_API_KEY
-		if (!anthropicKey) {
-			console.error("ANTHROPIC_API_KEY not set")
-			process.exit(1)
-		}
 		if (!neynarKey) {
 			console.error("NEYNAR_API_KEY not set")
 			process.exit(1)
@@ -100,21 +96,44 @@ const main = async () => {
 		}
 
 		const projectRoot = join(import.meta.dirname, "..")
-		const outcome = await executeReflection(
-			anthropicKey,
+		const result = await runClaudeReflection(
 			stateResult.value,
 			engResult.value.engagement,
 			projectRoot,
 		)
-		if (!outcome.ok) {
-			console.error(`Reflection error: ${outcome.error}`)
+		if (!result.ok) {
+			console.error(`Reflection error: ${result.error}`)
 			process.exit(1)
 		}
 
 		const state = stateResult.value
+		const engagement = engResult.value.engagement
+		const latestWithGenome = [...state.history].reverse().find((h) => h.genome !== null)
+		const latestEngagement = engagement[engagement.length - 1] ?? {
+			edition: state.lastEdition,
+			castHash: "",
+			likes: 0,
+			recasts: 0,
+			replies: 0,
+			ageHours: 0,
+		}
+
 		const updated = {
 			...state,
-			reflections: [...state.reflections, outcome.value.record],
+			reflections: [
+				...state.reflections,
+				{
+					edition: state.lastEdition,
+					genome: latestWithGenome?.genome ?? ({} as ReflectionRecord["genome"]),
+					engagement: latestEngagement,
+					changes: [],
+					reasoning: result.value.summary,
+					date: new Date().toISOString(),
+					model: result.value.model,
+					inputTokens: result.value.inputTokens,
+					outputTokens: result.value.outputTokens,
+				},
+			],
 		}
 		const saveResult = saveState(updated)
 		if (!saveResult.ok) {
@@ -123,10 +142,11 @@ const main = async () => {
 		}
 
 		console.log("\nReflection complete:")
-		console.log(`  Applied: ${outcome.value.applied}`)
-		console.log(`  Committed: ${outcome.value.committed}`)
-		console.log(`  Changes: ${outcome.value.record.changes.length} file(s)`)
-		console.log(`  Reasoning: ${outcome.value.reasoning.slice(0, 200)}`)
+		console.log(`  Model: ${result.value.model}`)
+		console.log(`  Turns: ${result.value.numTurns}`)
+		console.log(`  Tokens: ${result.value.inputTokens} in / ${result.value.outputTokens} out`)
+		console.log(`  Cost: $${result.value.costUsd.toFixed(4)}`)
+		console.log(`  Summary: ${result.value.summary.slice(0, 200)}`)
 		return
 	}
 

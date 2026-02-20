@@ -17,4 +17,8 @@ export type ReflectionRecord = {
 	readonly engagement: EngagementData
 	readonly changes: ReadonlyArray<string>
 	readonly reasoning: string
+	readonly date?: string
+	readonly model?: string
+	readonly inputTokens?: number
+	readonly outputTokens?: number
 }
