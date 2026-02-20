@@ -141,18 +141,42 @@ function generateScriptJs(entries: readonly EditionEntry[]): string {
 	return `const editions = [\n${editionsJs},\n];\n\n${renderFn}\n`
 }
 
-function updateHeroImage(indexPath: string, latestEdition: number): void {
+function updateHero(indexPath: string, latestEntry: EditionEntry): void {
 	let html = readFileSync(indexPath, "utf-8")
+	const n = latestEntry.edition
+	const imgPath = `img/stigmergence-${n}.webp`
+	const absoluteImg = `https://stigmergence.art/${imgPath}`
+
+	// Update hero picture tag
 	html = html.replace(
 		/<section class="hero">\s*<picture>[\s\S]*?<\/picture>/,
 		[
 			'<section class="hero">',
 			"    <picture>",
-			`      <source srcset="img/stigmergence-${latestEdition}.webp" type="image/webp">`,
-			`      <img src="img/stigmergence-${latestEdition}.webp" alt="stigmergence edition ${latestEdition}" class="hero-img">`,
+			`      <source srcset="${imgPath}" type="image/webp">`,
+			`      <img src="${imgPath}" alt="stigmergence edition ${n}" class="hero-img">`,
 			"    </picture>",
 		].join("\n"),
 	)
+
+	// Update hero CTA link
+	if (latestEntry.zora) {
+		html = html.replace(
+			/<a class="hero-cta"[^>]*>[^<]*<\/a>/,
+			`<a class="hero-cta" href="${latestEntry.zora}" target="_blank" rel="noopener">collect #${n}</a>`,
+		)
+	}
+
+	// Update og:image and twitter:image meta tags to latest edition
+	html = html.replace(
+		/(<meta property="og:image" content=")[^"]*(")/,
+		`$1${absoluteImg}$2`,
+	)
+	html = html.replace(
+		/(<meta name="twitter:image" content=")[^"]*(")/,
+		`$1${absoluteImg}$2`,
+	)
+
 	writeFileSync(indexPath, html)
 }
 
@@ -213,16 +237,16 @@ export async function updateGallery(current?: GalleryOptions): Promise<Result<vo
 	writeFileSync(scriptPath, generateScriptJs(entries))
 	console.log(`  wrote script.js (${entries.length} editions)`)
 
-	// 4. Update hero image to latest edition
-	const latestEdition = entries[0].edition
+	// 4. Update hero to latest edition (image, CTA, og/twitter meta tags)
+	const latestEntry = entries[0]
 	const indexPath = join(SITE_DIR, "index.html")
-	updateHeroImage(indexPath, latestEdition)
-	console.log(`  updated hero to edition ${latestEdition}`)
+	updateHero(indexPath, latestEntry)
+	console.log(`  updated hero to edition ${latestEntry.edition}`)
 
 	// 5. Git commit + push
 	try {
 		execSync("git add img/ script.js index.html", { cwd: SITE_DIR, stdio: "pipe" })
-		execSync(`git commit -m "gallery: update through edition ${latestEdition}"`, {
+		execSync(`git commit -m "gallery: update through edition ${latestEntry.edition}"`, {
 			cwd: SITE_DIR,
 			stdio: "pipe",
 		})
