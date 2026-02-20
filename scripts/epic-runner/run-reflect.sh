@@ -27,12 +27,6 @@ else
 fi
 echo "Dependencies installed."
 
-# --- Symlink bind-mounted state.json if present ---
-if [ -f /state.json ]; then
-  ln -sf /state.json state.json
-  echo "state.json linked from bind mount."
-fi
-
 # --- Restore .claude.json from persisted backup if missing ---
 claude_config="$HOME/.claude.json"
 if [ ! -f "$claude_config" ] && [ -d "$HOME/.claude/backups" ]; then

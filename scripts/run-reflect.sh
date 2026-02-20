@@ -30,12 +30,6 @@ fi
 repo_url="$(git -C "$project_dir" remote get-url origin)"
 branch="$(git -C "$project_dir" branch --show-current)"
 
-# --- Ensure state.json exists (container needs a file to bind-mount) ---
-state_file="$project_dir/state.json"
-if [ ! -f "$state_file" ]; then
-  echo '{}' > "$state_file"
-fi
-
 # --- Build container image (reuses epic-runner Dockerfile) ---
 echo "Building epic-runner container..."
 docker build -q -t epic-runner \
@@ -67,7 +61,6 @@ if [ "$raw_mode" = true ]; then
     -v "${SSH_AUTH_SOCK}:/ssh-agent" \
     -e SSH_AUTH_SOCK=/ssh-agent \
     -v "$runner_dir/run-reflect.sh:/run-reflect.sh:ro" \
-    -v "$state_file:/state.json" \
     -v "reflect-claude-home:/home/runner/.claude" \
     epic-runner /run-reflect.sh 2>&1 | tee "$log_file"
 else
@@ -81,7 +74,6 @@ else
     -v "${SSH_AUTH_SOCK}:/ssh-agent" \
     -e SSH_AUTH_SOCK=/ssh-agent \
     -v "$runner_dir/run-reflect.sh:/run-reflect.sh:ro" \
-    -v "$state_file:/state.json" \
     -v "reflect-claude-home:/home/runner/.claude" \
     epic-runner /run-reflect.sh 2>&1 | tee "$log_file" | bun run "$script_dir/reflect-stream-fmt.ts"
 fi
@@ -97,5 +89,5 @@ docker rm "$container_name"
 echo "Pulling code changes from remote..."
 git -C "$project_dir" pull --ff-only || echo "No new commits to pull."
 
-echo "Done. state.json updated in-place, code changes (if any) pulled."
+echo "Done. Code changes (if any) pulled."
 echo "Log saved: $log_file"

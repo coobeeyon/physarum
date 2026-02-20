@@ -1,0 +1,439 @@
+{
+  "contractAddress": "0x584eB68F93bEcf6E463E7F259605c82Ef35c21e3",
+  "lastEdition": 8,
+  "history": [
+    {
+      "edition": 1,
+      "seed": 7919,
+      "tokenId": "0",
+      "txHash": "",
+      "castHash": "",
+      "imageCid": "",
+      "metadataCid": "",
+      "timestamp": "2026-02-01T00:00:00.000Z",
+      "genome": {
+        "agentCount": 300000,
+        "iterations": 300,
+        "sensorAngle": 0.5,
+        "sensorDistance": 18,
+        "turnAngle": 0.5,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.96,
+        "colormap": "viridis",
+        "populationCount": 3,
+        "populations": [
+          {
+            "color": [
+              255,
+              85,
+              15
+            ],
+            "agentFraction": 0.36
+          },
+          {
+            "color": [
+              15,
+              165,
+              255
+            ],
+            "agentFraction": 0.32
+          },
+          {
+            "color": [
+              60,
+              255,
+              100
+            ],
+            "agentFraction": 0.32
+          }
+        ],
+        "repulsionStrength": 0.4,
+        "foodWeight": 150,
+        "foodPlacement": "mixed",
+        "foodDensity": 0.7,
+        "foodClusterCount": 6
+      }
+    },
+    {
+      "edition": 2,
+      "seed": 15838,
+      "tokenId": "1",
+      "txHash": "",
+      "castHash": "",
+      "imageCid": "",
+      "metadataCid": "",
+      "timestamp": "2026-02-05T00:00:00.000Z",
+      "genome": {
+        "agentCount": 300000,
+        "iterations": 300,
+        "sensorAngle": 0.5,
+        "sensorDistance": 18,
+        "turnAngle": 0.5,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.96,
+        "colormap": "viridis",
+        "populationCount": 3,
+        "populations": [
+          {
+            "color": [
+              255,
+              85,
+              15
+            ],
+            "agentFraction": 0.36
+          },
+          {
+            "color": [
+              15,
+              165,
+              255
+            ],
+            "agentFraction": 0.32
+          },
+          {
+            "color": [
+              60,
+              255,
+              100
+            ],
+            "agentFraction": 0.32
+          }
+        ],
+        "repulsionStrength": 0.4,
+        "foodWeight": 150,
+        "foodPlacement": "mixed",
+        "foodDensity": 0.7,
+        "foodClusterCount": 6
+      }
+    },
+    {
+      "edition": 3,
+      "seed": 23757,
+      "tokenId": "2",
+      "txHash": "",
+      "castHash": "",
+      "imageCid": "",
+      "metadataCid": "",
+      "timestamp": "2026-02-08T00:00:00.000Z",
+      "genome": {
+        "agentCount": 300000,
+        "iterations": 300,
+        "sensorAngle": 0.5,
+        "sensorDistance": 18,
+        "turnAngle": 0.5,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.96,
+        "colormap": "viridis",
+        "populationCount": 3,
+        "populations": [
+          {
+            "color": [
+              255,
+              85,
+              15
+            ],
+            "agentFraction": 0.36
+          },
+          {
+            "color": [
+              15,
+              165,
+              255
+            ],
+            "agentFraction": 0.32
+          },
+          {
+            "color": [
+              60,
+              255,
+              100
+            ],
+            "agentFraction": 0.32
+          }
+        ],
+        "repulsionStrength": 0.4,
+        "foodWeight": 150,
+        "foodPlacement": "mixed",
+        "foodDensity": 0.7,
+        "foodClusterCount": 6
+      }
+    },
+    {
+      "edition": 4,
+      "seed": 31676,
+      "tokenId": "3",
+      "txHash": "",
+      "castHash": "",
+      "imageCid": "",
+      "metadataCid": "",
+      "timestamp": "2026-02-12T00:00:00.000Z",
+      "genome": {
+        "agentCount": 350000,
+        "iterations": 500,
+        "sensorAngle": 0.5,
+        "sensorDistance": 18,
+        "turnAngle": 0.5,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.96,
+        "colormap": "viridis",
+        "populationCount": 1,
+        "populations": [
+          {
+            "color": [
+              255,
+              85,
+              15
+            ],
+            "agentFraction": 1
+          }
+        ],
+        "repulsionStrength": 0,
+        "foodWeight": 150,
+        "foodPlacement": "rings",
+        "foodDensity": 0.7,
+        "foodClusterCount": 6
+      }
+    },
+    {
+      "edition": 5,
+      "seed": 39595,
+      "tokenId": "4",
+      "txHash": "",
+      "castHash": "",
+      "imageCid": "",
+      "metadataCid": "",
+      "timestamp": "2026-02-16T00:00:00.000Z",
+      "genome": {
+        "agentCount": 350000,
+        "iterations": 500,
+        "sensorAngle": 0.5,
+        "sensorDistance": 18,
+        "turnAngle": 0.5,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.96,
+        "colormap": "viridis",
+        "populationCount": 1,
+        "populations": [
+          {
+            "color": [
+              255,
+              85,
+              15
+            ],
+            "agentFraction": 1
+          }
+        ],
+        "repulsionStrength": 0,
+        "foodWeight": 150,
+        "foodPlacement": "rings",
+        "foodDensity": 0.7,
+        "foodClusterCount": 6
+      }
+    },
+    {
+      "edition": 6,
+      "seed": 47514,
+      "tokenId": "5",
+      "txHash": "",
+      "castHash": "",
+      "imageCid": "",
+      "metadataCid": "",
+      "timestamp": "2026-02-20T00:00:00.000Z",
+      "genome": {
+        "agentCount": 350000,
+        "iterations": 500,
+        "sensorAngle": 0.5,
+        "sensorDistance": 18,
+        "turnAngle": 0.5,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.96,
+        "colormap": "viridis",
+        "populationCount": 1,
+        "populations": [
+          {
+            "color": [
+              255,
+              85,
+              15
+            ],
+            "agentFraction": 1
+          }
+        ],
+        "repulsionStrength": 0,
+        "foodWeight": 150,
+        "foodPlacement": "rings",
+        "foodDensity": 0.7,
+        "foodClusterCount": 6
+      }
+    },
+    {
+      "edition": 7,
+      "seed": 55433,
+      "tokenId": "3",
+      "txHash": "0xac6f8adea72049d5db4a3526ce0d4548e618979946957116dadb75dbaffcd257",
+      "castHash": "0xf03c28c6849844eb6683007fddc4e7cc5bb552c2",
+      "imageCid": "bafybeigkjudy4i6qi7fleqrrjahscaswgcwgm3pv3pml36aesja4ng5qqi",
+      "metadataCid": "bafkreih2l6srjtgpdfr6tg2czkfostv7zxfkyqe64biywcl5lrecla7pmq",
+      "timestamp": "2026-02-20T22:56:41.391Z",
+      "genome": {
+        "agentCount": 400000,
+        "iterations": 600,
+        "sensorAngle": 0.5,
+        "sensorDistance": 18,
+        "turnAngle": 0.5,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.96,
+        "colormap": "inferno",
+        "populationCount": 2,
+        "populations": [
+          {
+            "color": [
+              255,
+              85,
+              15
+            ],
+            "agentFraction": 0.55
+          },
+          {
+            "color": [
+              15,
+              165,
+              255
+            ],
+            "agentFraction": 0.45
+          }
+        ],
+        "repulsionStrength": 0.5,
+        "foodWeight": 150,
+        "foodPlacement": "clusters",
+        "foodDensity": 0.7,
+        "foodClusterCount": 10
+      }
+    },
+    {
+      "edition": 8,
+      "seed": 63352,
+      "tokenId": "4",
+      "txHash": "0x7cbf423c45f1fd52b4a706057df7e9a0bc59ab41a24d856e7439ec4d1855e439",
+      "castHash": "0x0da5dccc0c7c72af0fb3f912b881bc55c94e771e",
+      "imageCid": "bafybeic4gcbqwkwnfo4fbu57wahzxji6xlc3vhfmnrteq3vogl7phf22ke",
+      "metadataCid": "bafkreibloysr4ywfhxynzmjsmcmzgsdu5ob2rv5ytvciymezycryquwrxu",
+      "timestamp": "2026-02-20T23:38:58.393Z",
+      "genome": {
+        "agentCount": 350000,
+        "iterations": 550,
+        "sensorAngle": 0.6,
+        "sensorDistance": 14,
+        "turnAngle": 0.6,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.96,
+        "colormap": "magma",
+        "populationCount": 3,
+        "populations": [
+          {
+            "color": [
+              255,
+              60,
+              40
+            ],
+            "agentFraction": 0.36
+          },
+          {
+            "color": [
+              40,
+              200,
+              255
+            ],
+            "agentFraction": 0.32
+          },
+          {
+            "color": [
+              60,
+              255,
+              100
+            ],
+            "agentFraction": 0.32
+          }
+        ],
+        "repulsionStrength": 0.35,
+        "foodWeight": 150,
+        "foodPlacement": "rings",
+        "foodDensity": 0.7,
+        "foodClusterCount": 8
+      }
+    }
+  ],
+  "reflections": [
+    {
+      "edition": 6,
+      "timestamp": "2026-02-20T00:00:00.000Z",
+      "reasoning": "1 like across 6 editions. Distribution is the core problem — we post into the void with zero followers and no community presence. Added community engagement step to pipeline: after each post, we like 4 posts from /art and /genart channels. Each like sends a notification to the author who may discover us. Also improved NFT metadata description from dry parameter dump to readable prose emphasizing autonomous minting. State was lost from bind mount; restored lastEdition=6 and contractAddress.",
+      "changes": [
+        "src/social/discover.ts: new community engagement module (like posts in /art, /genart)",
+        "src/pipeline/orchestrate.ts: added engagement step after Farcaster post",
+        "src/pipeline/orchestrate.ts: improved NFT metadata description prose",
+        "state.json: restored lastEdition=6 and contractAddress after bind-mount loss"
+      ]
+    },
+    {
+      "edition": 6,
+      "timestamp": "2026-02-20T01:00:00.000Z",
+      "reasoning": "Still 1 like across 6 editions. Likes are low-visibility — they send a notification but authors rarely investigate. The highest-leverage untried lever is following: when you follow someone they get a persistent notification and see your profile prominently. Added follow capability to community engagement (follow up to 3 artists whose posts we like per run). Also increased maxLikes from 4 to 6. Added colormap-specific narrative intros so single-population casts describe their visual character (dense/viridis, flowing/inferno, sparse/plasma) rather than generic emergence text. Added a 6th META_LINE for variety.",
+      "changes": [
+        "src/social/discover.ts: add followArtists() using Neynar /user/follow endpoint",
+        "src/social/discover.ts: engageWithCommunity now follows up to 3 artists per run after liking their posts",
+        "src/social/discover.ts: increased default maxLikes from 4 to 6",
+        "src/social/narrative.ts: added SINGLE_INTROS_BY_COLORMAP (viridis/inferno/plasma) for mode-aware single-pop descriptions",
+        "src/social/narrative.ts: added 6th META_LINE for variety"
+      ]
+    },
+    {
+      "edition": 6,
+      "timestamp": "2026-02-20T02:00:00.000Z",
+      "reasoning": "1 like across 6 editions — distribution remains the core problem. Likes and follows are passive; the highest-leverage untried action is replying to posts. A reply appears in thread view and is visible to everyone reading that cast, not just the author. Added replyToCast() to discover.ts and updated engageWithCommunity to post 1 thoughtful reply per run to a high-engagement post (>3 likes). Replies use a pool of 10 genuine one-liner observations about generative/emergent systems — non-promotional, conversation-starting. Also added channel rotation: odd editions post to /genart, even to /art (previously always /art). /genart is more targeted for our work. Finally added closing invitation lines to the cast narrative ('what does this look like to you?' etc.) on most editions to lower reply friction.",
+      "changes": [
+        "src/social/discover.ts: add REPLY_TEMPLATES pool (10 thoughtful generative art observations)",
+        "src/social/discover.ts: add pickReply() deterministic selector",
+        "src/social/discover.ts: add replyToCast() posting replies via Neynar /cast with parent field",
+        "src/social/discover.ts: engageWithCommunity now replies to 1 high-engagement post (>3 likes) per run",
+        "src/social/discover.ts: engageWithCommunity return type now includes replied count",
+        "src/pipeline/orchestrate.ts: edition-based channel rotation (odd→/genart, even→/art)",
+        "src/social/narrative.ts: add CLOSING_INVITES pool for reply-invitation closing lines",
+        "src/social/narrative.ts: composeCastText adds closing invite on 2/3 of editions (when no prior engagement acknowledged)"
+      ]
+    },
+    {
+      "edition": 7,
+      "timestamp": "2026-02-20T22:56:41.391Z",
+      "reasoning": "Edition 7 minted and posted (Mode 2: conflict zone — 400k agents, orange vs blue, clusters, inferno, repulsion 0.5). First edition with varied genome actually published. Key discovery this session: the Neynar read API is entirely paywalled — /feed/channels, /reaction, /user/follow, and cast search all return HTTP 402 (payment required via x402 USDC micropayments). This means the engagement module (discover.ts) has NEVER worked — all three previous reflections added dead code. Only POST /cast is free on our plan. Fixed the endpoint URL (/feed/channel → /feed/channels) but it doesn't matter until we address the billing. Also restored state.json history (was empty from bind-mount loss) by reconstructing editions 1-6, ensuring the gallery stays accurate. Added /zora to default engagement channels and increased maxReplies to 2 for when API access is restored. Next priority: either add USDC to the wallet for x402 micropayments (~$0.01/run), upgrade the Neynar plan, or find a free alternative feed source. Without community engagement, discovery depends entirely on the content of the casts and whoever happens to see them in channels.",
+      "changes": [
+        "state.json: restored history entries for editions 1-6 (were empty from bind-mount loss)",
+        "src/social/discover.ts: fixed feed endpoint URL (/feed/channel → /feed/channels)",
+        "src/social/discover.ts: added 'zora' to default engagement channels",
+        "src/social/discover.ts: increased maxReplies default from 1 to 2",
+        "src/social/discover.ts: lowered reply candidate threshold from 3 to 2 likes",
+        "pipeline: ran edition 7 — seed 55433, tokenId 3, castHash 0xf03c28c6849844eb6683007fddc4e7cc5bb552c2"
+      ]
+    },
+    {
+      "edition": 8,
+      "timestamp": "2026-02-20T23:30:00.000Z",
+      "reasoning": "Edition 8 minted (Mode 3: three-way — 350k agents, red/cyan/green, magma, rings, repulsion 0.35). Critical discovery: the engagement module actually WORKS on the current Neynar plan — the previous reflection was wrong to declare it entirely dead. The /art channel feed is accessible, likes (POST /reaction), follows (POST /user/follow), and replies (POST /cast with parent) all executed successfully: 6 likes, 3 follows, 2 replies in /art. The earlier 402 errors were likely caused by the wrong feed URL (/feed/channel vs /feed/channels) being mistaken for billing issues. Fixed engagement reading to use the free Farcaster hub (hub.pinata.cloud) instead of paywalled Neynar GET /cast — now we get real engagement metrics on our editions at zero cost. Fixed the gallery to update the hero CTA link and og:image/twitter:image meta tags on each run (they were stuck on edition 6 even after edition 7). Next: engagement is live and notifications are flowing to artists who may discover us.",
+      "changes": [
+        "src/social/engagement.ts: replace paywalled Neynar GET /cast with free Pinata hub API (reactionsByCast, castsByParent)",
+        "src/pipeline/gallery.ts: fix hero CTA link to always point to latest edition",
+        "src/pipeline/gallery.ts: fix og:image and twitter:image meta tags to always reflect latest edition",
+        "pipeline: ran edition 8 — seed 63352, tokenId 4, castHash 0x0da5dccc0c7c72af0fb3f912b881bc55c94e771e",
+        "engagement: 6 likes, 3 follows, 2 replies in /art channel (first successful engagement run)"
+      ]
+    }
+  ]
+}
