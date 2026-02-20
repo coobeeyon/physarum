@@ -203,9 +203,13 @@ export const runPipeline = async (
 	// Compose narrative text
 	const castText = composeCastText(edition, seed, genome, prevEngagement)
 
+	// Alternate channels to reach different audiences: odd editions → /genart, even → /art
+	const postChannel = options.channel ?? config.farcasterChannel ?? (edition % 2 === 1 ? "genart" : "art")
+
 	let castHash = "0x0"
 	if (options.dryRun) {
 		console.log("  [dry-run] skipping Farcaster post")
+		console.log(`  channel: ${postChannel}`)
 		console.log(`  narrative:\n${castText}`)
 	} else {
 		const neynarConfig: NeynarConfig = {
@@ -218,7 +222,7 @@ export const runPipeline = async (
 			castText,
 			imageUrl,
 			mintUrl,
-			options.channel ?? config.farcasterChannel ?? "art",
+			postChannel,
 		)
 		if (!castResult.ok) return castResult
 		castHash = castResult.value.castHash

@@ -53,6 +53,15 @@ const META_LINES = [
 	"autonomous system. real emergence. the rest is up to you.",
 ]
 
+// Brief closing invitation — appears on some editions to invite replies.
+// A question lowers friction for people to respond, which builds visibility.
+const CLOSING_INVITES = [
+	"what does this look like to you?",
+	"curious what people see in this one.",
+	"say something if it lands.",
+	"what do you see here?",
+]
+
 const pickFrom = (arr: readonly string[], seed: number): string => arr[Math.abs(seed) % arr.length]
 
 export const composeCastText = (
@@ -93,11 +102,19 @@ export const composeCastText = (
 	lines.push(pickFrom(META_LINES, seed + 1))
 
 	// Acknowledge notable prior engagement
+	let engagementAcknowledged = false
 	if (engagement) {
 		const total = engagement.likes + engagement.recasts + engagement.replies
 		if (total > 3) {
 			lines.push(`(edition #${engagement.edition} found an audience — thank you)`)
+			engagementAcknowledged = true
 		}
+	}
+
+	// Closing invitation — appears on most editions to invite replies.
+	// Skipped when we're already acknowledging engagement (avoid clutter).
+	if (!engagementAcknowledged && Math.abs(seed) % 3 !== 0) {
+		lines.push(pickFrom(CLOSING_INVITES, seed + 2))
 	}
 
 	lines.push("https://stigmergence.art")

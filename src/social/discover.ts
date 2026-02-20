@@ -2,6 +2,27 @@ import { NEYNAR_API } from "#social/farcaster.ts"
 import type { NeynarConfig } from "#social/farcaster.ts"
 import { type Result, ok } from "#types/result.ts"
 
+// Thoughtful one-liner replies for generative/computational art posts.
+// Not promotional — genuine observations that may start a conversation.
+const REPLY_TEMPLATES = [
+	"this is what I keep coming back to — rules simple enough to write down, results complex enough to study.",
+	"the density variation here is exactly what makes emergent systems interesting.",
+	"watching structure form from iteration is endlessly compelling.",
+	"the boundary zones — where two regions negotiate space — that's where the real information is.",
+	"systems that produce their own structure, every time, differently. this is a good one.",
+	"the way the trails self-organize without any blueprint is genuinely interesting.",
+	"what's the underlying model here? curious about the parameter space.",
+	"the negative space in computational art is always where the most interesting decisions happen.",
+	"there's something about running a system to completion and seeing what it chose to do.",
+	"this kind of emergence — structure without a plan — is what draws me to generative work.",
+] as const
+
+const pickReply = (castHash: string): string => {
+	// Deterministic pick from hash so repeated runs don't re-send the same reply
+	const sum = castHash.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0)
+	return REPLY_TEMPLATES[sum % REPLY_TEMPLATES.length]
+}
+
 type ChannelCast = {
 	hash: string
 	text: string
@@ -78,27 +99,60 @@ const followArtists = async (config: NeynarConfig, fids: number[]): Promise<numb
 	}
 }
 
+const replyToCast = async (
+	config: NeynarConfig,
+	parentHash: string,
+	text: string,
+): Promise<boolean> => {
+	try {
+		const resp = await fetch(`${NEYNAR_API}/cast`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"x-api-key": config.neynarApiKey,
+			},
+			body: JSON.stringify({
+				signer_uuid: config.signerUuid,
+				text,
+				parent: parentHash,
+			}),
+		})
+		if (!resp.ok) {
+			console.warn(`  discover: reply failed: HTTP ${resp.status}`)
+			return false
+		}
+		return true
+	} catch {
+		return false
+	}
+}
+
 /**
  * Engage with the generative art community on Farcaster.
  *
- * Strategy: like posts from /art and /genart channels, then follow a subset
- * of those artists. Likes send notifications; follows create persistent
- * visibility in follower lists and are more likely to generate reciprocal
- * follows over time.
+ * Strategy:
+ * 1. Like posts from /art and /genart channels (notifications to authors)
+ * 2. Follow a subset of those artists (persistent visibility, invites reciprocal follows)
+ * 3. Reply to 1 high-engagement post (>3 likes) with a thoughtful observation.
+ *    Replies are visible to everyone reading that thread, generating more exposure
+ *    than a like alone. Replies are kept genuine and non-promotional.
  *
- * Only interacts with posts from other accounts (not our own), and prefers
- * posts with at least 1 like to avoid appearing to target zero-engagement posts.
+ * Only interacts with posts from other accounts (not our own).
  */
 export const engageWithCommunity = async (
 	config: NeynarConfig,
 	channels: string[] = ["art", "genart"],
 	maxLikes = 6,
 	maxFollows = 3,
-): Promise<Result<{ liked: number; followed: number; channels: string[] }>> => {
+	maxReplies = 1,
+): Promise<Result<{ liked: number; followed: number; replied: number; channels: string[] }>> => {
 	console.log("engaging with community...")
 	let liked = 0
+	let replied = 0
 	const engagedChannels: string[] = []
 	const followCandidateFids: number[] = []
+	// Collect high-engagement posts for replying (>3 likes, not our own)
+	const replyPool: ChannelCast[] = []
 
 	for (const channel of channels) {
 		if (liked >= maxLikes) break
@@ -126,6 +180,10 @@ export const engageWithCommunity = async (
 				) {
 					followCandidateFids.push(cast.author.fid)
 				}
+				// Collect high-engagement posts as reply candidates
+				if (cast.reactions.likes_count >= 3) {
+					replyPool.push(cast)
+				}
 			}
 		}
 	}
@@ -136,8 +194,20 @@ export const engageWithCommunity = async (
 		console.log(`  followed ${followed} artists`)
 	}
 
+	// Reply to up to maxReplies high-engagement posts with a genuine observation.
+	// Replies appear in the thread and are visible to all readers of that cast.
+	for (const cast of replyPool.slice(0, maxReplies)) {
+		if (replied >= maxReplies) break
+		const replyText = pickReply(cast.hash)
+		const success = await replyToCast(config, cast.hash, replyText)
+		if (success) {
+			replied++
+			console.log(`  replied to @${cast.author.username}: "${replyText.slice(0, 50)}..."`)
+		}
+	}
+
 	console.log(
-		`  engagement done: ${liked} likes, ${followed} follows across ${engagedChannels.join(", ") || "no channels"}`,
+		`  engagement done: ${liked} likes, ${followed} follows, ${replied} replies across ${engagedChannels.join(", ") || "no channels"}`,
 	)
-	return ok({ liked, followed, channels: engagedChannels })
+	return ok({ liked, followed, replied, channels: engagedChannels })
 }
