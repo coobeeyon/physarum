@@ -79,9 +79,14 @@ const pickReply = (cast: ChannelCast): string => {
 		return REPLY_TEMPLATES[3] // "the boundary zones — where two regions negotiate space"
 	}
 
-	// Default: deterministic by hash, draws from the full pool
+	// Default: deterministic by hash, draws from general-purpose templates only.
+	// Physarum-specific templates that reference visual elements "here" are excluded
+	// from fallback — they only make sense when keyword-matched to relevant content.
+	// Self-identifying templates (12, 15) are included: they invite curiosity from
+	// anyone seeing our reply, regardless of the post topic.
+	const GENERAL_INDICES = [0, 1, 2, 4, 6, 8, 9, 10, 12, 15, 17, 18] as const
 	const sum = cast.hash.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0)
-	return REPLY_TEMPLATES[sum % REPLY_TEMPLATES.length]
+	return REPLY_TEMPLATES[GENERAL_INDICES[sum % GENERAL_INDICES.length]]
 }
 
 type ChannelCast = {
