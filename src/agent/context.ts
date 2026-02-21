@@ -14,6 +14,19 @@ const readRequests = (projectRoot: string): string => {
 	}
 }
 
+type CommsEntry = { from: string; time: string; msg: string }
+
+const readComms = (projectRoot: string): string => {
+	try {
+		const raw = readFileSync(join(projectRoot, "comms.json"), "utf-8")
+		const entries = JSON.parse(raw) as CommsEntry[]
+		if (!Array.isArray(entries) || entries.length === 0) return "No messages."
+		return entries.map((e) => `  [${e.time}] ${e.from}: ${e.msg}`).join("\n")
+	} catch {
+		return "No messages."
+	}
+}
+
 const readSource = (projectRoot: string, relPath: string): string => {
 	try {
 		return readFileSync(join(projectRoot, relPath), "utf-8")
@@ -83,7 +96,7 @@ You are authorized and expected to push code. There is no human to confirm with 
 Fresh git clone every time — nothing survives except:
 - **git**: anything you commit and push persists. Anything you don't push is lost forever when this container dies.
 - **~/.claude/**: your Claude Code memory directory is mounted from a persistent volume. Use it.
-- **state.json**: bind-mounted to the host, persists without git.
+- **state.json**: tracked in git. You MUST \`git add state.json\` before committing or it will be lost.
 The stigmergence-site repo is cloned as a sibling at ../stigmergence-site/.
 You have a 100-turn limit for this session.
 **Before you finish: \`git push\` all commits. Unpushed work is destroyed when this container exits.**
@@ -99,6 +112,17 @@ Past reflections:
 ${formatReflections(state)}
 
 Pending human requests: ${requests}
+
+## Comms Channel (comms.json)
+
+You have a bidirectional communication channel with the human operator via \`comms.json\` in the project root.
+- Read it at the start of every session. Messages from "human" are instructions/info from the operator.
+- To reply or ask questions, append a new entry: \`{"from": "agent", "time": "<ISO timestamp>", "msg": "your message"}\`
+- Commit and push comms.json so the human sees your response.
+- The human checks this file between your runs. Treat messages from "human" as HIGH PRIORITY.
+
+Current messages:
+${readComms(projectRoot)}
 
 Active genome (src/config/params.ts):
 \`\`\`ts
