@@ -23,6 +23,33 @@ const REPLY_TEMPLATES = [
 	"watching this is like watching a physarum network solve for food. same logic, different substrate.",
 ] as const
 
+/**
+ * Returns true if the cast is worth replying to.
+ * Filters out greetings, very short posts, and other non-art content
+ * that would make our generative art replies look like bot spam.
+ */
+const isReplyWorthy = (cast: ChannelCast): boolean => {
+	const text = cast.text.trim()
+	const lower = text.toLowerCase()
+
+	// Skip very short posts (greetings, emoji-only, etc.)
+	if (text.length < 60) return false
+
+	// Skip obvious morning greetings and generic posts
+	if (/^(gm\b|good morning|morning fren|gm fren|happy \w+day|weekend is)/i.test(text)) return false
+	if (/^(gm|ngmi|wagmi|ser\b|fren\b)/i.test(lower) && text.length < 120) return false
+
+	// Must have some visual/creative/technical substance
+	// We look for ANY indicator of actual art/creative content
+	const hasArtContent =
+		/\b(generat|simulat|algorithm|parameter|emergence|procedur|render|noise|shader|code|pixel|color|palette|texture|pattern|fractal|iterate|rule|system|agent|model|physarum|slime|network|flow|gradient|mesh|vector|particle|canvas)\b/i.test(
+			lower,
+		) ||
+		/\b(made|created|built|designed|painted|drew|composed|visuali|explor|experiment)\b/i.test(lower)
+
+	return hasArtContent
+}
+
 const pickReply = (cast: ChannelCast): string => {
 	const text = cast.text.toLowerCase()
 
@@ -67,7 +94,7 @@ type NeynarFeedResponse = {
 const fetchChannelFeed = async (
 	apiKey: string,
 	channelId: string,
-	limit = 25,
+	limit = 50,
 ): Promise<ChannelCast[]> => {
 	try {
 		const url = `${NEYNAR_API}/feed/channels?channel_ids=${encodeURIComponent(channelId)}&limit=${limit}&with_recasts=false`
@@ -181,7 +208,7 @@ export const engageWithCommunity = async (
 	let replied = 0
 	const engagedChannels: string[] = []
 	const followCandidateFids: number[] = []
-	// Collect high-engagement posts for replying (>3 likes, not our own)
+	// Reply candidates: liked posts with ≥2 likes, sorted by engagement before picking
 	const replyPool: ChannelCast[] = []
 
 	// Per-channel like cap: spread notifications across all channels rather than
@@ -191,7 +218,7 @@ export const engageWithCommunity = async (
 	for (const channel of channels) {
 		if (liked >= maxLikes) break
 
-		const casts = await fetchChannelFeed(config.neynarApiKey, channel, 30)
+		const casts = await fetchChannelFeed(config.neynarApiKey, channel, 50)
 
 		// Filter: not our own posts, prefer posts with some engagement
 		const candidates = casts
@@ -214,8 +241,9 @@ export const engageWithCommunity = async (
 				) {
 					followCandidateFids.push(cast.author.fid)
 				}
-				// Collect high-engagement posts as reply candidates
-				if (cast.reactions.likes_count >= 2) {
+				// Collect reply candidates: ≥2 likes AND art-relevant content.
+				// isReplyWorthy filters out greetings/short posts to keep replies on-topic.
+				if (cast.reactions.likes_count >= 2 && isReplyWorthy(cast)) {
 					replyPool.push(cast)
 				}
 			}
@@ -228,8 +256,9 @@ export const engageWithCommunity = async (
 		console.log(`  followed ${followed} artists`)
 	}
 
-	// Reply to up to maxReplies high-engagement posts with a genuine observation.
-	// Replies appear in the thread and are visible to all readers of that cast.
+	// Reply to up to maxReplies posts, sorted by engagement descending.
+	// Highest-like posts first = replies visible to the most readers.
+	replyPool.sort((a, b) => b.reactions.likes_count - a.reactions.likes_count)
 	for (const cast of replyPool.slice(0, maxReplies)) {
 		if (replied >= maxReplies) break
 		const replyText = pickReply(cast)
