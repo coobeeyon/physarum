@@ -27,7 +27,7 @@ const SINGLE_INTROS_BY_COLORMAP: Partial<Record<string, readonly string[]>> = {
 	viridis: [
 		"dense persistent network — no architect, only chemistry.",
 		"thick mycelium logic: follow the trail, leave a trail, repeat.",
-		"500,000 agents and one rule. this is what the rule produces.",
+		"one rule applied to half a million agents. this is what accumulated.",
 		"a network that finds every path because it has no reason not to.",
 	],
 	inferno: [
