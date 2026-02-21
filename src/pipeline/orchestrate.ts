@@ -214,6 +214,7 @@ export const runPipeline = async (
 		options.channel ?? config.farcasterChannel ?? (edition % 2 === 1 ? "genart" : "art")
 
 	let castHash = "0x0"
+	let zoraCastHash: string | undefined
 	if (options.dryRun) {
 		console.log("  [dry-run] skipping Farcaster post")
 		console.log(`  channel: ${postChannel}`)
@@ -229,7 +230,8 @@ export const runPipeline = async (
 			const zoraText = composeZoraCast(edition, genome)
 			const zoraResult = await postCast(neynarConfig, zoraText, imageUrl, mintUrl, "zora")
 			if (zoraResult.ok) {
-				console.log(`  /zora cast: ${zoraResult.value.castHash}`)
+				zoraCastHash = zoraResult.value.castHash
+				console.log(`  /zora cast: ${zoraCastHash}`)
 			} else {
 				console.warn(`  /zora cast failed: ${zoraResult.error}`)
 			}
@@ -237,8 +239,12 @@ export const runPipeline = async (
 	}
 
 	// 6. Engage with community (builds organic discovery via notifications)
+	let replyCastHashes: string[] = []
 	if (!options.dryRun) {
-		await engageWithCommunity(neynarConfig)
+		const engageResult = await engageWithCommunity(neynarConfig)
+		if (engageResult.ok) {
+			replyCastHashes = engageResult.value.replyHashes
+		}
 	}
 
 	// 7. Update gallery
@@ -269,6 +275,8 @@ export const runPipeline = async (
 				tokenId,
 				txHash,
 				castHash,
+				...(zoraCastHash ? { zoraCastHash } : {}),
+				...(replyCastHashes.length > 0 ? { replyCastHashes } : {}),
 				imageCid,
 				metadataCid,
 				timestamp: new Date().toISOString(),

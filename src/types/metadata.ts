@@ -17,6 +17,8 @@ export type HistoryEntry = {
 	readonly tokenId: string
 	readonly txHash: string
 	readonly castHash: string
+	readonly zoraCastHash?: string
+	readonly replyCastHashes?: string[]
 	readonly imageCid: string
 	readonly metadataCid: string
 	readonly timestamp: string

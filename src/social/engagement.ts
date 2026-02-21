@@ -47,16 +47,29 @@ const fetchCastEngagement = async (
 	}
 
 	try {
-		const { likes, recasts, replies } = await fetchCastCounts(entry.castHash, apiKey)
+		// Fetch engagement for primary cast
+		const primary = await fetchCastCounts(entry.castHash, apiKey)
+
+		// Also fetch engagement for /zora cross-post and reply casts (where stored)
+		const extraHashes: string[] = [
+			...(entry.zoraCastHash && isValidCastHash(entry.zoraCastHash) ? [entry.zoraCastHash] : []),
+			...(entry.replyCastHashes?.filter(isValidCastHash) ?? []),
+		]
+		const extraCounts = await Promise.all(extraHashes.map((h) => fetchCastCounts(h, apiKey)))
+
+		const totalLikes = primary.likes + extraCounts.reduce((sum, c) => sum + c.likes, 0)
+		const totalRecasts = primary.recasts + extraCounts.reduce((sum, c) => sum + c.recasts, 0)
+		const totalReplies = primary.replies + extraCounts.reduce((sum, c) => sum + c.replies, 0)
+
 		const ageMs = Date.now() - new Date(entry.timestamp).getTime()
 
 		return {
 			engagement: {
 				edition: entry.edition,
 				castHash: entry.castHash,
-				likes,
-				recasts,
-				replies,
+				likes: totalLikes,
+				recasts: totalRecasts,
+				replies: totalReplies,
 				ageHours: Math.round((ageMs / 3_600_000) * 10) / 10,
 			},
 			warning: null,

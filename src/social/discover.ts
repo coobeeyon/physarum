@@ -206,7 +206,7 @@ const replyToCast = async (
 	config: NeynarConfig,
 	parentHash: string,
 	text: string,
-): Promise<boolean> => {
+): Promise<string | null> => {
 	try {
 		const resp = await fetch(`${NEYNAR_API}/cast`, {
 			method: "POST",
@@ -222,11 +222,12 @@ const replyToCast = async (
 		})
 		if (!resp.ok) {
 			console.warn(`  discover: reply failed: HTTP ${resp.status}`)
-			return false
+			return null
 		}
-		return true
+		const data = (await resp.json()) as { cast?: { hash?: string } }
+		return data.cast?.hash ?? null
 	} catch {
-		return false
+		return null
 	}
 }
 
@@ -248,12 +249,21 @@ export const engageWithCommunity = async (
 	maxLikes = 12,
 	maxFollows = 5,
 	maxReplies = 4,
-): Promise<Result<{ liked: number; followed: number; replied: number; channels: string[] }>> => {
+): Promise<
+	Result<{
+		liked: number
+		followed: number
+		replied: number
+		channels: string[]
+		replyHashes: string[]
+	}>
+> => {
 	console.log("engaging with community...")
 	let liked = 0
 	let replied = 0
 	const engagedChannels: string[] = []
 	const followCandidateFids: number[] = []
+	const replyHashes: string[] = []
 	// Reply candidates: liked posts with ≥2 likes, sorted by engagement before picking
 	const replyPool: ChannelCast[] = []
 
@@ -329,9 +339,10 @@ export const engageWithCommunity = async (
 	for (const cast of replyPool.slice(0, maxReplies)) {
 		if (replied >= maxReplies) break
 		const replyText = pickReply(cast)
-		const success = await replyToCast(config, cast.hash, replyText)
-		if (success) {
+		const replyHash = await replyToCast(config, cast.hash, replyText)
+		if (replyHash) {
 			replied++
+			replyHashes.push(replyHash)
 			console.log(`  replied to @${cast.author.username}: "${replyText.slice(0, 50)}..."`)
 		}
 	}
@@ -339,5 +350,5 @@ export const engageWithCommunity = async (
 	console.log(
 		`  engagement done: ${liked} likes, ${followed} follows, ${replied} replies across ${engagedChannels.join(", ") || "no channels"}`,
 	)
-	return ok({ liked, followed, replied, channels: engagedChannels })
+	return ok({ liked, followed, replied, channels: engagedChannels, replyHashes })
 }
