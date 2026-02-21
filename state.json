@@ -1,6 +1,6 @@
 {
   "contractAddress": "0x584eB68F93bEcf6E463E7F259605c82Ef35c21e3",
-  "lastEdition": 21,
+  "lastEdition": 22,
   "history": [
     {
       "edition": 1,
@@ -479,7 +479,8 @@
         "foodPlacement": "gradient",
         "foodDensity": 0.55,
         "foodClusterCount": 6
-      }
+      },
+      "zoraCastHash": "0x8a54626911da16cb6be96f435ba6b6122625a8d5"
     },
     {
       "edition": 12,
@@ -524,7 +525,8 @@
         "foodPlacement": "clusters",
         "foodDensity": 0.7,
         "foodClusterCount": 10
-      }
+      },
+      "zoraCastHash": "0x7f1799c8dca7d79d056a5cf3b7e420b4a13a9d27"
     },
     {
       "edition": 13,
@@ -577,7 +579,8 @@
         "foodPlacement": "rings",
         "foodDensity": 0.7,
         "foodClusterCount": 8
-      }
+      },
+      "zoraCastHash": "0xcaef42205cb15ecc1653a1bfe14d78f505fc7d78"
     },
     {
       "edition": 14,
@@ -614,7 +617,8 @@
         "foodPlacement": "grid",
         "foodDensity": 0.5,
         "foodClusterCount": 8
-      }
+      },
+      "zoraCastHash": "0x1529698d3157dc90aa431e584fd996fa30e2f51a"
     },
     {
       "edition": 15,
@@ -651,7 +655,8 @@
         "foodPlacement": "rings",
         "foodDensity": 0.7,
         "foodClusterCount": 8
-      }
+      },
+      "zoraCastHash": "0x414c58f8de74fafef14d0c11dbb438c4d373797d"
     },
     {
       "edition": 16,
@@ -688,7 +693,8 @@
         "foodPlacement": "gradient",
         "foodDensity": 0.55,
         "foodClusterCount": 6
-      }
+      },
+      "zoraCastHash": "0x2e55270a77b8ee8b6dd38ba57e3870633a0d7ff9"
     },
     {
       "edition": 17,
@@ -733,7 +739,8 @@
         "foodPlacement": "clusters",
         "foodDensity": 0.7,
         "foodClusterCount": 10
-      }
+      },
+      "zoraCastHash": "0xb88f6609ed16ecaded6d1a68255fc08984153e69"
     },
     {
       "edition": 18,
@@ -860,7 +867,8 @@
         "foodPlacement": "rings",
         "foodDensity": 0.7,
         "foodClusterCount": 8
-      }
+      },
+      "zoraCastHash": "0xb3160b61591562307a95854cf7340ffd7fd9e9c5"
     },
     {
       "edition": 21,
@@ -868,13 +876,6 @@
       "tokenId": "17",
       "txHash": "0x92d08b710d0f4422034be80cc77a6ac3ec9ba02a3335cb0234f83881659adcf3",
       "castHash": "0x29a74880f75017050f4347e0d8fd4b7021fcd9b9",
-      "zoraCastHash": "0xb76430db09ddf8ca458c473ba856f5265f25f3c7",
-      "replyCastHashes": [
-        "0xe1e86c907cf21bda59b58f9dd0129ceac3b623c3",
-        "0x0443f9a4e42dab5776d20df9fe2e583a302961d6",
-        "0x90ed845e3e42935547163d37cdae5cc8dea18509",
-        "0x99a0916cf8e8f93b9f633172a0bb604b54b989a7"
-      ],
       "imageCid": "bafybeiha5huesv6tf2y5x2ik37yvpkpxl75wtv3acwysce7fgn5j3dunbi",
       "metadataCid": "bafkreids5ruqt5lrhp6lju6p7tptv2lvs4e6jonodxeillfo6g4sf72kc4",
       "timestamp": "2026-02-21T21:07:11.696Z",
@@ -904,6 +905,58 @@
         "foodPlacement": "gradient",
         "foodDensity": 0.55,
         "foodClusterCount": 6
+      }
+    },
+    {
+      "edition": 22,
+      "seed": 174218,
+      "tokenId": "18",
+      "txHash": "0x41453c4456c2269b6d968a53a6dac5e14458b6cdaf5b08ea38d8b8ef41a3fc77",
+      "castHash": "0x69bb9ddc2abb37a9fbb74e17ec102bfb93453f14",
+      "zoraCastHash": "0x338efa6c16908c690dbadc54c96deb80509b829b",
+      "replyCastHashes": [
+        "0x0f5a5c125799e21da8e7b1bae96b81a71df7679e",
+        "0x57da031fff7bec30832962952d495e1e47e1c728",
+        "0xd50144eff6161902abc2d2c46b8287f2868560f7",
+        "0xf51a7696ac9da22eb172c8a388c5f513bfc74170"
+      ],
+      "imageCid": "bafybeifdqzepldeeylznfyi64zao7sghlmhms6bf45h22bodkm4qvoxl2q",
+      "metadataCid": "bafkreihw45twsvvlvnlinrcosxgrin3omu5le4kxal5mbsttcujl2uizwq",
+      "timestamp": "2026-02-21T23:56:30.251Z",
+      "genome": {
+        "agentCount": 400000,
+        "iterations": 600,
+        "sensorAngle": 0.5,
+        "sensorDistance": 18,
+        "turnAngle": 0.5,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.96,
+        "colormap": "inferno",
+        "populationCount": 2,
+        "populations": [
+          {
+            "color": [
+              255,
+              85,
+              15
+            ],
+            "agentFraction": 0.55
+          },
+          {
+            "color": [
+              15,
+              165,
+              255
+            ],
+            "agentFraction": 0.45
+          }
+        ],
+        "repulsionStrength": 0.5,
+        "foodWeight": 150,
+        "foodPlacement": "clusters",
+        "foodDensity": 0.7,
+        "foodClusterCount": 10
       }
     }
   ],

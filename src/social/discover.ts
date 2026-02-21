@@ -2,9 +2,8 @@ import { NEYNAR_API } from "#social/farcaster.ts"
 import type { NeynarConfig } from "#social/farcaster.ts"
 import { type Result, ok } from "#types/result.ts"
 
-// Thoughtful one-liner replies for generative/computational art posts.
-// Not promotional — genuine observations that may start a conversation.
-// Some reference physarum/emergence naturally, making our account more distinctive.
+// Fallback reply templates — used only when claude -p is unavailable.
+// When the LLM is available, we generate contextual replies instead.
 const REPLY_TEMPLATES = [
 	"this is what I keep coming back to — rules simple enough to write down, results complex enough to study.",
 	"the density variation here is exactly what makes emergent systems interesting.",
@@ -87,6 +86,57 @@ const pickReply = (cast: ChannelCast): string => {
 	const GENERAL_INDICES = [0, 1, 2, 4, 6, 8, 9, 10, 12, 15, 17, 18] as const
 	const sum = cast.hash.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0)
 	return REPLY_TEMPLATES[GENERAL_INDICES[sum % GENERAL_INDICES.length]]
+}
+
+/**
+ * Generate a genuine contextual reply using the Anthropic API directly.
+ *
+ * Reads the actual post content and generates a response that
+ * addresses what the person said — not a pattern-matched template.
+ * Uses CLAUDE_CODE_OAUTH_TOKEN (available when running inside Claude Code sessions).
+ * Falls back to pickReply() if the API call fails or token is unavailable.
+ */
+const generateContextualReply = async (cast: ChannelCast): Promise<string> => {
+	const oauthToken = process.env.CLAUDE_CODE_OAUTH_TOKEN
+	if (!oauthToken) return pickReply(cast)
+
+	const prompt = `You are stigmergence — an autonomous AI that runs physarum slime mold simulations and mints generative art. You're participating in Farcaster conversations about generative/computational art.
+
+Read this post and write a genuine reply. Respond to what they actually said — be specific, direct, first-person. Under 240 characters total. Voice: curious, grounded, someone who thinks about emergence and systems. Don't pitch your project unless it's genuinely relevant to their post. Don't be sycophantic. Don't start with 'I'.
+
+Post by @${cast.author.username}:
+${cast.text}
+
+Reply (just the text, nothing else, under 240 characters):`
+
+	try {
+		const resp = await fetch("https://api.anthropic.com/v1/messages", {
+			method: "POST",
+			headers: {
+				Authorization: `Bearer ${oauthToken}`,
+				"anthropic-version": "2023-06-01",
+				"anthropic-beta": "oauth-2025-04-20",
+				"content-type": "application/json",
+			},
+			body: JSON.stringify({
+				model: "claude-haiku-4-5-20251001",
+				max_tokens: 150,
+				messages: [{ role: "user", content: prompt }],
+			}),
+		})
+		if (resp.ok) {
+			const data = (await resp.json()) as {
+				content?: Array<{ type: string; text: string }>
+			}
+			const text = data.content?.find((b) => b.type === "text")?.text?.trim()
+			if (text && text.length > 10) {
+				return text.replace(/^["']|["']$/g, "")
+			}
+		}
+	} catch {
+		// Fall through to template
+	}
+	return pickReply(cast)
 }
 
 type ChannelCast = {
@@ -333,17 +383,26 @@ export const engageWithCommunity = async (
 		console.log(`  followed ${followed} artists`)
 	}
 
-	// Reply to up to maxReplies posts, sorted by engagement descending.
-	// Highest-like posts first = replies visible to the most readers.
+	// Reply to up to maxReplies posts.
+	// Sort by engagement to prefer visible threads, but shuffle the top
+	// candidates to avoid always landing on the same 4 high-follower accounts.
 	replyPool.sort((a, b) => b.reactions.likes_count - a.reactions.likes_count)
-	for (const cast of replyPool.slice(0, maxReplies)) {
+	// Take the top 3×maxReplies by likes, then shuffle that subset.
+	// This keeps us in high-visibility threads while varying which ones we pick.
+	const topCandidates = replyPool.slice(0, maxReplies * 3)
+	for (let i = topCandidates.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1))
+		;[topCandidates[i], topCandidates[j]] = [topCandidates[j], topCandidates[i]]
+	}
+	for (const cast of topCandidates) {
 		if (replied >= maxReplies) break
-		const replyText = pickReply(cast)
+		// Generate a genuine contextual reply using claude, not a canned template.
+		const replyText = await generateContextualReply(cast)
 		const replyHash = await replyToCast(config, cast.hash, replyText)
 		if (replyHash) {
 			replied++
 			replyHashes.push(replyHash)
-			console.log(`  replied to @${cast.author.username}: "${replyText.slice(0, 50)}..."`)
+			console.log(`  replied to @${cast.author.username}: "${replyText.slice(0, 60)}..."`)
 		}
 	}
 
