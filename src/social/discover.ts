@@ -144,9 +144,9 @@ const replyToCast = async (
  */
 export const engageWithCommunity = async (
 	config: NeynarConfig,
-	channels: string[] = ["art", "genart", "zora"],
-	maxLikes = 6,
-	maxFollows = 3,
+	channels: string[] = ["art", "genart", "zora", "nfts", "genai"],
+	maxLikes = 10,
+	maxFollows = 5,
 	maxReplies = 3,
 ): Promise<Result<{ liked: number; followed: number; replied: number; channels: string[] }>> => {
 	console.log("engaging with community...")
@@ -157,6 +157,10 @@ export const engageWithCommunity = async (
 	// Collect high-engagement posts for replying (>3 likes, not our own)
 	const replyPool: ChannelCast[] = []
 
+	// Per-channel like cap: spread notifications across all channels rather than
+	// exhausting the budget on the first channel alone.
+	const perChannelLimit = Math.max(1, Math.ceil(maxLikes / channels.length))
+
 	for (const channel of channels) {
 		if (liked >= maxLikes) break
 
@@ -166,7 +170,7 @@ export const engageWithCommunity = async (
 		const candidates = casts
 			.filter((c) => c.author.fid !== config.fid)
 			.filter((c) => c.reactions.likes_count >= 1)
-			.slice(0, maxLikes - liked)
+			.slice(0, Math.min(perChannelLimit, maxLikes - liked))
 
 		for (const cast of candidates) {
 			if (liked >= maxLikes) break

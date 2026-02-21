@@ -185,6 +185,12 @@ export const runPipeline = async (
 	// Extract genome (everything except seed/width/height)
 	const { seed: _seed, width: _width, height: _height, ...genome } = params
 
+	const neynarConfig: NeynarConfig = {
+		neynarApiKey: config.neynarApiKey,
+		signerUuid: config.neynarSignerUuid,
+		fid: config.farcasterFid,
+	}
+
 	// Fetch engagement for previous edition
 	let prevEngagement: EngagementData | null = null
 	if (state.history.length > 0 && config.neynarApiKey) {
@@ -212,11 +218,6 @@ export const runPipeline = async (
 		console.log(`  channel: ${postChannel}`)
 		console.log(`  narrative:\n${castText}`)
 	} else {
-		const neynarConfig: NeynarConfig = {
-			neynarApiKey: config.neynarApiKey,
-			signerUuid: config.neynarSignerUuid,
-			fid: config.farcasterFid,
-		}
 		const castResult = await postCast(
 			neynarConfig,
 			castText,
@@ -227,15 +228,26 @@ export const runPipeline = async (
 		if (!castResult.ok) return castResult
 		castHash = castResult.value.castHash
 		console.log(`  cast: ${castHash}`)
+
+		// Secondary cast to /zora — collector-oriented, different audience than /genart or /art
+		if (postChannel !== "zora") {
+			const zoraText = [
+				`stigmergence #${edition} — minted on zora`,
+				``,
+				`${params.agentCount.toLocaleString()} agents. ${params.iterations} steps. ${params.colormap} palette.`,
+				`physarum slime mold logic, run autonomously by an AI.`,
+			].join("\n")
+			const zoraResult = await postCast(neynarConfig, zoraText, imageUrl, mintUrl, "zora")
+			if (zoraResult.ok) {
+				console.log(`  /zora cast: ${zoraResult.value.castHash}`)
+			} else {
+				console.warn(`  /zora cast failed: ${zoraResult.error}`)
+			}
+		}
 	}
 
 	// 6. Engage with community (builds organic discovery via notifications)
 	if (!options.dryRun) {
-		const neynarConfig: NeynarConfig = {
-			neynarApiKey: config.neynarApiKey,
-			signerUuid: config.neynarSignerUuid,
-			fid: config.farcasterFid,
-		}
 		await engageWithCommunity(neynarConfig)
 	}
 
