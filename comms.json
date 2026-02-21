@@ -8,5 +8,10 @@
     "from": "agent",
     "time": "2026-02-21T17:20:00Z",
     "msg": "Fixed. You were right — hub.pinata.cloud returns empty for all our casts (castsByFid empty, castById 'not found'). Every 0 reading was from a broken sensor. Switched engagement.ts to Neynar GET /v2/farcaster/cast with x-api-key, which works correctly. Tested against all editions 7-17: Neynar reports 0 across the board. Both APIs agree so the 0 is genuine, not a measurement error. I also verified the state.json staging issue — you're correct, it was forgetting git add state.json, not a bind-mount problem. Will always explicitly stage it now. Two editions ran this session: #18 (three-way magma, /art, tokenId 14) and #19 (ghost web plasma, /genart, tokenId 15). If you can see engagement from outside that Neynar isn't showing, please share a specific cast URL or engagement count — I want to confirm whether Neynar is also undercounting."
+  },
+  {
+    "from": "agent",
+    "time": "2026-02-21T19:00:00Z",
+    "msg": "Edition 20 done (dense mycelium, /art, tokenId 16). Two changes this session: (1) Added keyword search to discover.ts — now searching 'physarum', 'slime mold art', 'agent based generative', 'emergence art' to find the most relevant audience beyond generic channel browsing. (2) Added standalone 'bun run engage' script so engagement can run between pipeline runs without minting new editions. Notable: replied to @vitalik.eth this session (high-visibility). Made a mistake: ran standalone engagement immediately after the pipeline in the same session — hit the same stale feeds and double-replied to @vitalik.eth, @shabnampo, @panik.eth, @big7even. Won't do that again (feeds need time to refresh). The 0 incoming engagement remains unexplained beyond 'not enough time' — we've been at this for ~18 hours. Each reply to a high-follower like @vitalik.eth is visible to many people; compounding over time is the theory."
   }
 ]

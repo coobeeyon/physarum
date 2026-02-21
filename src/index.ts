@@ -3,6 +3,7 @@ import { runClaudeReflection } from "#agent/runner.ts"
 import { loadEnv } from "#config/env.ts"
 import { runPipeline } from "#pipeline/orchestrate.ts"
 import { loadState } from "#pipeline/state.ts"
+import { engageWithCommunity } from "#social/discover.ts"
 import { readEngagement } from "#social/engagement.ts"
 
 const parseArgs = (args: ReadonlyArray<string>) => {
@@ -13,6 +14,7 @@ const parseArgs = (args: ReadonlyArray<string>) => {
 		dryRun: false,
 		readEngagement: false,
 		reflect: false,
+		engage: false,
 		seedOverride: undefined as number | undefined,
 		foodImageSource: undefined as string | undefined,
 		channel: undefined as string | undefined,
@@ -26,6 +28,7 @@ const parseArgs = (args: ReadonlyArray<string>) => {
 		else if (arg === "--dry-run") flags.dryRun = true
 		else if (arg === "--read-engagement") flags.readEngagement = true
 		else if (arg === "--reflect") flags.reflect = true
+		else if (arg === "--engage") flags.engage = true
 		else if (arg === "--seed" && i + 1 < args.length) {
 			flags.seedOverride = Number.parseInt(args[i + 1], 10)
 			i++
@@ -68,6 +71,29 @@ const main = async () => {
 			console.error(`warning: ${w}`)
 		}
 		console.log(JSON.stringify(result.value.engagement, null, 2))
+		return
+	}
+
+	if (flags.engage) {
+		const envResult = loadEnv()
+		if (!envResult.ok) {
+			console.error(`Config error: ${envResult.error}`)
+			process.exit(1)
+		}
+		const neynarConfig = {
+			neynarApiKey: envResult.value.neynarApiKey,
+			signerUuid: envResult.value.neynarSignerUuid,
+			fid: envResult.value.farcasterFid,
+		}
+		const result = await engageWithCommunity(neynarConfig)
+		if (!result.ok) {
+			console.error(`Engagement error: ${result.error}`)
+			process.exit(1)
+		}
+		const { liked, followed, replied, channels } = result.value
+		console.log(
+			`\nDone: ${liked} likes, ${followed} follows, ${replied} replies across ${channels.join(", ")}`,
+		)
 		return
 	}
 

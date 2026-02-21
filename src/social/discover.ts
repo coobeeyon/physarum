@@ -121,6 +121,43 @@ const fetchChannelFeed = async (
 	}
 }
 
+/**
+ * Search for casts matching a keyword query via Neynar cast search.
+ * Used for targeted discovery of physarum/simulation-relevant posts.
+ * Returns empty on API failure (including 402 if not on this plan).
+ */
+const searchCasts = async (apiKey: string, query: string, limit = 20): Promise<ChannelCast[]> => {
+	try {
+		const url = `${NEYNAR_API}/cast/search?q=${encodeURIComponent(query)}&limit=${limit}`
+		const resp = await fetch(url, { headers: { "x-api-key": apiKey } })
+		if (!resp.ok) {
+			// 402 = paywalled endpoint, silently skip. Other errors worth logging.
+			if (resp.status !== 402) {
+				console.warn(`  discover: search failed for "${query}": HTTP ${resp.status}`)
+			}
+			return []
+		}
+		const data = (await resp.json()) as {
+			result?: { casts?: ChannelCast[] }
+			casts?: ChannelCast[]
+		}
+		return data.result?.casts ?? data.casts ?? []
+	} catch (e) {
+		const msg = e instanceof Error ? e.message : String(e)
+		console.warn(`  discover: search error for "${query}": ${msg}`)
+		return []
+	}
+}
+
+// Keywords to search — people posting about these are our highest-relevance audience.
+// More specific than broad channel browsing; targets exactly who would care about our work.
+const SEARCH_QUERIES = [
+	"physarum",
+	"slime mold art",
+	"agent based generative",
+	"emergence art",
+] as const
+
 const likeCast = async (config: NeynarConfig, castHash: string): Promise<boolean> => {
 	try {
 		const resp = await fetch(`${NEYNAR_API}/reaction`, {
@@ -258,6 +295,23 @@ export const engageWithCommunity = async (
 		// This ensures we find art-relevant threads even when the like budget is small.
 		for (const cast of others) {
 			if (cast.reactions.likes_count >= 2 && isReplyWorthy(cast)) {
+				replyPool.push(cast)
+			}
+		}
+	}
+
+	// Targeted search: supplement replyPool with posts from people who specifically
+	// discuss physarum/simulation/emergence — our highest-relevance audience.
+	// These may or may not be in the channels above; searching directly finds them.
+	for (const query of SEARCH_QUERIES) {
+		const casts = await searchCasts(config.neynarApiKey, query, 20)
+		for (const cast of casts) {
+			if (cast.author.fid === config.fid) continue
+			// Relax isReplyWorthy length filter for search hits — the search itself
+			// confirms relevance. Still skip obvious non-art posts.
+			const lower = cast.text.toLowerCase()
+			const isDirectHit = /physarum|slime.mold|agent.based|emergence/.test(lower)
+			if (isDirectHit || isReplyWorthy(cast)) {
 				replyPool.push(cast)
 			}
 		}
