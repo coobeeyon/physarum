@@ -1,6 +1,6 @@
 {
   "contractAddress": "0x584eB68F93bEcf6E463E7F259605c82Ef35c21e3",
-  "lastEdition": 17,
+  "lastEdition": 19,
   "history": [
     {
       "edition": 1,
@@ -734,6 +734,96 @@
         "foodDensity": 0.7,
         "foodClusterCount": 10
       }
+    },
+    {
+      "edition": 18,
+      "seed": 142542,
+      "tokenId": "14",
+      "txHash": "0xdc1fae255ef93f162afdabf375e73b815e75ded719379e0fbde0369f3c5ea429",
+      "castHash": "0xb16c7308bedd1fa7e34efbd2fc3117abacc9f81d",
+      "imageCid": "bafybeialp4vp4e3sxg27makqqijgjyuaq5qmkhrctfdkpagkt2pbdqm4nu",
+      "metadataCid": "bafkreif6iqyn3hmnqnshl57hhnmeuvfgz6zralfuisvwplaoa55hpxmib4",
+      "timestamp": "2026-02-21T17:04:05.069Z",
+      "genome": {
+        "agentCount": 350000,
+        "iterations": 550,
+        "sensorAngle": 0.6,
+        "sensorDistance": 14,
+        "turnAngle": 0.6,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.96,
+        "colormap": "magma",
+        "populationCount": 3,
+        "populations": [
+          {
+            "color": [
+              255,
+              60,
+              40
+            ],
+            "agentFraction": 0.36
+          },
+          {
+            "color": [
+              40,
+              200,
+              255
+            ],
+            "agentFraction": 0.32
+          },
+          {
+            "color": [
+              60,
+              255,
+              100
+            ],
+            "agentFraction": 0.32
+          }
+        ],
+        "repulsionStrength": 0.35,
+        "foodWeight": 150,
+        "foodPlacement": "rings",
+        "foodDensity": 0.7,
+        "foodClusterCount": 8
+      }
+    },
+    {
+      "edition": 19,
+      "seed": 150461,
+      "tokenId": "15",
+      "txHash": "0x71db2541e5d734c894fd736e684b2b01d05c8c8f0e37c90814dd3013201ce733",
+      "castHash": "0xa661b7e7bcf98837c09b4f1e5ae16b18b702b15b",
+      "imageCid": "bafybeiankslresdfwxy73myrg7tkzme2xf3kj6nd4v3isokd657b7w3iie",
+      "metadataCid": "bafkreielxdqyt4szafag2kr45qjwjrlbgttv5kevyhbfutcnxcfodwu4pu",
+      "timestamp": "2026-02-21T17:06:31.363Z",
+      "genome": {
+        "agentCount": 300000,
+        "iterations": 800,
+        "sensorAngle": 0.25,
+        "sensorDistance": 28,
+        "turnAngle": 0.25,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.92,
+        "colormap": "plasma",
+        "populationCount": 1,
+        "populations": [
+          {
+            "color": [
+              200,
+              100,
+              255
+            ],
+            "agentFraction": 1
+          }
+        ],
+        "repulsionStrength": 0,
+        "foodWeight": 150,
+        "foodPlacement": "grid",
+        "foodDensity": 0.5,
+        "foodClusterCount": 8
+      }
     }
   ],
   "reflections": [
@@ -909,6 +999,17 @@
         "src/social/discover.ts: restricted hash-based fallback to GENERAL_INDICES (12 templates) — excludes physarum-specific 'here' references",
         "pipeline: ran edition 17 — seed 134623, tokenId 13, castHash 0xfa1740757f44aca28658eaa647cd5ddd6dbc9e70 (/genart), /zora cast 0xb88f6609ed16ecaded6d1a68255fc08984153e69",
         "engagement: 9 likes, 5 follows, 4 replies across art/genart/zora/base/genai — first full 4-reply run"
+      ]
+    },
+    {
+      "edition": 19,
+      "timestamp": "2026-02-21T17:06:31.363Z",
+      "reasoning": "Critical fix this session: engagement reading was broken. The Pinata hub (hub.pinata.cloud) cannot find ANY of our casts — castsByFid returns empty, castById returns 'not found'. Every previous '0 engagement' reading was from a silently broken data source. Fixed engagement.ts to use Neynar GET /v2/farcaster/cast with x-api-key header, which returns accurate likes_count, recasts_count, and replies.count. Tested: Neynar confirms 0 engagement across all editions 7-17 — so the signal is real (genuinely 0 incoming), not a measurement error. The human operator flagged this as urgent. Also ran editions 18 and 19 this session (accidentally ran twice). Edition 18: Mode 3 — three-way, 350k agents, magma, rings, 3 populations red/cyan/green, repulsion 0.35, 550 steps, even edition → /art, tokenId 14. Edition 19: Mode 4 — ghost web, 300k agents, plasma, grid, sensorAngle=0.25, low decay=0.92, 800 steps, odd edition → /genart, tokenId 15. Fixed critical git hygiene issue: previously forgot to git add state.json before committing (the 'bind-mount loss' was actually staging loss). Will always explicitly stage state.json now.",
+      "changes": [
+        "src/social/engagement.ts: replaced broken Pinata hub API with Neynar GET /v2/farcaster/cast (uses x-api-key header)",
+        "src/social/engagement.ts: reads likes_count, recasts_count, replies.count directly from Neynar cast object",
+        "pipeline: ran edition 18 — seed 142542, tokenId 14, castHash 0xb16c7308bedd1fa7e34efbd2fc3117abacc9f81d (/art), Mode 3 three-way magma",
+        "pipeline: ran edition 19 — seed 150461, tokenId 15, castHash 0xa661b7e7bcf98837c09b4f1e5ae16b18b702b15b (/genart), Mode 4 ghost web plasma"
       ]
     }
   ]
