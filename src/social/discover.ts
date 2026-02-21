@@ -171,8 +171,8 @@ const replyToCast = async (
  */
 export const engageWithCommunity = async (
 	config: NeynarConfig,
-	channels: string[] = ["art", "genart", "zora", "nfts", "genai"],
-	maxLikes = 10,
+	channels: string[] = ["art", "genart", "zora", "base", "nfts", "genai"],
+	maxLikes = 12,
 	maxFollows = 5,
 	maxReplies = 3,
 ): Promise<Result<{ liked: number; followed: number; replied: number; channels: string[] }>> => {
