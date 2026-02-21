@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Pre-commit hook: lint staged files
+# Installed in containers via core.hooksPath
+
+set -euo pipefail
+
+# Run beads hook if bd is available
+if command -v bd >/dev/null 2>&1; then
+  bd hook pre-commit "$@"
+fi
+
+# Run lint on staged TypeScript files
+staged_ts=$(git diff --cached --name-only --diff-filter=ACM -- '*.ts' '*.tsx' || true)
+if [ -n "$staged_ts" ]; then
+  echo "Running lint..."
+  bun run lint
+fi

@@ -27,6 +27,9 @@ else
 fi
 echo "Dependencies installed."
 
+# --- Install pre-commit hook (lint + beads) ---
+git config core.hooksPath scripts/git-hooks
+
 # --- Restore .claude.json from persisted backup if missing ---
 claude_config="$HOME/.claude.json"
 if [ ! -f "$claude_config" ] && [ -d "$HOME/.claude/backups" ]; then
