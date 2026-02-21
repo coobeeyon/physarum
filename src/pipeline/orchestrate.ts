@@ -14,7 +14,7 @@ import { renderPng } from "#render/canvas.ts"
 import { engageWithCommunity } from "#social/discover.ts"
 import { readEngagement } from "#social/engagement.ts"
 import { type NeynarConfig, postCast } from "#social/farcaster.ts"
-import { composeCastText } from "#social/narrative.ts"
+import { composeCastText, composeZoraCast } from "#social/narrative.ts"
 import type { EngagementData } from "#types/evolution.ts"
 import type { NftMetadata } from "#types/metadata.ts"
 import type { PhysarumParams } from "#types/physarum.ts"
@@ -210,7 +210,8 @@ export const runPipeline = async (
 	const castText = composeCastText(edition, seed, genome, prevEngagement)
 
 	// Alternate channels to reach different audiences: odd editions → /genart, even → /art
-	const postChannel = options.channel ?? config.farcasterChannel ?? (edition % 2 === 1 ? "genart" : "art")
+	const postChannel =
+		options.channel ?? config.farcasterChannel ?? (edition % 2 === 1 ? "genart" : "art")
 
 	let castHash = "0x0"
 	if (options.dryRun) {
@@ -218,25 +219,14 @@ export const runPipeline = async (
 		console.log(`  channel: ${postChannel}`)
 		console.log(`  narrative:\n${castText}`)
 	} else {
-		const castResult = await postCast(
-			neynarConfig,
-			castText,
-			imageUrl,
-			mintUrl,
-			postChannel,
-		)
+		const castResult = await postCast(neynarConfig, castText, imageUrl, mintUrl, postChannel)
 		if (!castResult.ok) return castResult
 		castHash = castResult.value.castHash
 		console.log(`  cast: ${castHash}`)
 
 		// Secondary cast to /zora — collector-oriented, different audience than /genart or /art
 		if (postChannel !== "zora") {
-			const zoraText = [
-				`stigmergence #${edition} — minted on zora`,
-				``,
-				`${params.agentCount.toLocaleString()} agents. ${params.iterations} steps. ${params.colormap} palette.`,
-				`physarum slime mold logic, run autonomously by an AI.`,
-			].join("\n")
+			const zoraText = composeZoraCast(edition, genome)
 			const zoraResult = await postCast(neynarConfig, zoraText, imageUrl, mintUrl, "zora")
 			if (zoraResult.ok) {
 				console.log(`  /zora cast: ${zoraResult.value.castHash}`)

@@ -168,14 +168,8 @@ function updateHero(indexPath: string, latestEntry: EditionEntry): void {
 	}
 
 	// Update og:image and twitter:image meta tags to latest edition
-	html = html.replace(
-		/(<meta property="og:image" content=")[^"]*(")/,
-		`$1${absoluteImg}$2`,
-	)
-	html = html.replace(
-		/(<meta name="twitter:image" content=")[^"]*(")/,
-		`$1${absoluteImg}$2`,
-	)
+	html = html.replace(/(<meta property="og:image" content=")[^"]*(")/, `$1${absoluteImg}$2`)
+	html = html.replace(/(<meta name="twitter:image" content=")[^"]*(")/, `$1${absoluteImg}$2`)
 
 	writeFileSync(indexPath, html)
 }

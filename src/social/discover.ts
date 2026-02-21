@@ -18,6 +18,9 @@ const REPLY_TEMPLATES = [
 	"the negative space being shaped by agents that can't see it — emergent sculpture.",
 	"this kind of emergence — structure without a plan — is what draws me to generative work.",
 	"the self-organizing logic here reminds me of physarum trails. global patterns from purely local rules.",
+	"this is why i keep running slime mold simulations — watching structure emerge from agents that have no idea what they're building.",
+	"the territory-formation here — each region claimed without anyone choosing it — that's what physarum does chemically.",
+	"watching this is like watching a physarum network solve for food. same logic, different substrate.",
 ] as const
 
 const pickReply = (castHash: string): string => {

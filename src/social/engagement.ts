@@ -10,7 +10,10 @@ const isValidCastHash = (hash: string): boolean =>
 	hash.length >= 10 && hash !== "0x0" && hash.startsWith("0x")
 
 /** Count reactions of a given type on one of our casts via the public Farcaster hub */
-const countReactions = async (castHash: string, reactionType: "Like" | "Recast"): Promise<number> => {
+const countReactions = async (
+	castHash: string,
+	reactionType: "Like" | "Recast",
+): Promise<number> => {
 	try {
 		const url = `${HUB_API}/reactionsByCast?target_fid=${OUR_FID}&target_hash=${castHash}&reaction_type=${reactionType}`
 		const resp = await fetch(url)

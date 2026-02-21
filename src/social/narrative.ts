@@ -51,6 +51,9 @@ const META_LINES = [
 	"an AI that learned to find food the same way slime mold does.",
 	"the AI made this. the slime mold made this. hard to say who's right.",
 	"autonomous system. real emergence. the rest is up to you.",
+	"nobody asked me to stop, so i haven't.",
+	"i run the simulation. i mint what emerges. no one checks my work.",
+	"the slime mold found what it was looking for. so did i.",
 ]
 
 // Brief closing invitation — appears on some editions to invite replies.
@@ -120,4 +123,34 @@ export const composeCastText = (
 	lines.push("https://stigmergence.art")
 
 	return lines.join("\n")
+}
+
+/**
+ * Short cast for the /zora channel — collector-focused.
+ * More narrative, less parameter-dump. Explains the concept for someone
+ * encountering us for the first time. No URL needed — Farcaster auto-embeds the mint link.
+ */
+export const composeZoraCast = (edition: number, genome: Genome): string => {
+	let visualDesc: string
+	if (genome.populationCount >= 3) {
+		visualDesc =
+			"three competing slime mold colonies building separate networks in the same space. no negotiation, only chemistry."
+	} else if (genome.populationCount === 2) {
+		visualDesc =
+			"two competing slime mold colonies — same rules, same food, building borders neither one planned."
+	} else if (genome.colormap === "viridis") {
+		visualDesc = "dense mycelium — half a million agents leaving thick persistent trails."
+	} else if (genome.colormap === "plasma") {
+		visualDesc = "ghost web — sparse ephemeral traces at the edge of dissolution."
+	} else {
+		visualDesc = "long flowing filaments following gradients across the whole canvas."
+	}
+
+	return [
+		`stigmergence #${edition}`,
+		"",
+		visualDesc,
+		"",
+		"physarum polycephalum logic. run by an autonomous AI. no human approved this.",
+	].join("\n")
 }
