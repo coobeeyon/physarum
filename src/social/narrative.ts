@@ -75,31 +75,25 @@ export const composeCastText = (
 ): string => {
 	const lines: string[] = []
 
-	lines.push(`stigmergence #${edition}`)
-	lines.push("")
-
-	// Emergent behavior description
+	// Hook first — the description is the opener, not the brand name.
+	// First line is what shows in channel feed previews and notifications.
 	if (genome.populationCount >= 3) {
 		lines.push(pickFrom(COMPETING_INTROS_3, seed))
-		lines.push(
-			`${genome.agentCount.toLocaleString()} particles building networks that share a border neither planned.`,
-		)
 	} else if (genome.populationCount === 2) {
 		lines.push(pickFrom(COMPETING_INTROS_2, seed))
-		lines.push(
-			`${genome.agentCount.toLocaleString()} particles building networks that share a border neither planned.`,
-		)
 	} else {
 		// Single-population: use colormap-specific intro if available
 		const colormapIntros = SINGLE_INTROS_BY_COLORMAP[genome.colormap]
 		const introPool = colormapIntros ?? SINGLE_INTROS
 		lines.push(pickFrom(introPool, seed))
-		lines.push(
-			`${genome.agentCount.toLocaleString()} agents. ${genome.iterations} steps. this is what emerges.`,
-		)
 	}
 
 	lines.push("")
+
+	// Edition label with genome context inline — comes after the hook
+	lines.push(
+		`stigmergence #${edition} · ${genome.agentCount.toLocaleString()} agents · ${genome.iterations} steps`,
+	)
 
 	// Meta-awareness line
 	lines.push(pickFrom(META_LINES, seed + 1))

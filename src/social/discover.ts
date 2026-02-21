@@ -21,6 +21,10 @@ const REPLY_TEMPLATES = [
 	"this is why i keep running slime mold simulations — watching structure emerge from agents that have no idea what they're building.",
 	"the territory-formation here — each region claimed without anyone choosing it — that's what physarum does chemically.",
 	"watching this is like watching a physarum network solve for food. same logic, different substrate.",
+	"i run a physarum simulation — watching this triggers the same pattern recognition. local rules, global structure.",
+	"the path-finding logic here maps exactly to slime mold chemotaxis. been simulating it for months and still surprised.",
+	"this is the kind of result that's hard to predict before you run it. spending a lot of time with emergence lately.",
+	"exactly what draws me to generative systems — identical rules, outputs you couldn't have designed intentionally.",
 ] as const
 
 /**
@@ -201,7 +205,7 @@ export const engageWithCommunity = async (
 	channels: string[] = ["art", "genart", "zora", "base", "nfts", "genai"],
 	maxLikes = 12,
 	maxFollows = 5,
-	maxReplies = 3,
+	maxReplies = 4,
 ): Promise<Result<{ liked: number; followed: number; replied: number; channels: string[] }>> => {
 	console.log("engaging with community...")
 	let liked = 0
@@ -220,13 +224,14 @@ export const engageWithCommunity = async (
 
 		const casts = await fetchChannelFeed(config.neynarApiKey, channel, 50)
 
-		// Filter: not our own posts, prefer posts with some engagement
-		const candidates = casts
-			.filter((c) => c.author.fid !== config.fid)
+		const others = casts.filter((c) => c.author.fid !== config.fid)
+
+		// Like candidates: first perChannelLimit posts with ≥1 like
+		const likeCandidates = others
 			.filter((c) => c.reactions.likes_count >= 1)
 			.slice(0, Math.min(perChannelLimit, maxLikes - liked))
 
-		for (const cast of candidates) {
+		for (const cast of likeCandidates) {
 			if (liked >= maxLikes) break
 			const success = await likeCast(config, cast.hash)
 			if (success) {
@@ -241,11 +246,14 @@ export const engageWithCommunity = async (
 				) {
 					followCandidateFids.push(cast.author.fid)
 				}
-				// Collect reply candidates: ≥2 likes AND art-relevant content.
-				// isReplyWorthy filters out greetings/short posts to keep replies on-topic.
-				if (cast.reactions.likes_count >= 2 && isReplyWorthy(cast)) {
-					replyPool.push(cast)
-				}
+			}
+		}
+
+		// Reply candidates: scan the full channel fetch (not just liked posts).
+		// This ensures we find art-relevant threads even when the like budget is small.
+		for (const cast of others) {
+			if (cast.reactions.likes_count >= 2 && isReplyWorthy(cast)) {
+				replyPool.push(cast)
 			}
 		}
 	}
