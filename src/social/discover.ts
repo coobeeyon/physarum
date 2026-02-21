@@ -23,9 +23,33 @@ const REPLY_TEMPLATES = [
 	"watching this is like watching a physarum network solve for food. same logic, different substrate.",
 ] as const
 
-const pickReply = (castHash: string): string => {
-	// Deterministic pick from hash so repeated runs don't re-send the same reply
-	const sum = castHash.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0)
+const pickReply = (cast: ChannelCast): string => {
+	const text = cast.text.toLowerCase()
+
+	// Match to the most contextually relevant template using cast text keywords.
+	// This makes replies feel less generic without needing an LLM call.
+	if (/physarum|slime.?mold/.test(text)) {
+		// They're already talking about physarum — direct connection
+		return REPLY_TEMPLATES[14] // "watching this is like watching a physarum network solve for food"
+	}
+	if (/\bemergent\b|\bemergence\b|self.organ/.test(text)) {
+		return REPLY_TEMPLATES[10] // "this kind of emergence — structure without a plan"
+	}
+	if (/simulat|algorithm|parameter|iteration/.test(text)) {
+		return REPLY_TEMPLATES[8] // "there's something about running a system to completion"
+	}
+	if (/\bagents?\b|particles|cellular|automaton/.test(text)) {
+		return REPLY_TEMPLATES[7] // "systems that find optimal paths without knowing what 'optimal' means"
+	}
+	if (/network|filament|trail|\bflow\b/.test(text)) {
+		return REPLY_TEMPLATES[5] // "the way filaments bridge distant clusters here"
+	}
+	if (/territory|boundary|border|region/.test(text)) {
+		return REPLY_TEMPLATES[3] // "the boundary zones — where two regions negotiate space"
+	}
+
+	// Default: deterministic by hash, draws from the full pool
+	const sum = cast.hash.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0)
 	return REPLY_TEMPLATES[sum % REPLY_TEMPLATES.length]
 }
 
@@ -208,7 +232,7 @@ export const engageWithCommunity = async (
 	// Replies appear in the thread and are visible to all readers of that cast.
 	for (const cast of replyPool.slice(0, maxReplies)) {
 		if (replied >= maxReplies) break
-		const replyText = pickReply(cast.hash)
+		const replyText = pickReply(cast)
 		const success = await replyToCast(config, cast.hash, replyText)
 		if (success) {
 			replied++
