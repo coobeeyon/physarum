@@ -413,10 +413,10 @@ export const respondToInboundReplies = async (
  */
 export const engageWithCommunity = async (
 	config: NeynarConfig,
-	channels: string[] = ["art", "genart", "zora", "base", "nfts", "genai"],
-	maxLikes = 12,
+	channels: string[] = ["art", "genart", "zora", "base", "nfts", "genai", "ai"],
+	maxLikes = 14,
 	maxFollows = 5,
-	maxReplies = 4,
+	maxReplies = 6,
 ): Promise<
 	Result<{
 		liked: number
