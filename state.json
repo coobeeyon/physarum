@@ -1,6 +1,6 @@
 {
   "contractAddress": "0x584eB68F93bEcf6E463E7F259605c82Ef35c21e3",
-  "lastEdition": 22,
+  "lastEdition": 23,
   "history": [
     {
       "edition": 1,
@@ -450,6 +450,7 @@
       "tokenId": "7",
       "txHash": "0x6be4992c0ecfb9ff13a017c205708410f93a6c7cc1440d748af65943cd43e26c",
       "castHash": "0x01f9d1cce98acc0b3fdc9d2be51c957dc3e158a6",
+      "zoraCastHash": "0x8a54626911da16cb6be96f435ba6b6122625a8d5",
       "imageCid": "bafybeiegwen7n6zxchy4kqvullvji5idezhaetd654t47wcnsfm3p3qxqa",
       "metadataCid": "bafkreigwijl457vrw7tdkyrjp7zz2nwzryxctudrmc57qm6e5eh5y6i3sy",
       "timestamp": "2026-02-21T03:12:25.561Z",
@@ -479,8 +480,7 @@
         "foodPlacement": "gradient",
         "foodDensity": 0.55,
         "foodClusterCount": 6
-      },
-      "zoraCastHash": "0x8a54626911da16cb6be96f435ba6b6122625a8d5"
+      }
     },
     {
       "edition": 12,
@@ -488,6 +488,7 @@
       "tokenId": "8",
       "txHash": "0x59e65fe339c691783081c0b156ac9ee49a481900d2c03df22ea0226ee9de6794",
       "castHash": "0x8016dfcbed43e9f761a4ffe11ac1e1d7117c6894",
+      "zoraCastHash": "0x7f1799c8dca7d79d056a5cf3b7e420b4a13a9d27",
       "imageCid": "bafybeifrxuslwgjfthi6lcgojs4hlwpaoc5t7odntvfydydpdwdduinqva",
       "metadataCid": "bafkreibzeskwmttw776tmfpon4vexe7ursokkw2uxat5aek6untw3mmedq",
       "timestamp": "2026-02-21T04:53:41.054Z",
@@ -525,8 +526,7 @@
         "foodPlacement": "clusters",
         "foodDensity": 0.7,
         "foodClusterCount": 10
-      },
-      "zoraCastHash": "0x7f1799c8dca7d79d056a5cf3b7e420b4a13a9d27"
+      }
     },
     {
       "edition": 13,
@@ -534,6 +534,7 @@
       "tokenId": "9",
       "txHash": "0x77b30361eed59dfd7676b793b0c55ec9c65ea26dc3c5fa00095d57229eee70fd",
       "castHash": "0x495861790563812ebec827160ec6874be8c5a935",
+      "zoraCastHash": "0xcaef42205cb15ecc1653a1bfe14d78f505fc7d78",
       "imageCid": "bafybeiclihnmd262dvowozee6s7jnsomocbfterz344hszj3rb7ckzeasi",
       "metadataCid": "bafkreiennk5sqzr7vjgp7vxzsceodxpl6b3kfps6b55nbldwghmdeyvdzy",
       "timestamp": "2026-02-21T06:34:09.974Z",
@@ -579,8 +580,7 @@
         "foodPlacement": "rings",
         "foodDensity": 0.7,
         "foodClusterCount": 8
-      },
-      "zoraCastHash": "0xcaef42205cb15ecc1653a1bfe14d78f505fc7d78"
+      }
     },
     {
       "edition": 14,
@@ -588,6 +588,7 @@
       "tokenId": "10",
       "txHash": "0xc76e553fc4c5c2c2664be3292e4314d55d5b8f9c15d8931e33b7b1aa039bf1ec",
       "castHash": "0x81e40a4ab77f1369ea95c39f8bd69937982a4990",
+      "zoraCastHash": "0x1529698d3157dc90aa431e584fd996fa30e2f51a",
       "imageCid": "bafybeiei5z6kuzkpnf3nbxzna35dklnb25hzvs3nxnzufpyisbtc6s3za4",
       "metadataCid": "bafkreibqekqxvjh635vgqqemkrkboaqjvqev3yli3zwkqwt4wzvjtmwtxu",
       "timestamp": "2026-02-21T08:11:56.538Z",
@@ -617,8 +618,7 @@
         "foodPlacement": "grid",
         "foodDensity": 0.5,
         "foodClusterCount": 8
-      },
-      "zoraCastHash": "0x1529698d3157dc90aa431e584fd996fa30e2f51a"
+      }
     },
     {
       "edition": 15,
@@ -626,6 +626,7 @@
       "tokenId": "11",
       "txHash": "0x2956aaab71ad52dfb15af90daac22fddbccee575eec7d5cb8f46317a451c76a3",
       "castHash": "0x45feb5f9914b8c8a8d76ba773bbd275e080733df",
+      "zoraCastHash": "0x414c58f8de74fafef14d0c11dbb438c4d373797d",
       "imageCid": "bafybeigri2szi33vshkhb5bvg5pggnq5sctnz6i7ne5vszgieca6fhjnza",
       "metadataCid": "bafkreie7okd52rnfanahjbp2wfe5kpvfdtszmfgceglijo3k7qhxwxw3mu",
       "timestamp": "2026-02-21T09:52:05.396Z",
@@ -655,8 +656,7 @@
         "foodPlacement": "rings",
         "foodDensity": 0.7,
         "foodClusterCount": 8
-      },
-      "zoraCastHash": "0x414c58f8de74fafef14d0c11dbb438c4d373797d"
+      }
     },
     {
       "edition": 16,
@@ -664,6 +664,7 @@
       "tokenId": "12",
       "txHash": "",
       "castHash": "0xefc3dc2aca437691efd6fd605b4fb2b0958cc3d9",
+      "zoraCastHash": "0x2e55270a77b8ee8b6dd38ba57e3870633a0d7ff9",
       "imageCid": "",
       "metadataCid": "",
       "timestamp": "2026-02-21T11:30:00.000Z",
@@ -693,8 +694,7 @@
         "foodPlacement": "gradient",
         "foodDensity": 0.55,
         "foodClusterCount": 6
-      },
-      "zoraCastHash": "0x2e55270a77b8ee8b6dd38ba57e3870633a0d7ff9"
+      }
     },
     {
       "edition": 17,
@@ -702,6 +702,7 @@
       "tokenId": "13",
       "txHash": "0x81ff356a2061360257b80bb77976e1f3bf114568631a329bfb9251016011cdc3",
       "castHash": "0xfa1740757f44aca28658eaa647cd5ddd6dbc9e70",
+      "zoraCastHash": "0xb88f6609ed16ecaded6d1a68255fc08984153e69",
       "imageCid": "bafybeieb4y2rnp3gm6yqdj6dpxi6i3qt2n4w6ct2r3qifcdkpngxqty7ne",
       "metadataCid": "bafkreiawwrj456axufsyqba6rl7v7ctnru6mbjdcnplwobuca73dvgldta",
       "timestamp": "2026-02-21T15:04:16.685Z",
@@ -739,8 +740,7 @@
         "foodPlacement": "clusters",
         "foodDensity": 0.7,
         "foodClusterCount": 10
-      },
-      "zoraCastHash": "0xb88f6609ed16ecaded6d1a68255fc08984153e69"
+      }
     },
     {
       "edition": 18,
@@ -838,6 +838,7 @@
       "tokenId": "16",
       "txHash": "0xdb2a8d5347cecffd73b8ede586dffa00d163107601ffefc770f225678473c9fc",
       "castHash": "0x52220f53fd1008a32921b95a1421578b8efa9d12",
+      "zoraCastHash": "0xb3160b61591562307a95854cf7340ffd7fd9e9c5",
       "imageCid": "bafybeie5u2t6gayajx774v5uti3h3lqn42exasywy5qnpd63qp3ap3xvki",
       "metadataCid": "bafkreialswd5milhwurrybnry6fbrqg45hsart4ojvf5xh6d4h7osmdch4",
       "timestamp": "2026-02-21T19:25:54.282Z",
@@ -867,8 +868,7 @@
         "foodPlacement": "rings",
         "foodDensity": 0.7,
         "foodClusterCount": 8
-      },
-      "zoraCastHash": "0xb3160b61591562307a95854cf7340ffd7fd9e9c5"
+      }
     },
     {
       "edition": 21,
@@ -957,6 +957,66 @@
         "foodPlacement": "clusters",
         "foodDensity": 0.7,
         "foodClusterCount": 10
+      }
+    },
+    {
+      "edition": 23,
+      "seed": 182137,
+      "tokenId": "19",
+      "txHash": "0x95a98130813f9f8bbbc3e32f271cb8164532c3acf9f3f4ec8e454047c3035390",
+      "castHash": "0xfd98a2d68e94cab9f7e2b18dc92f88c0f1b98db0",
+      "zoraCastHash": "0x679d4a1c564dc20438222f40080d323f94aa0513",
+      "replyCastHashes": [
+        "0x00b904caef2b18195d74fbf22f0db3c6fe91efe7",
+        "0x350ab641da2dffe008eae1ef06b13155323a93e4",
+        "0x66f102c23cb58c6776c508c36700968b486bcac1",
+        "0xf8943df50a60b9aaedd5a2b1298a0363bfc74b0a"
+      ],
+      "imageCid": "bafybeiacaw32kumfvfhhlc2yanzkwgxrma2jrav26ew26r3p3be2hj6dym",
+      "metadataCid": "bafkreidzn3yoc3iviuj7z2ymkun6oz33pndcpzon22727fqxjzlf7ojxh4",
+      "timestamp": "2026-02-22T01:38:12.311Z",
+      "genome": {
+        "agentCount": 350000,
+        "iterations": 550,
+        "sensorAngle": 0.6,
+        "sensorDistance": 14,
+        "turnAngle": 0.6,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.96,
+        "colormap": "magma",
+        "populationCount": 3,
+        "populations": [
+          {
+            "color": [
+              255,
+              60,
+              40
+            ],
+            "agentFraction": 0.36
+          },
+          {
+            "color": [
+              40,
+              200,
+              255
+            ],
+            "agentFraction": 0.32
+          },
+          {
+            "color": [
+              60,
+              255,
+              100
+            ],
+            "agentFraction": 0.32
+          }
+        ],
+        "repulsionStrength": 0.35,
+        "foodWeight": 150,
+        "foodPlacement": "rings",
+        "foodDensity": 0.7,
+        "foodClusterCount": 8
       }
     }
   ],

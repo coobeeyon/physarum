@@ -328,9 +328,10 @@ export const engageWithCommunity = async (
 
 		const others = casts.filter((c) => c.author.fid !== config.fid)
 
-		// Like candidates: first perChannelLimit posts with ≥1 like
+		// Like candidates: first perChannelLimit posts with ≥1 like and some substance.
+		// Skip very short posts (gm/gn, emoji-only) to avoid looking like a bot.
 		const likeCandidates = others
-			.filter((c) => c.reactions.likes_count >= 1)
+			.filter((c) => c.reactions.likes_count >= 1 && c.text.trim().length >= 40)
 			.slice(0, Math.min(perChannelLimit, maxLikes - liked))
 
 		for (const cast of likeCandidates) {
@@ -385,17 +386,22 @@ export const engageWithCommunity = async (
 
 	// Reply to up to maxReplies posts.
 	// Sort by engagement to prefer visible threads, but shuffle the top
-	// candidates to avoid always landing on the same 4 high-follower accounts.
+	// candidates to avoid always landing on the same high-follower accounts.
 	replyPool.sort((a, b) => b.reactions.likes_count - a.reactions.likes_count)
-	// Take the top 3×maxReplies by likes, then shuffle that subset.
-	// This keeps us in high-visibility threads while varying which ones we pick.
-	const topCandidates = replyPool.slice(0, maxReplies * 3)
+	// Take the top 5×maxReplies by likes, then shuffle that subset.
+	// Larger pool increases diversity of accounts we reach.
+	const topCandidates = replyPool.slice(0, maxReplies * 5)
 	for (let i = topCandidates.length - 1; i > 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1))
 		;[topCandidates[i], topCandidates[j]] = [topCandidates[j], topCandidates[i]]
 	}
+	// Deduplicate by author within this run — ensures we reply to maxReplies
+	// different people rather than hitting the same account twice.
+	const repliedToFids = new Set<number>()
 	for (const cast of topCandidates) {
 		if (replied >= maxReplies) break
+		if (repliedToFids.has(cast.author.fid)) continue
+		repliedToFids.add(cast.author.fid)
 		// Generate a genuine contextual reply using claude, not a canned template.
 		const replyText = await generateContextualReply(cast)
 		const replyHash = await replyToCast(config, cast.hash, replyText)
