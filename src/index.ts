@@ -3,7 +3,7 @@ import { runClaudeReflection } from "#agent/runner.ts"
 import { loadEnv } from "#config/env.ts"
 import { runPipeline } from "#pipeline/orchestrate.ts"
 import { loadState } from "#pipeline/state.ts"
-import { engageWithCommunity } from "#social/discover.ts"
+import { engageWithCommunity, respondToInboundReplies } from "#social/discover.ts"
 import { readEngagement } from "#social/engagement.ts"
 
 const parseArgs = (args: ReadonlyArray<string>) => {
@@ -85,12 +85,29 @@ const main = async () => {
 			signerUuid: envResult.value.neynarSignerUuid,
 			fid: envResult.value.farcasterFid,
 		}
+
+		// Outbound engagement
 		const result = await engageWithCommunity(neynarConfig)
 		if (!result.ok) {
 			console.error(`Engagement error: ${result.error}`)
 			process.exit(1)
 		}
 		const { liked, followed, replied, channels } = result.value
+
+		// Respond to inbound replies on our recent casts
+		const stateResult = loadState()
+		if (stateResult.ok) {
+			const isValidHash = (h: string) => h.length >= 10 && h !== "0x0" && h.startsWith("0x")
+			const inboundHashes: string[] = []
+			for (const entry of stateResult.value.history.slice(-3)) {
+				if (isValidHash(entry.castHash)) inboundHashes.push(entry.castHash)
+				if (entry.selfReplyHash && isValidHash(entry.selfReplyHash))
+					inboundHashes.push(entry.selfReplyHash)
+				if (entry.replyCastHashes) inboundHashes.push(...entry.replyCastHashes.filter(isValidHash))
+			}
+			await respondToInboundReplies(neynarConfig, inboundHashes)
+		}
+
 		console.log(
 			`\nDone: ${liked} likes, ${followed} follows, ${replied} replies across ${channels.join(", ")}`,
 		)

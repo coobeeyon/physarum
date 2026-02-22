@@ -11,7 +11,7 @@ import { createPinataClient, uploadImage, uploadMetadata } from "#ipfs/upload.ts
 import { updateGallery } from "#pipeline/gallery.ts"
 import { loadState, saveState } from "#pipeline/state.ts"
 import { renderPng } from "#render/canvas.ts"
-import { engageWithCommunity } from "#social/discover.ts"
+import { engageWithCommunity, respondToInboundReplies } from "#social/discover.ts"
 import { readEngagement } from "#social/engagement.ts"
 import { type NeynarConfig, postCast, postReply } from "#social/farcaster.ts"
 import {
@@ -262,6 +262,23 @@ export const runPipeline = async (
 		const engageResult = await engageWithCommunity(neynarConfig)
 		if (engageResult.ok) {
 			replyCastHashes.push(...engageResult.value.replyHashes)
+		}
+
+		// Respond to inbound replies on our recent casts — closes the engagement loop.
+		// When someone replies to us (our cast, self-reply, or our reply to them),
+		// we continue the conversation. This is the step most likely to convert
+		// a notification to a follower or collector.
+		const isValidHash = (h: string) => h.length >= 10 && h !== "0x0" && h.startsWith("0x")
+		const inboundHashes: string[] = []
+		for (const entry of state.history.slice(-3)) {
+			if (isValidHash(entry.castHash)) inboundHashes.push(entry.castHash)
+			if (entry.selfReplyHash && isValidHash(entry.selfReplyHash))
+				inboundHashes.push(entry.selfReplyHash)
+			if (entry.replyCastHashes) inboundHashes.push(...entry.replyCastHashes.filter(isValidHash))
+		}
+		const inboundResult = await respondToInboundReplies(neynarConfig, inboundHashes)
+		if (inboundResult.responded > 0) {
+			replyCastHashes.push(...inboundResult.responseHashes)
 		}
 	}
 

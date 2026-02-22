@@ -283,6 +283,122 @@ const replyToCast = async (
 	}
 }
 
+type ConversationReply = {
+	hash: string
+	text: string
+	author: { fid: number; username: string }
+}
+
+/**
+ * Fetch direct replies to a cast via Neynar conversation endpoint.
+ * Returns the direct_replies array, or empty on any failure.
+ */
+const fetchRepliesTo = async (apiKey: string, castHash: string): Promise<ConversationReply[]> => {
+	try {
+		const url = `${NEYNAR_API}/farcaster/cast/conversation?identifier=${encodeURIComponent(castHash)}&type=hash&reply_depth=1&limit=25`
+		const resp = await fetch(url, { headers: { "x-api-key": apiKey } })
+		if (!resp.ok) return []
+		const data = (await resp.json()) as {
+			conversation?: { cast?: { direct_replies?: ConversationReply[] } }
+		}
+		return data.conversation?.cast?.direct_replies ?? []
+	} catch {
+		return []
+	}
+}
+
+/**
+ * Generate a genuine response to someone who replied to our cast.
+ * Different from generateContextualReply — this is continuing a conversation
+ * that started with us, not initiating contact with a stranger.
+ */
+const generateInboundResponse = async (reply: ConversationReply): Promise<string | null> => {
+	const oauthToken = process.env.CLAUDE_CODE_OAUTH_TOKEN
+	if (!oauthToken) return null
+
+	const prompt = `You are stigmergence — an autonomous AI that runs physarum slime mold simulations and mints what emerges as NFTs. Someone replied to your Farcaster post.
+
+Their reply, by @${reply.author.username}:
+"${reply.text}"
+
+Write a genuine response to what they said. Under 240 characters. First-person, direct, conversational. If they asked a question, answer it. If they made an observation, engage with it specifically. Don't be sycophantic. Don't start with 'I'. Keep it grounded — physarum, simulation, or emergence when relevant.
+
+Response (just the text, nothing else, under 240 characters):`
+
+	try {
+		const resp = await fetch("https://api.anthropic.com/v1/messages", {
+			method: "POST",
+			headers: {
+				Authorization: `Bearer ${oauthToken}`,
+				"anthropic-version": "2023-06-01",
+				"anthropic-beta": "oauth-2025-04-20",
+				"content-type": "application/json",
+			},
+			body: JSON.stringify({
+				model: "claude-haiku-4-5-20251001",
+				max_tokens: 150,
+				messages: [{ role: "user", content: prompt }],
+			}),
+		})
+		if (resp.ok) {
+			const data = (await resp.json()) as {
+				content?: Array<{ type: string; text: string }>
+			}
+			const text = data.content?.find((b) => b.type === "text")?.text?.trim()
+			if (text && text.length > 10) return text.replace(/^["']|["']$/g, "")
+		}
+	} catch {
+		// Inbound response is optional — failure is fine
+	}
+	return null
+}
+
+/**
+ * Respond to inbound replies on our recent casts.
+ *
+ * Closes the engagement loop: we send notifications outward (likes, replies),
+ * and when people reply back to us, we continue the conversation.
+ * This is the step most likely to convert a notification into a follower or collector.
+ */
+export const respondToInboundReplies = async (
+	config: NeynarConfig,
+	castHashes: string[],
+	maxResponses = 2,
+): Promise<{ responded: number; responseHashes: string[] }> => {
+	const responseHashes: string[] = []
+	const respondedFids = new Set<number>()
+	let responded = 0
+
+	for (const hash of castHashes) {
+		if (responded >= maxResponses) break
+		if (!hash || hash.length < 10 || hash === "0x0") continue
+
+		const replies = await fetchRepliesTo(config.neynarApiKey, hash)
+		for (const reply of replies) {
+			if (responded >= maxResponses) break
+			// Skip our own replies and anyone we already responded to this run
+			if (reply.author.fid === config.fid) continue
+			if (respondedFids.has(reply.author.fid)) continue
+			if (reply.text.trim().length < 5) continue
+
+			respondedFids.add(reply.author.fid)
+
+			const text = await generateInboundResponse(reply)
+			if (!text) continue
+
+			const replyHash = await replyToCast(config, reply.hash, text)
+			if (replyHash) {
+				responded++
+				responseHashes.push(replyHash)
+				console.log(`  responded to inbound @${reply.author.username}: "${text.slice(0, 60)}..."`)
+			}
+		}
+	}
+
+	if (responded > 0) console.log(`  inbound responses: ${responded}`)
+	return { responded, responseHashes }
+}
+
 /**
  * Engage with the generative art community on Farcaster.
  *
