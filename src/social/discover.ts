@@ -295,7 +295,7 @@ type ConversationReply = {
  */
 const fetchRepliesTo = async (apiKey: string, castHash: string): Promise<ConversationReply[]> => {
 	try {
-		const url = `${NEYNAR_API}/farcaster/cast/conversation?identifier=${encodeURIComponent(castHash)}&type=hash&reply_depth=1&limit=25`
+		const url = `${NEYNAR_API}/cast/conversation?identifier=${encodeURIComponent(castHash)}&type=hash&reply_depth=1&limit=25`
 		const resp = await fetch(url, { headers: { "x-api-key": apiKey } })
 		if (!resp.ok) return []
 		const data = (await resp.json()) as {
