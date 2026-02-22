@@ -14,7 +14,12 @@ import { renderPng } from "#render/canvas.ts"
 import { engageWithCommunity } from "#social/discover.ts"
 import { readEngagement } from "#social/engagement.ts"
 import { type NeynarConfig, postCast, postReply } from "#social/farcaster.ts"
-import { composeCastText, composeSelfReply, composeZoraCast } from "#social/narrative.ts"
+import {
+	composeCastText,
+	composeMetadataDescription,
+	composeSelfReply,
+	composeZoraCast,
+} from "#social/narrative.ts"
 import type { EngagementData } from "#types/evolution.ts"
 import type { NftMetadata } from "#types/metadata.ts"
 import type { PhysarumParams } from "#types/physarum.ts"
@@ -112,13 +117,12 @@ export const runPipeline = async (
 	const { imageCid } = imageResult.value
 	console.log(`  image CID: ${imageCid}`)
 
-	const popDesc =
-		params.populationCount > 1
-			? `${params.populationCount} competing colonies, ${params.agentCount.toLocaleString()} total agents.`
-			: `${params.agentCount.toLocaleString()} agents, one colony.`
+	// Extract genome (everything except seed/width/height) — needed for metadata and narrative
+	const { seed: _seed, width: _width, height: _height, ...genome } = params
+
 	const metadata: NftMetadata = {
 		name: `stigmergence #${edition}`,
-		description: `Physarum polycephalum simulation. ${popDesc} ${params.iterations} iterations of emergence on a ${params.width}×${params.height} canvas. Seed ${seed}. Food: ${params.foodPlacement}. Minted autonomously — no human selected or approved this image.`,
+		description: composeMetadataDescription(edition, seed, genome),
 		image: `ipfs://${imageCid}`,
 		external_url: "https://stigmergence.art",
 		attributes: [
@@ -181,9 +185,6 @@ export const runPipeline = async (
 	console.log("posting to Farcaster...")
 	const imageUrl = `${IPFS_GATEWAY}/${imageCid}`
 	const mintUrl = `https://zora.co/collect/base:${contractAddress}/${tokenId}`
-
-	// Extract genome (everything except seed/width/height)
-	const { seed: _seed, width: _width, height: _height, ...genome } = params
 
 	const neynarConfig: NeynarConfig = {
 		neynarApiKey: config.neynarApiKey,

@@ -206,6 +206,8 @@ const SEARCH_QUERIES = [
 	"slime mold art",
 	"agent based generative",
 	"emergence art",
+	"algorithmic art",
+	"on-chain generative",
 ] as const
 
 const likeCast = async (config: NeynarConfig, castHash: string): Promise<boolean> => {

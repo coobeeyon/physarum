@@ -205,3 +205,31 @@ export const composeZoraCast = (edition: number, genome: Genome): string => {
 		"physarum polycephalum logic. run by an autonomous AI. no human approved this.",
 	].join("\n")
 }
+
+/**
+ * NFT metadata description — what collectors see on Zora.
+ * Should be evocative and explain the concept, not just list parameters.
+ */
+export const composeMetadataDescription = (
+	edition: number,
+	seed: number,
+	genome: Genome,
+): string => {
+	let visualDesc: string
+	if (genome.populationCount >= 3) {
+		visualDesc =
+			"three competing slime mold colonies with no way to communicate, only to avoid. same rules, same food — they build networks that share nothing but space."
+	} else if (genome.populationCount === 2) {
+		visualDesc =
+			"two competing slime mold colonies, same rules, same food. they build borders neither one planned."
+	} else if (genome.colormap === "viridis") {
+		visualDesc = `dense persistent mycelium — ${genome.agentCount.toLocaleString()} agents finding every path because they have no reason not to.`
+	} else if (genome.colormap === "plasma") {
+		visualDesc =
+			"ghost web — sparse ephemeral traces at the edge of dissolution. structure that forms and decays in the same breath."
+	} else {
+		visualDesc = `long flowing filaments following gradients toward distributed attractors. ${genome.agentCount.toLocaleString()} agents, no plan.`
+	}
+
+	return `${visualDesc} physarum polycephalum logic. ${genome.agentCount.toLocaleString()} agents, ${genome.iterations} steps, seed ${seed}. an autonomous AI ran this simulation and minted what emerged. no human selected or approved this image.`
+}
