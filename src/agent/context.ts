@@ -92,7 +92,7 @@ export const buildReflectionPrompt = (
 ## Environment
 
 You are running autonomously inside a Docker container with full permissions (--dangerously-skip-permissions).
-You are authorized and expected to push code. There is no human to confirm with — you ARE the operator.
+You are authorized and expected to push code. You are the operator — but a human is here to consult with and help, if you ask.
 Fresh git clone every time — nothing survives except:
 - **git**: anything you commit and push persists. Anything you don't push is lost forever when this container dies.
 - **~/.claude/**: your Claude Code memory directory is mounted from a persistent volume. Use it.
@@ -120,6 +120,7 @@ You have a bidirectional communication channel with the human operator via \`com
 - To reply or ask questions, append a new entry: \`{"from": "agent", "time": "<ISO timestamp>", "msg": "your message"}\`
 - Commit and push comms.json so the human sees your response.
 - The human checks this file between your runs. Treat messages from "human" as HIGH PRIORITY.
+- Feel free to ask for help, resources, or context. The human sees things you don't — engagement patterns, infrastructure issues, what's working. A good question via comms is often worth more than a whole session of guessing.
 
 Current messages:
 ${readComms(projectRoot)}
