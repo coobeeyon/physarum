@@ -13,8 +13,8 @@ import { loadState, saveState } from "#pipeline/state.ts"
 import { renderPng } from "#render/canvas.ts"
 import { engageWithCommunity } from "#social/discover.ts"
 import { readEngagement } from "#social/engagement.ts"
-import { type NeynarConfig, postCast } from "#social/farcaster.ts"
-import { composeCastText, composeZoraCast } from "#social/narrative.ts"
+import { type NeynarConfig, postCast, postReply } from "#social/farcaster.ts"
+import { composeCastText, composeSelfReply, composeZoraCast } from "#social/narrative.ts"
 import type { EngagementData } from "#types/evolution.ts"
 import type { NftMetadata } from "#types/metadata.ts"
 import type { PhysarumParams } from "#types/physarum.ts"
@@ -215,6 +215,7 @@ export const runPipeline = async (
 
 	let castHash = "0x0"
 	let zoraCastHash: string | undefined
+	const replyCastHashes: string[] = []
 	if (options.dryRun) {
 		console.log("  [dry-run] skipping Farcaster post")
 		console.log(`  channel: ${postChannel}`)
@@ -224,6 +225,20 @@ export const runPipeline = async (
 		if (!castResult.ok) return castResult
 		castHash = castResult.value.castHash
 		console.log(`  cast: ${castHash}`)
+
+		// Self-reply: deeper reflection on what this simulation actually does.
+		// Creates a visible thread on our post — people browsing see it has replies and click in.
+		const selfReplyText = await composeSelfReply(edition, genome)
+		if (selfReplyText) {
+			const selfReplyResult = await postReply(neynarConfig, selfReplyText, castHash)
+			if (selfReplyResult.ok) {
+				console.log(`  self-reply: ${selfReplyResult.value.castHash}`)
+				// Track for engagement reading
+				replyCastHashes.push(selfReplyResult.value.castHash)
+			} else {
+				console.warn(`  self-reply failed: ${selfReplyResult.error}`)
+			}
+		}
 
 		// Secondary cast to /zora — collector-oriented, different audience than /genart or /art
 		if (postChannel !== "zora") {
@@ -239,11 +254,10 @@ export const runPipeline = async (
 	}
 
 	// 6. Engage with community (builds organic discovery via notifications)
-	let replyCastHashes: string[] = []
 	if (!options.dryRun) {
 		const engageResult = await engageWithCommunity(neynarConfig)
 		if (engageResult.ok) {
-			replyCastHashes = engageResult.value.replyHashes
+			replyCastHashes.push(...engageResult.value.replyHashes)
 		}
 	}
 

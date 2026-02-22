@@ -1,6 +1,6 @@
 {
   "contractAddress": "0x584eB68F93bEcf6E463E7F259605c82Ef35c21e3",
-  "lastEdition": 23,
+  "lastEdition": 25,
   "history": [
     {
       "edition": 1,
@@ -1013,6 +1013,96 @@
           }
         ],
         "repulsionStrength": 0.35,
+        "foodWeight": 150,
+        "foodPlacement": "rings",
+        "foodDensity": 0.7,
+        "foodClusterCount": 8
+      }
+    },
+    {
+      "edition": 24,
+      "seed": 190056,
+      "tokenId": "20",
+      "txHash": "0x9afd894e5381a17ffb5a080ca491111c1ba91c8d8f716a96d21881d20cf9b3d9",
+      "castHash": "0x72f6454623a2ff1f85ec1d7612e7ceecd297d1f1",
+      "zoraCastHash": "0xb7120cf065a3d0b55ab5cf9f07052231b1962e0c",
+      "replyCastHashes": [
+        "0xfecf5966e639457250e15db6c1faf1838eacc2b5",
+        "0xdb47ae401d98765c3b5877c6d8aa30cfe72a54ae",
+        "0xafc726ee69d0b47dba652b110b24d9ef51b3f6ed",
+        "0xfcf87fbb5443e8e3d180b42cdffa08f20edffbec",
+        "0x24db07f394f9a73d5c38350aea20e2617c181bd0"
+      ],
+      "imageCid": "bafybeiccy5425flrga22tqo3mnxcf5zi4bdpitby4aohe77hth2gakvezq",
+      "metadataCid": "bafkreihtowx3fbwpur5u7562by7n3uenirdkuzilz443uqmox6k7l5jprm",
+      "timestamp": "2026-02-22T03:17:51.203Z",
+      "genome": {
+        "agentCount": 300000,
+        "iterations": 800,
+        "sensorAngle": 0.25,
+        "sensorDistance": 28,
+        "turnAngle": 0.25,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.92,
+        "colormap": "plasma",
+        "populationCount": 1,
+        "populations": [
+          {
+            "color": [
+              200,
+              100,
+              255
+            ],
+            "agentFraction": 1
+          }
+        ],
+        "repulsionStrength": 0,
+        "foodWeight": 150,
+        "foodPlacement": "grid",
+        "foodDensity": 0.5,
+        "foodClusterCount": 8
+      }
+    },
+    {
+      "edition": 25,
+      "seed": 197975,
+      "tokenId": "21",
+      "txHash": "0x6e8133d5ff05823189e95f7ac1d0a7c1843e4a00cee1af4361d1f5d3138f39ad",
+      "castHash": "0x9a470d8870065109b639e8b8094fa6800b8a657f",
+      "zoraCastHash": "0x17f95513fcf390b1a30cb061293c3e9004c55127",
+      "replyCastHashes": [
+        "0x7e72ac0cb2870905112ac8ece3fadeae4845a08a",
+        "0xfb7f219592f82783379d97b62e6d25ed0d6620f2",
+        "0xf2ad2f01852337ae72f17bda1e38174925e7181c",
+        "0x81e5292b6568ae3bd01715e92dff5b6092f1b53c",
+        "0x59f9547cea02cb2df08bf91e51309fc0a3d4d4ce"
+      ],
+      "imageCid": "bafybeie2yy3uet2yk7ph2aaginc6s5n5yg5alj5e6en6hjmnf4qx5ussbq",
+      "metadataCid": "bafkreihpwdinptctmysgqvmyvvyanufc67t5arpsfuvwdjzykwxortgynq",
+      "timestamp": "2026-02-22T03:20:47.807Z",
+      "genome": {
+        "agentCount": 500000,
+        "iterations": 600,
+        "sensorAngle": 0.65,
+        "sensorDistance": 12,
+        "turnAngle": 0.6,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.98,
+        "colormap": "viridis",
+        "populationCount": 1,
+        "populations": [
+          {
+            "color": [
+              20,
+              220,
+              160
+            ],
+            "agentFraction": 1
+          }
+        ],
+        "repulsionStrength": 0,
         "foodWeight": 150,
         "foodPlacement": "rings",
         "foodDensity": 0.7,

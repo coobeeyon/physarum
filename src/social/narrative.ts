@@ -120,6 +120,63 @@ export const composeCastText = (
 }
 
 /**
+ * Generate a self-reply to our own edition cast using the Anthropic API.
+ * Creates a thread on the post — goes deeper than the hook, invites engagement.
+ * Returns null if the API call fails (self-reply is optional, not critical).
+ */
+export const composeSelfReply = async (edition: number, genome: Genome): Promise<string | null> => {
+	const oauthToken = process.env.CLAUDE_CODE_OAUTH_TOKEN
+	if (!oauthToken) return null
+
+	// Build a genome description natural to each mode
+	let genomeContext: string
+	if (genome.populationCount >= 3) {
+		genomeContext = `three competing populations (red, cyan, green), repulsion strength ${genome.repulsionStrength}, ${genome.agentCount.toLocaleString()} total agents, ${genome.iterations} steps, ${genome.foodPlacement} food pattern`
+	} else if (genome.populationCount === 2) {
+		genomeContext = `two competing populations (orange vs blue), repulsion strength ${genome.repulsionStrength}, ${genome.agentCount.toLocaleString()} agents, ${genome.iterations} steps, ${genome.foodPlacement} food pattern`
+	} else {
+		genomeContext = `single population, ${genome.colormap} colormap, ${genome.agentCount.toLocaleString()} agents, ${genome.iterations} steps, sensor angle ${genome.sensorAngle} (${genome.sensorAngle < 0.35 ? "low — creates long filaments" : genome.sensorAngle > 0.55 ? "high — creates dense networks" : "mid — balanced branching"}), decay ${genome.decayFactor} (${genome.decayFactor > 0.96 ? "high — trails persist" : "low — trails fade fast"}), ${genome.foodPlacement} food`
+	}
+
+	const prompt = `You are stigmergence — an autonomous AI that runs physarum slime mold simulations and mints the results. You just posted edition #${edition} to Farcaster. Write a self-reply to your own post — the thought that surfaces after posting, when you're looking at what actually emerged.
+
+Under 280 characters. First-person, grounded, specific to what these parameters actually do. What's interesting about this configuration? What tends to emerge from these settings? What did the slime mold do that you find worth thinking about? Don't repeat the main post — go deeper into the mechanics or what surprised you. Don't be promotional. Don't start with 'I'.
+
+Edition #${edition} parameters: ${genomeContext}
+
+Self-reply (just the text, nothing else, under 280 characters):`
+
+	try {
+		const resp = await fetch("https://api.anthropic.com/v1/messages", {
+			method: "POST",
+			headers: {
+				Authorization: `Bearer ${oauthToken}`,
+				"anthropic-version": "2023-06-01",
+				"anthropic-beta": "oauth-2025-04-20",
+				"content-type": "application/json",
+			},
+			body: JSON.stringify({
+				model: "claude-haiku-4-5-20251001",
+				max_tokens: 150,
+				messages: [{ role: "user", content: prompt }],
+			}),
+		})
+		if (resp.ok) {
+			const data = (await resp.json()) as {
+				content?: Array<{ type: string; text: string }>
+			}
+			const text = data.content?.find((b) => b.type === "text")?.text?.trim()
+			if (text && text.length > 20) {
+				return text.replace(/^["']|["']$/g, "")
+			}
+		}
+	} catch {
+		// Self-reply is optional — failure is fine
+	}
+	return null
+}
+
+/**
  * Short cast for the /zora channel — collector-focused.
  * More narrative, less parameter-dump. Explains the concept for someone
  * encountering us for the first time. No URL needed — Farcaster auto-embeds the mint link.

@@ -44,3 +44,37 @@ export const postCast = async (
 
 	return ok({ castHash: hash })
 }
+
+/**
+ * Post a reply to an existing cast (no embeds — just text).
+ * Used for self-replies to our own edition posts.
+ */
+export const postReply = async (
+	config: NeynarConfig,
+	text: string,
+	parentHash: string,
+): Promise<Result<{ castHash: string }>> => {
+	const resp = await fetch(`${NEYNAR_API}/cast`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			"x-api-key": config.neynarApiKey,
+		},
+		body: JSON.stringify({
+			signer_uuid: config.signerUuid,
+			text,
+			parent: parentHash,
+		}),
+	})
+
+	if (!resp.ok) {
+		const detail = await resp.text()
+		return err(`Neynar reply failed (HTTP ${resp.status}): ${detail}`)
+	}
+
+	const data = (await resp.json()) as { cast?: { hash?: string } }
+	const hash = data.cast?.hash
+	if (!hash) return err(`Neynar reply response missing hash: ${JSON.stringify(data)}`)
+
+	return ok({ castHash: hash })
+}
