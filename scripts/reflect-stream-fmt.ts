@@ -5,16 +5,21 @@
  */
 export {}
 
-const DIM = "\x1b[2m"
-const BOLD = "\x1b[1m"
-const CYAN = "\x1b[36m"
-const YELLOW = "\x1b[33m"
-const GREEN = "\x1b[32m"
-const RED = "\x1b[31m"
-const RESET = "\x1b[0m"
+const isTTY = Boolean(process.stdout.isTTY)
+const DIM = isTTY ? "\x1b[2m" : ""
+const BOLD = isTTY ? "\x1b[1m" : ""
+const CYAN = isTTY ? "\x1b[36m" : ""
+const YELLOW = isTTY ? "\x1b[33m" : ""
+const GREEN = isTTY ? "\x1b[32m" : ""
+const RED = isTTY ? "\x1b[31m" : ""
+const RESET = isTTY ? "\x1b[0m" : ""
 
-const truncate = (s: string, max: number): string =>
-	s.length <= max ? s : `${s.slice(0, max)}...`
+const indent = (s: string): string =>
+	s.split("\n").map(l => `\t${l}`).join("\n")
+
+const TODO_TOOLS = new Set(["TodoRead", "TodoWrite", "TaskCreate", "TaskGet", "TaskUpdate", "TaskList"])
+const QUIET_TOOLS = new Set(["Read"])
+const suppressedIds = new Set<string>()
 
 const formatEvent = (line: string): string | null => {
 	let event: Record<string, unknown>
@@ -29,7 +34,7 @@ const formatEvent = (line: string): string | null => {
 
 	if (type === "system" && event.subtype === "init") {
 		const model = (event as Record<string, unknown>).model as string
-		return `${BOLD}${CYAN}[init]${RESET} model=${model}`
+		return `${BOLD}${CYAN}[init]${RESET}\n\tmodel=${model}`
 	}
 
 	if (type === "assistant") {
@@ -39,18 +44,24 @@ const formatEvent = (line: string): string | null => {
 
 		const parts: string[] = []
 		for (const block of content) {
+			if (block.type === "tool_use" && TODO_TOOLS.has(block.name as string)) {
+				suppressedIds.add(block.id as string)
+				continue
+			}
+			if (block.type === "tool_use" && QUIET_TOOLS.has(block.name as string)) {
+				suppressedIds.add(block.id as string)
+			}
 			if (block.type === "thinking") {
 				const thinking = block.thinking as string
 				if (thinking) {
-					const firstLine = thinking.split("\n")[0]
-					parts.push(`${DIM}[think] ${truncate(firstLine, 120)}${RESET}`)
+					parts.push(`${DIM}[think]${RESET}\n${DIM}${indent(thinking)}${RESET}`)
 				}
 			} else if (block.type === "tool_use") {
 				const name = block.name as string
 				const input = block.input as Record<string, unknown>
 				if (name === "Bash") {
 					parts.push(
-						`${YELLOW}[${name}]${RESET} ${input.command as string}`,
+						`${YELLOW}[${name}]${RESET}\n${indent(input.command as string)}`,
 					)
 				} else if (name === "Read") {
 					parts.push(
@@ -66,19 +77,19 @@ const formatEvent = (line: string): string | null => {
 					)
 				} else if (name === "Grep") {
 					parts.push(
-						`${YELLOW}[${name}]${RESET} /${input.pattern as string}/`,
+						`${YELLOW}[${name}]${RESET}\n\t/${input.pattern as string}/`,
 					)
 				} else if (name === "Glob") {
 					parts.push(
-						`${YELLOW}[${name}]${RESET} ${input.pattern as string}`,
+						`${YELLOW}[${name}]${RESET}\n\t${input.pattern as string}`,
 					)
 				} else {
 					parts.push(
-						`${YELLOW}[${name}]${RESET} ${truncate(JSON.stringify(input), 100)}`,
+						`${YELLOW}[${name}]${RESET}\n\t${JSON.stringify(input)}`,
 					)
 				}
 			} else if (block.type === "text") {
-				parts.push(`${GREEN}[text]${RESET} ${truncate(block.text as string, 200)}`)
+				parts.push(`${GREEN}[text]${RESET}\n${indent(block.text as string)}`)
 			}
 		}
 		return parts.length > 0 ? parts.join("\n") : null
@@ -90,19 +101,17 @@ const formatEvent = (line: string): string | null => {
 		if (!content) return null
 
 		for (const block of content) {
+			if (block.type === "tool_result" && suppressedIds.has(block.tool_use_id as string)) {
+				continue
+			}
 			if (block.type === "tool_result") {
 				const raw = block.content
 				const result = typeof raw === "string" ? raw : JSON.stringify(raw)
 				if (block.is_error) {
-					return `${RED}[error]${RESET} ${truncate(result, 200)}`
+					return `${RED}[error]${RESET}\n${indent(result)}`
 				}
 				if (result) {
-					const lines = result.split("\n")
-					const preview =
-						lines.length <= 3
-							? result
-							: `${lines.slice(0, 3).join("\n")}  ${DIM}(${lines.length} lines)${RESET}`
-					return `${DIM}[result] ${truncate(preview, 200)}${RESET}`
+					return `${DIM}[result]${RESET}\n${DIM}${result}${RESET}`
 				}
 			}
 		}
@@ -113,7 +122,8 @@ const formatEvent = (line: string): string | null => {
 		const result = event.result as string
 		const cost = event.total_cost_usd as number
 		const turns = event.num_turns as number
-		return `\n${BOLD}${GREEN}[done]${RESET} turns=${turns} cost=$${cost?.toFixed(4) ?? "?"}\n${result ? truncate(result, 500) : "(no summary)"}`
+		const summary = result || "(no summary)"
+		return `\n${BOLD}${GREEN}[done]${RESET}\n\tturns=${turns} cost=$${cost?.toFixed(4) ?? "?"}\n${indent(summary)}`
 	}
 
 	return null
