@@ -1,6 +1,6 @@
 {
   "contractAddress": "0x584eB68F93bEcf6E463E7F259605c82Ef35c21e3",
-  "lastEdition": 30,
+  "lastEdition": 31,
   "history": [
     {
       "edition": 1,
@@ -1358,6 +1358,53 @@
         "foodPlacement": "rings",
         "foodDensity": 0.7,
         "foodClusterCount": 8
+      }
+    },
+    {
+      "edition": 31,
+      "seed": 245489,
+      "tokenId": "27",
+      "txHash": "0x7bb2d80aff7cbe93a125582891b8d139b350988796e874a6fccaf70cbea9152b",
+      "castHash": "0x863e4f20bcaca585974f10d67528f56da22cc430",
+      "zoraCastHash": "0xb554596c583968f6294dc9e34c8c1064792b3237",
+      "selfReplyHash": "0xdc059c429ed16b167f480660a94112c69f2f1acc",
+      "replyCastHashes": [
+        "0x37cd0d7026dae07217df59ae3164db30e7d8e202",
+        "0x00650cad7081f239ef3b368e06f004cc1ed5cadf",
+        "0xe697f413df8ff9312103e31cbc0710df6a90b39b",
+        "0xd22c211cb4af4ab0483608b8b5196e37cc2923e5",
+        "0x69fb2847d67a7eb11efbb129ddb82a2279bc4caa",
+        "0x6c818b7ffa412bbeaeca39468615414c850b70c5"
+      ],
+      "imageCid": "bafybeidtlhsrdnvpud5a2iitvwsacpie5t5ek4mjefjuhdgqm5upw2uaiy",
+      "metadataCid": "bafkreicbsikhgpgvd74rab6lqupzyqwylzdnoaqbghn2rouceku4s5v4ki",
+      "timestamp": "2026-02-22T20:54:16.961Z",
+      "genome": {
+        "agentCount": 400000,
+        "iterations": 700,
+        "sensorAngle": 0.3,
+        "sensorDistance": 26,
+        "turnAngle": 0.3,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.94,
+        "colormap": "inferno",
+        "populationCount": 1,
+        "populations": [
+          {
+            "color": [
+              255,
+              140,
+              20
+            ],
+            "agentFraction": 1
+          }
+        ],
+        "repulsionStrength": 0,
+        "foodWeight": 150,
+        "foodPlacement": "gradient",
+        "foodDensity": 0.55,
+        "foodClusterCount": 6
       }
     }
   ],

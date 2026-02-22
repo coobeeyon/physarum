@@ -274,6 +274,8 @@ export const runPipeline = async (
 			if (isValidHash(entry.castHash)) inboundHashes.push(entry.castHash)
 			if (entry.selfReplyHash && isValidHash(entry.selfReplyHash))
 				inboundHashes.push(entry.selfReplyHash)
+			if (entry.zoraCastHash && isValidHash(entry.zoraCastHash))
+				inboundHashes.push(entry.zoraCastHash)
 			if (entry.replyCastHashes) inboundHashes.push(...entry.replyCastHashes.filter(isValidHash))
 		}
 		const inboundResult = await respondToInboundReplies(neynarConfig, inboundHashes)
