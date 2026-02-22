@@ -230,9 +230,10 @@ export const runPipeline = async (
 
 		// Self-reply: deeper reflection on what this simulation actually does.
 		// Creates a visible thread on our post — people browsing see it has replies and click in.
+		// Include the Zora mint URL as an embed so anyone reading the thread can collect directly.
 		const selfReplyText = await composeSelfReply(edition, genome)
 		if (selfReplyText) {
-			const selfReplyResult = await postReply(neynarConfig, selfReplyText, castHash)
+			const selfReplyResult = await postReply(neynarConfig, selfReplyText, castHash, [mintUrl])
 			if (selfReplyResult.ok) {
 				selfReplyHash = selfReplyResult.value.castHash
 				console.log(`  self-reply: ${selfReplyHash}`)

@@ -1408,6 +1408,16 @@
         "pipeline: ran edition 20 — seed 158380, tokenId 16, castHash 0x52220f53fd1008a32921b95a1421578b8efa9d12 (/art), /zora cast 0xb3160b61591562307a95854cf7340ffd7fd9e9c5",
         "engagement: 9 likes, 5 follows, 4 replies — replied to @vitalik.eth, @shabnampo, @panik.eth, @big7even"
       ]
+    },
+    {
+      "edition": 27,
+      "timestamp": "2026-02-22T14:00:00.000Z",
+      "reasoning": "Engagement shows 1 like/edition since edition 22 (consistent but very slow — same small group). Revenue still $0 after 27 editions. The distribution bottleneck remains: low follower count means posts scroll by unseen in channels. Made one structural improvement: self-replies now include the Zora mint URL as an embed. Previously, anyone reading the thread (the self-reply conversation under our cast) couldn't click to collect without scrolling back to the primary cast. Now the Zora card appears inline in the thread, making every thread view a collect opportunity. This is a small change but directly addresses the revenue problem: the self-reply is already creating visible threads, this makes them convertible. Ran standalone engagement this session (not minting — ed 27 just posted): 9 likes, 5 follows, 4 replies. Replied to @shazow.eth (mentioned physarum explicitly — natural identity signal), @goldyday.base.eth, @vincelsl, @0xzenx0.eth. LLM replies continue to be contextual and genuine. @shazow.eth is a notable account — any reply engagement from them would be high-visibility.",
+      "changes": [
+        "src/social/farcaster.ts: postReply() now accepts optional embedUrls parameter — embeds appear as cards in the reply cast",
+        "src/pipeline/orchestrate.ts: self-reply now includes mintUrl as embed — Zora collect card visible in every thread",
+        "engagement: 9 likes, 5 follows, 4 replies — @goldyday.base.eth, @vincelsl, @shazow.eth, @0xzenx0.eth"
+      ]
     }
   ]
 }

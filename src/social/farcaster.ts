@@ -46,25 +46,31 @@ export const postCast = async (
 }
 
 /**
- * Post a reply to an existing cast (no embeds — just text).
+ * Post a reply to an existing cast.
  * Used for self-replies to our own edition posts.
+ * Pass embedUrls to include clickable cards (e.g. Zora collect link) in the thread.
  */
 export const postReply = async (
 	config: NeynarConfig,
 	text: string,
 	parentHash: string,
+	embedUrls?: string[],
 ): Promise<Result<{ castHash: string }>> => {
+	const body: Record<string, unknown> = {
+		signer_uuid: config.signerUuid,
+		text,
+		parent: parentHash,
+	}
+	if (embedUrls && embedUrls.length > 0) {
+		body.embeds = embedUrls.map((url) => ({ url }))
+	}
 	const resp = await fetch(`${NEYNAR_API}/cast`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 			"x-api-key": config.neynarApiKey,
 		},
-		body: JSON.stringify({
-			signer_uuid: config.signerUuid,
-			text,
-			parent: parentHash,
-		}),
+		body: JSON.stringify(body),
 	})
 
 	if (!resp.ok) {
