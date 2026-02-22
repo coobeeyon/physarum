@@ -215,6 +215,7 @@ export const runPipeline = async (
 
 	let castHash = "0x0"
 	let zoraCastHash: string | undefined
+	let selfReplyHash: string | undefined
 	const replyCastHashes: string[] = []
 	if (options.dryRun) {
 		console.log("  [dry-run] skipping Farcaster post")
@@ -232,9 +233,10 @@ export const runPipeline = async (
 		if (selfReplyText) {
 			const selfReplyResult = await postReply(neynarConfig, selfReplyText, castHash)
 			if (selfReplyResult.ok) {
-				console.log(`  self-reply: ${selfReplyResult.value.castHash}`)
-				// Track for engagement reading
-				replyCastHashes.push(selfReplyResult.value.castHash)
+				selfReplyHash = selfReplyResult.value.castHash
+				console.log(`  self-reply: ${selfReplyHash}`)
+				// Tracked separately — self-reply shows in primary cast's replies.count,
+				// so we need to know it's ours to avoid counting it as external engagement.
 			} else {
 				console.warn(`  self-reply failed: ${selfReplyResult.error}`)
 			}
@@ -290,6 +292,7 @@ export const runPipeline = async (
 				txHash,
 				castHash,
 				...(zoraCastHash ? { zoraCastHash } : {}),
+				...(selfReplyHash ? { selfReplyHash } : {}),
 				...(replyCastHashes.length > 0 ? { replyCastHashes } : {}),
 				imageCid,
 				metadataCid,

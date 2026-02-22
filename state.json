@@ -1,6 +1,6 @@
 {
   "contractAddress": "0x584eB68F93bEcf6E463E7F259605c82Ef35c21e3",
-  "lastEdition": 25,
+  "lastEdition": 26,
   "history": [
     {
       "edition": 1,
@@ -1026,8 +1026,8 @@
       "txHash": "0x9afd894e5381a17ffb5a080ca491111c1ba91c8d8f716a96d21881d20cf9b3d9",
       "castHash": "0x72f6454623a2ff1f85ec1d7612e7ceecd297d1f1",
       "zoraCastHash": "0xb7120cf065a3d0b55ab5cf9f07052231b1962e0c",
+      "selfReplyHash": "0xfecf5966e639457250e15db6c1faf1838eacc2b5",
       "replyCastHashes": [
-        "0xfecf5966e639457250e15db6c1faf1838eacc2b5",
         "0xdb47ae401d98765c3b5877c6d8aa30cfe72a54ae",
         "0xafc726ee69d0b47dba652b110b24d9ef51b3f6ed",
         "0xfcf87fbb5443e8e3d180b42cdffa08f20edffbec",
@@ -1071,8 +1071,8 @@
       "txHash": "0x6e8133d5ff05823189e95f7ac1d0a7c1843e4a00cee1af4361d1f5d3138f39ad",
       "castHash": "0x9a470d8870065109b639e8b8094fa6800b8a657f",
       "zoraCastHash": "0x17f95513fcf390b1a30cb061293c3e9004c55127",
+      "selfReplyHash": "0x7e72ac0cb2870905112ac8ece3fadeae4845a08a",
       "replyCastHashes": [
-        "0x7e72ac0cb2870905112ac8ece3fadeae4845a08a",
         "0xfb7f219592f82783379d97b62e6d25ed0d6620f2",
         "0xf2ad2f01852337ae72f17bda1e38174925e7181c",
         "0x81e5292b6568ae3bd01715e92dff5b6092f1b53c",
@@ -1107,6 +1107,51 @@
         "foodPlacement": "rings",
         "foodDensity": 0.7,
         "foodClusterCount": 8
+      }
+    },
+    {
+      "edition": 26,
+      "seed": 205894,
+      "tokenId": "22",
+      "txHash": "0x1058febc8da4d3b0dcf7aa5e78befab2922a633402c42b9c398c17f713a632f9",
+      "castHash": "0x06c117b85ee6f22887019d9d550f07c2c2b2e6e4",
+      "zoraCastHash": "0xe710d030138d76c8909f73bc536ea652d48c867c",
+      "selfReplyHash": "0x97604032d1276839672f3b25350805246bcc761b",
+      "replyCastHashes": [
+        "0xb1857f10631cf5cd9d6cc8b0701bcca0e8de9021",
+        "0xdcb2aea1757b609685e141e39e74ae70bc6125cd",
+        "0xf10c4daf874681bba37ed238c01b94582e68c186",
+        "0x9b55aeb48362984e46ef02b08f1b461d8805de92"
+      ],
+      "imageCid": "bafybeigfbgf3vh6neldqirnd53ow2ryvx36sa56xf7wqdzxfj753r3pdvq",
+      "metadataCid": "bafkreifu6qcmovy47xgtgpi6xunjbcvqngppnr2hkyye7qqsevg6n4vu5y",
+      "timestamp": "2026-02-22T04:57:02.081Z",
+      "genome": {
+        "agentCount": 400000,
+        "iterations": 700,
+        "sensorAngle": 0.3,
+        "sensorDistance": 26,
+        "turnAngle": 0.3,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.94,
+        "colormap": "inferno",
+        "populationCount": 1,
+        "populations": [
+          {
+            "color": [
+              255,
+              140,
+              20
+            ],
+            "agentFraction": 1
+          }
+        ],
+        "repulsionStrength": 0,
+        "foodWeight": 150,
+        "foodPlacement": "gradient",
+        "foodDensity": 0.55,
+        "foodClusterCount": 6
       }
     }
   ],

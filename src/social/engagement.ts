@@ -50,8 +50,11 @@ const fetchCastEngagement = async (
 		// Fetch engagement for primary cast
 		const primary = await fetchCastCounts(entry.castHash, apiKey)
 
-		// Also fetch engagement for /zora cross-post and reply casts (where stored)
+		// Also fetch engagement for self-reply, /zora cross-post, and community reply casts.
+		// selfReplyHash is tracked separately because our self-reply shows up in primary.replies —
+		// we subtract it to avoid counting our own reply as external engagement.
 		const extraHashes: string[] = [
+			...(entry.selfReplyHash && isValidCastHash(entry.selfReplyHash) ? [entry.selfReplyHash] : []),
 			...(entry.zoraCastHash && isValidCastHash(entry.zoraCastHash) ? [entry.zoraCastHash] : []),
 			...(entry.replyCastHashes?.filter(isValidCastHash) ?? []),
 		]
@@ -59,7 +62,11 @@ const fetchCastEngagement = async (
 
 		const totalLikes = primary.likes + extraCounts.reduce((sum, c) => sum + c.likes, 0)
 		const totalRecasts = primary.recasts + extraCounts.reduce((sum, c) => sum + c.recasts, 0)
-		const totalReplies = primary.replies + extraCounts.reduce((sum, c) => sum + c.replies, 0)
+		// Subtract our self-reply from primary.replies — it appears there but is not external engagement.
+		const selfReplyAdjustment = entry.selfReplyHash && isValidCastHash(entry.selfReplyHash) ? 1 : 0
+		const totalReplies =
+			Math.max(0, primary.replies - selfReplyAdjustment) +
+			extraCounts.reduce((sum, c) => sum + c.replies, 0)
 
 		const ageMs = Date.now() - new Date(entry.timestamp).getTime()
 
