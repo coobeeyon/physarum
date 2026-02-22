@@ -17,6 +17,36 @@ const RESET = isTTY ? "\x1b[0m" : ""
 const indent = (s: string): string =>
 	s.split("\n").map(l => `\t${l}`).join("\n")
 
+/** Collapse large fenced code blocks (file dumps) to a single line */
+const collapseCodeBlocks = (s: string): string => {
+	const lines = s.split("\n")
+	const out: string[] = []
+	let inBlock = false
+	let blockStart = 0
+	for (let i = 0; i < lines.length; i++) {
+		if (!inBlock && lines[i].startsWith("```")) {
+			inBlock = true
+			blockStart = i
+			continue
+		}
+		if (inBlock && lines[i].trimEnd() === "```") {
+			const blockLen = i - blockStart - 1
+			if (blockLen > 10) {
+				out.push(`(${blockLen} lines omitted)`)
+			} else {
+				for (let j = blockStart; j <= i; j++) out.push(lines[j])
+			}
+			inBlock = false
+			continue
+		}
+		if (!inBlock) out.push(lines[i])
+	}
+	if (inBlock) {
+		for (let j = blockStart; j < lines.length; j++) out.push(lines[j])
+	}
+	return out.join("\n")
+}
+
 const TODO_TOOLS = new Set(["TodoRead", "TodoWrite", "TaskCreate", "TaskGet", "TaskUpdate", "TaskList"])
 const QUIET_TOOLS = new Set(["Read"])
 const suppressedIds = new Set<string>()
@@ -83,6 +113,10 @@ const formatEvent = (line: string): string | null => {
 					parts.push(
 						`${YELLOW}[${name}]${RESET}\n\t${input.pattern as string}`,
 					)
+				} else if (name === "Task") {
+					parts.push(
+						`${YELLOW}[${name}]${RESET} ${input.description as string} (${input.subagent_type as string})`,
+					)
 				} else {
 					parts.push(
 						`${YELLOW}[${name}]${RESET}\n\t${JSON.stringify(input)}`,
@@ -106,7 +140,16 @@ const formatEvent = (line: string): string | null => {
 			}
 			if (block.type === "tool_result") {
 				const raw = block.content
-				const result = typeof raw === "string" ? raw : JSON.stringify(raw)
+				const result = collapseCodeBlocks(
+					typeof raw === "string"
+						? raw
+						: Array.isArray(raw)
+							? (raw as Array<Record<string, unknown>>)
+								.filter((b) => b.type === "text")
+								.map((b) => b.text as string)
+								.join("\n")
+							: JSON.stringify(raw),
+				)
 				if (block.is_error) {
 					return `${RED}[error]${RESET}\n${indent(result)}`
 				}
