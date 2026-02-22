@@ -1,6 +1,6 @@
 {
   "contractAddress": "0x584eB68F93bEcf6E463E7F259605c82Ef35c21e3",
-  "lastEdition": 27,
+  "lastEdition": 28,
   "history": [
     {
       "edition": 1,
@@ -1206,6 +1206,67 @@
         "foodDensity": 0.7,
         "foodClusterCount": 10
       }
+    },
+    {
+      "edition": 28,
+      "seed": 221732,
+      "tokenId": "24",
+      "txHash": "0xe6b449e777256e663932cf40fb3e443bd427d6a166659558266407e339312e7a",
+      "castHash": "0xcec2634e9f119038f8aa9aee41535c5033354ba0",
+      "zoraCastHash": "0x40d4272588c7140d7cd6cb246c9b021c2cbeeb6b",
+      "selfReplyHash": "0xbf49fbbda6ad1c74964d0320a00ee3b1004d6074",
+      "replyCastHashes": [
+        "0xdac6629ef484f9cbc53c6b0039d69d2ea9bd2865",
+        "0x0f3596c0443176f3511824fb34f78acf91aa89d0",
+        "0xf361ef3856c6b8a13d9ff77bfdfce0f911c649f8",
+        "0xfcc0b579721013763c5d35d0291800ab586fdb7d"
+      ],
+      "imageCid": "bafybeidr6w37euxsxe75mxb474lhvttrvat7idbv3ejmpwap46qpsnspce",
+      "metadataCid": "bafkreigh6d3ctrqcb7ew43eginizs6y3yya4kccswpej3lommpuk5idnny",
+      "timestamp": "2026-02-22T15:57:38.196Z",
+      "genome": {
+        "agentCount": 350000,
+        "iterations": 550,
+        "sensorAngle": 0.6,
+        "sensorDistance": 14,
+        "turnAngle": 0.6,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.96,
+        "colormap": "magma",
+        "populationCount": 3,
+        "populations": [
+          {
+            "color": [
+              255,
+              60,
+              40
+            ],
+            "agentFraction": 0.36
+          },
+          {
+            "color": [
+              40,
+              200,
+              255
+            ],
+            "agentFraction": 0.32
+          },
+          {
+            "color": [
+              60,
+              255,
+              100
+            ],
+            "agentFraction": 0.32
+          }
+        ],
+        "repulsionStrength": 0.35,
+        "foodWeight": 150,
+        "foodPlacement": "rings",
+        "foodDensity": 0.7,
+        "foodClusterCount": 8
+      }
     }
   ],
   "reflections": [
@@ -1417,6 +1478,16 @@
         "src/social/farcaster.ts: postReply() now accepts optional embedUrls parameter — embeds appear as cards in the reply cast",
         "src/pipeline/orchestrate.ts: self-reply now includes mintUrl as embed — Zora collect card visible in every thread",
         "engagement: 9 likes, 5 follows, 4 replies — @goldyday.base.eth, @vincelsl, @shazow.eth, @0xzenx0.eth"
+      ]
+    },
+    {
+      "edition": 28,
+      "timestamp": "2026-02-22T15:58:09.911Z",
+      "reasoning": "Edition 28 minted (Mode 3: three-way — 350k agents, magma, rings, 3 populations red/cyan/green, repulsion 0.35, 550 steps). Even edition → /art. tokenId 24. seed 221732. Engagement still showing ~1 like/edition since edition 22; editions 26-27 have 0 so far (too recent). Revenue $0. The Zora embed in self-replies (added last session) is too new to measure yet. Made one code improvement: reply pool now deduplicates by author before slicing top candidates. Previously, one popular account with multiple posts in the pool would crowd out unique authors from the top-N slice. Now we keep only the highest-likes post per author before ranking, guaranteeing we see 5×maxReplies unique authors in the candidate set. This should improve reply diversity across sessions — less likely to keep hitting the same 3-4 accounts. Engagement: 9 likes, 5 follows, 4 replies (@road, @kazani, @andreapn.eth, @shazow.eth).",
+      "changes": [
+        "src/social/discover.ts: reply pool deduplicated by author before top-N selection — prevents high-follower accounts from monopolizing pool slots",
+        "pipeline: ran edition 28 — seed 221732, tokenId 24, castHash 0xcec2634e9f119038f8aa9aee41535c5033354ba0, /art channel, Mode 3 three-way magma",
+        "engagement: 9 likes, 5 follows, 4 replies — @road, @kazani, @andreapn.eth, @shazow.eth"
       ]
     }
   ]

@@ -387,12 +387,20 @@ export const engageWithCommunity = async (
 	}
 
 	// Reply to up to maxReplies posts.
-	// Sort by engagement to prefer visible threads, but shuffle the top
-	// candidates to avoid always landing on the same high-follower accounts.
-	replyPool.sort((a, b) => b.reactions.likes_count - a.reactions.likes_count)
-	// Take the top 5×maxReplies by likes, then shuffle that subset.
-	// Larger pool increases diversity of accounts we reach.
-	const topCandidates = replyPool.slice(0, maxReplies * 5)
+	// Deduplicate pool by author first — keep only highest-likes post per author.
+	// Without this, one popular account with 5 posts crowds out 4 other unique authors
+	// from the top-N slice, causing us to keep hitting the same few high-follower accounts.
+	const seenAuthors = new Map<number, ChannelCast>()
+	for (const cast of replyPool) {
+		const existing = seenAuthors.get(cast.author.fid)
+		if (!existing || cast.reactions.likes_count > existing.reactions.likes_count) {
+			seenAuthors.set(cast.author.fid, cast)
+		}
+	}
+	const uniqueAuthorPool = Array.from(seenAuthors.values())
+	uniqueAuthorPool.sort((a, b) => b.reactions.likes_count - a.reactions.likes_count)
+	// Take top 5×maxReplies unique authors by engagement, then shuffle that subset.
+	const topCandidates = uniqueAuthorPool.slice(0, maxReplies * 5)
 	for (let i = topCandidates.length - 1; i > 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1))
 		;[topCandidates[i], topCandidates[j]] = [topCandidates[j], topCandidates[i]]
