@@ -16,16 +16,18 @@ const ALLOWED_TOOLS = [
 	"mcp__playwright__*",
 ].join(",")
 
+const isContainer = () => process.env.CONTAINER === "true"
+
 const MCP_CONFIG = JSON.stringify({
 	mcpServers: {
 		playwright: {
 			command: "npx",
-			args: ["@playwright/mcp@latest", "--headless"],
+			args: isContainer()
+				? ["@playwright/mcp@latest", "--headless", "--no-sandbox"]
+				: ["@playwright/mcp@latest", "--headless"],
 		},
 	},
 })
-
-const isContainer = () => process.env.CONTAINER === "true"
 
 export const runClaudeReflection = async (
 	state: PipelineState,
