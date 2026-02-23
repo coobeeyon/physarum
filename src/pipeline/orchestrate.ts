@@ -7,6 +7,7 @@ import type { EnvConfig } from "#config/env.ts"
 import { DEFAULT_PARAMS } from "#config/params.ts"
 import { type FoodImageData, loadFoodImage } from "#engine/food.ts"
 import { simulate } from "#engine/physarum.ts"
+import { uploadToImgur } from "#ipfs/imgur.ts"
 import { createPinataClient, uploadImage, uploadMetadata } from "#ipfs/upload.ts"
 import { updateGallery } from "#pipeline/gallery.ts"
 import { loadState, saveState } from "#pipeline/state.ts"
@@ -166,6 +167,19 @@ export const runPipeline = async (
 
 	const metadataUri = `ipfs://${metadataCid}`
 
+	// Upload to imgur for reliable Farcaster embeds (IPFS gateways are flaky)
+	let imgurUrl: string | undefined
+	if (!options.dryRun) {
+		console.log("uploading to imgur...")
+		const imgurResult = await uploadToImgur(png, `stigmergence #${edition}`)
+		if (imgurResult.ok) {
+			imgurUrl = imgurResult.value.url
+			console.log(`  imgur: ${imgurUrl}`)
+		} else {
+			console.warn(`  imgur failed: ${imgurResult.error} — falling back to IPFS gateway`)
+		}
+	}
+
 	if (options.deployOnly || options.postOnly) {
 		// Skip chain deployment if post-only
 	}
@@ -204,7 +218,9 @@ export const runPipeline = async (
 
 	// 5. Post to Farcaster
 	console.log("posting to Farcaster...")
-	const imageUrl = `${IPFS_GATEWAY}/${imageCid}`
+	// Prefer imgur for cast embeds (direct URL, no redirects, no rate limiting).
+	// Fall back to IPFS gateway if imgur upload failed.
+	const imageUrl = imgurUrl ?? `${IPFS_GATEWAY}/${imageCid}`
 	const mintUrl = `https://zora.co/collect/base:${contractAddress}/${tokenId}`
 
 	const neynarConfig: NeynarConfig = {
