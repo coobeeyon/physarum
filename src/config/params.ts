@@ -1,25 +1,24 @@
 import type { PhysarumParams, PopulationConfig } from "#types/physarum.ts"
 
 export const DEFAULT_POPULATIONS: readonly PopulationConfig[] = [
-	{ color: [255, 85, 15], agentFraction: 0.55 },
-	{ color: [15, 165, 255], agentFraction: 0.45 },
+	{ color: [255, 160, 40], agentFraction: 1.0 },
 ]
 
 export const DEFAULT_PARAMS: Omit<PhysarumParams, "seed"> = {
 	width: 2048,
 	height: 2048,
-	agentCount: 400_000,
-	iterations: 600,
-	sensorAngle: 0.5,
-	sensorDistance: 18,
-	turnAngle: 0.5,
+	agentCount: 500_000,
+	iterations: 800,
+	sensorAngle: 0.45,
+	sensorDistance: 20,
+	turnAngle: 0.45,
 	stepSize: 1.3,
-	depositAmount: 10,
+	depositAmount: 18,
 	decayFactor: 0.96,
-	colormap: "inferno",
-	populationCount: 2,
+	colormap: "viridis",
+	populationCount: 1,
 	populations: DEFAULT_POPULATIONS,
-	repulsionStrength: 0.4,
+	repulsionStrength: 0,
 	foodWeight: 150.0,
 	foodPlacement: "gradient",
 	foodDensity: 0.7,

@@ -58,7 +58,9 @@ export const runPipeline = async (
 	// 1. Simulate
 	console.log("simulating physarum...")
 	const { width, height, ...defaultGenome } = DEFAULT_PARAMS
-	const variedGenome = varyGenome(edition, defaultGenome)
+	// When a food image is provided, skip the automatic mode rotation.
+	// Image-food editions are intentional — parameters chosen per-edition, not cycled.
+	const variedGenome = options.foodImageSource ? defaultGenome : varyGenome(edition, defaultGenome)
 	let params: PhysarumParams = {
 		width,
 		height,
@@ -91,10 +93,12 @@ export const runPipeline = async (
 			...params,
 			width: foodData.width,
 			height: foodData.height,
-			agentCount: scaledAgents,
-			foodWeight: Math.min(params.foodWeight, 40),
+			agentCount: Math.max(scaledAgents, params.agentCount),
+			foodWeight: Math.min(params.foodWeight, 60),
 		}
-		console.log(`  image dimensions: ${foodData.width}x${foodData.height} (${scaledAgents} agents)`)
+		console.log(
+			`  image dimensions: ${foodData.width}x${foodData.height} (${params.agentCount} agents)`,
+		)
 	}
 
 	const t0 = performance.now()
