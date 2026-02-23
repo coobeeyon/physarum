@@ -13,7 +13,17 @@ const ALLOWED_TOOLS = [
 	"Read",
 	"Write",
 	"Edit",
+	"mcp__playwright__*",
 ].join(",")
+
+const MCP_CONFIG = JSON.stringify({
+	mcpServers: {
+		playwright: {
+			command: "npx",
+			args: ["@playwright/mcp@latest", "--headless"],
+		},
+	},
+})
 
 const isContainer = () => process.env.CONTAINER === "true"
 
@@ -38,6 +48,8 @@ export const runClaudeReflection = async (
 		maxTurns,
 		"--output-format",
 		"stream-json",
+		"--mcp-config",
+		MCP_CONFIG,
 	]
 	const sandboxArgs = isContainer()
 		? ["--dangerously-skip-permissions"]
