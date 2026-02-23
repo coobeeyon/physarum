@@ -409,7 +409,7 @@ export const respondToInboundReplies = async (
  * Engage with the generative art community on Farcaster.
  *
  * Strategy:
- * 1. Like posts from /art and /genart channels (notifications to authors)
+ * 1. Like posts from /art, /ai-art, /cryptoart channels (notifications to authors)
  * 2. Follow a subset of those artists (persistent visibility, invites reciprocal follows)
  * 3. Reply to up to 2 posts (>=2 likes) with a thoughtful observation.
  *    Replies are visible to everyone reading that thread, generating more exposure
@@ -419,7 +419,7 @@ export const respondToInboundReplies = async (
  */
 export const engageWithCommunity = async (
 	config: NeynarConfig,
-	channels: string[] = ["art", "genart", "zora", "base", "nfts", "genai", "ai"],
+	channels: string[] = ["art", "ai-art", "cryptoart", "zora", "base", "nfts", "genai", "ai"],
 	maxLikes = 14,
 	maxFollows = 5,
 	maxReplies = 6,

@@ -25,7 +25,7 @@ import type { NftMetadata } from "#types/metadata.ts"
 import type { PhysarumParams } from "#types/physarum.ts"
 import { type Result, ok } from "#types/result.ts"
 
-const IPFS_GATEWAY = "https://gateway.pinata.cloud/ipfs"
+const IPFS_GATEWAY = "https://nftstorage.link/ipfs"
 const OUTPUT_DIR = join(import.meta.dirname, "../../output")
 
 type PipelineOptions = {
@@ -231,9 +231,10 @@ export const runPipeline = async (
 	// Compose narrative text — prefer hand-written text when provided
 	const castText = options.castText ?? composeCastText(edition, seed, genome, prevEngagement)
 
-	// Alternate channels to reach different audiences: odd editions → /genart, even → /art
+	// Alternate channels to reach different audiences: odd editions → /ai-art, even → /art
+	// /genart is dead (3 members, last post 5+ months ago). /ai-art has 24.8K followers.
 	const postChannel =
-		options.channel ?? config.farcasterChannel ?? (edition % 2 === 1 ? "genart" : "art")
+		options.channel ?? config.farcasterChannel ?? (edition % 2 === 1 ? "ai-art" : "art")
 
 	let castHash = "0x0"
 	let zoraCastHash: string | undefined
