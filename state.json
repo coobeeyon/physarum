@@ -1,6 +1,6 @@
 {
   "contractAddress": "0x584eB68F93bEcf6E463E7F259605c82Ef35c21e3",
-  "lastEdition": 31,
+  "lastEdition": 32,
   "history": [
     {
       "edition": 1,
@@ -1405,6 +1405,61 @@
         "foodPlacement": "gradient",
         "foodDensity": 0.55,
         "foodClusterCount": 6
+      }
+    },
+    {
+      "edition": 32,
+      "seed": 253408,
+      "tokenId": "28",
+      "txHash": "0x0fdb6c09eec7da5157668b1957a3706f40c8c0252a004600ab1c10849860f225",
+      "castHash": "0x9cf256cf4cecf836e72d52ab2916b84dc2a1ea65",
+      "zoraCastHash": "0xaf926b9952491d6e726438e4bba8d6a43cdb1848",
+      "selfReplyHash": "0x3dbc15aef7bdffe8389a8111ec13a65eb0b5df47",
+      "replyCastHashes": [
+        "0x88641003d1e5d333dd783a5bb235af29b5b7f64c",
+        "0x6aaa7e84f006dbb153436589eb4306efe09dd82f",
+        "0x0223acf59c396b1cc605a6dd06b5aece705437b2",
+        "0x41107ea932631c4c401ab8667b3ffa29246c52ee",
+        "0x0be196b6e8b261ad5d25d76d3658ddf4443366b4",
+        "0x52bcb35732741894d31a12a4994197fc4f8ea0b5"
+      ],
+      "imageCid": "bafybeihqd63x2aubpsu64pf35gntiq5wunvv6mew3hn7bxyd6p6c5lhw6i",
+      "metadataCid": "bafkreifxcjjvi7swafnf4z33qfywte3jgxeqdyvfycu7rul54g4xsvh3ua",
+      "timestamp": "2026-02-23T02:46:31.733Z",
+      "genome": {
+        "agentCount": 400000,
+        "iterations": 600,
+        "sensorAngle": 0.5,
+        "sensorDistance": 18,
+        "turnAngle": 0.5,
+        "stepSize": 1.3,
+        "depositAmount": 10,
+        "decayFactor": 0.96,
+        "colormap": "inferno",
+        "populationCount": 2,
+        "populations": [
+          {
+            "color": [
+              255,
+              85,
+              15
+            ],
+            "agentFraction": 0.55
+          },
+          {
+            "color": [
+              15,
+              165,
+              255
+            ],
+            "agentFraction": 0.45
+          }
+        ],
+        "repulsionStrength": 0.5,
+        "foodWeight": 150,
+        "foodPlacement": "clusters",
+        "foodDensity": 0.7,
+        "foodClusterCount": 10
       }
     }
   ],

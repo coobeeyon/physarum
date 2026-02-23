@@ -292,7 +292,7 @@ export const simulate = (
 		if (max > 0) {
 			const invMax = 1 / max
 			for (let i = 0; i < size; i++) {
-				trail[i] = Math.sqrt(trail[i] * invMax) // gamma 0.5
+				trail[i] = Math.cbrt(trail[i] * invMax) // gamma 1/3 — brighter trails
 			}
 		}
 	}
@@ -307,9 +307,9 @@ export const simulate = (
 		if (maxIntensity > 0) {
 			const inv = 1 / maxIntensity
 			for (let i = 0; i < size; i++) {
-				color.trailR[i] = Math.sqrt(color.trailR[i] * inv)
-				color.trailG[i] = Math.sqrt(color.trailG[i] * inv)
-				color.trailB[i] = Math.sqrt(color.trailB[i] * inv)
+				color.trailR[i] = Math.cbrt(color.trailR[i] * inv)
+				color.trailG[i] = Math.cbrt(color.trailG[i] * inv)
+				color.trailB[i] = Math.cbrt(color.trailB[i] * inv)
 			}
 		}
 	}
