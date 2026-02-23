@@ -24,7 +24,7 @@ type AestheticMode = Pick<
 >
 
 const MODES: readonly AestheticMode[] = [
-	// Mode 0: Dense mycelium — viridis, rings, thick persistent network
+	// Mode 0: Dense mycelium — viridis, clusters, thick persistent network
 	{
 		agentCount: 500_000,
 		iterations: 600,
@@ -36,9 +36,9 @@ const MODES: readonly AestheticMode[] = [
 		populationCount: 1,
 		populations: [{ color: [20, 220, 160] as readonly [number, number, number], agentFraction: 1 }],
 		repulsionStrength: 0,
-		foodPlacement: "rings" as FoodPlacementStrategy,
+		foodPlacement: "clusters" as FoodPlacementStrategy,
 		foodDensity: 0.7,
-		foodClusterCount: 8,
+		foodClusterCount: 12,
 	},
 
 	// Mode 1: River delta — long flowing orange filaments, gradient food
@@ -78,7 +78,7 @@ const MODES: readonly AestheticMode[] = [
 		foodClusterCount: 10,
 	},
 
-	// Mode 3: Three-way — red, cyan, green populations with repulsion, rings
+	// Mode 3: Three-way — red, cyan, green populations with repulsion, clusters
 	{
 		agentCount: 350_000,
 		iterations: 550,
@@ -94,9 +94,9 @@ const MODES: readonly AestheticMode[] = [
 			{ color: [60, 255, 100] as readonly [number, number, number], agentFraction: 0.32 },
 		],
 		repulsionStrength: 0.35,
-		foodPlacement: "rings" as FoodPlacementStrategy,
+		foodPlacement: "clusters" as FoodPlacementStrategy,
 		foodDensity: 0.7,
-		foodClusterCount: 8,
+		foodClusterCount: 10,
 	},
 
 	// Mode 4: Ghost web — sparse ephemeral traces, plasma colormap, grid food
