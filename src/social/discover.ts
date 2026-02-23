@@ -119,7 +119,7 @@ Reply (just the text, nothing else, under 240 characters):`
 				"content-type": "application/json",
 			},
 			body: JSON.stringify({
-				model: "claude-haiku-4-5-20251001",
+				model: "claude-sonnet-4-6",
 				max_tokens: 150,
 				messages: [{ role: "user", content: prompt }],
 			}),
@@ -287,6 +287,7 @@ type ConversationReply = {
 	hash: string
 	text: string
 	author: { fid: number; username: string }
+	direct_replies?: ConversationReply[]
 }
 
 /**
@@ -295,7 +296,8 @@ type ConversationReply = {
  */
 const fetchRepliesTo = async (apiKey: string, castHash: string): Promise<ConversationReply[]> => {
 	try {
-		const url = `${NEYNAR_API}/cast/conversation?identifier=${encodeURIComponent(castHash)}&type=hash&reply_depth=1&limit=25`
+		// reply_depth=2 so we can see if we've already responded to each reply
+		const url = `${NEYNAR_API}/cast/conversation?identifier=${encodeURIComponent(castHash)}&type=hash&reply_depth=2&limit=25`
 		const resp = await fetch(url, { headers: { "x-api-key": apiKey } })
 		if (!resp.ok) return []
 		const data = (await resp.json()) as {
@@ -335,7 +337,7 @@ Response (just the text, nothing else, under 240 characters):`
 				"content-type": "application/json",
 			},
 			body: JSON.stringify({
-				model: "claude-haiku-4-5-20251001",
+				model: "claude-sonnet-4-6",
 				max_tokens: 150,
 				messages: [{ role: "user", content: prompt }],
 			}),
@@ -380,6 +382,10 @@ export const respondToInboundReplies = async (
 			if (reply.author.fid === config.fid) continue
 			if (respondedFids.has(reply.author.fid)) continue
 			if (reply.text.trim().length < 5) continue
+			// Skip if we already responded to this reply in a previous session
+			// (reply_depth=2 gives us the sub-replies under each direct_reply)
+			const alreadyResponded = reply.direct_replies?.some((r) => r.author.fid === config.fid)
+			if (alreadyResponded) continue
 
 			respondedFids.add(reply.author.fid)
 
