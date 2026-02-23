@@ -18,6 +18,9 @@ const parseArgs = (args: ReadonlyArray<string>) => {
 		seedOverride: undefined as number | undefined,
 		foodImageSource: undefined as string | undefined,
 		channel: undefined as string | undefined,
+		castText: undefined as string | undefined,
+		zoraCastText: undefined as string | undefined,
+		selfReplyText: undefined as string | undefined,
 	}
 
 	for (let i = 0; i < args.length; i++) {
@@ -37,6 +40,15 @@ const parseArgs = (args: ReadonlyArray<string>) => {
 			i++
 		} else if (arg === "--channel" && i + 1 < args.length) {
 			flags.channel = args[i + 1]
+			i++
+		} else if (arg === "--cast-text" && i + 1 < args.length) {
+			flags.castText = args[i + 1]
+			i++
+		} else if (arg === "--zora-text" && i + 1 < args.length) {
+			flags.zoraCastText = args[i + 1]
+			i++
+		} else if (arg === "--self-reply-text" && i + 1 < args.length) {
+			flags.selfReplyText = args[i + 1]
 			i++
 		}
 	}

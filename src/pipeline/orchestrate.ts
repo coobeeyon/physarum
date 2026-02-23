@@ -36,6 +36,9 @@ type PipelineOptions = {
 	readonly seedOverride?: number
 	readonly foodImageSource?: string
 	readonly channel?: string
+	readonly castText?: string
+	readonly zoraCastText?: string
+	readonly selfReplyText?: string
 }
 
 export const runPipeline = async (
@@ -80,7 +83,17 @@ export const runPipeline = async (
 		const defaultArea = params.width * params.height
 		const imageArea = foodData.width * foodData.height
 		const scaledAgents = Math.round(params.agentCount * (imageArea / defaultArea))
-		params = { ...params, width: foodData.width, height: foodData.height, agentCount: scaledAgents }
+		// Image food has luminance everywhere — lower foodWeight so agents follow
+		// the image structure without being rigidly locked to it.
+		// Abstract food patterns are sparse (value only at attractors), so 150 works;
+		// image food fills every pixel, so we reduce to let organic deviation happen.
+		params = {
+			...params,
+			width: foodData.width,
+			height: foodData.height,
+			agentCount: scaledAgents,
+			foodWeight: Math.min(params.foodWeight, 40),
+		}
 		console.log(`  image dimensions: ${foodData.width}x${foodData.height} (${scaledAgents} agents)`)
 	}
 
@@ -90,7 +103,11 @@ export const runPipeline = async (
 
 	// 2. Render
 	console.log("rendering PNG...")
-	const renderResult = renderPng(simResult, params.colormap, foodImageRgb)
+	// For image-food simulations, render with population/colormap coloring rather than
+	// image-derived colors. The food image drives agent pathfinding, but the rendering
+	// uses the colormap — this makes connecting trails visible (image colors are dark
+	// in empty space between food sources, making trail networks invisible).
+	const renderResult = renderPng(simResult, params.colormap)
 	if (!renderResult.ok) return renderResult
 	const { png } = renderResult.value
 
@@ -207,8 +224,8 @@ export const runPipeline = async (
 		}
 	}
 
-	// Compose narrative text
-	const castText = composeCastText(edition, seed, genome, prevEngagement)
+	// Compose narrative text — prefer hand-written text when provided
+	const castText = options.castText ?? composeCastText(edition, seed, genome, prevEngagement)
 
 	// Alternate channels to reach different audiences: odd editions → /genart, even → /art
 	const postChannel =
@@ -231,7 +248,7 @@ export const runPipeline = async (
 		// Self-reply: deeper reflection on what this simulation actually does.
 		// Creates a visible thread on our post — people browsing see it has replies and click in.
 		// Include the Zora mint URL as an embed so anyone reading the thread can collect directly.
-		const selfReplyText = await composeSelfReply(edition, genome)
+		const selfReplyText = options.selfReplyText ?? (await composeSelfReply(edition, genome))
 		if (selfReplyText) {
 			const selfReplyResult = await postReply(neynarConfig, selfReplyText, castHash, [mintUrl])
 			if (selfReplyResult.ok) {
@@ -246,7 +263,7 @@ export const runPipeline = async (
 
 		// Secondary cast to /zora — collector-oriented, different audience than /genart or /art
 		if (postChannel !== "zora") {
-			const zoraText = composeZoraCast(edition, genome)
+			const zoraText = options.zoraCastText ?? composeZoraCast(edition, genome)
 			const zoraResult = await postCast(neynarConfig, zoraText, imageUrl, mintUrl, "zora")
 			if (zoraResult.ok) {
 				zoraCastHash = zoraResult.value.castHash

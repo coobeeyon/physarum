@@ -19,12 +19,16 @@ export const renderPng = (
 		colorTrailB,
 	} = result
 
-	const rgba =
-		colorTrailR && colorTrailG && colorTrailB
-			? applyColorTrail(colorTrailR, colorTrailG, colorTrailB, width, height, foodImageRgb)
-			: populationCount > 1
-				? applyMultiPopulationColors(trailMaps, populations, width, height)
-				: applyColormap(trailMaps[0], width, height, colormap ?? "magma")
+	// When foodImageRgb is provided AND we have color trails, use image-derived colors.
+	// When foodImageRgb is not passed to the renderer (even if the simulation used it),
+	// fall through to population coloring or colormap — this lets image-food simulations
+	// be rendered with standard colormaps for better visibility of connecting trails.
+	const useColorTrails = foodImageRgb && colorTrailR && colorTrailG && colorTrailB
+	const rgba = useColorTrails
+		? applyColorTrail(colorTrailR, colorTrailG, colorTrailB, width, height, foodImageRgb)
+		: populationCount > 1
+			? applyMultiPopulationColors(trailMaps, populations, width, height)
+			: applyColormap(trailMaps[0], width, height, colormap ?? "magma")
 
 	const canvas = createCanvas(width, height)
 	const ctx = canvas.getContext("2d")
