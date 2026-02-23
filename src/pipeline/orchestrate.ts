@@ -25,7 +25,7 @@ import type { NftMetadata } from "#types/metadata.ts"
 import type { PhysarumParams } from "#types/physarum.ts"
 import { type Result, ok } from "#types/result.ts"
 
-const IPFS_GATEWAY = "https://nftstorage.link/ipfs"
+const IPFS_GATEWAY = "https://ipfs.io/ipfs"
 const OUTPUT_DIR = join(import.meta.dirname, "../../output")
 
 type PipelineOptions = {

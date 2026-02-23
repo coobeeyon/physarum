@@ -283,6 +283,8 @@ export const simulate = (
 	}
 
 	// Normalize each trail map independently with gamma correction
+	const gamma = params.normPower ?? 1 / 3 // default cbrt; use 0.5 for old sqrt rendering
+	const applyGamma = gamma === 1 / 3 ? Math.cbrt : (x: number) => x ** gamma
 	for (let p = 0; p < populationCount; p++) {
 		const trail = trailMaps[p]
 		let max = 0
@@ -292,7 +294,7 @@ export const simulate = (
 		if (max > 0) {
 			const invMax = 1 / max
 			for (let i = 0; i < size; i++) {
-				trail[i] = Math.cbrt(trail[i] * invMax) // gamma 1/3 — brighter trails
+				trail[i] = applyGamma(trail[i] * invMax)
 			}
 		}
 	}
@@ -307,9 +309,9 @@ export const simulate = (
 		if (maxIntensity > 0) {
 			const inv = 1 / maxIntensity
 			for (let i = 0; i < size; i++) {
-				color.trailR[i] = Math.cbrt(color.trailR[i] * inv)
-				color.trailG[i] = Math.cbrt(color.trailG[i] * inv)
-				color.trailB[i] = Math.cbrt(color.trailB[i] * inv)
+				color.trailR[i] = applyGamma(color.trailR[i] * inv)
+				color.trailG[i] = applyGamma(color.trailG[i] * inv)
+				color.trailB[i] = applyGamma(color.trailB[i] * inv)
 			}
 		}
 	}

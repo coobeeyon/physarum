@@ -30,6 +30,7 @@ export type PhysarumParams = {
 	readonly foodDensity: number
 	readonly foodClusterCount: number
 	readonly foodImageSource?: string
+	readonly normPower?: number // gamma correction exponent: 1/3 (cbrt, default) or 1/2 (sqrt, old)
 }
 
 export type SimulationResult = {
