@@ -1,6 +1,6 @@
 {
   "contractAddress": "0x584eB68F93bEcf6E463E7F259605c82Ef35c21e3",
-  "lastEdition": 35,
+  "lastEdition": 36,
   "history": [
     {
       "edition": 1,
@@ -1612,6 +1612,54 @@
         "foodDensity": 0.7,
         "foodClusterCount": 6,
         "foodImageSource": "output/maze.png"
+      }
+    },
+    {
+      "edition": 36,
+      "seed": 36007,
+      "tokenId": "32",
+      "txHash": "0xb6dddaf99aa60f536858d7a155362f66a8dabe9ec2071c4fb5a45835bfeb793c",
+      "castHash": "0xa189b2791865f640ba239c9d7a75ced8018a9afc",
+      "zoraCastHash": "0x95347178dbbabd350305f452e3d5ff89311172ae",
+      "selfReplyHash": "0x7a35ac28734640f118be690d7a84c66417f29919",
+      "imageCid": "bafybeidbkbb5fx4bud4e67cdsp5ew774iz5bt53np7egy27hqnfm4myvyy",
+      "metadataCid": "bafkreiesboau52brnbpohumk5ogbqas2fzsip5noe7axnfb3724g6gu4r4",
+      "timestamp": "2026-02-24T19:28:06.690Z",
+      "genome": {
+        "agentCount": 500000,
+        "iterations": 2000,
+        "sensorAngle": 0.3,
+        "sensorDistance": 22,
+        "turnAngle": 0.35,
+        "stepSize": 1,
+        "depositAmount": 25,
+        "decayFactor": 0.93,
+        "colormap": "inferno",
+        "populationCount": 2,
+        "populations": [
+          {
+            "color": [
+              40,
+              120,
+              255
+            ],
+            "agentFraction": 0.5
+          },
+          {
+            "color": [
+              255,
+              140,
+              30
+            ],
+            "agentFraction": 0.5
+          }
+        ],
+        "repulsionStrength": 0.45,
+        "foodWeight": 200,
+        "foodPlacement": "image",
+        "foodDensity": 0.7,
+        "foodClusterCount": 6,
+        "foodImageSource": "output/tokyo-rail-food.png"
       }
     }
   ],
