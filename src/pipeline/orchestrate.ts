@@ -86,16 +86,14 @@ export const runPipeline = async (
 		const defaultArea = params.width * params.height
 		const imageArea = foodData.width * foodData.height
 		const scaledAgents = Math.round(params.agentCount * (imageArea / defaultArea))
-		// Image food has luminance everywhere — lower foodWeight so agents follow
-		// the image structure without being rigidly locked to it.
-		// Abstract food patterns are sparse (value only at attractors), so 150 works;
-		// image food fills every pixel, so we reduce to let organic deviation happen.
+		// Scale agents proportionally to the food image area.
+		// foodWeight is left as-is from DEFAULT_PARAMS — each edition's params
+		// are tuned for the specific food image (maze needs 500, photo needs 60).
 		params = {
 			...params,
 			width: foodData.width,
 			height: foodData.height,
 			agentCount: Math.max(scaledAgents, params.agentCount),
-			foodWeight: Math.min(params.foodWeight, 60),
 		}
 		console.log(
 			`  image dimensions: ${foodData.width}x${foodData.height} (${params.agentCount} agents)`,
