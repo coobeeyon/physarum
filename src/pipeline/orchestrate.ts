@@ -259,7 +259,9 @@ export const runPipeline = async (
 		console.log(`  channel: ${postChannel}`)
 		console.log(`  narrative:\n${castText}`)
 	} else {
-		const castResult = await postCast(neynarConfig, castText, imageUrl, mintUrl, postChannel)
+		// Primary cast embeds image only — no Zora card competing with the art.
+		// The Zora collect URL goes in the self-reply thread instead.
+		const castResult = await postCast(neynarConfig, castText, imageUrl, undefined, postChannel)
 		if (!castResult.ok) return castResult
 		castHash = castResult.value.castHash
 		console.log(`  cast: ${castHash}`)

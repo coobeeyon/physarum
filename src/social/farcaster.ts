@@ -12,13 +12,15 @@ export const postCast = async (
 	config: NeynarConfig,
 	text: string,
 	imageUrl: string,
-	mintUrl: string,
+	mintUrl?: string,
 	channel?: string,
 ): Promise<Result<{ castHash: string }>> => {
+	const embeds: Array<{ url: string }> = [{ url: imageUrl }]
+	if (mintUrl) embeds.push({ url: mintUrl })
 	const body: Record<string, unknown> = {
 		signer_uuid: config.signerUuid,
 		text,
-		embeds: [{ url: imageUrl }, { url: mintUrl }],
+		embeds,
 	}
 	if (channel) {
 		body.channel_id = channel
