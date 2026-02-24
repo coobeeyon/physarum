@@ -1412,9 +1412,9 @@
       "seed": 253408,
       "tokenId": "28",
       "txHash": "0x0fdb6c09eec7da5157668b1957a3706f40c8c0252a004600ab1c10849860f225",
-      "castHash": "0x9cf256cf4cecf836e72d52ab2916b84dc2a1ea65",
+      "castHash": "0x09da903fe1af38d4644f1a9cdd35511745356aeb",
       "zoraCastHash": "0xaf926b9952491d6e726438e4bba8d6a43cdb1848",
-      "selfReplyHash": "0x3dbc15aef7bdffe8389a8111ec13a65eb0b5df47",
+      "selfReplyHash": "0xc56be06ba6ea476a44303ca2da6305fdba2351f9",
       "replyCastHashes": [
         "0x88641003d1e5d333dd783a5bb235af29b5b7f64c",
         "0x6aaa7e84f006dbb153436589eb4306efe09dd82f",
