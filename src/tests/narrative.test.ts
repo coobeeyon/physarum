@@ -44,11 +44,11 @@ describe("composeCastText", () => {
 		expect(text).toContain("stigmergence #1")
 	})
 
-	test("multi-population uses competing intro and particle count", () => {
+	test("multi-population uses competing intro and agent count", () => {
 		const text = composeCastText(1, 7919, makeGenome(), null)
 
-		expect(text).toContain("300,000 particles")
-		expect(text).toContain("border neither planned")
+		expect(text).toContain("300,000 agents")
+		expect(text).toContain("three colonies")
 	})
 
 	test("single population uses single intro and agent count", () => {

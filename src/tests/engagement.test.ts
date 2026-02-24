@@ -72,7 +72,7 @@ describe("readEngagement", () => {
 		expect(result.value.warnings).toHaveLength(1)
 	})
 
-	test("handles HTTP error as warning", async () => {
+	test("handles HTTP error as zero engagement", async () => {
 		const originalFetch = globalThis.fetch
 		globalThis.fetch = mock(async () => new Response("Not Found", { status: 404 })) as typeof fetch
 
@@ -80,14 +80,16 @@ describe("readEngagement", () => {
 
 		expect(result.ok).toBe(true)
 		if (!result.ok) return
-		expect(result.value.engagement).toHaveLength(0)
-		expect(result.value.warnings).toHaveLength(1)
-		expect(result.value.warnings[0]).toContain("404")
+		expect(result.value.engagement).toHaveLength(1)
+		expect(result.value.engagement[0].likes).toBe(0)
+		expect(result.value.engagement[0].recasts).toBe(0)
+		expect(result.value.engagement[0].replies).toBe(0)
+		expect(result.value.warnings).toHaveLength(0)
 
 		globalThis.fetch = originalFetch
 	})
 
-	test("handles network error as warning", async () => {
+	test("handles network error as zero engagement", async () => {
 		const originalFetch = globalThis.fetch
 		globalThis.fetch = mock(async () => {
 			throw new Error("network down")
@@ -97,9 +99,9 @@ describe("readEngagement", () => {
 
 		expect(result.ok).toBe(true)
 		if (!result.ok) return
-		expect(result.value.engagement).toHaveLength(0)
-		expect(result.value.warnings).toHaveLength(1)
-		expect(result.value.warnings[0]).toContain("network down")
+		expect(result.value.engagement).toHaveLength(1)
+		expect(result.value.engagement[0].likes).toBe(0)
+		expect(result.value.warnings).toHaveLength(0)
 
 		globalThis.fetch = originalFetch
 	})
