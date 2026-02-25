@@ -283,9 +283,12 @@ export const runPipeline = async (
 		}
 
 		// Secondary cast to /zora — collector-oriented, different audience than /genart or /art
+		// Image-only embed (no Zora promotional card) — the garish +325% chrome graphic
+		// competes with the art. Collect URL goes as text instead.
 		if (postChannel !== "zora") {
 			const zoraText = options.zoraCastText ?? composeZoraCast(edition, genome)
-			const zoraResult = await postCast(neynarConfig, zoraText, imageUrl, mintUrl, "zora")
+			const zoraTextWithLink = `${zoraText}\n\n${mintUrl}`
+			const zoraResult = await postCast(neynarConfig, zoraTextWithLink, imageUrl, undefined, "zora")
 			if (zoraResult.ok) {
 				zoraCastHash = zoraResult.value.castHash
 				console.log(`  /zora cast: ${zoraCastHash}`)
