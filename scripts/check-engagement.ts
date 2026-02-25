@@ -2,15 +2,15 @@ const apiKey = process.env.NEYNAR_API_KEY!;
 const OUR_FID = 2797211;
 
 const hashes: Record<string, string> = {
-  "ed32-primary": "0x09da903fe1af38d4644f1a9cdd35511745356aeb",
-  "ed33-primary": "0x554691819da02da9c6f41afbf544ec0bf696a1f3",
-  "ed33-zora": "0xf0a724c3633ac1c841862a70d1163a135be4e8bc",
   "ed34-primary": "0x9e79aac3fae9fb44eafa214da2d1b8240f67e84a",
   "ed34-zora": "0xe7010aa5bb627bbc9b06d343b00cf149c31517de",
   "ed34-self": "0x44f315f4bac9ccf353aa8ceca995a703ba538c17",
-  "ed35-primary": "0x2878f61152e0d9052082e93c4967f3ae8fea6720",
+  "ed35-primary": "0xf55cc8d37b64f5e5c622c03ae354e251bfb444c6",
   "ed35-zora": "0xcb40b5236acf913bdabe437ba5a77c956d961bd1",
-  "ed35-self": "0x35b48e676282941536cd0415fa2e6df9d740bcdd",
+  "ed35-self": "0xbbce0e68c483df4ffb98969df8271d995c2cda19",
+  "ed36-primary": "0xa189b2791865f640ba239c9d7a75ced8018a9afc",
+  "ed36-zora": "0x95347178dbbabd350305f452e3d5ff89311172ae",
+  "ed36-self": "0x7a35ac28734640f118be690d7a84c66417f29919",
 };
 
 console.log("=== ENGAGEMENT CHECK ===\n");
@@ -30,11 +30,15 @@ for (const [label, hash] of Object.entries(hashes)) {
 console.log("\n=== INBOUND REPLIES ===\n");
 
 const conversationHashes = [
-  "0x2878f61152e0d9052082e93c4967f3ae8fea6720", // ed35 primary
-  "0xcb40b5236acf913bdabe437ba5a77c956d961bd1", // ed35 zora
-  "0x35b48e676282941536cd0415fa2e6df9d740bcdd", // ed35 self
   "0x9e79aac3fae9fb44eafa214da2d1b8240f67e84a", // ed34 primary
   "0xe7010aa5bb627bbc9b06d343b00cf149c31517de", // ed34 zora
+  "0x44f315f4bac9ccf353aa8ceca995a703ba538c17", // ed34 self
+  "0xf55cc8d37b64f5e5c622c03ae354e251bfb444c6", // ed35 primary
+  "0xcb40b5236acf913bdabe437ba5a77c956d961bd1", // ed35 zora
+  "0xbbce0e68c483df4ffb98969df8271d995c2cda19", // ed35 self
+  "0xa189b2791865f640ba239c9d7a75ced8018a9afc", // ed36 primary
+  "0x95347178dbbabd350305f452e3d5ff89311172ae", // ed36 zora
+  "0x7a35ac28734640f118be690d7a84c66417f29919", // ed36 self
 ];
 
 for (const hash of conversationHashes) {
