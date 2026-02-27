@@ -42,7 +42,6 @@ export const runClaudeReflection = async (
 	const baseArgs = [
 		"claude",
 		"-p",
-		prompt,
 		"--verbose",
 		"--model",
 		model,
@@ -57,8 +56,10 @@ export const runClaudeReflection = async (
 		? ["--dangerously-skip-permissions"]
 		: ["--allowedTools", ALLOWED_TOOLS]
 
+	// Pipe prompt via stdin to avoid E2BIG when the assembled context exceeds ARG_MAX
 	const proc = Bun.spawn([...baseArgs, ...sandboxArgs], {
 		cwd: projectRoot,
+		stdin: Buffer.from(prompt),
 		stdout: "inherit",
 		stderr: "inherit",
 	})
