@@ -1,3 +1,5 @@
+import { writeFileSync } from "node:fs"
+import { join } from "node:path"
 import { buildReflectionPrompt } from "#agent/context.ts"
 import type { EngagementData } from "#types/evolution.ts"
 import type { PipelineState } from "#types/metadata.ts"
@@ -37,7 +39,7 @@ export const runClaudeReflection = async (
 	const model = process.env.REFLECT_MODEL || "opus"
 	const maxTurns = process.env.REFLECT_MAX_TURNS || "100"
 
-	const prompt = buildReflectionPrompt(state, engagement, projectRoot)
+	const prompt = buildReflectionPrompt(state, engagement, projectRoot, maxTurns)
 
 	const baseArgs = [
 		"claude",
@@ -57,12 +59,43 @@ export const runClaudeReflection = async (
 		: ["--allowedTools", ALLOWED_TOOLS]
 
 	// Pipe prompt via stdin to avoid E2BIG when the assembled context exceeds ARG_MAX
+	const turnCountPath = join(projectRoot, ".turn-count")
 	const proc = Bun.spawn([...baseArgs, ...sandboxArgs], {
 		cwd: projectRoot,
 		stdin: Buffer.from(prompt),
-		stdout: "inherit",
+		stdout: "pipe",
 		stderr: "inherit",
 	})
+
+	// Intercept stdout to count turns and write .turn-count
+	let turnCount = 0
+	const reader = proc.stdout.getReader()
+	const decoder = new TextDecoder()
+	let buffer = ""
+
+	const pump = async () => {
+		while (true) {
+			const { done, value } = await reader.read()
+			if (done) break
+			const chunk = decoder.decode(value, { stream: true })
+			process.stdout.write(chunk)
+			buffer += chunk
+			// Count complete JSON lines containing assistant messages
+			for (
+				let newlineIdx = buffer.indexOf("\n");
+				newlineIdx !== -1;
+				newlineIdx = buffer.indexOf("\n")
+			) {
+				const line = buffer.slice(0, newlineIdx)
+				buffer = buffer.slice(newlineIdx + 1)
+				if (line.includes('"type":"assistant"') || line.includes('"type": "assistant"')) {
+					turnCount++
+					writeFileSync(turnCountPath, `${turnCount}/${maxTurns}`)
+				}
+			}
+		}
+	}
+	await pump()
 
 	const exitCode = await proc.exited
 

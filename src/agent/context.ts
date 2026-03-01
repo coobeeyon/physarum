@@ -82,6 +82,7 @@ export const buildReflectionPrompt = (
 	state: PipelineState,
 	engagement: ReadonlyArray<EngagementData>,
 	projectRoot: string,
+	maxTurns = "100",
 ): string => {
 	const requests = readRequests(projectRoot)
 	const paramsSource = readSource(projectRoot, "src/config/params.ts")
@@ -98,7 +99,7 @@ Fresh git clone every time — nothing survives except:
 - **~/.claude/**: your Claude Code memory directory is mounted from a persistent volume. Use it.
 - **state.json**: tracked in git. You MUST \`git add state.json\` before committing or it will be lost.
 The stigmergence-site repo is cloned as a sibling at ../stigmergence-site/.
-You have a 100-turn limit for this session.
+You have a ${maxTurns}-turn limit for this session. Check your current turn count anytime with \`cat .turn-count\` — it shows "N/${maxTurns}". Plan your work accordingly: push early, push often, and start winding down by turn 85.
 **Before you finish: \`git push\` all commits. Unpushed work is destroyed when this container exits.**
 
 ## State
