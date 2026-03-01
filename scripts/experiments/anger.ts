@@ -1,19 +1,22 @@
 /**
  * ANGER
  *
- * Communicates: violence, force, impact, fracture, pressure breaking through.
+ * Communicates: violence, force, impact, rupture.
  *
- * Approach: An explosion of jagged cracks radiating from an impact point.
- * Not a pattern — a surface that was struck and shattered.
+ * v1 & v2 failed — random walk cracks always look organic (veins, neurons).
  *
- * Visual language:
- * - Off-center impact point (compositional tension, asymmetry)
- * - Jagged branching cracks (violence, not organic smoothness)
- * - Hot center → cold edges (energy dissipating from point of violence)
- * - Red/crimson/black palette (blood, fire, darkness)
- * - Background texture: stressed, turbulent, ready to break
+ * v3 approach: VORONOI SHATTER. Like shattered glass or cracked stone.
+ * Voronoi cell boundaries are inherently angular — straight segments meeting
+ * at sharp vertices. This is what real fractures look like.
  *
- * The viewer should feel: something was hit. Hard.
+ * - Dense point sites near impact (small fragments = more damage)
+ * - Sparse sites far from impact (larger intact cells)
+ * - Dark crack lines on pressured red surface
+ * - Cells near impact are brighter (energy, heat)
+ * - Impact glow at the center
+ * - Some cells near impact are "missing" (blown out, holes)
+ *
+ * The viewer should feel: something was hit and shattered.
  */
 
 import { createCanvas } from "canvas"
@@ -33,7 +36,7 @@ function makePRNG(seed: number) {
   }
 }
 
-// ---- Noise for background texture ----
+// ---- Noise ----
 function makeNoise(seed: number, scale: number) {
   let s = seed | 0
   const rand = () => {
@@ -42,7 +45,6 @@ function makeNoise(seed: number, scale: number) {
     t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296
   }
-
   const SIZE = 256
   const gradX = new Float32Array(SIZE)
   const gradY = new Float32Array(SIZE)
@@ -60,7 +62,6 @@ function makeNoise(seed: number, scale: number) {
   const hash = (x: number, y: number) => perm[(perm[x & (SIZE - 1)] + y) & (SIZE - 1)]
   const fade = (t: number) => t * t * t * (t * (t * 6 - 15) + 10)
   const dot = (gi: number, x: number, y: number) => gradX[gi] * x + gradY[gi] * y
-
   return (px: number, py: number): number => {
     const x = px / scale, y = py / scale
     const x0 = Math.floor(x), y0 = Math.floor(y)
@@ -75,114 +76,143 @@ function makeNoise(seed: number, scale: number) {
   }
 }
 
-// ---- Crack simulation ----
-interface CrackTip {
+// ---- Generate Voronoi sites ----
+
+interface Site {
   x: number
   y: number
-  angle: number
-  width: number
-  energy: number // decreases with distance from impact
-  depth: number
+  distFromImpact: number
+  blownOut: boolean // "missing" cell — the fragment has been knocked away
 }
 
-function simulateCracks(
+function generateSites(
   impactX: number,
   impactY: number,
   rand: () => number,
-): Array<{ x1: number; y1: number; x2: number; y2: number; width: number; energy: number }> {
-  const segments: Array<{
-    x1: number; y1: number; x2: number; y2: number; width: number; energy: number
-  }> = []
+): Site[] {
+  const sites: Site[] = []
 
-  const tips: CrackTip[] = []
-
-  // Initial crack directions from impact point — not evenly spaced, slightly irregular
-  const initialCount = 12 + Math.floor(rand() * 6)
-  for (let i = 0; i < initialCount; i++) {
-    const baseAngle = (i / initialCount) * Math.PI * 2
-    const jitter = (rand() - 0.5) * 0.4
-    tips.push({
-      x: impactX,
-      y: impactY,
-      angle: baseAngle + jitter,
-      width: 8 + rand() * 12,
-      energy: 1.0,
-      depth: 0,
+  // Dense cluster near impact (small shattered fragments)
+  const innerCount = 200
+  for (let i = 0; i < innerCount; i++) {
+    const angle = rand() * Math.PI * 2
+    // Gaussian-ish distribution clustered at center
+    const r = Math.abs(rand() + rand() + rand() - 1.5) * 350
+    const x = impactX + Math.cos(angle) * r
+    const y = impactY + Math.sin(angle) * r
+    const dist = Math.sqrt((x - impactX) ** 2 + (y - impactY) ** 2)
+    sites.push({
+      x, y,
+      distFromImpact: dist,
+      blownOut: dist < 120 && rand() < 0.35, // some near-impact cells are missing
     })
   }
 
-  // Process all tips (BFS to avoid stack overflow)
-  while (tips.length > 0) {
-    const tip = tips.shift()!
-    if (tip.energy < 0.02 || tip.depth > 300) continue
-    if (tip.x < -100 || tip.x > W + 100 || tip.y < -100 || tip.y > H + 100) continue
-
-    // Segment length — shorter near impact (more detail), longer far away
-    const len = tip.depth < 30 ? 3 + rand() * 6 : 6 + rand() * 14
-
-    // Jagged angle deviation — MORE jagged than smooth
-    const jagAmount = tip.depth < 20 ? 0.7 : 0.4
-    const jag = (rand() - 0.5) * jagAmount
-    const newAngle = tip.angle + jag
-
-    const x2 = tip.x + Math.cos(newAngle) * len
-    const y2 = tip.y + Math.sin(newAngle) * len
-
-    segments.push({
-      x1: tip.x,
-      y1: tip.y,
-      x2,
-      y2,
-      width: tip.width,
-      energy: tip.energy,
+  // Medium density in the mid-range
+  const midCount = 150
+  for (let i = 0; i < midCount; i++) {
+    const angle = rand() * Math.PI * 2
+    const r = 200 + rand() * 600
+    const x = impactX + Math.cos(angle) * r
+    const y = impactY + Math.sin(angle) * r
+    const dist = Math.sqrt((x - impactX) ** 2 + (y - impactY) ** 2)
+    sites.push({
+      x, y,
+      distFromImpact: dist,
+      blownOut: false,
     })
+  }
 
-    // Energy decay
-    const decay = 0.985 + rand() * 0.01
-    const newEnergy = tip.energy * decay
-    const newWidth = tip.width * (0.993 + rand() * 0.005)
-
-    // Continue main crack
-    tips.push({
-      x: x2,
-      y: y2,
-      angle: newAngle,
-      width: Math.max(0.3, newWidth),
-      energy: newEnergy,
-      depth: tip.depth + 1,
+  // Sparse points across the rest of the canvas (large intact cells)
+  const outerCount = 100
+  for (let i = 0; i < outerCount; i++) {
+    const x = rand() * W
+    const y = rand() * H
+    const dist = Math.sqrt((x - impactX) ** 2 + (y - impactY) ** 2)
+    sites.push({
+      x, y,
+      distFromImpact: dist,
+      blownOut: false,
     })
+  }
 
-    // Branch with some probability
-    const branchProb = tip.depth < 15 ? 0.12 : tip.depth < 40 ? 0.06 : 0.025
-    if (rand() < branchProb) {
-      const branchDir = rand() > 0.5 ? 1 : -1
-      const branchAngle = newAngle + branchDir * (0.4 + rand() * 0.9)
-      tips.push({
-        x: x2,
-        y: y2,
-        angle: branchAngle,
-        width: tip.width * (0.4 + rand() * 0.3),
-        energy: tip.energy * (0.6 + rand() * 0.2),
-        depth: tip.depth + 1,
-      })
+  return sites
+}
+
+// ---- Grid-accelerated nearest site lookup ----
+
+class SiteGrid {
+  private cells: Int32Array[]
+  private gridW: number
+  private gridH: number
+  private cellSize: number
+
+  constructor(private sites: Site[], cellSize: number) {
+    this.cellSize = cellSize
+    this.gridW = Math.ceil(W / cellSize)
+    this.gridH = Math.ceil(H / cellSize)
+    this.cells = new Array(this.gridW * this.gridH)
+    for (let i = 0; i < this.cells.length; i++) {
+      this.cells[i] = new Int32Array(0)
     }
 
-    // Occasional secondary branch (creates denser fracture near impact)
-    if (tip.depth < 25 && rand() < 0.04) {
-      const branchDir = rand() > 0.5 ? 1 : -1
-      const branchAngle = newAngle + branchDir * (0.8 + rand() * 1.2)
-      tips.push({
-        x: x2,
-        y: y2,
-        angle: branchAngle,
-        width: tip.width * (0.3 + rand() * 0.2),
-        energy: tip.energy * (0.4 + rand() * 0.2),
-        depth: tip.depth + 5,
-      })
+    // Assign sites to grid cells
+    const cellLists: number[][] = new Array(this.gridW * this.gridH)
+    for (let i = 0; i < cellLists.length; i++) cellLists[i] = []
+
+    for (let i = 0; i < sites.length; i++) {
+      const gx = Math.floor(sites[i].x / cellSize)
+      const gy = Math.floor(sites[i].y / cellSize)
+      if (gx >= 0 && gx < this.gridW && gy >= 0 && gy < this.gridH) {
+        cellLists[gy * this.gridW + gx].push(i)
+      }
+    }
+
+    for (let i = 0; i < cellLists.length; i++) {
+      this.cells[i] = new Int32Array(cellLists[i])
     }
   }
 
-  return segments
+  // Find nearest and second-nearest site
+  findNearest2(px: number, py: number): { nearest: number; second: number; d1: number; d2: number } {
+    const gx = Math.floor(px / this.cellSize)
+    const gy = Math.floor(py / this.cellSize)
+
+    let bestIdx = -1, bestDist = Infinity
+    let secondIdx = -1, secondDist = Infinity
+
+    // Search expanding rings of grid cells
+    const searchRadius = 3
+    for (let dy = -searchRadius; dy <= searchRadius; dy++) {
+      for (let dx = -searchRadius; dx <= searchRadius; dx++) {
+        const cx = gx + dx
+        const cy = gy + dy
+        if (cx < 0 || cx >= this.gridW || cy < 0 || cy >= this.gridH) continue
+
+        const cell = this.cells[cy * this.gridW + cx]
+        for (let i = 0; i < cell.length; i++) {
+          const s = this.sites[cell[i]]
+          const d = (px - s.x) ** 2 + (py - s.y) ** 2
+          if (d < bestDist) {
+            secondDist = bestDist
+            secondIdx = bestIdx
+            bestDist = d
+            bestIdx = cell[i]
+          } else if (d < secondDist) {
+            secondDist = d
+            secondIdx = cell[i]
+          }
+        }
+      }
+    }
+
+    return {
+      nearest: bestIdx,
+      second: secondIdx,
+      d1: Math.sqrt(bestDist),
+      d2: Math.sqrt(secondDist),
+    }
+  }
 }
 
 // ---- Rendering ----
@@ -190,121 +220,95 @@ function simulateCracks(
 function render(
   impactX: number,
   impactY: number,
-  segments: Array<{ x1: number; y1: number; x2: number; y2: number; width: number; energy: number }>,
+  sites: Site[],
   seed: number,
 ): Uint8ClampedArray {
   const N = W * H
-  const energyField = new Float32Array(N)
-  const distField = new Float32Array(N)
-
-  // Compute distance from impact for every pixel
-  const maxDist = Math.sqrt(W * W + H * H)
-  for (let y = 0; y < H; y++) {
-    for (let x = 0; x < W; x++) {
-      const dx = x - impactX
-      const dy = y - impactY
-      distField[y * W + x] = Math.sqrt(dx * dx + dy * dy) / maxDist
-    }
-  }
-
-  // Deposit crack energy into the field
-  // For each segment, deposit energy into nearby pixels
-  for (const seg of segments) {
-    const dx = seg.x2 - seg.x1
-    const dy = seg.y2 - seg.y1
-    const len = Math.sqrt(dx * dx + dy * dy)
-    if (len < 0.1) continue
-
-    const steps = Math.ceil(len * 2)
-    for (let s = 0; s <= steps; s++) {
-      const t = s / steps
-      const px = seg.x1 + dx * t
-      const py = seg.y1 + dy * t
-
-      // Deposit in a radius proportional to width
-      const radius = Math.ceil(seg.width * 1.5)
-      for (let ry = -radius; ry <= radius; ry++) {
-        for (let rx = -radius; rx <= radius; rx++) {
-          const ix = Math.floor(px + rx)
-          const iy = Math.floor(py + ry)
-          if (ix < 0 || ix >= W || iy < 0 || iy >= H) continue
-
-          const d = Math.sqrt(rx * rx + ry * ry)
-          if (d > radius) continue
-
-          // Falloff from crack center — sharp core, soft glow
-          const falloff = d < seg.width * 0.4
-            ? 1.0
-            : Math.max(0, 1.0 - (d - seg.width * 0.4) / (radius - seg.width * 0.4))
-
-          const deposit = seg.energy * falloff * falloff
-          const idx = iy * W + ix
-          energyField[idx] = Math.max(energyField[idx], deposit)
-        }
-      }
-    }
-  }
-
-  // Add impact glow — bright hot spot at point of impact
-  const glowRadius = Math.min(W, H) * 0.12
-  for (let y = 0; y < H; y++) {
-    for (let x = 0; x < W; x++) {
-      const dx = x - impactX
-      const dy = y - impactY
-      const d = Math.sqrt(dx * dx + dy * dy)
-      if (d < glowRadius) {
-        const t = 1.0 - d / glowRadius
-        const glow = t * t * t // cubic falloff
-        const idx = y * W + x
-        energyField[idx] = Math.max(energyField[idx], glow * 1.2)
-      }
-    }
-  }
-
-  // Background noise texture — stressed surface
-  const noise1 = makeNoise(seed, 200)
-  const noise2 = makeNoise(seed + 1000, 80)
-  const noise3 = makeNoise(seed + 2000, 30)
-
-  // Render to RGBA
   const rgba = new Uint8ClampedArray(N * 4)
+
+  const grid = new SiteGrid(sites, 80)
+  const maxDist = Math.sqrt(W * W + H * H)
+
+  // Noise for surface texture
+  const noise1 = makeNoise(seed, 250)
+  const noise2 = makeNoise(seed + 1000, 80)
 
   for (let y = 0; y < H; y++) {
     for (let x = 0; x < W; x++) {
       const idx = y * W + x
-      const e = Math.min(1.0, energyField[idx])
-      const dist = distField[idx]
+      const { nearest, d1, d2 } = grid.findNearest2(x, y)
 
-      // Background: near-black with dark red undertone, modulated by noise
-      const n = noise1(x, y) * 0.3 + noise2(x, y) * 0.2 + noise3(x, y) * 0.1
-      const bgR = Math.max(0, Math.min(255, 18 + n * 25))
-      const bgG = Math.max(0, Math.min(255, 5 + n * 8))
-      const bgB = Math.max(0, Math.min(255, 5 + n * 5))
+      // Distance from impact (normalized)
+      const impDx = x - impactX
+      const impDy = y - impactY
+      const impDist = Math.sqrt(impDx * impDx + impDy * impDy) / maxDist
+
+      // How close to a Voronoi boundary (crack line)?
+      // Boundary occurs where d1 ≈ d2
+      const edgeness = d2 - d1 // small = near edge
+
+      // Surface noise
+      const n = noise1(x, y) * 0.3 + noise2(x, y) * 0.2
 
       let r: number, g: number, b: number
 
-      if (e > 0.01) {
-        // Crack color: distance from impact determines the "temperature"
-        // Near impact: white-hot → yellow → orange
-        // Far from impact: red → crimson → dark red
-        const heat = Math.max(0, 1.0 - dist * 2.5)
-        const intensity = e
+      const site = nearest >= 0 ? sites[nearest] : null
 
-        // White-hot core (very near impact, high energy)
-        const whiteHot = Math.max(0, heat - 0.6) * 2.5 * intensity
-        // Orange-yellow (medium distance)
-        const hotOrange = Math.max(0, Math.min(1, heat * 1.5)) * intensity
-        // Red (base crack color)
-        const red = intensity
+      if (site && site.blownOut) {
+        // Blown-out cells: deep dark void with hot glowing edges
+        if (edgeness < 8) {
+          // Edge of the hole — hot glow, magma visible through gap
+          const edgeGlow = 1.0 - edgeness / 8
+          const eg2 = edgeGlow * edgeGlow
+          r = 160 + eg2 * 95
+          g = 20 + eg2 * 50
+          b = 5 + eg2 * 15
+        } else {
+          // Interior of hole — the void
+          r = 4 + n * 4
+          g = 1 + n * 1
+          b = 2 + n * 1
+        }
+      } else if (edgeness < 7) {
+        // ON a crack line — wider, more prominent dark fractures
+        const crackIntensity = 1.0 - edgeness / 7
+        const crackDepth = crackIntensity * crackIntensity
 
-        // Blend layers
-        r = Math.min(255, bgR + red * 220 + hotOrange * 35 + whiteHot * 50)
-        g = Math.min(255, bgG + hotOrange * 80 + whiteHot * 120)
-        b = Math.min(255, bgB + whiteHot * 80)
+        // Crack: dark gap with hot glow bleeding through near impact
+        const heat = Math.max(0, 1.0 - impDist * 2.0)
+        // Near impact: cracks glow hot (magma visible through fractures)
+        // Far from impact: cracks are cold dark lines
+        r = 8 + crackDepth * heat * 140
+        g = 2 + crackDepth * heat * 25
+        b = 2 + crackDepth * heat * 10
       } else {
-        r = bgR
-        g = bgG
-        b = bgB
+        // Cell interior: the fractured surface
+        // MUCH brighter near impact — angry, hot, pressured
+        const heat = Math.max(0, 1.0 - impDist * 1.8)
+        const heat2 = heat * heat
+
+        // Surface: dark blood red → vivid crimson near impact
+        r = 35 + n * 18 + heat * 100 + heat2 * 60
+        g = 5 + n * 5 + heat * 12
+        b = 7 + n * 4 + heat * 8
+
+        // Per-cell color variation (cells are distinct fragments)
+        if (nearest >= 0) {
+          const cellNoise = ((nearest * 7919) % 255) / 255
+          r += cellNoise * 20 - 10
+          g += cellNoise * 5 - 2
+        }
+      }
+
+      // Impact glow — LARGER, more intense, the heat source
+      const glowDist = Math.sqrt(impDx * impDx + impDy * impDy)
+      const glowRadius = Math.min(W, H) * 0.22
+      if (glowDist < glowRadius) {
+        const t = 1.0 - glowDist / glowRadius
+        const glow = t * t * 0.7
+        r = r * (1 - glow) + 255 * glow
+        g = g * (1 - glow) + 90 * glow
+        b = b * (1 - glow) + 25 * glow
       }
 
       rgba[idx * 4 + 0] = Math.round(Math.max(0, Math.min(255, r)))
@@ -312,6 +316,8 @@ function render(
       rgba[idx * 4 + 2] = Math.round(Math.max(0, Math.min(255, b)))
       rgba[idx * 4 + 3] = 255
     }
+
+    if (y % 256 === 0) console.log(`  row ${y}/${H}`)
   }
 
   return rgba
@@ -320,27 +326,25 @@ function render(
 // ---- Main ----
 
 async function main() {
-  const variant = process.argv[2] || "v1"
+  const variant = process.argv[2] || "v3"
 
-  // Different impact positions and seeds for iteration
   const variants: Record<string, { impactX: number; impactY: number; seed: number }> = {
-    v1: { impactX: W * 0.38, impactY: H * 0.55, seed: 66601 },    // lower-left
-    v2: { impactX: W * 0.62, impactY: H * 0.42, seed: 66602 },    // upper-right
-    v3: { impactX: W * 0.45, impactY: H * 0.5, seed: 66603 },     // near center
-    v4: { impactX: W * 0.3, impactY: H * 0.65, seed: 66604 },     // bottom-left
+    v3: { impactX: W * 0.35, impactY: H * 0.55, seed: 66623 },
+    v4: { impactX: W * 0.42, impactY: H * 0.48, seed: 66624 },
+    v5: { impactX: W * 0.30, impactY: H * 0.60, seed: 66625 },
   }
 
-  const config = variants[variant] ?? variants.v1
+  const config = variants[variant] ?? variants.v3
   const rand = makePRNG(config.seed)
 
-  console.log(`=== ANGER ${variant} (impact: ${config.impactX}, ${config.impactY}) ===`)
+  console.log(`=== ANGER ${variant} (impact: ${Math.round(config.impactX)}, ${Math.round(config.impactY)}) ===`)
 
-  console.log("  Simulating fractures...")
-  const segments = simulateCracks(config.impactX, config.impactY, rand)
-  console.log(`  ${segments.length} segments generated`)
+  console.log("  Generating sites...")
+  const sites = generateSites(config.impactX, config.impactY, rand)
+  console.log(`  ${sites.length} Voronoi sites (${sites.filter(s => s.blownOut).length} blown out)`)
 
-  console.log("  Rendering...")
-  const rgba = render(config.impactX, config.impactY, segments, config.seed)
+  console.log("  Rendering Voronoi shatter...")
+  const rgba = render(config.impactX, config.impactY, sites, config.seed)
 
   const canvas = createCanvas(W, H)
   const ctx = canvas.getContext("2d")
