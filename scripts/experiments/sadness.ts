@@ -21,8 +21,11 @@
 import { createCanvas } from "canvas"
 import { writeFileSync } from "fs"
 
-const W = 2048
-const H = 2048
+// Simulation runs at SIM_SIZE for speed, render upscales to OUT_SIZE
+const SIM_SIZE = 1024
+const OUT_SIZE = 2048
+let W = SIM_SIZE
+let H = SIM_SIZE
 
 // ---- PRNG ----
 function makePRNG(seed: number) {
@@ -121,20 +124,138 @@ function simulateRD(
   return { u, v }
 }
 
-// ---- Dissolution ----
+// ---- Dissolution with survival islands ----
+interface SurvivalIsland {
+  x: number
+  y: number
+  radius: number
+  strength: number // 0-1, how much pattern survives here
+}
+
 function dissolve(
   v: Float32Array,
   survivalRate: number,
-  sinkBias: number, // how much fragments cluster toward bottom
+  sinkBias: number,
   seed: number,
+  largeMode: boolean = false,
+  teardropMode: boolean = false,
+  composedMode: boolean = false,
 ): Float32Array {
   const dissolved = new Float32Array(v.length)
   const rand = makePRNG(seed)
 
-  // Multi-scale noise for organic dissolution boundaries
-  const noise1 = makeNoise(seed + 100, 250)
-  const noise2 = makeNoise(seed + 200, 100)
-  const noise3 = makeNoise(seed + 300, 40)
+  // Generate survival islands — scattered remnant positions
+  // Biased toward lower portion (sinking), well-separated for isolation
+  const islands: SurvivalIsland[] = []
+
+  if (composedMode) {
+    // HAND-PLACED composition for maximum emotional impact
+    // Main remnant: large, off-center-left, in the lower third
+    // This is the thing you're still holding onto
+    islands.push({
+      x: W * 0.38, y: H * 0.62,
+      radius: W * 0.18,
+      strength: 0.75,
+    })
+
+    // Second fragment: smaller, fading, upper-right
+    // Already half-gone — a memory dissolving
+    islands.push({
+      x: W * 0.68, y: H * 0.35,
+      radius: W * 0.11,
+      strength: 0.45,
+    })
+
+    // Third: tiny, very faint, far from others
+    // Almost gone — you can barely remember
+    islands.push({
+      x: W * 0.15, y: H * 0.28,
+      radius: W * 0.05,
+      strength: 0.25,
+    })
+
+    // Ghost traces — barely perceptible wisps
+    islands.push({
+      x: W * 0.82, y: H * 0.72,
+      radius: W * 0.025,
+      strength: 0.15,
+    })
+    islands.push({
+      x: W * 0.52, y: H * 0.85,
+      radius: W * 0.02,
+      strength: 0.12,
+    })
+  } else if (largeMode) {
+    // LARGE FRAGMENTS mode: 3-4 major remnants with enough internal detail
+    // to see the organic structure that was lost
+    const mainCount = 3 + Math.floor(rand() * 2)
+
+    // Place fragments with minimum separation to avoid overlap
+    const placed: { x: number; y: number }[] = []
+    for (let attempt = 0; attempt < mainCount * 20 && placed.length < mainCount; attempt++) {
+      const x = W * 0.12 + rand() * W * 0.76
+      // Biased toward lower half — sinking, heavy
+      const yRaw = 0.3 + rand() * 0.55 + sinkBias * 0.15
+      const y = H * Math.min(0.85, yRaw)
+
+      // Check separation from existing islands
+      let tooClose = false
+      for (const p of placed) {
+        const dist = Math.sqrt((x - p.x) ** 2 + (y - p.y) ** 2)
+        if (dist < W * 0.22) { tooClose = true; break }
+      }
+      if (tooClose) continue
+
+      placed.push({ x, y })
+
+      // First fragment is largest (the main remnant), others progressively smaller
+      const sizeScale = placed.length === 1 ? 1.0 : 0.5 + rand() * 0.4
+      const radius = W * (0.14 + rand() * 0.10) * sizeScale
+      islands.push({
+        x, y, radius,
+        // First fragment strongest, others fading
+        strength: placed.length === 1 ? 0.65 + rand() * 0.2 : 0.3 + rand() * 0.35,
+      })
+    }
+
+    // A few tiny ghost traces — barely visible remnants
+    for (let i = 0; i < 4; i++) {
+      islands.push({
+        x: rand() * W,
+        y: H * (0.2 + rand() * 0.7),
+        radius: W * (0.01 + rand() * 0.02),
+        strength: 0.12 + rand() * 0.18,
+      })
+    }
+  } else {
+    // Original mode: smaller, more numerous fragments
+    const islandCount = 4 + Math.floor(rand() * 3)
+    for (let i = 0; i < islandCount; i++) {
+      const x = W * 0.1 + rand() * W * 0.8
+      const yBias = 0.4 + rand() * 0.5 + sinkBias * 0.1
+      const y = H * Math.min(0.88, yBias)
+      const radius = W * (0.05 + rand() * 0.07)
+      islands.push({
+        x, y, radius,
+        strength: 0.35 + rand() * 0.35,
+      })
+    }
+
+    // Tiny barely-visible fragments scattered around (ghosts)
+    for (let i = 0; i < 6; i++) {
+      islands.push({
+        x: rand() * W,
+        y: H * (0.15 + rand() * 0.75),
+        radius: W * (0.008 + rand() * 0.015),
+        strength: 0.15 + rand() * 0.25,
+      })
+    }
+  }
+
+  // AGGRESSIVE noise for organic, ragged, non-circular edges
+  const noise1 = makeNoise(seed + 100, 40)  // smaller scale = more jagged
+  const noise2 = makeNoise(seed + 200, 15)  // fine detail
+  const noise3 = makeNoise(seed + 300, 80)  // large-scale shape distortion
 
   // Find V range
   let vMin = Infinity, vMax = -Infinity
@@ -149,28 +270,54 @@ function dissolve(
       const i = y * W + x
       const vNorm = (v[i] - vMin) / vRange
 
-      // Only consider pixels that have pattern (V > threshold)
-      if (vNorm < 0.15) continue
+      // Only consider pixels that have pattern
+      if (vNorm < 0.12) continue
 
-      // Dissolution map: multi-scale noise + vertical bias
-      const n = noise1(x, y) * 0.5 + noise2(x, y) * 0.3 + noise3(x, y) * 0.2
+      // Check proximity to any survival island
+      let maxSurvival = 0
+      for (const island of islands) {
+        const dx = x - island.x
+        const dy = y - island.y
 
-      // Vertical bias: fragments survive more toward the bottom (sinking)
-      const verticalBias = (y / H) * sinkBias
+        let dist: number
+        let effectiveRadius: number
 
-      // Survival threshold: lower = more survives
-      const survivalThreshold = 1.0 - survivalRate
-      const survivalScore = n * 0.5 + 0.5 + verticalBias
+        if (teardropMode) {
+          // ASYMMETRIC distance: compressed above island center, extended below
+          // Creates teardrop/drip shape — gravity pulling the fragment down
+          const aboveFactor = dy < 0 ? 1.6 : 1.0  // tighter above
+          const belowExtend = dy > 0 ? 0.7 : 0.0   // extended below
+          dist = Math.sqrt(dx * dx + (dy * aboveFactor) ** 2)
 
-      if (survivalScore > survivalThreshold) {
-        dissolved[i] = vNorm
+          const edgeNoise = noise1(x, y) * 0.6 + noise2(x, y) * 0.35 + noise3(x, y) * 0.25
+          effectiveRadius = island.radius * (1.0 + edgeNoise * 0.9 + belowExtend)
+        } else {
+          dist = Math.sqrt(dx * dx + dy * dy)
+          // AGGRESSIVE noise distortion for ragged, organic edges
+          const edgeNoise = noise1(x, y) * 0.5 + noise2(x, y) * 0.3 + noise3(x, y) * 0.2
+          effectiveRadius = island.radius * (1.0 + edgeNoise * 0.8)
+        }
+
+        if (dist < effectiveRadius) {
+          // Gradual fade at edges — dissolution, not a hard boundary
+          const t = dist / effectiveRadius
+          const fadeCurve = teardropMode
+            ? (t < 0.3 ? 1.0 : 1.0 - (t - 0.3) / 0.7) // wider core for teardrops
+            : (t < 0.4 ? 1.0 : 1.0 - (t - 0.4) / 0.6)
+          const survival = island.strength * fadeCurve * fadeCurve
+          maxSurvival = Math.max(maxSurvival, survival)
+        }
+      }
+
+      if (maxSurvival > 0.1) {
+        dissolved[i] = vNorm * maxSurvival
       }
     }
   }
 
-  // Soften edges of surviving fragments — blur pass
+  // Soften edges — gentle blur
   const softened = new Float32Array(dissolved.length)
-  const blurR = 3
+  const blurR = 2
   for (let y = blurR; y < H - blurR; y++) {
     for (let x = blurR; x < W - blurR; x++) {
       let sum = 0
@@ -212,15 +359,15 @@ function render(
       const bgB = 220 + n * 6
 
       if (d > 0.01) {
-        // Fragment color: darker grey-blue
-        // Low contrast — fragments are visible but not vivid
-        // They're remnants, not declarations
-        const intensity = Math.min(1.0, d * 1.5)
+        // Fragment color: muted grey-blue, but enough contrast to read
+        // These are remnants — not bold, but present enough to mourn
+        const intensity = Math.min(1.0, d * 1.4)
 
-        // Fragments: cool grey-blue, slightly darker than background
+        // Fragments: cool grey with slight warmth in darkest areas
+        // Enough contrast to see the internal RD structure
         const fragR = bgR - intensity * 95
-        const fragG = bgG - intensity * 85
-        const fragB = bgB - intensity * 70
+        const fragG = bgG - intensity * 90
+        const fragB = bgB - intensity * 75
 
         rgba[idx * 4 + 0] = Math.round(Math.max(0, fragR))
         rgba[idx * 4 + 1] = Math.round(Math.max(0, fragG))
@@ -289,6 +436,60 @@ const VARIANTS: Record<string, SadnessVariant> = {
     survivalRate: 0.05,
     sinkBias: 0.35,
     seed: 77704,
+    seedingStyle: "scattered",
+  },
+  // LARGE fragments — enough internal detail to see what was lost
+  // Fewer, bigger, well-separated remnants in vast emptiness
+  v5: {
+    name: "remnants-large",
+    rdF: 0.0545, rdK: 0.062,
+    rdIterations: 10000,
+    survivalRate: 0.10,
+    sinkBias: 0.25,
+    seed: 77705,
+    seedingStyle: "scattered",
+  },
+  // Even larger single dominant fragment + 2 fading echoes
+  v6: {
+    name: "last-fragment",
+    rdF: 0.0545, rdK: 0.062,
+    rdIterations: 10000,
+    survivalRate: 0.12,
+    sinkBias: 0.20,
+    seed: 77706,
+    seedingStyle: "scattered",
+  },
+  // TEARDROPS — fragments dissolving downward, gravity pulling them apart
+  // Asymmetric survival zones: tighter top, bleeding downward
+  v7: {
+    name: "falling-apart",
+    rdF: 0.0545, rdK: 0.062,
+    rdIterations: 10000,
+    survivalRate: 0.10,
+    sinkBias: 0.15,
+    seed: 77707,
+    seedingStyle: "scattered",
+  },
+  // COMPOSED — hand-placed fragments for intentional composition
+  // One dominant remnant (what you hold onto), fading ghosts (what's already gone)
+  v8: {
+    name: "what-remains",
+    rdF: 0.0545, rdK: 0.062,
+    rdIterations: 10000,
+    survivalRate: 0.10,
+    sinkBias: 0.0,
+    seed: 77708,
+    seedingStyle: "scattered",
+  },
+  // COMPOSED + TEARDROP — the definitive version
+  // Hand-placed composition with downward dissolution and extreme edge noise
+  v9: {
+    name: "grief",
+    rdF: 0.0545, rdK: 0.062,
+    rdIterations: 10000,
+    survivalRate: 0.10,
+    sinkBias: 0.0,
+    seed: 77709,
     seedingStyle: "scattered",
   },
 }
@@ -360,20 +561,29 @@ async function main() {
   const { u, v } = simulateRD(config.rdF, config.rdK, config.rdIterations, seedFn)
 
   console.log("  Dissolving...")
-  const dissolved = dissolve(v, config.survivalRate, config.sinkBias, config.seed)
+  const largeMode = variant === "v5" || variant === "v6" || variant === "v7"
+  const teardropMode = variant === "v7" || variant === "v9"
+  const composedMode = variant === "v8" || variant === "v9"
+  const dissolved = dissolve(v, config.survivalRate, config.sinkBias, config.seed, largeMode, teardropMode, composedMode)
 
-  console.log("  Rendering...")
+  console.log("  Rendering at simulation size...")
   const rgba = render(dissolved, config.seed)
 
-  const canvas = createCanvas(W, H)
-  const ctx = canvas.getContext("2d")
-  const imageData = ctx.createImageData(W, H)
-  imageData.data.set(rgba)
-  ctx.putImageData(imageData, 0, 0)
+  // Render at simulation size, then upscale to output size
+  const simCanvas = createCanvas(W, H)
+  const simCtx = simCanvas.getContext("2d")
+  const simImageData = simCtx.createImageData(W, H)
+  simImageData.data.set(rgba)
+  simCtx.putImageData(simImageData, 0, 0)
+
+  // Upscale with bilinear interpolation (slight blur is fine for sadness — softens edges)
+  const outCanvas = createCanvas(OUT_SIZE, OUT_SIZE)
+  const outCtx = outCanvas.getContext("2d")
+  outCtx.drawImage(simCanvas, 0, 0, OUT_SIZE, OUT_SIZE)
 
   const filename = `output/sadness-${variant}.png`
-  writeFileSync(filename, canvas.toBuffer("image/png"))
-  console.log(`  → ${filename}`)
+  writeFileSync(filename, outCanvas.toBuffer("image/png"))
+  console.log(`  → ${filename} (${OUT_SIZE}x${OUT_SIZE})`)
 }
 
 main()
