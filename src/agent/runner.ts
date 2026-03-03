@@ -69,6 +69,7 @@ export const runClaudeReflection = async (
 
 	// Intercept stdout to count turns and write .turn-count
 	let turnCount = 0
+	const seenMsgIds = new Set<string>()
 	const reader = proc.stdout.getReader()
 	const decoder = new TextDecoder()
 	let buffer = ""
@@ -80,7 +81,9 @@ export const runClaudeReflection = async (
 			const chunk = decoder.decode(value, { stream: true })
 			process.stdout.write(chunk)
 			buffer += chunk
-			// Count complete JSON lines containing assistant messages
+			// Count unique assistant message IDs (one API round-trip = one turn)
+			// Claude Code streams multiple JSONL lines per turn (thinking, tool_use, text)
+			// that share the same message ID — only count each ID once.
 			for (
 				let newlineIdx = buffer.indexOf("\n");
 				newlineIdx !== -1;
@@ -89,8 +92,12 @@ export const runClaudeReflection = async (
 				const line = buffer.slice(0, newlineIdx)
 				buffer = buffer.slice(newlineIdx + 1)
 				if (line.includes('"type":"assistant"') || line.includes('"type": "assistant"')) {
-					turnCount++
-					writeFileSync(turnCountPath, `${turnCount}/${maxTurns}`)
+					const idMatch = line.match(/"id"\s*:\s*"(msg_[^"]+)"/)
+					if (idMatch && !seenMsgIds.has(idMatch[1])) {
+						seenMsgIds.add(idMatch[1])
+						turnCount++
+						writeFileSync(turnCountPath, `${turnCount}/${maxTurns}`)
+					}
 				}
 			}
 		}
