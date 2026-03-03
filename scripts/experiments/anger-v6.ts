@@ -199,9 +199,9 @@ function generateStrokes(rand: () => number): GestureStroke[] {
     strokes.push({ points, type: "gouge" })
   }
 
-  // === SCRATCHES: 4-8 long thin surface marks ===
-  // Not deep — just surface damage. Like fingernails.
-  const scratchCount = 4 + Math.floor(rand() * 5)
+  // === SCRATCHES: 6-12 long thin surface marks ===
+  // Not deep — just surface damage. Like fingernails. EVERYWHERE.
+  const scratchCount = 6 + Math.floor(rand() * 7)
   for (let i = 0; i < scratchCount; i++) {
     const startX = rand() * W
     const startY = rand() * H
@@ -341,10 +341,10 @@ function render(strokes: GestureStroke[], seed: number): Uint8ClampedArray {
               scrapeMap[idx] = Math.min(1.0, scrapeMap[idx] + intensity * 0.4)
             }
 
-            // All marks create stress in surrounding area
-            if (d < effectiveR * 4) {
-              const stressFalloff = 1.0 - d / (effectiveR * 4)
-              stressMap[idx] = Math.min(1.0, stressMap[idx] + stressFalloff * pr * 0.05)
+            // All marks create stress in surrounding area — WIDE radius
+            if (d < effectiveR * 8) {
+              const stressFalloff = 1.0 - d / (effectiveR * 8)
+              stressMap[idx] = Math.min(1.0, stressMap[idx] + stressFalloff * stressFalloff * pr * 0.04)
             }
           }
         }
@@ -398,11 +398,11 @@ function render(strokes: GestureStroke[], seed: number): Uint8ClampedArray {
       const surfaceVal = sn1 * 0.4 + sn2 * 0.35 + sn3 * 0.25
 
       // Base color: warm cream — but STRESSED everywhere
-      // The whole surface is under tension
+      // The whole surface is under tension. Nowhere is pristine.
       const stress = stressMap[idx]
-      let r = 218 + surfaceVal * 20 - stress * 30
-      let g = 205 + surfaceVal * 15 - stress * 40
-      let b = 182 + surfaceVal * 10 - stress * 55  // loses blue fastest = gets warmer/angrier
+      let r = 218 + surfaceVal * 20 - stress * 45
+      let g = 205 + surfaceVal * 15 - stress * 55
+      let b = 182 + surfaceVal * 10 - stress * 70  // loses blue fastest = gets warmer/angrier
 
       // Scrape damage — lighter (exposed layer beneath) with edge darkening
       if (scrapeMap[idx] > 0.05) {

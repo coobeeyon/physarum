@@ -100,13 +100,13 @@ async function main() {
 
   // Island definition (same concept as v12 — one form, alone)
   const islandX = W * 0.38
-  const islandY = H * 0.64
-  const islandR = W * 0.20
+  const islandY = H * 0.63
+  const islandR = W * 0.26  // larger — needs to read on phone screens
 
   // Ghost position
-  const ghostX = W * 0.72
-  const ghostY = H * 0.30
-  const ghostR = W * 0.04
+  const ghostX = W * 0.74
+  const ghostY = H * 0.28
+  const ghostR = W * 0.05
 
   // Edge noise for organic island boundary
   const edgeN1 = makeNoise(seed + 200, 70)
@@ -207,19 +207,19 @@ async function main() {
         // Color: background grey → warm amber
         // At the edges, the fragment is barely distinguishable
         // At the core, you see warm amber veins in darker amber matrix
-        const liftAmount = textureVisible * 0.50
+        const liftAmount = textureVisible * 0.60   // brighter core
         const warmthColor = warmth * textureVisible
 
-        let r = bgR + liftAmount * 100 + warmthColor * 50
-        let g = bgG + liftAmount * 50 + warmthColor * 10
-        let b = bgB + liftAmount * 15 - warmthColor * 15
+        let r = bgR + liftAmount * 130 + warmthColor * 60
+        let g = bgG + liftAmount * 65 + warmthColor * 15
+        let b = bgB + liftAmount * 20 - warmthColor * 18
 
-        // The veins themselves: slightly brighter and warmer
-        if (texClamped > 0.55 && mask > 0.2) {
-          const veinStrength = (texClamped - 0.55) / 0.45 * mask * warmth
-          r += veinStrength * 30
-          g += veinStrength * 8
-          b -= veinStrength * 5
+        // The veins themselves: brighter and warmer
+        if (texClamped > 0.50 && mask > 0.15) {
+          const veinStrength = (texClamped - 0.50) / 0.50 * mask * warmth
+          r += veinStrength * 40
+          g += veinStrength * 12
+          b -= veinStrength * 8
         }
 
         rgba[idx * 4 + 0] = Math.round(Math.max(0, Math.min(255, r)))
