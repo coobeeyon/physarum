@@ -39,6 +39,13 @@ docker build -q -t epic-runner \
 
 container_name="reflect-$(date +%Y%m%d-%H%M%S)"
 
+# SSH agent is required for git access inside the container
+if [ -z "${SSH_AUTH_SOCK:-}" ]; then
+  echo "ERROR: SSH_AUTH_SOCK is not set. Start an ssh-agent first:"
+  echo '  eval "$(ssh-agent -s)" && ssh-add'
+  exit 1
+fi
+
 echo "Running reflection on branch $branch..."
 echo "Container name: $container_name"
 

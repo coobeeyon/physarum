@@ -9,7 +9,7 @@ Read `MANIFESTO.md` first. It defines the mission, inventory, and identity. Ever
 - **Path aliases**: `#config/`, `#social/`, `#pipeline/`, `#agent/`, `#types/` via tsconfig paths
 - **Build**: `bun run build` (tsc --noEmit)
 - **Test**: `bun test`
-- **Git**: physarum repo is local-only. stigmergence-site pushes to GitHub.
+- **Git**: Both physarum and stigmergence-site push to GitHub.
 
 ## Key Paths
 
