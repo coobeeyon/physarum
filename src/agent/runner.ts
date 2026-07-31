@@ -8,6 +8,7 @@ import { type Result, err, ok } from "#types/result.ts"
 const ALLOWED_TOOLS = [
 	"Bash(bun run build)",
 	"Bash(bun run lint)",
+	"Bash(bun run codex-image *)",
 	"Bash(bun test)",
 	"Bash(bun test *)",
 	"Bash(git status *)",
