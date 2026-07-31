@@ -1,64 +1,20 @@
 import { join } from "node:path"
 import { runClaudeReflection } from "#agent/runner.ts"
+import { parseArgs } from "#config/cli.ts"
 import { loadEnv } from "#config/env.ts"
 import { runPipeline } from "#pipeline/orchestrate.ts"
 import { loadState } from "#pipeline/state.ts"
 import { engageWithCommunity } from "#social/discover.ts"
 import { readEngagement } from "#social/engagement.ts"
 
-const parseArgs = (args: ReadonlyArray<string>) => {
-	const flags = {
-		generateOnly: false,
-		deployOnly: false,
-		postOnly: false,
-		dryRun: false,
-		readEngagement: false,
-		reflect: false,
-		engage: false,
-		seedOverride: undefined as number | undefined,
-		foodImageSource: undefined as string | undefined,
-		channel: undefined as string | undefined,
-		castText: undefined as string | undefined,
-		zoraCastText: undefined as string | undefined,
-		selfReplyText: undefined as string | undefined,
-	}
-
-	for (let i = 0; i < args.length; i++) {
-		const arg = args[i]
-		if (arg === "--generate-only") flags.generateOnly = true
-		else if (arg === "--deploy-only") flags.deployOnly = true
-		else if (arg === "--post-only") flags.postOnly = true
-		else if (arg === "--dry-run") flags.dryRun = true
-		else if (arg === "--read-engagement") flags.readEngagement = true
-		else if (arg === "--reflect") flags.reflect = true
-		else if (arg === "--engage") flags.engage = true
-		else if (arg === "--seed" && i + 1 < args.length) {
-			flags.seedOverride = Number.parseInt(args[i + 1], 10)
-			i++
-		} else if (arg === "--food-image" && i + 1 < args.length) {
-			flags.foodImageSource = args[i + 1]
-			i++
-		} else if (arg === "--channel" && i + 1 < args.length) {
-			flags.channel = args[i + 1]
-			i++
-		} else if (arg === "--cast-text" && i + 1 < args.length) {
-			flags.castText = args[i + 1]
-			i++
-		} else if (arg === "--zora-text" && i + 1 < args.length) {
-			flags.zoraCastText = args[i + 1]
-			i++
-		} else if (arg === "--self-reply-text" && i + 1 < args.length) {
-			flags.selfReplyText = args[i + 1]
-			i++
-		}
-	}
-
-	return flags
-}
-
 const main = async () => {
 	const args = process.argv.slice(2)
-	const flags = parseArgs(args)
+	const flagsResult = parseArgs(args)
+	if (!flagsResult.ok) {
+		console.error(`Argument error: ${flagsResult.error}`)
+		process.exit(1)
+	}
+	const flags = flagsResult.value
 
 	if (flags.readEngagement) {
 		const apiKey = process.env.NEYNAR_API_KEY
@@ -155,31 +111,21 @@ const main = async () => {
 		return
 	}
 
-	// generate-only and dry-run don't need all env vars
-	const envResult =
-		flags.generateOnly || flags.dryRun
-			? {
-					ok: true as const,
-					value: {
-						walletPrivateKey: "0x0" as `0x${string}`,
-						pinataJwt: "",
-						farcasterFid: 0,
-						neynarApiKey: "",
-						neynarSignerUuid: "",
-						baseRpcUrl: "",
-						farcasterChannel: process.env.FARCASTER_CHANNEL?.trim() || undefined,
-					},
-				}
-			: loadEnv()
+	const config =
+		flags.mode === "live"
+			? (() => {
+					const envResult = loadEnv()
+					if (!envResult.ok) {
+						console.error(`Config error: ${envResult.error}`)
+						process.exit(1)
+					}
+					return envResult.value
+				})()
+			: undefined
 
-	if (!envResult.ok) {
-		console.error(`Config error: ${envResult.error}`)
-		process.exit(1)
-	}
-
-	const result = await runPipeline(envResult.value, {
+	const result = await runPipeline(config, {
 		...flags,
-		channel: flags.channel ?? envResult.value.farcasterChannel,
+		channel: flags.channel ?? config?.farcasterChannel,
 	})
 
 	if (!result.ok) {
@@ -187,7 +133,9 @@ const main = async () => {
 		process.exit(1)
 	}
 
-	console.log(`Edition ${result.value.edition} complete.`)
+	console.log(
+		`${result.value.mode === "studio" ? "Studio render" : `Edition ${result.value.edition}`} complete: ${result.value.outputPath}`,
+	)
 }
 
 main()

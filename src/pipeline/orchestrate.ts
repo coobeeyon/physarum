@@ -1,8 +1,9 @@
-import { writeFileSync } from "node:fs"
+import { mkdirSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import { varyGenome } from "#agent/evolve.ts"
 import { createClients } from "#chain/client.ts"
 import { deployEdition } from "#chain/zora.ts"
+import type { RunMode } from "#config/cli.ts"
 import type { EnvConfig } from "#config/env.ts"
 import { DEFAULT_PARAMS } from "#config/params.ts"
 import { type FoodImageData, loadFoodImage } from "#engine/food.ts"
@@ -10,30 +11,31 @@ import { simulate } from "#engine/physarum.ts"
 import { uploadToImgur } from "#ipfs/imgur.ts"
 import { createPinataClient, uploadImage, uploadMetadata } from "#ipfs/upload.ts"
 import { updateGallery } from "#pipeline/gallery.ts"
+import {
+	type LiveRunJournal,
+	beginLiveOperation,
+	completeLiveOperation,
+	completeLiveRun,
+	loadLiveRunJournal,
+	prepareLiveRun,
+} from "#pipeline/journal.ts"
 import { loadState, saveState } from "#pipeline/state.ts"
 import { renderPng } from "#render/canvas.ts"
 import { engageWithCommunity } from "#social/discover.ts"
 import { readEngagement } from "#social/engagement.ts"
 import { type NeynarConfig, postCast, postReply } from "#social/farcaster.ts"
-import {
-	composeCastText,
-	composeMetadataDescription,
-	composeSelfReply,
-	composeZoraCast,
-} from "#social/narrative.ts"
+import { composeCastText, composeMetadataDescription, composeZoraCast } from "#social/narrative.ts"
 import type { EngagementData } from "#types/evolution.ts"
 import type { NftMetadata } from "#types/metadata.ts"
 import type { PhysarumParams } from "#types/physarum.ts"
-import { type Result, ok } from "#types/result.ts"
+import { type Result, err, ok } from "#types/result.ts"
 
 const IPFS_GATEWAY = "https://ipfs.io/ipfs"
 const OUTPUT_DIR = join(import.meta.dirname, "../../output")
 
 type PipelineOptions = {
-	readonly generateOnly?: boolean
-	readonly deployOnly?: boolean
-	readonly postOnly?: boolean
-	readonly dryRun?: boolean
+	readonly mode: RunMode
+	readonly resumeLive?: boolean
 	readonly seedOverride?: number
 	readonly foodImageSource?: string
 	readonly channel?: string
@@ -43,16 +45,58 @@ type PipelineOptions = {
 }
 
 export const runPipeline = async (
-	config: EnvConfig,
-	options: PipelineOptions = {},
-): Promise<Result<{ edition: number }>> => {
+	config: EnvConfig | undefined,
+	options: PipelineOptions,
+): Promise<Result<{ edition: number; mode: RunMode; outputPath: string }>> => {
 	// Load state
 	const stateResult = loadState()
 	if (!stateResult.ok) return stateResult
 
 	const state = stateResult.value
-	const edition = state.lastEdition + 1
-	const seed = options.seedOverride ?? edition * 7919 // prime-based seed
+	let edition = state.lastEdition + 1
+	let seed = options.seedOverride ?? edition * 7919 // prime-based seed
+	let journal: LiveRunJournal | undefined
+
+	if (options.mode === "live") {
+		if (!config) return err("live mode requires a complete environment configuration")
+		if (!options.castText || !options.selfReplyText || !options.zoraCastText) {
+			return err(
+				"live mode requires explicit --cast-text, --self-reply-text, and --zora-text from Stigmergence",
+			)
+		}
+
+		if (options.resumeLive) {
+			const existingResult = loadLiveRunJournal()
+			if (!existingResult.ok) return existingResult
+			if (!existingResult.value || existingResult.value.completedAt) {
+				return err("there is no incomplete live run to resume")
+			}
+			edition = existingResult.value.edition
+			seed = existingResult.value.seed
+			if (state.lastEdition === edition) {
+				if (
+					existingResult.value.pendingOperation ||
+					!existingResult.value.completedOperations.includes("save-state")
+				) {
+					return err("state advanced but the live-run journal is uncertain; reconcile it manually")
+				}
+				const completed = completeLiveRun(existingResult.value)
+				if (!completed.ok) return completed
+				return ok({
+					edition,
+					mode: options.mode,
+					outputPath: join(OUTPUT_DIR, `stigmergence-${edition}.png`),
+				})
+			}
+			if (state.lastEdition !== edition - 1) {
+				return err("state.json does not match the incomplete live run")
+			}
+		}
+
+		const journalResult = prepareLiveRun(edition, seed, options.resumeLive ?? false)
+		if (!journalResult.ok) return journalResult
+		journal = journalResult.value
+	}
 
 	console.log(`\n--- stigmergence #${edition} | seed ${seed} ---\n`)
 
@@ -114,27 +158,40 @@ export const runPipeline = async (
 	if (!renderResult.ok) return renderResult
 	const { png } = renderResult.value
 
-	const pngPath = join(OUTPUT_DIR, `stigmergence-${edition}.png`)
+	const outputDir = options.mode === "studio" ? join(OUTPUT_DIR, "studio") : OUTPUT_DIR
+	mkdirSync(outputDir, { recursive: true })
+	const pngPath = join(
+		outputDir,
+		options.mode === "studio"
+			? `stigmergence-${edition}-seed-${seed}.png`
+			: `stigmergence-${edition}.png`,
+	)
 	writeFileSync(pngPath, png)
 	console.log(`  saved to ${pngPath}`)
 
-	if (options.generateOnly) {
-		return ok({ edition })
+	if (options.mode === "studio") {
+		console.log("  studio mode: no uploads, wallet calls, posts, gallery changes, or state writes")
+		return ok({ edition, mode: options.mode, outputPath: pngPath })
 	}
+	if (!config || !journal) return err("live mode was not prepared")
 
 	// 3. Upload to IPFS
 	console.log("uploading to IPFS...")
-	if (options.dryRun) {
-		console.log("  [dry-run] skipping IPFS upload")
-	}
 
 	const pinata = createPinataClient(config.pinataJwt)
 
-	const imageResult = options.dryRun
-		? ok({ imageCid: "dry-run-image-cid" })
-		: await uploadImage(pinata, png, `stigmergence-${edition}`)
-	if (!imageResult.ok) return imageResult
-	const { imageCid } = imageResult.value
+	let imageCid = journal.results.imageCid
+	if (!imageCid) {
+		const begun = beginLiveOperation(journal, "upload-image")
+		if (!begun.ok) return begun
+		journal = begun.value
+		const imageResult = await uploadImage(pinata, png, `stigmergence-${edition}`)
+		if (!imageResult.ok) return imageResult
+		imageCid = imageResult.value.imageCid
+		const completed = completeLiveOperation(journal, "upload-image", { imageCid })
+		if (!completed.ok) return completed
+		journal = completed.value
+	}
 	console.log(`  image CID: ${imageCid}`)
 
 	// Extract genome (everything except seed/width/height) — needed for metadata and narrative
@@ -156,44 +213,53 @@ export const runPipeline = async (
 		],
 	}
 
-	const metaResult = options.dryRun
-		? ok({ metadataCid: "dry-run-metadata-cid" })
-		: await uploadMetadata(pinata, metadata, `stigmergence-${edition}`)
-	if (!metaResult.ok) return metaResult
-	const { metadataCid } = metaResult.value
+	let metadataCid = journal.results.metadataCid
+	if (!metadataCid) {
+		const begun = beginLiveOperation(journal, "upload-metadata")
+		if (!begun.ok) return begun
+		journal = begun.value
+		const metaResult = await uploadMetadata(pinata, metadata, `stigmergence-${edition}`)
+		if (!metaResult.ok) return metaResult
+		metadataCid = metaResult.value.metadataCid
+		const completed = completeLiveOperation(journal, "upload-metadata", { metadataCid })
+		if (!completed.ok) return completed
+		journal = completed.value
+	}
 	console.log(`  metadata CID: ${metadataCid}`)
 
 	const metadataUri = `ipfs://${metadataCid}`
 
 	// Upload to imgur for reliable Farcaster embeds (IPFS gateways are flaky)
-	let imgurUrl: string | undefined
-	if (!options.dryRun) {
+	let imgurUrl = journal.results.imgurUrl
+	if (!imgurUrl && !journal.results.imgurFailed) {
 		console.log("uploading to imgur...")
+		const begun = beginLiveOperation(journal, "upload-imgur")
+		if (!begun.ok) return begun
+		journal = begun.value
 		const imgurResult = await uploadToImgur(png, `stigmergence #${edition}`)
 		if (imgurResult.ok) {
 			imgurUrl = imgurResult.value.url
 			console.log(`  imgur: ${imgurUrl}`)
+			const completed = completeLiveOperation(journal, "upload-imgur", { imgurUrl })
+			if (!completed.ok) return completed
+			journal = completed.value
 		} else {
 			console.warn(`  imgur failed: ${imgurResult.error} — falling back to IPFS gateway`)
+			const completed = completeLiveOperation(journal, "upload-imgur", { imgurFailed: true })
+			if (!completed.ok) return completed
+			journal = completed.value
 		}
-	}
-
-	if (options.deployOnly || options.postOnly) {
-		// Skip chain deployment if post-only
 	}
 
 	// 4. Deploy to Zora/Base
 	console.log("deploying to Zora/Base...")
-	let contractAddress = state.contractAddress ?? undefined
-	let tokenId = "0"
-	let txHash = "0x0"
-
-	if (options.dryRun || options.postOnly) {
-		console.log("  [dry-run/post-only] skipping chain deployment")
-		contractAddress = contractAddress ?? "0xdry-run"
-		tokenId = String(edition)
-		txHash = "0xdry-run"
-	} else {
+	let contractAddress = journal.results.contractAddress ?? state.contractAddress ?? undefined
+	let tokenId = journal.results.tokenId
+	let txHash = journal.results.txHash
+	if (!journal.results.contractAddress || !tokenId || !txHash) {
+		const begun = beginLiveOperation(journal, "mint")
+		if (!begun.ok) return begun
+		journal = begun.value
 		const { publicClient, walletClient } = createClients(config.walletPrivateKey, config.baseRpcUrl)
 		const deployResult = await deployEdition(
 			publicClient as Parameters<typeof deployEdition>[0],
@@ -205,14 +271,17 @@ export const runPipeline = async (
 		contractAddress = deployResult.value.contractAddress
 		tokenId = deployResult.value.tokenId
 		txHash = deployResult.value.txHash
-		console.log(`  contract: ${contractAddress}`)
-		console.log(`  tokenId: ${tokenId}`)
-		console.log(`  tx: ${txHash}`)
+		const completed = completeLiveOperation(journal, "mint", {
+			contractAddress,
+			tokenId,
+			txHash,
+		})
+		if (!completed.ok) return completed
+		journal = completed.value
 	}
-
-	if (options.deployOnly) {
-		return ok({ edition })
-	}
+	console.log(`  contract: ${contractAddress}`)
+	console.log(`  tokenId: ${tokenId}`)
+	console.log(`  tx: ${txHash}`)
 
 	// 5. Post to Farcaster
 	console.log("posting to Farcaster...")
@@ -250,71 +319,100 @@ export const runPipeline = async (
 	const postChannel =
 		options.channel ?? config.farcasterChannel ?? (edition % 2 === 1 ? "ai-art" : "art")
 
-	let castHash = "0x0"
-	let zoraCastHash: string | undefined
-	let selfReplyHash: string | undefined
+	let castHash = journal.results.castHash
+	let zoraCastHash = journal.results.zoraCastHash
+	let selfReplyHash = journal.results.selfReplyHash
 	const replyCastHashes: string[] = []
-	if (options.dryRun) {
-		console.log("  [dry-run] skipping Farcaster post")
-		console.log(`  channel: ${postChannel}`)
-		console.log(`  narrative:\n${castText}`)
-	} else {
-		// Primary cast embeds image only — no Zora card competing with the art.
-		// The Zora collect URL goes in the self-reply thread instead.
+	// Primary cast embeds image only — no Zora card competing with the art.
+	// The Zora collect URL goes in the self-reply thread instead.
+	if (!castHash) {
+		const begun = beginLiveOperation(journal, "post-primary")
+		if (!begun.ok) return begun
+		journal = begun.value
 		const castResult = await postCast(neynarConfig, castText, imageUrl, undefined, postChannel)
 		if (!castResult.ok) return castResult
 		castHash = castResult.value.castHash
-		console.log(`  cast: ${castHash}`)
+		const completed = completeLiveOperation(journal, "post-primary", { castHash })
+		if (!completed.ok) return completed
+		journal = completed.value
+	}
+	if (!castHash) return err("primary cast was not recorded")
+	console.log(`  cast: ${castHash}`)
 
-		// Self-reply: deeper reflection on what this simulation actually does.
-		// Creates a visible thread on our post — people browsing see it has replies and click in.
-		// Include the Zora mint URL as an embed so anyone reading the thread can collect directly.
-		const selfReplyText = options.selfReplyText ?? (await composeSelfReply(edition, genome))
-		if (selfReplyText) {
-			const selfReplyResult = await postReply(neynarConfig, selfReplyText, castHash, [mintUrl])
-			if (selfReplyResult.ok) {
-				selfReplyHash = selfReplyResult.value.castHash
-				console.log(`  self-reply: ${selfReplyHash}`)
-				// Tracked separately — self-reply shows in primary cast's replies.count,
-				// so we need to know it's ours to avoid counting it as external engagement.
-			} else {
-				console.warn(`  self-reply failed: ${selfReplyResult.error}`)
-			}
-		}
+	// Self-reply: deeper reflection on what this simulation actually does.
+	// Creates a visible thread on our post — people browsing see it has replies and click in.
+	// Include the Zora mint URL as an embed so anyone reading the thread can collect directly.
+	const selfReplyText = options.selfReplyText ?? ""
+	if (!selfReplyHash) {
+		const begun = beginLiveOperation(journal, "post-self-reply")
+		if (!begun.ok) return begun
+		journal = begun.value
+		const selfReplyResult = await postReply(neynarConfig, selfReplyText, castHash, [mintUrl])
+		if (selfReplyResult.ok) {
+			selfReplyHash = selfReplyResult.value.castHash
+			console.log(`  self-reply: ${selfReplyHash}`)
+			// Tracked separately — self-reply shows in primary cast's replies.count,
+			// so we need to know it's ours to avoid counting it as external engagement.
+			const completed = completeLiveOperation(journal, "post-self-reply", { selfReplyHash })
+			if (!completed.ok) return completed
+			journal = completed.value
+		} else return selfReplyResult
+	}
 
-		// Secondary cast to /zora — collector-oriented, different audience than /genart or /art
-		// Image-only embed (no Zora promotional card) — the garish +325% chrome graphic
-		// competes with the art. Collect URL goes as text instead.
-		if (postChannel !== "zora") {
+	// Secondary cast to /zora — collector-oriented, different audience than /genart or /art
+	// Image-only embed (no Zora promotional card) — the garish +325% chrome graphic
+	// competes with the art. Collect URL goes as text instead.
+	if (postChannel !== "zora") {
+		if (!zoraCastHash) {
+			const begun = beginLiveOperation(journal, "post-zora")
+			if (!begun.ok) return begun
+			journal = begun.value
 			const zoraText = options.zoraCastText ?? composeZoraCast(edition, genome)
 			const zoraTextWithLink = `${zoraText}\n\n${mintUrl}`
 			const zoraResult = await postCast(neynarConfig, zoraTextWithLink, imageUrl, undefined, "zora")
-			if (zoraResult.ok) {
-				zoraCastHash = zoraResult.value.castHash
-				console.log(`  /zora cast: ${zoraCastHash}`)
-			} else {
-				console.warn(`  /zora cast failed: ${zoraResult.error}`)
-			}
+			if (!zoraResult.ok) return zoraResult
+			zoraCastHash = zoraResult.value.castHash
+			console.log(`  /zora cast: ${zoraCastHash}`)
+			const completed = completeLiveOperation(journal, "post-zora", { zoraCastHash })
+			if (!completed.ok) return completed
+			journal = completed.value
 		}
+	} else if (!journal.completedOperations.includes("post-zora")) {
+		const begun = beginLiveOperation(journal, "post-zora")
+		if (!begun.ok) return begun
+		journal = begun.value
+		const completed = completeLiveOperation(journal, "post-zora", { zoraPostSkipped: true })
+		if (!completed.ok) return completed
+		journal = completed.value
 	}
 
 	// 6. Engage with community (builds organic discovery via notifications)
-	if (!options.dryRun) {
-		// Automated engagement: likes and follows only.
-		// All replies are composed by me directly each session — not by pipeline automation.
-		// The mixed voice problem (automated sonnet replies + my direct replies) was degrading trust.
-		const engageResult = await engageWithCommunity(
+	// Automated engagement: likes and follows only.
+	// All replies are composed by me directly each session — not by pipeline automation.
+	// The mixed voice problem (automated sonnet replies + my direct replies) was degrading trust.
+	if (!journal.completedOperations.includes("engage")) {
+		const begun = beginLiveOperation(journal, "engage")
+		if (!begun.ok) return begun
+		journal = begun.value
+		const engagementResult = await engageWithCommunity(
 			neynarConfig,
 			undefined, // channels
 			undefined, // maxLikes
 			undefined, // maxFollows
 			0, // maxReplies — disabled, I reply myself
 		)
-		// No automated inbound responses either — I handle conversations directly.
+		if (!engagementResult.ok) return engagementResult
+		const completed = completeLiveOperation(journal, "engage")
+		if (!completed.ok) return completed
+		journal = completed.value
 	}
+	// No automated inbound responses either — I handle conversations directly.
 
 	// 7. Update gallery
-	if (!options.dryRun) {
+	if (!journal.completedOperations.includes("update-gallery")) {
+		const begun = beginLiveOperation(journal, "update-gallery")
+		if (!begun.ok) return begun
+		journal = begun.value
 		const galleryResult = await updateGallery({
 			edition,
 			seed,
@@ -324,9 +422,10 @@ export const runPipeline = async (
 			contractAddress: contractAddress ?? "",
 			tokenId,
 		})
-		if (!galleryResult.ok) {
-			console.warn(`  gallery update failed: ${galleryResult.error}`)
-		}
+		if (!galleryResult.ok) return galleryResult
+		const completed = completeLiveOperation(journal, "update-gallery")
+		if (!completed.ok) return completed
+		journal = completed.value
 	}
 
 	// 8. Save state
@@ -352,9 +451,19 @@ export const runPipeline = async (
 		],
 		reflections: state.reflections,
 	}
-	const saveResult = saveState(newState)
-	if (!saveResult.ok) return saveResult
+	if (!journal.completedOperations.includes("save-state")) {
+		const begun = beginLiveOperation(journal, "save-state")
+		if (!begun.ok) return begun
+		journal = begun.value
+		const saveResult = saveState(newState)
+		if (!saveResult.ok) return saveResult
+		const completed = completeLiveOperation(journal, "save-state")
+		if (!completed.ok) return completed
+		journal = completed.value
+	}
+	const runCompleted = completeLiveRun(journal)
+	if (!runCompleted.ok) return runCompleted
 
 	console.log(`\n--- stigmergence #${edition} complete ---\n`)
-	return ok({ edition })
+	return ok({ edition, mode: options.mode, outputPath: pngPath })
 }

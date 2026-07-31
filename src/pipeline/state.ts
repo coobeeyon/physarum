@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, writeFileSync } from "node:fs"
+import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import type { HistoryEntry, PipelineState } from "#types/metadata.ts"
 import { type Result, ok } from "#types/result.ts"
@@ -46,6 +46,8 @@ export const loadState = (): Result<PipelineState> => {
 }
 
 export const saveState = (state: PipelineState): Result<void> => {
-	writeFileSync(STATE_PATH, JSON.stringify(state, null, 2))
+	const temporaryPath = `${STATE_PATH}.tmp`
+	writeFileSync(temporaryPath, JSON.stringify(state, null, 2))
+	renameSync(temporaryPath, STATE_PATH)
 	return ok(undefined)
 }

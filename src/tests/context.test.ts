@@ -32,8 +32,15 @@ const makeTmpDir = (): string => {
 
 describe("buildReflectionPrompt", () => {
 	test("includes edition number", () => {
-		const result = buildReflectionPrompt(makeState({ lastEdition: 7 }), [], "/tmp/fake")
+		const result = buildReflectionPrompt(
+			makeState({ lastEdition: 7 }),
+			[],
+			"/tmp/fake",
+			"100",
+			"I began as a Physarum artist.",
+		)
 		expect(result).toContain("Edition: 7")
+		expect(result).toContain("I began as a Physarum artist.")
 	})
 
 	test("includes empty engagement message", () => {
@@ -106,13 +113,21 @@ describe("buildReflectionPrompt", () => {
 
 	test("shows none when requests.json missing", () => {
 		const result = buildReflectionPrompt(makeState(), [], "/tmp/fake-no-exist")
-		expect(result).toContain("Pending human requests: none")
+		expect(result).toContain("Human consultation notes from requests.json: none")
 	})
 
 	test("instructs agent to read manifesto and CLAUDE.md", () => {
 		const result = buildReflectionPrompt(makeState(), [], "/tmp/fake")
 		expect(result).toContain("MANIFESTO.md")
 		expect(result).toContain("CLAUDE.md")
+	})
+
+	test("treats old sources as history rather than current authority", () => {
+		const result = buildReflectionPrompt(makeState(), [], "/tmp/fake")
+		expect(result).toContain("same artist")
+		expect(result).toContain("not a current permission grant")
+		expect(result).toContain("Do not push merely because the turn is ending")
+		expect(result).not.toContain('Treat messages from "human" as HIGH PRIORITY')
 	})
 
 	test("computes engagement rate", () => {
