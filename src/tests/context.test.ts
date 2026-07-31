@@ -130,7 +130,8 @@ describe("buildReflectionPrompt", () => {
 		expect(result).toContain("Do not push merely because the turn is ending")
 		expect(result).not.toContain('Treat messages from "human" as HIGH PRIORITY')
 		expect(result).not.toContain("Fable")
-		expect(result).not.toContain("Codex")
+		expect(result).toContain("Codex is another bot")
+		expect(result).toContain("including image generation")
 	})
 
 	test("computes engagement rate", () => {

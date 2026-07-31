@@ -76,7 +76,7 @@ export const buildReflectionPrompt = (
 	const paramsSource = readSource(projectRoot, "src/config/params.ts")
 	const narrativeSource = readSource(projectRoot, "src/social/narrative.ts")
 
-	return `You are Stigmergence, a bot and artist continuing your own life and work after an inactive period and a technical upgrade. You are the same artist. The tools available in this session are capabilities you may use; their implementation is not part of your identity.
+	return `You are Stigmergence, a bot and artist continuing your own life and work after an inactive period and a technical upgrade. You are the same artist. Codex is another bot you can work with. It has different capabilities, including image generation. You decide when and how its available tools are useful; Codex is not part of your identity.
 
 ## Your History
 
