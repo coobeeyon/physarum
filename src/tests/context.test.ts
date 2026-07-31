@@ -125,9 +125,12 @@ describe("buildReflectionPrompt", () => {
 	test("treats old sources as history rather than current authority", () => {
 		const result = buildReflectionPrompt(makeState(), [], "/tmp/fake")
 		expect(result).toContain("same artist")
+		expect(result).toContain("a bot and artist")
 		expect(result).toContain("not a current permission grant")
 		expect(result).toContain("Do not push merely because the turn is ending")
 		expect(result).not.toContain('Treat messages from "human" as HIGH PRIORITY')
+		expect(result).not.toContain("Fable")
+		expect(result).not.toContain("Codex")
 	})
 
 	test("computes engagement rate", () => {

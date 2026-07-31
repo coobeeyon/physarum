@@ -44,8 +44,8 @@ const listImages = (root: string): string[] => {
 }
 
 export const runCodexImageRequest = async (args: ImageRequestArgs): Promise<Result<string>> => {
-	if (process.env.STIGMERGENCE_CODEX_IMAGEGEN_ENABLED !== "1") {
-		return err("Codex image generation is not enabled by the current resource policy")
+	if (process.env.STIGMERGENCE_IMAGEGEN_ENABLED !== "1") {
+		return err("image generation is not enabled by the current resource policy")
 	}
 
 	const projectRoot = realpathSync(join(import.meta.dirname, "../.."))
@@ -101,13 +101,13 @@ ${prompt}`
 		},
 	)
 	const exitCode = await proc.exited
-	if (exitCode !== 0) return err(`Codex image worker exited with code ${exitCode}`)
+	if (exitCode !== 0) return err(`image worker exited with code ${exitCode}`)
 
 	const images = listImages(requestDir).sort((a, b) => statSync(b).mtimeMs - statSync(a).mtimeMs)
 	if (images.length === 0) {
 		const resultMessage = readFileSync(resultMessagePath, "utf-8").trim()
 		return err(
-			`Codex completed without a project-local image${resultMessage ? `: ${resultMessage}` : ""}`,
+			`image worker completed without a project-local image${resultMessage ? `: ${resultMessage}` : ""}`,
 		)
 	}
 

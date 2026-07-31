@@ -8,7 +8,7 @@ import { type Result, err, ok } from "#types/result.ts"
 const ALLOWED_TOOLS = [
 	"Bash(bun run build)",
 	"Bash(bun run lint)",
-	"Bash(bun run codex-image *)",
+	"Bash(bun run generate-image *)",
 	"Bash(bun test)",
 	"Bash(bun test *)",
 	"Bash(git status *)",
@@ -39,7 +39,8 @@ export const runClaudeReflection = async (
 	}
 	if (!autobiography) return err("curated Stigmergence history is empty")
 
-	const model = process.env.REFLECT_MODEL || "claude-fable-5"
+	const model = process.env.REFLECT_MODEL?.trim()
+	if (!model) return err("REFLECT_MODEL is required by the private launch configuration")
 	const maxTurns = process.env.REFLECT_MAX_TURNS || "100"
 
 	const prompt = buildReflectionPrompt(state, engagement, projectRoot, maxTurns, autobiography)
