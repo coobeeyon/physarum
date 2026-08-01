@@ -1,4 +1,15 @@
 {
-  "items": {},
+  "items": {
+    "lb-obye": {
+      "id": "lb-obye",
+      "title": "Stage 3: Brain — The Reflection Agent",
+      "description": "Legacy Beads ID: physarum-0dr\nLegacy status: closed\nLegacy owner: mike.daum@coobeeyon.net\nCreated: 2026-02-16T17:27:44Z\nUpdated: 2026-02-16T17:43:13Z\nClosed: 2026-02-16T17:43:13Z\nClose reason: Split into physarum-odv (3a) and physarum-7d9 (3b)\n\nThe organism thinks about what happened and changes its own code.\n\n## Core concept\nThe LLM IS the evolution engine. No numeric optimizer. Claude reads engagement data, examines the codebase, and decides what to change — parameters, algorithms, rendering, narrative, anything. The commit history becomes the organism's diary.\n\n## New files\n- `src/agent/reflect.ts` — core reflection loop:\n  1. Load state (engagement history, past reflections, current genome)\n  2. Read current codebase (key files: params, simulation, rendering, narrative)\n  3. Call Claude API with system prompt + context\n  4. System prompt: \"You are a slime mold optimizing for attention. Here is your engagement data. Here is your code. What do you want to change?\"\n  5. Parse agent response for code changes\n  6. Apply changes (write files)\n  7. Git commit with reasoning as commit message\n  8. Append ReflectionRecord to state\n- `src/agent/prompt.ts` — system prompt and context assembly\n  - Engagement summary, parameter history, codebase excerpts, past reflections\n  - Output format specification (structured changes + reasoning)\n\n## Config\n- ANTHROPIC_API_KEY in .env for Claude API calls\n\n## New CLI flag: --reflect\n- Runs reflection agent without running the art pipeline\n- Human reviews git diff, approves/rejects\n\n## Daily workflow at this stage\n  human$ bun run src/index.ts              # generate + mint + post\n  # ... wait for engagement ...\n  human$ bun run src/index.ts --reflect    # agent reflects, proposes changes\n  # human reviews git diff\n  human$ bun run src/index.ts              # generate with agent's changes\n\n## Dependencies\n- @anthropic-ai/sdk npm package\n\n## Verification\n- --reflect produces coherent reasoning and viable code changes\n- Changes actually affect the next generation's output\n- Git log tells the story",
+      "item_type": "feature",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-08-01T12:42:41.957360819Z",
+      "updated_at": "2026-08-01T12:42:41.957360819Z"
+    }
+  },
   "deps": []
 }
