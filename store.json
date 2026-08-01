@@ -20,6 +20,16 @@
       "created_at": "2026-08-01T12:42:42.506563053Z",
       "updated_at": "2026-08-01T12:42:42.512419393Z"
     },
+    "lb-45ow": {
+      "id": "lb-45ow",
+      "title": "Wet run: full pipeline to mainnet with test Farcaster channel",
+      "description": "Legacy Beads ID: physarum-b4n\nLegacy status: closed\nLegacy owner: mike.daum@coobeeyon.net\nCreated: 2026-02-15T13:08:51Z\nUpdated: 2026-02-18T08:34:30Z\nClosed: 2026-02-18T08:34:30Z\nClose reason: Wet run successful — full pipeline to mainnet verified, cast posted to Farcaster\n\nEnd-to-end pipeline test posting to a test Farcaster channel before going public.\n\n1. Create a test Farcaster channel for dry-fire posts\n2. `bun start --generate-only --seed 42 --food-image <image>` — verify PNG with food image coloring\n3. `bun start --dry-run` — full pipeline with logged (not executed) chain/social calls\n4. `bun start` — full mainnet run: deploy ERC-1155 on Zora/Base + post to test channel\n5. Verify: PNG on IPFS, token on Zora, cast renders correctly with image + mint link\n6. Once validated, switch to the real channel for public drops\n\nStraight to Base mainnet (gas is cheap). Test channel is the safety net.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-08-01T12:42:42.775809158Z",
+      "updated_at": "2026-08-01T12:42:42.775809158Z"
+    },
     "lb-6rg2": {
       "id": "lb-6rg2",
       "title": "Stage 4b: Supervisor Loop & Self-Test",
