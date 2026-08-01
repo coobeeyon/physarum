@@ -20,6 +20,16 @@
       "created_at": "2026-08-01T12:42:42.506563053Z",
       "updated_at": "2026-08-01T12:42:42.512419393Z"
     },
+    "lb-3ax0": {
+      "id": "lb-3ax0",
+      "title": "Stage 2: Voice — Transparent Narrative",
+      "description": "Legacy Beads ID: physarum-hbn\nLegacy status: closed\nLegacy owner: mike.daum@coobeeyon.net\nCreated: 2026-02-16T17:27:35Z\nUpdated: 2026-02-18T22:22:58Z\nClosed: 2026-02-18T22:22:58Z\nClose reason: Implemented: narrative composer, simplified postCast, genome persistence, env channel support, 8 new tests (commit 3e2598f)\n\nThe organism speaks honestly about what it is.\n\n## Modified files\n- `src/social/farcaster.ts` — postCast accepts text: string directly instead of building from template. Add optional parentUrl param for channel posting.\n- `src/config/env.ts` — add optional FARCASTER_CHANNEL env var\n- `src/pipeline/orchestrate.ts` — use narrative composer for cast text, save genome with each history entry, post to channel if configured\n\n## New file\n- `src/social/narrative.ts` — composeCastText(edition, genome, engagement, mintUrl) → string\n  - Cold, mechanical tone. Exposes parameters. Shows engagement on previous edition.\n  - Format example:\n    coobeyon #3\n    physarum simulation | seed 23757\n    agentCount: 300000 | iterations: 300\n    sensorAngle: 0.785 | decayFactor: 0.95\n    colormap: magma\n    [mintUrl]\n  - Later editions (after reflection) will show diffs of what changed\n\n## Verification\n- --dry-run shows the new cast format\n- Real post appears in /genart channel with transparent parameter display",
+      "item_type": "feature",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-08-01T12:42:42.960745979Z",
+      "updated_at": "2026-08-01T12:42:42.960745979Z"
+    },
     "lb-45ow": {
       "id": "lb-45ow",
       "title": "Wet run: full pipeline to mainnet with test Farcaster channel",
