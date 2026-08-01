@@ -40,6 +40,16 @@
       "created_at": "2026-08-01T12:42:42.960745979Z",
       "updated_at": "2026-08-01T12:42:42.965629363Z"
     },
+    "lb-3fu5": {
+      "id": "lb-3fu5",
+      "title": "Create host-side run-reflect.sh orchestrator",
+      "description": "Legacy Beads ID: physarum-t6y.3\nLegacy status: closed\nLegacy owner: mike.daum@coobeeyon.net\nCreated: 2026-02-20T18:07:45Z\nUpdated: 2026-02-20T18:28:44Z\nClosed: 2026-02-20T18:28:44Z\nClose reason: Closed\n\nCreate scripts/run-reflect.sh — host-side script that mirrors scripts/run-epic.sh pattern. Builds same epic-runner Docker image (no new Dockerfile). Passes env: ANTHROPIC_API_KEY, NEYNAR_API_KEY, REFLECT_MODEL, REFLECT_MAX_TURNS, CONTAINER=true. Mounts SSH agent socket, bind-mounts state.json to /workspace/state.json. After container exits, git pull --ff-only to get code changes. Checks for clean working tree before starting.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-08-01T12:42:44.815834090Z",
+      "updated_at": "2026-08-01T12:42:44.815834090Z"
+    },
     "lb-45ow": {
       "id": "lb-45ow",
       "title": "Wet run: full pipeline to mainnet with test Farcaster channel",
@@ -314,6 +324,11 @@
     },
     {
       "from_id": "lb-lw1j",
+      "to_id": "lb-efq2",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-3fu5",
       "to_id": "lb-efq2",
       "dep_type": "parent"
     }
