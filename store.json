@@ -135,10 +135,10 @@
       "title": "Add container detection to runner.ts",
       "description": "Legacy Beads ID: physarum-t6y.1\nLegacy status: completed\nLegacy owner: mike.daum@coobeeyon.net\nCreated: 2026-02-20T18:07:41Z\nUpdated: 2026-02-20T18:27:38Z\n\nDetect CONTAINER=true env var in src/agent/runner.ts. When set, use --dangerously-skip-permissions instead of --allowedTools. Container provides the real sandbox, so tool restrictions are unnecessary and limiting. Keep --allowedTools as fallback for host-based runs.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
       "created_at": "2026-08-01T12:42:44.625884542Z",
-      "updated_at": "2026-08-01T12:42:44.625884542Z"
+      "updated_at": "2026-08-01T12:42:44.631912421Z"
     },
     "lb-hkay": {
       "id": "lb-hkay",
