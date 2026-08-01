@@ -39,6 +39,16 @@
       "priority": 2,
       "created_at": "2026-08-01T12:42:41.957360819Z",
       "updated_at": "2026-08-01T12:42:41.964434085Z"
+    },
+    "lb-oufp": {
+      "id": "lb-oufp",
+      "title": "Wire --reflect CLI to shell out to claude -p",
+      "description": "Legacy Beads ID: physarum-3lt\nLegacy status: closed\nLegacy owner: mike.daum@coobeeyon.net\nCreated: 2026-02-19T22:11:01Z\nUpdated: 2026-02-19T22:29:25Z\nClosed: 2026-02-19T22:29:25Z\nClose reason: Reformulating as proper epic hierarchy\n\nUpdate src/index.ts: the --reflect handler gathers state + engagement, calls context.ts to build the prompt, then spawns claude -p with that prompt. Invocation: claude -p \"$PROMPT\" --allowedTools (bun, git add/commit/status/diff/log, Read, Write, Edit) --model sonnet --max-turns 30 --output-format json. Parse the JSON output for token usage and log to state.json. Remove the old executeReflection call path from evolve.ts.",
+      "item_type": "feature",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-08-01T12:42:42.325229989Z",
+      "updated_at": "2026-08-01T12:42:42.325229989Z"
     }
   },
   "deps": []
