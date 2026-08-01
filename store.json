@@ -303,13 +303,18 @@
   },
   "deps": [
     {
-      "from_id": "lb-6eaq",
+      "from_id": "lb-0tai",
+      "to_id": "lb-9lh6",
+      "dep_type": "blocks"
+    },
+    {
+      "from_id": "lb-1x52",
       "to_id": "lb-nw4a",
       "dep_type": "parent"
     },
     {
-      "from_id": "lb-hm1j",
-      "to_id": "lb-nw4a",
+      "from_id": "lb-3fu5",
+      "to_id": "lb-efq2",
       "dep_type": "parent"
     },
     {
@@ -318,12 +323,12 @@
       "dep_type": "parent"
     },
     {
-      "from_id": "lb-hkay",
-      "to_id": "lb-nw4a",
-      "dep_type": "parent"
+      "from_id": "lb-6eaq",
+      "to_id": "lb-hm1j",
+      "dep_type": "blocks"
     },
     {
-      "from_id": "lb-1x52",
+      "from_id": "lb-6eaq",
       "to_id": "lb-nw4a",
       "dep_type": "parent"
     },
@@ -333,12 +338,27 @@
       "dep_type": "parent"
     },
     {
-      "from_id": "lb-lw1j",
-      "to_id": "lb-efq2",
+      "from_id": "lb-hkay",
+      "to_id": "lb-1x52",
+      "dep_type": "blocks"
+    },
+    {
+      "from_id": "lb-hkay",
+      "to_id": "lb-nw4a",
       "dep_type": "parent"
     },
     {
-      "from_id": "lb-3fu5",
+      "from_id": "lb-hm1j",
+      "to_id": "lb-hkay",
+      "dep_type": "blocks"
+    },
+    {
+      "from_id": "lb-hm1j",
+      "to_id": "lb-nw4a",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-lw1j",
       "to_id": "lb-efq2",
       "dep_type": "parent"
     },
@@ -348,28 +368,8 @@
       "dep_type": "blocks"
     },
     {
-      "from_id": "lb-0tai",
-      "to_id": "lb-9lh6",
-      "dep_type": "blocks"
-    },
-    {
       "from_id": "lb-xrot",
       "to_id": "lb-oufp",
-      "dep_type": "blocks"
-    },
-    {
-      "from_id": "lb-6eaq",
-      "to_id": "lb-hm1j",
-      "dep_type": "blocks"
-    },
-    {
-      "from_id": "lb-hm1j",
-      "to_id": "lb-hkay",
-      "dep_type": "blocks"
-    },
-    {
-      "from_id": "lb-hkay",
-      "to_id": "lb-1x52",
       "dep_type": "blocks"
     }
   ]
