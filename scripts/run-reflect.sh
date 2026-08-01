@@ -4,6 +4,15 @@ set -euo pipefail
 script_dir="$(cd "$(dirname "$0")" && pwd)"
 project_dir="$(cd "$script_dir/.." && pwd)"
 runner_dir="$script_dir/epic-runner"
+history_file="${STIGMERGENCE_HISTORY_PATH:-/home/mdaum/.mybuddy/memory/managed-peer-briefs/stigmergence-autobiography.md}"
+codex_volume="${STIGMERGENCE_CODEX_HOME_VOLUME:-mrmouth-codex-home}"
+archived_env="/home/mdaum/workspace/physarum-data/private/secrets/whimzee-physarum.env"
+if [ -r "$archived_env" ]; then
+  default_env="$archived_env"
+else
+  default_env="$project_dir/.env"
+fi
+environment_file="${STIGMERGENCE_ENV_PATH:-$default_env}"
 
 # --- Parse flags ---
 raw_mode=false
@@ -20,6 +29,20 @@ mkdir -p "$log_dir"
 log_file="$log_dir/reflect-$(date +%Y%m%d-%H%M%S).jsonl"
 
 echo "Log file: $log_file"
+
+if [ ! -r "$history_file" ]; then
+  echo "ERROR: Stigmergence history is not readable: $history_file"
+  exit 1
+fi
+if [ ! -r "$environment_file" ]; then
+  echo "ERROR: Stigmergence environment is not readable: $environment_file"
+  exit 1
+fi
+if ! docker volume inspect "$codex_volume" >/dev/null 2>&1; then
+  echo "ERROR: Codex home volume does not exist: $codex_volume"
+  echo "Set STIGMERGENCE_CODEX_HOME_VOLUME to an authenticated Codex volume."
+  exit 1
+fi
 
 # --- Preflight: clean working tree ---
 if ! git -C "$project_dir" diff --quiet || ! git -C "$project_dir" diff --cached --quiet; then
@@ -59,29 +82,37 @@ docker run --rm -v reflect-claude-home:/data alpine chown "$(id -u):$(id -g)" /d
 
 if [ "$raw_mode" = true ]; then
   docker run --name "$container_name" \
-    --env-file "$project_dir/.env" \
-    -e REFLECT_MODEL="${REFLECT_MODEL:-}" \
-    -e REFLECT_MAX_TURNS="${REFLECT_MAX_TURNS:-}" \
+    --env-file "$environment_file" \
+    -e REFLECT_MODEL="${REFLECT_MODEL:-claude-fable-5}" \
+    -e REFLECT_MAX_TURNS="${REFLECT_MAX_TURNS:-100}" \
+    -e STIGMERGENCE_HISTORY_PATH=/runtime/stigmergence-history.md \
+    -e CODEX_HOME=/home/runner/.codex \
     -e CONTAINER=true \
     -e REPO_URL="$repo_url" \
     -e BRANCH="$branch" \
     -v "${SSH_AUTH_SOCK}:/ssh-agent" \
     -e SSH_AUTH_SOCK=/ssh-agent \
     -v "$runner_dir/run-reflect.sh:/run-reflect.sh:ro" \
+    -v "$history_file:/runtime/stigmergence-history.md:ro" \
     -v "reflect-claude-home:/home/runner/.claude" \
+    -v "$codex_volume:/codex-source:ro" \
     epic-runner /run-reflect.sh 2>&1 | tee "$log_file"
 else
   docker run --name "$container_name" \
-    --env-file "$project_dir/.env" \
-    -e REFLECT_MODEL="${REFLECT_MODEL:-}" \
-    -e REFLECT_MAX_TURNS="${REFLECT_MAX_TURNS:-}" \
+    --env-file "$environment_file" \
+    -e REFLECT_MODEL="${REFLECT_MODEL:-claude-fable-5}" \
+    -e REFLECT_MAX_TURNS="${REFLECT_MAX_TURNS:-100}" \
+    -e STIGMERGENCE_HISTORY_PATH=/runtime/stigmergence-history.md \
+    -e CODEX_HOME=/home/runner/.codex \
     -e CONTAINER=true \
     -e REPO_URL="$repo_url" \
     -e BRANCH="$branch" \
     -v "${SSH_AUTH_SOCK}:/ssh-agent" \
     -e SSH_AUTH_SOCK=/ssh-agent \
     -v "$runner_dir/run-reflect.sh:/run-reflect.sh:ro" \
+    -v "$history_file:/runtime/stigmergence-history.md:ro" \
     -v "reflect-claude-home:/home/runner/.claude" \
+    -v "$codex_volume:/codex-source:ro" \
     epic-runner /run-reflect.sh 2>&1 | tee "$log_file" | bun run "$script_dir/reflect-stream-fmt.ts"
 fi
 

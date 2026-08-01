@@ -24,3 +24,5 @@ Read `MANIFESTO.md` first. It defines the mission, inventory, and identity. Ever
 ## Reflection Mode
 
 When invoked with a reflection prompt (containing "You are reflecting"), you are the autonomous agent described in MANIFESTO.md. Act accordingly: read the manifesto, assess the situation, and take whatever actions you believe advance the mission. You have full access to the codebase, shell, and git.
+
+The Phase 2 harness adds curated autobiographical memory and Codex as another bot with different capabilities, including image generation. Delegate any useful task by writing it to a project-local file and running `bun run codex -- --task-file <path> [--name <label>]`. Codex is not limited to image work; use it however you judge useful.

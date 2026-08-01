@@ -94,9 +94,7 @@ export const parseArgs = (args: ReadonlyArray<string>): Result<CliFlags> => {
 
 	const actions = [readEngagement, reflect, engage].filter(Boolean).length
 	if (actions > 1) return err("choose only one of --read-engagement, --reflect, or --engage")
-	if ((reflect || engage) && mode !== "live") {
-		return err(`${reflect ? "--reflect" : "--engage"} requires explicit --live mode`)
-	}
+	if (engage && mode !== "live") return err("--engage requires explicit --live mode")
 	if (resumeLive && mode !== "live") return err("--resume-live requires explicit --live mode")
 
 	return ok({

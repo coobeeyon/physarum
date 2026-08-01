@@ -24,8 +24,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends gcc g++ libc6-d
     apt-get install -y --no-install-recommends libicu72 && \
     rm -rf /var/lib/apt/lists/* /usr/local/go /root/go /root/.cache/go-build
 
-# Layer 4: Claude Code (changes occasionally)
-RUN npm install -g @anthropic-ai/claude-code
+# Layer 4: Agent CLIs (changes occasionally, pinned for reproducible runs)
+ARG CLAUDE_CODE_VERSION=2.1.220
+ARG CODEX_VERSION=0.144.5
+RUN npm install -g \
+    "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}" \
+    "@openai/codex@${CODEX_VERSION}"
 
 # Layer 5: Non-root user matching host UID (for SSH agent socket access)
 ARG HOST_UID=1000

@@ -5,6 +5,24 @@ repo_url="${REPO_URL:?REPO_URL required}"
 branch="${BRANCH:?BRANCH required}"
 base_dir="$HOME/repos"
 
+# Give this disposable runner its own writable Codex home while reusing only
+# the authenticated configuration and installed skills from the shared volume.
+mkdir -p "$HOME/.codex"
+for codex_file in auth.json config.toml; do
+  if [ -f "/codex-source/$codex_file" ]; then
+    cp "/codex-source/$codex_file" "$HOME/.codex/$codex_file"
+  fi
+done
+if [ -d /codex-source/skills ]; then
+  cp -a /codex-source/skills "$HOME/.codex/skills"
+fi
+if [ ! -f "$HOME/.codex/auth.json" ]; then
+  echo "ERROR: authenticated Codex config was not found in /codex-source"
+  exit 1
+fi
+chmod 700 "$HOME/.codex"
+chmod 600 "$HOME/.codex/auth.json"
+
 # --- Clone physarum and stigmergence-site as siblings ---
 mkdir -p "$base_dir"
 echo "Cloning $repo_url (branch: $branch)..."

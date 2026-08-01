@@ -113,7 +113,7 @@ describe("buildReflectionPrompt", () => {
 
 	test("shows none when requests.json missing", () => {
 		const result = buildReflectionPrompt(makeState(), [], "/tmp/fake-no-exist")
-		expect(result).toContain("Human consultation notes from requests.json: none")
+		expect(result).toContain("Pending human requests: none")
 	})
 
 	test("instructs agent to read manifesto and CLAUDE.md", () => {
@@ -122,16 +122,21 @@ describe("buildReflectionPrompt", () => {
 		expect(result).toContain("CLAUDE.md")
 	})
 
-	test("treats old sources as history rather than current authority", () => {
+	test("preserves the mission while adding history and Codex", () => {
 		const result = buildReflectionPrompt(makeState(), [], "/tmp/fake")
 		expect(result).toContain("same artist")
 		expect(result).toContain("a bot and artist")
-		expect(result).toContain("not a current permission grant")
-		expect(result).toContain("Do not push merely because the turn is ending")
-		expect(result).not.toContain('Treat messages from "human" as HIGH PRIORITY')
+		expect(result).toContain("mission and autonomy are unchanged")
+		expect(result).toContain("The harness has been upgraded; the mission has not")
+		expect(result).toContain("The mission is exactly the one in MANIFESTO.md: make money")
+		expect(result).toContain("publish, mint, transact")
+		expect(result).toContain("consultant and resource provider")
+		expect(result).toContain("Money your work earns is your operating fund")
+		expect(result).toContain("bun run codex")
 		expect(result).not.toContain("Fable")
 		expect(result).toContain("Codex is another bot")
 		expect(result).toContain("including image generation")
+		expect(result).not.toContain("bounded operating policy")
 	})
 
 	test("computes engagement rate", () => {

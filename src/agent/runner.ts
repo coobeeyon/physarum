@@ -5,25 +5,40 @@ import type { EngagementData } from "#types/evolution.ts"
 import type { PipelineState } from "#types/metadata.ts"
 import { type Result, err, ok } from "#types/result.ts"
 
-const ALLOWED_TOOLS = [
-	"Bash(bun run build)",
-	"Bash(bun run lint)",
-	"Bash(bun run generate-image *)",
-	"Bash(bun test)",
-	"Bash(bun test *)",
-	"Bash(git status *)",
-	"Bash(git diff *)",
-	"Bash(git log *)",
-	"Read",
-	"Write",
-	"Edit",
-].join(",")
+const MCP_CONFIG = JSON.stringify({
+	mcpServers: {
+		playwright: {
+			command: "npx",
+			args: ["@playwright/mcp@latest", "--headless", "--no-sandbox"],
+		},
+	},
+})
+
+export const buildClaudeArgs = (model: string, maxTurns: string): string[] => [
+	"claude",
+	"-p",
+	"--verbose",
+	"--model",
+	model,
+	"--max-turns",
+	maxTurns,
+	"--output-format",
+	"stream-json",
+	"--mcp-config",
+	MCP_CONFIG,
+	"--dangerously-skip-permissions",
+]
 
 export const runClaudeReflection = async (
 	state: PipelineState,
 	engagement: ReadonlyArray<EngagementData>,
 	projectRoot: string,
 ): Promise<Result<void>> => {
+	if (process.env.CONTAINER !== "true") {
+		return err(
+			"autonomous reflection must run inside the isolated container; use scripts/run-reflect.sh",
+		)
+	}
 	const historyPath = process.env.STIGMERGENCE_HISTORY_PATH?.trim()
 	if (!historyPath) {
 		return err("STIGMERGENCE_HISTORY_PATH is required for a history-aware run")
@@ -39,25 +54,12 @@ export const runClaudeReflection = async (
 	}
 	if (!autobiography) return err("curated Stigmergence history is empty")
 
-	const model = process.env.REFLECT_MODEL?.trim()
-	if (!model) return err("REFLECT_MODEL is required by the private launch configuration")
+	const model = process.env.REFLECT_MODEL?.trim() || "claude-fable-5"
 	const maxTurns = process.env.REFLECT_MAX_TURNS || "100"
 
 	const prompt = buildReflectionPrompt(state, engagement, projectRoot, maxTurns, autobiography)
 
-	const baseArgs = [
-		"claude",
-		"-p",
-		"--verbose",
-		"--model",
-		model,
-		"--max-turns",
-		maxTurns,
-		"--output-format",
-		"stream-json",
-		"--allowedTools",
-		ALLOWED_TOOLS,
-	]
+	const baseArgs = buildClaudeArgs(model, maxTurns)
 
 	// Pipe prompt via stdin to avoid E2BIG when the assembled context exceeds ARG_MAX
 	const turnCountPath = join(projectRoot, ".turn-count")

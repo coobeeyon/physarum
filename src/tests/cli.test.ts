@@ -38,6 +38,13 @@ describe("CLI execution modes", () => {
 		})
 	})
 
+	test("reflection starts the autonomous harness without redefining its authority as a CLI mode", () => {
+		expect(parseArgs(["--reflect"])).toMatchObject({
+			ok: true,
+			value: { mode: "studio", reflect: true },
+		})
+	})
+
 	test("rejects partial modes that could desynchronize state", () => {
 		for (const flag of ["--dry-run", "--deploy-only", "--post-only"]) {
 			const result = parseArgs([flag])

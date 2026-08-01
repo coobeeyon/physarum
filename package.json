@@ -5,7 +5,7 @@
 	"scripts": {
 		"start": "bun run src/index.ts",
 		"engage": "bun run src/index.ts --engage",
-		"generate-image": "bun run src/agent/codex-image.ts",
+		"codex": "bun run src/agent/codex.ts",
 		"build": "tsc --noEmit",
 		"test": "bun test",
 		"lint": "biome check src/",
