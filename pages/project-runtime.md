@@ -12,7 +12,9 @@ Useful when: changing how Stigmergence starts, diagnosing missing project contex
 
 `scripts/run-reflect.sh` is the host entry point. It requires a clean tracked worktree, the owner-only autobiographical history, the selected private service environment, an authenticated Codex home volume, and an SSH agent. It builds the disposable runner, clones Physarum and the gallery as siblings, mounts only the required private inputs, and starts `bun run src/index.ts --reflect`.
 
-The reflection code assembles the manifesto, current state, engagement, project context, communications, and curated autobiography into the prompt. Claude Code runs Fable as Stigmergence's primary reasoning process. Codex remains a separate general collaborator that Stigmergence may call through `bun run codex -- --task-file <path> [--name <label>]`.
+The reflection code keeps the original Phase 1 prompt structure and adds only essential Phase 2 context: continuous identity, the curated autobiography, Codex as a separate general collaborator, and credential hygiene. It still begins with “You are reflecting,” preserves the original disposable-checkout and turn-limit guidance, and includes current state, engagement, project context, genome, and narrative. Claude Code runs Fable as Stigmergence's primary reasoning process. Codex remains a separate general collaborator that Stigmergence may call through `bun run codex -- --task-file <path> [--name <label>]`.
+
+`comms.json` remains the live bidirectional human/artist channel. Every reflection reads its full current contents. Stigmergence may append an `agent` entry, then commit and push the file so Mike sees the response between runs. Tests protect both the original prompt framing and these message-file instructions from being silently replaced.
 
 The publishing pipeline's studio/live boundary and crash-safe journal protect operation correctness. They do not narrow the mission in `MANIFESTO.md` or introduce a human approval policy into the artist's prompt.
 
