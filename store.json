@@ -1,5 +1,15 @@
 {
   "items": {
+    "lb-0tai": {
+      "id": "lb-0tai",
+      "title": "Delete old reflection code (reflect.ts, prompt.ts, simplify evolve.ts)",
+      "description": "Legacy Beads ID: physarum-1j9\nLegacy status: closed\nLegacy owner: mike.daum@coobeeyon.net\nCreated: 2026-02-19T22:11:05Z\nUpdated: 2026-02-19T22:29:25Z\nClosed: 2026-02-19T22:29:25Z\nClose reason: Reformulating as proper epic hierarchy\n\nDelete src/agent/reflect.ts (single-shot API call, JSON parsing — replaced by Claude Code). Delete src/agent/prompt.ts (system prompt assembly, CONTEXT_FILES, OUTPUT_FORMAT — Claude Code reads MANIFESTO.md and CLAUDE.md directly). Simplify src/agent/evolve.ts: remove applyChanges, revertChanges, selfTest (Claude Code does this itself). Keep only what's needed for the new shell-out approach.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-08-01T12:42:42.052181887Z",
+      "updated_at": "2026-08-01T12:42:42.052181887Z"
+    },
     "lb-obye": {
       "id": "lb-obye",
       "title": "Stage 3: Brain — The Reflection Agent",
