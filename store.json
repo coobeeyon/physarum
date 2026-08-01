@@ -55,10 +55,10 @@
       "title": "Create src/agent/context.ts — prompt assembly for Claude Code reflection",
       "description": "Legacy Beads ID: physarum-3yp\nLegacy status: closed\nLegacy owner: mike.daum@coobeeyon.net\nCreated: 2026-02-19T22:10:58Z\nUpdated: 2026-02-19T22:29:25Z\nClosed: 2026-02-19T22:29:25Z\nClose reason: Reformulating as proper epic hierarchy\n\nSimple function: takes PipelineState + engagement data, returns a prompt string for claude -p. No system prompt, no codebase inclusion, no output format schema. Just formats the facts: edition number, engagement summary, past reflections, pending human requests (from requests.json if it exists). This replaces the old prompt.ts/assembleContext which built system prompts and included codebase files.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
       "created_at": "2026-08-01T12:42:42.417485265Z",
-      "updated_at": "2026-08-01T12:42:42.417485265Z"
+      "updated_at": "2026-08-01T12:42:42.421905470Z"
     }
   },
   "deps": []
