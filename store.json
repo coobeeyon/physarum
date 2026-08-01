@@ -346,6 +346,11 @@
       "from_id": "lb-xrot",
       "to_id": "lb-oufp",
       "dep_type": "blocks"
+    },
+    {
+      "from_id": "lb-6eaq",
+      "to_id": "lb-hm1j",
+      "dep_type": "blocks"
     }
   ]
 }
