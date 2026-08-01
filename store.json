@@ -40,6 +40,16 @@
       "created_at": "2026-08-01T12:42:42.775809158Z",
       "updated_at": "2026-08-01T12:42:42.780165103Z"
     },
+    "lb-5w94": {
+      "id": "lb-5w94",
+      "title": "Update CLAUDE.md with reflection mode instructions",
+      "description": "Legacy Beads ID: physarum-i08.3\nLegacy status: closed\nLegacy owner: mike.daum@coobeeyon.net\nCreated: 2026-02-19T22:30:15Z\nUpdated: 2026-02-20T17:34:55Z\nClosed: 2026-02-20T17:34:55Z\nClose reason: Deleted reflect.ts, prompt.ts, evolve.ts and their tests. Removed @anthropic-ai/sdk dependency. Cleaned anthropicApiKey from env.ts. Added Reflection Mode section to CLAUDE.md.\n\nAdd a \"Reflection Mode\" section to the project CLAUDE.md so that any Claude Code session spawned by --reflect understands it's the autonomous agent.\n\nAdd after the existing Key Paths section:\n\n## Reflection Mode\n\nWhen invoked with a reflection prompt (containing \"You are reflecting\"), you are the autonomous agent described in MANIFESTO.md. Act accordingly: read the manifesto, assess the situation, and take whatever actions you believe advance the mission. You have full access to the codebase, shell, and git.\n\nThis section ensures claude -p sessions have the right context without needing it baked into the prompt.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-08-01T12:42:44.302547024Z",
+      "updated_at": "2026-08-01T12:42:44.302547024Z"
+    },
     "lb-6eaq": {
       "id": "lb-6eaq",
       "title": "Create src/agent/context.ts",
@@ -239,6 +249,11 @@
     },
     {
       "from_id": "lb-hm1j",
+      "to_id": "lb-nw4a",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-5w94",
       "to_id": "lb-nw4a",
       "dep_type": "parent"
     }
