@@ -160,6 +160,16 @@
       "created_at": "2026-08-01T12:42:42.868752232Z",
       "updated_at": "2026-08-01T12:42:42.874304423Z"
     },
+    "lb-uscp": {
+      "id": "lb-uscp",
+      "title": "One-time manual setup: wallet, Pinata, Neynar, .env",
+      "description": "Legacy Beads ID: physarum-xnu\nLegacy status: closed\nLegacy owner: mike.daum@coobeeyon.net\nCreated: 2026-02-15T13:08:43Z\nUpdated: 2026-02-16T15:47:50Z\nClosed: 2026-02-16T15:47:50Z\nClose reason: Setup complete: .env populated with all secrets (wallet, Pinata JWT, Farcaster FID/signer key, hub API key). Refactored from Neynar REST API to direct hub gRPC. Registered app FID 2800696 and Ed25519 signer via Farcaster deep link approval. Dry-run passes.\n\nManual setup steps (no code changes needed):\n\n1. **Wallet**: Create an Ethereum wallet, fund with ~$5 of Base ETH, export private key (0x-prefixed)\n2. **Pinata**: Sign up at pinata.cloud, create API key (JWT) for IPFS uploads\n3. **Farcaster/Neynar**: Create Farcaster account, sign up at neynar.com, get API key + approved signer UUID\n4. **System deps**: `sudo apt install build-essential libcairo2-dev libjpeg-dev libpango1.0-dev libgif-dev librsvg2-dev` (for node-canvas)\n5. **Create .env** from .env.example with all secrets\n\nEnv vars needed:\n- WALLET_PRIVATE_KEY (0x-prefixed, funded on Base)\n- PINATA_JWT\n- NEYNAR_API_KEY\n- NEYNAR_SIGNER_UUID\n- BASE_RPC_URL (optional, defaults to public)\n\nAfter setup, verify with: `bun start --dry-run`",
+      "item_type": "task",
+      "status": "open",
+      "priority": 1,
+      "created_at": "2026-08-01T12:42:43.698962487Z",
+      "updated_at": "2026-08-01T12:42:43.698962487Z"
+    },
     "lb-vils": {
       "id": "lb-vils",
       "title": "Create coobeyon.xyz project page (GitHub Pages)",
