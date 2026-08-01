@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 set schema '{"type":"object","properties":{"done":{"type":"boolean"}},"required":["done"]}'
-set prompt "If there are no more beads under i08 then just set done=true then exit. Otherwise implement a task under i08 and then set done=false and exit."
+set prompt "If there are no more open Litebrite items under lb-nw4a then just set done=true then exit. Otherwise implement one task under lb-nw4a, close it with lb, and then set done=false and exit."
 
 set i 0
 while true

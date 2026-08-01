@@ -1,3 +1,14 @@
+FROM rust:1.88-slim AS agent-tools
+
+ARG LITEBRITE_REV=294171da1490e5f071a9fd5f31c25a9c34f9010e
+ARG TRAPPERKEEPER_REV=bd5ca628ab75f4c902945d0dc2768c66052624f8
+RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates \
+  && cargo install --locked --git https://github.com/coobeeyon/litebrite.git \
+    --rev "${LITEBRITE_REV}" \
+  && cargo install --locked --git https://github.com/coobeeyon/trapperkeeper.git \
+    --rev "${TRAPPERKEEPER_REV}" \
+  && rm -rf /var/lib/apt/lists/* /usr/local/cargo/registry /usr/local/cargo/git
+
 FROM node:22-slim
 
 # Layer 1: System deps (changes ~never)
@@ -14,15 +25,9 @@ ARG BUN_VERSION=1.3.5
 RUN curl -fsSL https://bun.sh/install | bash -s "bun-v${BUN_VERSION}"
 ENV PATH="/root/.bun/bin:${PATH}"
 
-# Layer 3b: Build beads (bd) from source with CGO for Dolt backend
-ARG GO_VERSION=1.25.6
-RUN apt-get update && apt-get install -y --no-install-recommends gcc g++ libc6-dev libicu-dev && \
-    curl -fsSL "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz" | tar -C /usr/local -xz && \
-    PATH="/usr/local/go/bin:$PATH" CGO_ENABLED=1 go install github.com/steveyegge/beads/cmd/bd@latest && \
-    cp /root/go/bin/bd /usr/local/bin/bd && \
-    apt-get purge -y gcc g++ libc6-dev libicu-dev && apt-get autoremove -y --purge && \
-    apt-get install -y --no-install-recommends libicu72 && \
-    rm -rf /var/lib/apt/lists/* /usr/local/go /root/go /root/.cache/go-build
+# Layer 3b: Project task tracker and wiki, pinned to reviewed revisions
+COPY --from=agent-tools /usr/local/cargo/bin/lb /usr/local/bin/lb
+COPY --from=agent-tools /usr/local/cargo/bin/trk /usr/local/bin/trk
 
 # Layer 4: Agent CLIs (changes occasionally, pinned for reproducible runs)
 ARG CLAUDE_CODE_VERSION=2.1.220

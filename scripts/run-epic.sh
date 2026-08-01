@@ -10,13 +10,9 @@ runner_dir="$script_dir/epic-runner"
 repo_url="$(git -C "$project_dir" remote get-url origin)"
 branch="$(git -C "$project_dir" branch --show-current)"
 
-# Ensure beads JSONL is committed before the container clones
-bd export
-if ! git -C "$project_dir" diff --quiet .beads/issues.jsonl 2>/dev/null; then
-  git -C "$project_dir" add .beads/issues.jsonl
-  git -C "$project_dir" commit -m "bd sync: pre-run flush for $epic"
-  git -C "$project_dir" push origin "$branch"
-fi
+# Ensure the requested work and tracker branch are available to the clone.
+lb show "$epic" >/dev/null
+lb sync
 
 # Build the container image (all layers cached unless versions change)
 echo "Building epic-runner container..."
@@ -46,8 +42,8 @@ docker run --name "$container_name" \
 echo "Container $container_name finished. Cleaning up..."
 docker rm "$container_name"
 
-# Pull the feature branch and import bead updates
+# Pull the feature branch and tracker updates
 echo "Fetching results from remote..."
 git -C "$project_dir" fetch origin
-bd export
+lb sync
 echo "Done. Check remote branches for the feature branch."

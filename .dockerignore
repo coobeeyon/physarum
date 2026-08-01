@@ -4,5 +4,5 @@ output
 .env
 *.log
 .git
-.beads
+.trapper_keeper
 .claude

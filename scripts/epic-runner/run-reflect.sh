@@ -36,6 +36,25 @@ git config --global --add safe.directory "$base_dir/stigmergence-site"
 
 cd "$base_dir/physarum"
 
+# --- Materialize project knowledge and enable Claude hooks ---
+for project_branch in litebrite trapperkeeper; do
+  if ! git show-ref --verify --quiet "refs/heads/$project_branch"; then
+    if ! git show-ref --verify --quiet "refs/remotes/origin/$project_branch"; then
+      echo "ERROR: required project branch is missing: origin/$project_branch"
+      exit 1
+    fi
+    git branch --track "$project_branch" "origin/$project_branch"
+  fi
+done
+if [ ! -d .trapper_keeper ]; then
+  git worktree add .trapper_keeper trapperkeeper
+fi
+lb setup claude
+trk setup claude
+lb prime >/dev/null
+trk prime >/dev/null
+echo "Litebrite, Trapper Keeper, and Claude hooks are ready."
+
 # --- Install dependencies from pre-built cache ---
 echo "Installing project dependencies..."
 if [ -d /deps/physarum/node_modules ]; then
@@ -45,7 +64,7 @@ else
 fi
 echo "Dependencies installed."
 
-# --- Install pre-commit hook (lint + beads) ---
+# --- Install pre-commit hook (lint) ---
 git config core.hooksPath scripts/git-hooks
 
 # --- Restore .claude.json from persisted backup if missing ---

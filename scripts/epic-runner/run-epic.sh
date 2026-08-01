@@ -24,42 +24,47 @@ else
 fi
 echo "Dependencies installed."
 
-# --- Initialize beads ---
-echo "Initializing beads..."
-bd init --prefix physarum
-bd config set beads.role maintainer
-yes | bd doctor --fix || true
-rm -f .beads/dolt/*/.dolt/noms/LOCK
-bd import
+# --- Materialize project knowledge and enable Claude hooks ---
+for project_branch in litebrite trapperkeeper; do
+  if ! git show-ref --verify --quiet "refs/heads/$project_branch"; then
+    if ! git show-ref --verify --quiet "refs/remotes/origin/$project_branch"; then
+      echo "ERROR: required project branch is missing: origin/$project_branch"
+      exit 1
+    fi
+    git branch --track "$project_branch" "origin/$project_branch"
+  fi
+done
+if [ ! -d .trapper_keeper ]; then
+  git worktree add .trapper_keeper trapperkeeper
+fi
+lb setup claude
+trk setup claude
+lb prime >/dev/null
+trk prime >/dev/null
 
 # Verify the epic exists before starting
-if ! bd show "$epic" > /dev/null 2>&1; then
-  echo "ERROR: Epic $epic not found in beads database"
+if ! lb show "$epic" > /dev/null 2>&1; then
+  echo "ERROR: Epic $epic not found in Litebrite"
   echo "Available issues:"
-  bd list --pretty
+  lb list --all --tree
   exit 1
 fi
 
-# --- Create feature branch from bead title ---
-bead_id="$(bd show "$epic" --json 2>/dev/null | grep '"id"' | head -1 | sed 's/.*"id": *"//; s/".*//')"
-bead_title="$(bd show "$epic" --json 2>/dev/null | grep '"title"' | head -1 | sed 's/.*"title": *"//; s/".*//')"
-slug="$(echo "$bead_title" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g; s/--*/-/g; s/^-//; s/-$//' | cut -c1-50)"
-feature_branch="${bead_id}-${slug}"
+# --- Create feature branch from item title ---
+item_title="$(lb show "$epic" | sed -n 's/^  Title: //p')"
+slug="$(echo "$item_title" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g; s/--*/-/g; s/^-//; s/-$//' | cut -c1-50)"
+feature_branch="${epic}-${slug}"
 
 echo "Creating feature branch: $feature_branch"
 git checkout -b "$feature_branch"
 
 # --- Task loop ---
 remaining() {
-  bd show --children "$epic" | grep -c '○' || true
+  lb list --parent "$epic" | awk 'NR > 2 && ($3 == "open" || $3 == "in_progress") { count++ } END { print count + 0 }'
 }
 
 sync_and_push() {
-  bd export
-  git add .beads/issues.jsonl 2>/dev/null || true
-  if ! git diff --cached --quiet 2>/dev/null; then
-    git commit -m "bd sync: $epic task $task_num"
-  fi
+  lb sync
   git push -u origin "$feature_branch"
 }
 
@@ -74,7 +79,7 @@ while [ "$(remaining)" -gt 0 ]; do
 
   set +e
   timeout "${timeout_mins}m" claude \
-    "Run 'bd show --children $epic' to see tasks. Pick ONE open child task (marked ○) and complete it. Do NOT work on tasks outside this epic. Commit your changes and close the bead when done. Do NOT push — the runner handles pushing." \
+    "Run 'lb list --parent $epic' to see tasks. Pick ONE open child, read it with lb show, claim it, and complete it. Do NOT work on tasks outside this epic. Commit your changes and close the Litebrite item when done. Do NOT push source changes — the runner handles pushing." \
     --dangerously-skip-permissions \
     -p --verbose 2>&1 | tee "$logfile"
   exit_code=${PIPESTATUS[0]}
@@ -98,7 +103,7 @@ while [ "$(remaining)" -gt 0 ]; do
   fi
 
   echo ""
-  bd list --pretty
+  lb list --parent "$epic"
   echo ""
 done
 
