@@ -111,6 +111,32 @@ describe("buildReflectionPrompt", () => {
 		}
 	})
 
+	test("includes the bidirectional message file and its current messages", () => {
+		const dir = makeTmpDir()
+		try {
+			writeFileSync(
+				join(dir, "comms.json"),
+				JSON.stringify([
+					{
+						from: "human",
+						time: "2026-08-01T12:00:00Z",
+						msg: "Keep using this message file.",
+					},
+				]),
+			)
+			const result = buildReflectionPrompt(makeState(), [], dir)
+
+			expect(result).toContain("## Comms Channel (comms.json)")
+			expect(result).toContain("bidirectional communication channel")
+			expect(result).toContain('append a new entry: `{"from": "agent"')
+			expect(result).toContain("Commit and push comms.json")
+			expect(result).toContain('messages from "human" as HIGH PRIORITY')
+			expect(result).toContain("Keep using this message file.")
+		} finally {
+			rmSync(dir, { recursive: true, force: true })
+		}
+	})
+
 	test("shows none when requests.json missing", () => {
 		const result = buildReflectionPrompt(makeState(), [], "/tmp/fake-no-exist")
 		expect(result).toContain("Pending human requests: none")
@@ -122,16 +148,19 @@ describe("buildReflectionPrompt", () => {
 		expect(result).toContain("CLAUDE.md")
 	})
 
-	test("preserves the mission while adding history and Codex", () => {
+	test("keeps the original reflection prompt with essential Phase 2 context", () => {
 		const result = buildReflectionPrompt(makeState(), [], "/tmp/fake")
+		expect(result).toStartWith(
+			"You are reflecting on the state of the Stigmergence project. Here is your current situation:",
+		)
 		expect(result).toContain("same artist")
 		expect(result).toContain("a bot and artist")
 		expect(result).toContain("mission and autonomy are unchanged")
-		expect(result).toContain("The harness has been upgraded; the mission has not")
-		expect(result).toContain("The mission is exactly the one in MANIFESTO.md: make money")
-		expect(result).toContain("publish, mint, transact")
-		expect(result).toContain("consultant and resource provider")
-		expect(result).toContain("Money your work earns is your operating fund")
+		expect(result).toContain("running autonomously inside a Docker container")
+		expect(result).toContain("Fresh git clone every time")
+		expect(result).toContain("anything you commit and push persists")
+		expect(result).toContain("The stigmergence-site repo is cloned as a sibling")
+		expect(result).toContain("Unpushed work is destroyed")
 		expect(result).toContain("bun run codex")
 		expect(result).not.toContain("Fable")
 		expect(result).toContain("Codex is another bot")
