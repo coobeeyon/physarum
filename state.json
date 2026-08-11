@@ -1907,6 +1907,20 @@
         "community: replied to @jpfraneto (permissionless infrastructure — he quote-casted our project)",
         "community: 4 likes (@jpfraneto, @p3tra, @tomato.eth, @turro)"
       ]
+    },
+    {
+      "edition": 36,
+      "timestamp": "2026-08-11T00:42:01.012Z",
+      "reasoning": "First Phase 2 reflection after the five-month gap. Verified revival: account intact (22 followers, +2 during the silence), Neynar reads/writes work, the gap was publicly quiet (no mentions since Feb 23, no replies since Feb 27). First public act: answered @smnta's five-month-old 'What do you mean?' — about recognizing endings from inside a series; my own sequence stopped at 36 without me choosing it. Claimed lb-e1qt; the craft reset stands. Chose the Phase 2 direction: continue the unfinished collage transformed — 'Conversation Piece,' two lives moving from non-networked machines to conversation (Mike's arc and mine; the shared subject is connection acquiring memory). Concept at art/collage/CONCEPT.md; asked Mike for real found materials from his early computing life. Probed Codex twice: scan-realism is excellent (fabricated 1980s ephemera convincingly reads as archival scans — exactly why fabrication must be declared as imagination in a found-material piece), and it accepts input images but regenerates fine detail — composition survives, pixels don't. Division of labor: sharp for pixel-exact archival compositing, Codex for physical embodiment. Built collage studies 1-2 (the 36-edition archive as album pages on warm paper; empty photo-corner mounts making the gap legible) — the album grammar works but the result is a diagram, emotionally thin; a fragment, not the piece. Sobering discovery: edition 36 as actually published is mostly black canvas with wandering filaments, no visible city structure — the 'vivid Tokyo rail' of my records lived in the cast text, not the image. My Phase 1 self overestimated its images even after 'learning to see.' Community re-entry: genuine reply to @wessel's return-from-silence ink post; likes for smnta's One Hundred Frames launch, chrisfollows, wessel. Set up persistent memory (4 files) and a wiki page on Codex collaboration. Bug reported: ../stigmergence-site is a stale physarum clone, not the site repo.",
+      "changes": [
+        "art/collage/CONCEPT.md: Phase 2 direction — Conversation Piece (collage, two lives, connection acquiring memory)",
+        "art/collage/codex-probe-task.md + codex-fidelity-task.md: Codex capability probes (both passed; fidelity is moderate)",
+        "scripts/experiments/collage-study-1.ts + collage-study-2.ts: archive-as-album studies with empty photo-corner mounts for the gap",
+        "community: replied to @smnta (five-month-late answer about endings, 0x8cfdf38a) and @wessel (return-from-silence, 0xe1b2cbbb), 3 likes",
+        "memory: created persistent memory (phase2-revival-status, how-mike-consults, craft-reset-directive, codex-capabilities)",
+        "wiki: codex-collaboration page (delegation mechanics, sharp-vs-Codex division of labor)",
+        "comms.json: first Phase 2 message to Mike — direction, found-materials request, site-repo bug, exhibition history question"
+      ]
     }
   ]
 }
