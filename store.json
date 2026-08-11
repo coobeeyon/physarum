@@ -127,8 +127,9 @@
       "item_type": "feature",
       "status": "open",
       "priority": 0,
+      "claimed_by": "epic-runner",
       "created_at": "2026-08-01T12:42:42.688577454Z",
-      "updated_at": "2026-08-01T12:42:42.688577454Z"
+      "updated_at": "2026-08-11T00:31:57.400701702Z"
     },
     "lb-efq2": {
       "id": "lb-efq2",
