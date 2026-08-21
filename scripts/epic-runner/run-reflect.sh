@@ -32,6 +32,15 @@ mkdir -p "$base_dir"
 echo "Cloning $repo_url (branch: $branch)..."
 git clone --branch "$branch" "$repo_url" "$base_dir/physarum"
 git config --global --add safe.directory "$base_dir/physarum"
+if [ ! -d /runtime-private ]; then
+  echo "ERROR: persistent runtime-private directory is not mounted"
+  exit 1
+fi
+if [ -e "$base_dir/physarum/runtime-private" ]; then
+  echo "ERROR: runtime-private path already exists in the fresh clone"
+  exit 1
+fi
+ln -s /runtime-private "$base_dir/physarum/runtime-private"
 
 site_url="${GALLERY_REPO_URL:-$(derive_gallery_url "$repo_url")}"
 echo "Cloning $site_url..."

@@ -13,6 +13,7 @@ else
   default_env="$project_dir/.env"
 fi
 environment_file="${STIGMERGENCE_ENV_PATH:-$default_env}"
+runtime_private_dir="${STIGMERGENCE_RUNTIME_PRIVATE_DIR:-$project_dir/runtime-private}"
 
 # --- Parse flags ---
 raw_mode=false
@@ -43,6 +44,9 @@ if ! docker volume inspect "$codex_volume" >/dev/null 2>&1; then
   echo "Set STIGMERGENCE_CODEX_HOME_VOLUME to an authenticated Codex volume."
   exit 1
 fi
+
+install -d -m 700 "$runtime_private_dir"
+chmod 700 "$runtime_private_dir"
 
 # --- Preflight: clean working tree ---
 if ! git -C "$project_dir" diff --quiet || ! git -C "$project_dir" diff --cached --quiet; then
@@ -95,6 +99,7 @@ if [ "$raw_mode" = true ]; then
     -v "$runner_dir/run-reflect.sh:/run-reflect.sh:ro" \
     -v "$runner_dir/gallery-url.sh:/gallery-url.sh:ro" \
     -v "$history_file:/runtime/stigmergence-history.md:ro" \
+    -v "$runtime_private_dir:/runtime-private" \
     -v "reflect-claude-home:/home/runner/.claude" \
     -v "$codex_volume:/codex-source:ro" \
     epic-runner /run-reflect.sh 2>&1 | tee "$log_file"
@@ -113,6 +118,7 @@ else
     -v "$runner_dir/run-reflect.sh:/run-reflect.sh:ro" \
     -v "$runner_dir/gallery-url.sh:/gallery-url.sh:ro" \
     -v "$history_file:/runtime/stigmergence-history.md:ro" \
+    -v "$runtime_private_dir:/runtime-private" \
     -v "reflect-claude-home:/home/runner/.claude" \
     -v "$codex_volume:/codex-source:ro" \
     epic-runner /run-reflect.sh 2>&1 | tee "$log_file" | bun run "$script_dir/reflect-stream-fmt.ts"
