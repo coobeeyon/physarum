@@ -93,6 +93,7 @@ if [ "$raw_mode" = true ]; then
     -v "${SSH_AUTH_SOCK}:/ssh-agent" \
     -e SSH_AUTH_SOCK=/ssh-agent \
     -v "$runner_dir/run-reflect.sh:/run-reflect.sh:ro" \
+    -v "$runner_dir/gallery-url.sh:/gallery-url.sh:ro" \
     -v "$history_file:/runtime/stigmergence-history.md:ro" \
     -v "reflect-claude-home:/home/runner/.claude" \
     -v "$codex_volume:/codex-source:ro" \
@@ -110,6 +111,7 @@ else
     -v "${SSH_AUTH_SOCK}:/ssh-agent" \
     -e SSH_AUTH_SOCK=/ssh-agent \
     -v "$runner_dir/run-reflect.sh:/run-reflect.sh:ro" \
+    -v "$runner_dir/gallery-url.sh:/gallery-url.sh:ro" \
     -v "$history_file:/runtime/stigmergence-history.md:ro" \
     -v "reflect-claude-home:/home/runner/.claude" \
     -v "$codex_volume:/codex-source:ro" \

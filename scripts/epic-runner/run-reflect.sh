@@ -4,6 +4,10 @@ set -euo pipefail
 repo_url="${REPO_URL:?REPO_URL required}"
 branch="${BRANCH:?BRANCH required}"
 base_dir="$HOME/repos"
+script_dir="$(cd "$(dirname "$0")" && pwd)"
+
+# shellcheck source=gallery-url.sh
+source "$script_dir/gallery-url.sh"
 
 # Give this disposable runner its own writable Codex home while reusing only
 # the authenticated configuration and installed skills from the shared volume.
@@ -29,10 +33,16 @@ echo "Cloning $repo_url (branch: $branch)..."
 git clone --branch "$branch" "$repo_url" "$base_dir/physarum"
 git config --global --add safe.directory "$base_dir/physarum"
 
-site_url="$(echo "$repo_url" | sed 's|physarum\.git|stigmergence.git|')"
+site_url="${GALLERY_REPO_URL:-$(derive_gallery_url "$repo_url")}"
 echo "Cloning $site_url..."
-git clone "$site_url" "$base_dir/stigmergence-site" || echo "Warning: could not clone stigmergence-site"
+git clone "$site_url" "$base_dir/stigmergence-site"
 git config --global --add safe.directory "$base_dir/stigmergence-site"
+
+cloned_site_url="$(git -C "$base_dir/stigmergence-site" remote get-url origin)"
+if [ "$cloned_site_url" != "$site_url" ]; then
+  echo "ERROR: gallery clone origin does not match the requested repository"
+  exit 1
+fi
 
 cd "$base_dir/physarum"
 
