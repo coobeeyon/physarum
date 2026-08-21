@@ -95,11 +95,10 @@
       "title": "Make the reflection runner portable and clone the real gallery",
       "description": "Fix gallery URL derivation for source remotes with or without .git, fail closed if the gallery cannot be cloned or verified, and prepare the runner for a trusted host without changing Stigmergence's mission, prompt, autonomy, or comms flow.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 1,
-      "claimed_by": "Michael Daum",
       "created_at": "2026-08-21T17:49:50.672392859Z",
-      "updated_at": "2026-08-21T17:49:54.230414346Z"
+      "updated_at": "2026-08-21T18:31:51.596155231Z"
     },
     "lb-9lh6": {
       "id": "lb-9lh6",
