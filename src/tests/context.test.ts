@@ -165,6 +165,8 @@ describe("buildReflectionPrompt", () => {
 		expect(result).not.toContain("Fable")
 		expect(result).toContain("Codex is another bot")
 		expect(result).toContain("including image generation")
+		expect(result).toContain("outside-action-journal.ts begin")
+		expect(result).toContain("never retry an uncertain action")
 		expect(result).not.toContain("bounded operating policy")
 	})
 

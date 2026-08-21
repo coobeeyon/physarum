@@ -14,6 +14,10 @@ describe("reflection host recovery", () => {
 		expect(hostScript).toContain("STIGMERGENCE_RUNTIME_PRIVATE_DIR")
 		expect(hostScript).toContain("$runtime_private_dir:/runtime-private")
 		expect(containerScript).toContain('ln -s /runtime-private "$base_dir/physarum/runtime-private"')
+		expect(containerScript).toContain(
+			"printf '/runtime-private\\n' >> \"$base_dir/physarum/.git/info/exclude\"",
+		)
+		expect(containerScript).toContain("bun run scripts/outside-action-journal.ts check")
 	})
 
 	test("requires an owner-only host journal directory", () => {

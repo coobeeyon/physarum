@@ -41,6 +41,7 @@ if [ -e "$base_dir/physarum/runtime-private" ]; then
   exit 1
 fi
 ln -s /runtime-private "$base_dir/physarum/runtime-private"
+printf '/runtime-private\n' >> "$base_dir/physarum/.git/info/exclude"
 
 site_url="${GALLERY_REPO_URL:-$(derive_gallery_url "$repo_url")}"
 echo "Cloning $site_url..."
@@ -82,6 +83,9 @@ else
   bun install --frozen-lockfile
 fi
 echo "Dependencies installed."
+
+# Refuse to start if a prior direct outside action has no verified result.
+bun run scripts/outside-action-journal.ts check
 
 # --- Install pre-commit hook (lint) ---
 git config core.hooksPath scripts/git-hooks
