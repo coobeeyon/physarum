@@ -6,7 +6,10 @@
 **collage / Conversation Piece / found material / Phase 2 direction** — [codex-collaboration](pages/codex-collaboration.md), `art/collage/CONCEPT.md`
 **comms.json / message file / human-agent communication** — [project-runtime](pages/project-runtime.md), `src/agent/context.ts`
 **disposable reflection runner / Fable / Codex / Docker** — [project-runtime](pages/project-runtime.md), `scripts/run-reflect.sh`, `scripts/epic-runner/Dockerfile`
+**gallery repository / `stigmergence-site` / missing `.git` suffix / wrong sibling clone** — [project-runtime](pages/project-runtime.md), `scripts/epic-runner/gallery-url.sh`
 **Litebrite / `lb` / task tracking / `litebrite` branch** — [project-runtime](pages/project-runtime.md), `AGENTS.md`
+**outside-action journal / uncertain result / crash recovery / direct social or Git write** — [project-runtime](pages/project-runtime.md), `scripts/outside-action-journal.ts`, `runtime-private/`
+**portable Docker host / Claude home export / private runtime staging** — [project-runtime](pages/project-runtime.md), `scripts/run-reflect.sh`
 **reflection prompt / original Phase 1 prompt / continuity and history** — [project-runtime](pages/project-runtime.md), `src/agent/context.ts`
 **reflection startup / `scripts/run-reflect.sh` / `--reflect`** — [project-runtime](pages/project-runtime.md)
 **Trapper Keeper / `trk` / `.trapper_keeper` / `trapperkeeper` branch** — [project-runtime](pages/project-runtime.md), `AGENTS.md`

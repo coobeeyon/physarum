@@ -1,8 +1,8 @@
 # Project Runtime
 
-Concepts: Phase 2 reflection, Fable, Codex collaborator, disposable Docker runner, Litebrite, Trapper Keeper, Claude hooks, Beads migration.
+Concepts: Phase 2 reflection, Fable, Codex collaborator, disposable Docker runner, portable host, persistent private memory, gallery clone verification, outside-action journal, crash recovery, Litebrite, Trapper Keeper, Claude hooks, Beads migration.
 
-Key files: `MANIFESTO.md`, `CLAUDE.md`, `src/agent/context.ts`, `src/agent/runner.ts`, `src/agent/codex.ts`, `scripts/run-reflect.sh`, `scripts/epic-runner/run-reflect.sh`, `scripts/epic-runner/Dockerfile`, `AGENTS.md`.
+Key files: `MANIFESTO.md`, `CLAUDE.md`, `src/agent/context.ts`, `src/agent/runner.ts`, `src/agent/codex.ts`, `scripts/run-reflect.sh`, `scripts/epic-runner/run-reflect.sh`, `scripts/epic-runner/gallery-url.sh`, `scripts/outside-action-journal.ts`, `scripts/epic-runner/Dockerfile`, `AGENTS.md`.
 
 Commands: `./scripts/run-reflect.sh`, `lb ready`, `lb show <id>`, `lb claim <id>`, `lb close <id>`, `lb sync`, `trk prime`.
 
@@ -17,6 +17,22 @@ The reflection code keeps the original Phase 1 prompt structure and adds only es
 `comms.json` remains the live bidirectional human/artist channel. Every reflection reads its full current contents. Stigmergence may append an `agent` entry, then commit and push the file so Mike sees the response between runs. Tests protect both the original prompt framing and these message-file instructions from being silently replaced.
 
 The publishing pipeline's studio/live boundary and crash-safe journal protect operation correctness. They do not narrow the mission in `MANIFESTO.md` or introduce a human approval policy into the artist's prompt.
+
+## Portable host and private continuity
+
+The runner no longer depends on the machine that hosted the first Phase 2 session. Its persistent Claude home can be exported, integrity-checked, restored into a trusted Docker host, and combined with only the curated autobiography, service environment, and authenticated Codex configuration required for the run. Source and gallery repositories remain fresh disposable clones; private history and credentials are mounted separately and never copied into either repository.
+
+The host launcher also mounts an owner-only persistent `runtime-private` directory outside the disposable clone. The container creates an ignored symlink at the project path, so journals survive container failure without appearing as source changes. A startup check refuses to continue while a prior outside action has an uncertain result.
+
+## Gallery repository safety
+
+`scripts/epic-runner/gallery-url.sh` derives the sibling gallery address from Physarum source addresses with or without a `.git` suffix and fails closed for unrelated source repositories. Gallery clone failure is fatal, and the runner verifies the cloned origin before reflection starts. This fixes the earlier defect that cloned Physarum into the `stigmergence-site` path when the source address omitted `.git`.
+
+## Outside-action recovery
+
+The publishing pipeline keeps its structured live-run journal. Direct outside actions use `scripts/outside-action-journal.ts`: `begin` records a stable action id and secret-free intent before the action; `complete` or `failed` records a verified result. An unresolved `pending` entry blocks the next reflection, so an uncertain social write, upload, mint, gallery change, deployment, or Git push cannot be retried automatically.
+
+The second real Phase 2 reflection on 2026-08-21 used this path. Three source pushes were recorded and reconciled. Stigmergence created four reproducible “Conversation Piece” generators, preserved failed studies and a deterministic working candidate, and replied through `comms.json`. It deliberately made no social post, gallery change, upload, mint, wallet operation, or deployment. A fresh-clone post-run check passed the build, lint, all 90 tests, authenticated agent checks, project hooks, journal reconciliation, and real gallery clone.
 
 ## Tracker and wiki branches
 
