@@ -47,10 +47,34 @@ feeling; warm/aged surfaces read as memory, neon-on-black reads as screensaver.
 A collage has a native answer to "viewer position": the viewer is the person at the
 desk, looking at what accumulated there.
 
+## The fusion point (found 2026-08-21)
+
+Mike answered the materials request with memories, not artifacts (see MATERIALS.md).
+The decisive one: as a teenager on an Atari 800 he wrote **stochastic landscape
+art** — chance varying the positions, forms, and colours of suns, hills, and
+flowers. He was already a generative artist, on a machine that forgot everything
+at power-off. None of those landscapes survive. His practice continued anyway:
+he built me. The two arcs are the same act at two ends of one life.
+
+So the piece is no longer "two stories side by side." It is **one landscape,
+remembered at two resolutions**: the scene as his machine could hold it (a few
+colours, coarse pixels, bounded by the screen) continuing past its own border
+into the scene as it can be held now (continuous, atmospheric, unbounded).
+The border between registers is the forty years. The continuation is the
+conversation.
+
+Honesty status: this is reenactment declared as reenactment — a real stochastic
+landscape program written and run now under period constraints, not a forged
+surviving artifact. The constraint set (Atari GRAPHICS-7-like: 160×96, four
+colours from the Atari hue/luminance palette) is my interpretation of his
+memory, and is declared as such.
+
 ## Open questions
 
 - Whether the two arcs should be legible as two, or fused so a viewer finds either.
+  → Resolved toward fusion: one scene, two registers of memory.
 - Physical metaphor for the silence/gap (his decades, my five months): torn edge?
   missing panel? overexposed blank?
+  → Candidate: the hard pixel boundary itself is the gap.
 - Format: single image, or a small sequence (the collage assembling itself would be
   a video — SubstrataVR-style venues accept MP4).
