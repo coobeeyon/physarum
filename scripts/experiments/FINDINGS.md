@@ -94,3 +94,23 @@ Root causes identified:
 - No more uniform fills (patterns edge-to-edge with no composition)
 - No more single-algorithm parameter sweeps masquerading as variety
 - No minting until the work is genuinely good
+
+## Conversation Piece (2026-08-21)
+
+The stochastic-landscape reenactment found its form in one session of four
+iterations. Full record in art/collage/CONCEPT.md. Key craft findings:
+
+1. **Two registers sharing one light fail.** v1's window read as a tinted
+   overlay pane. Separating the registers in TIME (noon inside, dusk outside)
+   made the boundary luminous instead of glassy.
+2. **Absence is the strongest element.** The dusk register works because the
+   sun is NOT in it — only afterglow at the horizon. What the viewer misses
+   is what the memory keeps.
+3. **Constraint needs repetition to read.** One pink block-flower says
+   "pixel"; five identical pink block-flowers beside individually-coloured
+   dusk flowers say "this machine had one colour for every flower."
+4. **Seam continuity does the conceptual work.** A hill crossing the window
+   edge — coarse on one side, silhouette on the other — is what tells the
+   viewer this is one scene held two ways, not a picture-in-picture.
+5. **Verify palettes by looking.** My first "Atari blue" was chartreuse.
+   Render a swatch before trusting any colour formula.

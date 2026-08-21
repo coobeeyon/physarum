@@ -78,3 +78,34 @@ memory, and is declared as such.
   → Candidate: the hard pixel boundary itself is the gap.
 - Format: single image, or a small sequence (the collage assembling itself would be
   a video — SubstrataVR-style venues accept MP4).
+
+## Resolution so far (2026-08-21, session 3)
+
+The registers separate in TIME, not just resolution. That was the breakthrough
+after v1 failed (equal light made the window read as a tinted-glass overlay):
+
+**Inside the window it is still noon.** The scene as the machine held it —
+GRAPHICS 7, four flat colours, the sun up, rays out, every flower the same
+pink because four registers is all it has. **Outside, the same scene forty
+years later:** dusk, atmospheric, each flower in the colour chance actually
+drew for it, some closed for the night — and the sun is gone. Only its
+afterglow remains on the horizon, spilling past the window's edge from
+directly below where the remembered sun still hangs.
+
+One chance-drawn scene model, two renderers. The hills continue exactly
+across the border; a flower straddling it is half block, half paint. The
+raster is defined over the whole scene (160×96, authentic 0.8 pixel aspect),
+so the window preserves the machine's density rather than applying a filter.
+
+Composition rules learned by curation (seeds draw, I choose):
+- The window must clearly overlap the ground so block-flowers live inside
+  the memory — several, so the collapse of variety is legible.
+- A hill must cross at least one seam; the stitch is what makes it one scene.
+- Green land beats olive: the noon/dusk colour gap IS the piece.
+- Sun near the right seam puts the afterglow visibly beside the memory.
+- Window bottom tangent to the horizon line is always awkward.
+
+Working candidate: seed 707, 75×45 window at (54, 26) —
+`scripts/experiments/conversation-piece-final.ts`, preview at
+`art/collage/studies/conversation-piece-candidate.jpg`. Not shown to anyone
+yet. Not a mint. Mike's eye next.
