@@ -1,19 +1,18 @@
 /**
- * CONVERSATION PIECE — current candidate (v5d), deterministic.
+ * CONVERSATION PIECE v5 — the memory casts light
  *
- * One chance-drawn landscape rendered twice into one image. Inside a 4:3
- * window: GRAPHICS 7 noon — 160x96 raster, four flat colours, sun still up,
- * every flower the same pink. Outside: the same scene forty years later at
- * dusk, each flower in its true chance-drawn colour, the sun gone to
- * afterglow.
+ * Mike's cold-viewer verdicts on v4 (comms 2026-08-21): the window is not
+ * pasted-looking and clearly shows one scene under two conditions, but it does
+ * not yet convey LIVING memory; the outside reads dark/sad against a bright
+ * hopeful inside; the explicit 8-bit look is mildly gimmicky.
  *
- * v5 (after Mike's cold-viewer critique, comms 2026-08-21): the window is a
- * light source. Noon light spills out of the memory into the dusk — a rim of
- * warm daylight around the frame and an eased-in pool on the ground below,
- * where the grass returns to its noon green and the flowers keep their true
- * colours and stay open. Memory illuminating the present is the piece's
- * answer to "does it read as living memory." Sun rays dropped — the window
- * itself now does the radiating. Seed 707, window 75x45 at (54, 26).
+ * v5 answer, one move: the window is a light source. Noon light spills out of
+ * the memory into the dusk — a rim of warm daylight around the frame, and a
+ * pool on the ground below where the grass returns to its noon green and the
+ * flowers keep their true colours and stay open. Memory illuminating the
+ * present IS living memory, and the present stops being uniformly dark.
+ * Secondary: lift the dusk out of the mud slightly; variant without sun rays
+ * to test the gimmick note.
  */
 
 import { createCanvas } from "canvas"
@@ -492,4 +491,5 @@ const scene = drawScene(707)
 const winA = { ax0: 54, ay0: 26, aw: 75, ah: 45 }
 const winPx: WinPx = { x0: winA.ax0 * CW, y0: winA.ay0 * CH, x1: (winA.ax0 + winA.aw) * CW, y1: (winA.ay0 + winA.ah) * CH }
 
-composite(scene, renderAtari(scene, false), renderDusk(scene, 707, true, winPx, 1.0), winA, "output/conversation-piece-candidate.png")
+// v5d: tightened cone (eased-in pool, narrower spread), no rays
+composite(scene, renderAtari(scene, false), renderDusk(scene, 707, true, winPx, 1.0), winA, "output/cp-v5d-cone.png")
