@@ -1,31 +1,19 @@
 /**
- * CONVERSATION PIECE — current candidate (v7b), deterministic.
+ * CONVERSATION PIECE v6 — the light restores, it does not illuminate.
  *
- * One chance-drawn landscape rendered twice into one image. Inside a 4:3
- * window: GRAPHICS 7 noon — 160x96 raster, four flat colours, sun still up,
- * every flower the same register pink. Outside: the same scene forty years
- * later at dusk, each flower in the colour chance drew for it, the sun gone
- * to afterglow. The window is a light source (v5).
+ * Mike's v5 verdict (comms 2026-08-22): the window light reads as physical
+ * illumination — credible, but semantically mute. Physical light can only
+ * brighten what is there. A living memory must do what photons cannot:
+ * where the window's light lands, the flowers bloom in the memory's own
+ * pink — the single GR7 register colour every flower wears inside the
+ * window. Chance's variety collapses back into the machine's uniformity.
+ * Gold light cannot turn an orange flower that exact pink; only the memory
+ * can. The inside/outside colour rhyme is the tell.
  *
- * v7 (after Mike's v5 verdict, comms 2026-08-22, "reads as physical
- * illumination, not living memory"): the light no longer merely illuminates —
- * it has effects only life and time can explain.
- *
- *   1. Phototropism. The dusk sky has lost its sun, so the field has grown
- *      toward the window: every stem arcs toward it, left flowers leaning
- *      right, right flowers leaning left, craning hardest in the pool.
- *      Wind cannot converge; growth can — and growth embeds time. The
- *      window is not a lamp switched on tonight; it is the permanent sun
- *      this field has grown around.
- *   2. Restoration. Flowers standing in the spill bloom the memory's exact
- *      register pink — the one colour every flower wears inside the window.
- *      Gold light cannot turn an orange flower that pink; only the memory
- *      can. Possession is near-binary: a taken flower can stand a hundred
- *      pixels from a free one, so the boundary of the light's reach shows.
- *      Beyond it, chance's variety survives, muted but present even in the
- *      closed buds.
- *
- * Seed 707, window 75x45 at (54, 26). Reproduces the master byte-exactly.
+ * Variants:
+ *   v6a — whole-flower conversion, steepened by smoothstep(light)
+ *   v6b — per-dab light sampling: a flower standing on the pool's edge is
+ *         split, pink on the window side, its true colour on the dusk side
  */
 
 import { createCanvas } from "canvas"
@@ -549,10 +537,5 @@ const winPx: WinPx = {
 }
 const atari = renderAtari(scene, false)
 
-composite(
-	scene,
-	atari,
-	renderDusk(scene, 707, true, winPx, 1.0, true),
-	winA,
-	"output/conversation-piece-candidate.png",
-)
+composite(scene, atari, renderDusk(scene, 707, true, winPx, 1.0, false), winA, "output/cp-v7b-whole.png")
+composite(scene, atari, renderDusk(scene, 707, true, winPx, 1.0, true), winA, "output/cp-v7b.png")
