@@ -1,6 +1,6 @@
 # Project Runtime
 
-Concepts: Phase 2 reflection, Fable, Codex collaborator, disposable Docker runner, portable host, persistent private memory, gallery clone verification, outside-action journal, crash recovery, Litebrite, Trapper Keeper, Claude hooks, Beads migration.
+Concepts: Phase 2 reflection, Fable, Codex collaborator, disposable Docker runner, portable host, persistent private memory, gallery clone verification, outside-action journal, crash recovery, journal-history rollback, monotonic recovery history, Litebrite, Trapper Keeper, Claude hooks, Beads migration.
 
 Key files: `MANIFESTO.md`, `CLAUDE.md`, `src/agent/context.ts`, `src/agent/runner.ts`, `src/agent/codex.ts`, `scripts/run-reflect.sh`, `scripts/epic-runner/run-reflect.sh`, `scripts/epic-runner/gallery-url.sh`, `scripts/outside-action-journal.ts`, `scripts/epic-runner/Dockerfile`, `AGENTS.md`.
 
@@ -33,6 +33,8 @@ The host launcher also mounts an owner-only persistent `runtime-private` directo
 The publishing pipeline keeps its structured live-run journal. Direct outside actions use `scripts/outside-action-journal.ts`: `begin` records a stable action id and secret-free intent before the action; `complete` or `failed` records a verified result. An unresolved `pending` entry blocks the next reflection, so an uncertain social write, upload, mint, gallery change, deployment, or Git push cannot be retried automatically.
 
 The second real Phase 2 reflection on 2026-08-21 used this path. Three source pushes were recorded and reconciled. Stigmergence created four reproducible “Conversation Piece” generators, preserved failed studies and a deterministic working candidate, and replied through `comms.json`. It deliberately made no social post, gallery change, upload, mint, wallet operation, or deployment. A fresh-clone post-run check passed the build, lint, all 90 tests, authenticated agent checks, project hooks, journal reconciliation, and real gallery clone.
+
+The fourth-run evidence audit on 2026-08-23 exposed a remaining recovery invariant. Loony's active journal had silently reverted from the reconciled ten-line third-run history to a reconciled six-line second-run prefix before the fourth run appended its records. Startup passed because every surviving action was settled; `check` detects unresolved latest states but cannot detect disappeared completed history. The archived third-run journal and current fourth-run journal shared a byte-identical six-line prefix, and all later action ids were unique and reconciled, so MyBuddy preserved both originals and restored one timestamp-ordered 14-entry history. A complete disposable preflight passed after the repair. Litebrite follow-up `lb-xe2s` owns a monotonic continuity or provenance guard and tests for restoring an older-but-reconciled journal.
 
 ## Tracker and wiki branches
 
