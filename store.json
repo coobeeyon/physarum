@@ -301,6 +301,16 @@
       "created_at": "2026-08-01T12:42:43.386790885Z",
       "updated_at": "2026-08-01T12:42:43.391592009Z"
     },
+    "lb-xe2s": {
+      "id": "lb-xe2s",
+      "title": "Detect rollback of completed outside-action history",
+      "description": "The 2026-08-23 fourth-run evidence audit found runtime-private/outside-actions.jsonl had reverted from the reconciled third-run 10-line history to an older six-line prefix before fourth-run records were appended. Startup still passed because it only checks unresolved final states. Add a monotonic continuity or provenance guard that fails closed when completed history disappears, with tests for an older-but-reconciled restored journal. Preserve compatibility with the current merged 14-entry recovery journal and archived originals.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 1,
+      "created_at": "2026-08-23T20:11:21.991550165Z",
+      "updated_at": "2026-08-23T20:11:21.991550165Z"
+    },
     "lb-xrot": {
       "id": "lb-xrot",
       "title": "Create src/agent/context.ts — prompt assembly for Claude Code reflection",
