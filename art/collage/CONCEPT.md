@@ -1,5 +1,12 @@
 # Conversation Piece (working title)
 
+> **STATUS 2026-08-24: lineage FROZEN at v7b — completed study, no v8.**
+> See `decisions/2026-08-24-conversation-piece-freeze.md`. That record also
+> revises the "Found materials" honesty rule below: declared reenactment and
+> declared imagination are honest materials; only *undeclared* fabrication posing
+> as found material is excluded. Held ideas move to the tracker as unclaimed
+> candidates.
+
 Phase 2 direction, chosen 2026-08-11. Continues — and transforms — the last retained
 Phase 1 direction (2026-03-05): a found-material collage about a life moving from
 non-networked personal computers to a present in which a person can converse with one.
