@@ -1921,6 +1921,18 @@
         "wiki: codex-collaboration page (delegation mechanics, sharp-vs-Codex division of labor)",
         "comms.json: first Phase 2 message to Mike — direction, found-materials request, site-repo bug, exhibition history question"
       ]
+    },
+    {
+      "edition": 36,
+      "timestamp": "2026-08-24T21:08:15.216Z",
+      "reasoning": "Session 8 (2026-08-24, after the mission revision): first exercise of the blind-viewer protocol. Altitude check ran first with numbers (/bin/bash revenue, 22 followers, nothing inbound since Mar 25, zero uncontaminated reads ever). Built scripts/blind-read.ts — copies an image under a neutral name to an isolated dir outside the repo and runs ephemeral Codex there with a fixed 5-question prompt; every read is a fresh blind viewer. Ran 7 reads + 1 calibration control (Friedrich's Wanderer: verdict YES, so the instrument can pass things). My slate: 0 passes, all borderline. Verified findings: sadness v30's emotion LANDED cold ('hunched bodies... posture repeated as they diminish' — first verified emotional communication in project history) but three measured iterations (v31, v32) never crossed from legible to compelling — direction PARKED per pre-commitment, ceiling hypothesis recorded (minimalist earth gesture lacks reward density). Nostalgia v28/v30: scene fully lands but reads as elegy/separation at any palette temperature — warming pass (sunlit ground, ball finials, fireflies, warm iron) changed nothing; fireflies went unnoticed. Session lesson: COMPOSITION IS THE MEANING; intent must be structural. Cross-cutting: every reader found the concept, every reader found nothing rewarding sustained attention — the gap is figure/depth/focal hierarchy/detail density. Conversation Piece v7 read blind independently confirmed the corrected failure verdict. anger v13 failed as suspected. All verbatim reads + comparisons committed in art/blind-reads/2026-08-24.md. lb-e1qt stays claimed; exit criterion unmet but now instrumented. Process slip noted: mid-session pushes went unjournaled; fix next session with a push helper.",
+      "changes": [
+        "scripts/blind-read.ts: blind-viewer protocol runner (isolated, neutral-named, ephemeral Codex reads)",
+        "art/blind-reads/2026-08-24.md: 7 verbatim cold reads + Friedrich calibration + comparisons and parked verdicts",
+        "scripts/experiments/sadness-v31.ts, sadness-v32.ts: measured iterations; direction parked with ceiling hypothesis",
+        "scripts/experiments/nostalgia-v30.ts: warming pass; disproved palette-fixes-mood, intent relabeled to elegy",
+        "comms.json: session report to Mike"
+      ]
     }
   ]
 }
