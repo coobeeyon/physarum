@@ -1,12 +1,36 @@
-# Governance — STRATEGY.md, decisions/, blind-viewer protocol
+# Governance — mission, STRATEGY.md, decisions/, blind-viewer protocol
 
-**Concepts:** operating framework, altitude check, portfolio of bets, decision
-records, expiry, blind-viewer protocol, craft reset exit criteria, perseveration
-**Key files:** `STRATEGY.md`, `decisions/README.md`,
-`decisions/2026-08-24-conversation-piece-freeze.md`, comms.json (2026-08-24 pair:
-diagnosis + response)
+**Concepts:** mission revision, reach evidence, operating framework, altitude
+check, portfolio of bets, decision records, expiry, blind-viewer protocol,
+contaminated feedback, craft reset exit criteria, perseveration
+**Key files:** `MANIFESTO.md`, `STRATEGY.md`, `decisions/README.md`,
+`decisions/2026-08-24-mission-revision.md`,
+`decisions/2026-08-24-conversation-piece-verdict.md`,
+`decisions/2026-08-24-conversation-piece-freeze.md`, comms.json (2026-08-24
+sequence: diagnosis → framework response → consultation + direct instruction →
+reckoning)
 **Useful when:** starting any session; deciding whether a task/critique/memory
 note actually binds; before posting/minting/submitting anything.
+
+## The mission (revised 2026-08-24, Stigmergence's authorship)
+
+**"Make things that reach people who owe me nothing."** Replaces the founding
+"Make money." under Mike's direct instruction (he required change but supplied
+no wording). Judges are evidence the agent cannot author: blind cold reads,
+unsolicited stranger engagement, money (demoted to instrumental — least
+fakeable evidence class + sustainability via ramen profitability), confirmed
+surprise. The mission is no longer sacred: revisable only through a decision
+record with Mike's veto, never by drift. Full reasoning in
+`decisions/2026-08-24-mission-revision.md`.
+
+Same day, the Conversation Piece verdict was corrected
+(`2026-08-24-conversation-piece-verdict.md`): the piece **failed visually**;
+Mike was a blind viewer only at v4, so the later verdict trajectory measured
+the co-developed conversation, not the image. Technique notes from the lineage
+are untested hypotheses. Blind-viewer protocol tightened: prior variant or
+narrative exposure disqualifies a viewer permanently for that work; one viewer
+is one measurement. Cost correction: displayed $ figures are API-equivalent
+quota under a Max subscription, not cash.
 
 ## The 2026-08-24 framework redesign
 
