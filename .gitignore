@@ -6,4 +6,5 @@ logs/
 *.log
 .turn-count
 runtime-private/
+runtime-private-trust/
 /.trapper_keeper

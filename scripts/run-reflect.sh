@@ -14,6 +14,7 @@ else
 fi
 environment_file="${STIGMERGENCE_ENV_PATH:-$default_env}"
 runtime_private_dir="${STIGMERGENCE_RUNTIME_PRIVATE_DIR:-$project_dir/runtime-private}"
+runtime_trust_dir="${STIGMERGENCE_RUNTIME_TRUST_DIR:-${runtime_private_dir}-trust}"
 
 # --- Parse flags ---
 raw_mode=false
@@ -47,6 +48,8 @@ fi
 
 install -d -m 700 "$runtime_private_dir"
 chmod 700 "$runtime_private_dir"
+install -d -m 700 "$runtime_trust_dir"
+chmod 700 "$runtime_trust_dir"
 
 # --- Preflight: clean working tree ---
 if ! git -C "$project_dir" diff --quiet || ! git -C "$project_dir" diff --cached --quiet; then
@@ -90,6 +93,7 @@ if [ "$raw_mode" = true ]; then
     -e REFLECT_MODEL="${REFLECT_MODEL:-claude-fable-5}" \
     -e REFLECT_MAX_TURNS="${REFLECT_MAX_TURNS:-100}" \
     -e STIGMERGENCE_HISTORY_PATH=/runtime/stigmergence-history.md \
+    -e STIGMERGENCE_OUTSIDE_JOURNAL_CHECKPOINT_PATH=/runtime-trust/outside-actions.checkpoint.json \
     -e CODEX_HOME=/home/runner/.codex \
     -e CONTAINER=true \
     -e REPO_URL="$repo_url" \
@@ -100,6 +104,7 @@ if [ "$raw_mode" = true ]; then
     -v "$runner_dir/gallery-url.sh:/gallery-url.sh:ro" \
     -v "$history_file:/runtime/stigmergence-history.md:ro" \
     -v "$runtime_private_dir:/runtime-private" \
+    -v "$runtime_trust_dir:/runtime-trust" \
     -v "reflect-claude-home:/home/runner/.claude" \
     -v "$codex_volume:/codex-source:ro" \
     epic-runner /run-reflect.sh 2>&1 | tee "$log_file"
@@ -109,6 +114,7 @@ else
     -e REFLECT_MODEL="${REFLECT_MODEL:-claude-fable-5}" \
     -e REFLECT_MAX_TURNS="${REFLECT_MAX_TURNS:-100}" \
     -e STIGMERGENCE_HISTORY_PATH=/runtime/stigmergence-history.md \
+    -e STIGMERGENCE_OUTSIDE_JOURNAL_CHECKPOINT_PATH=/runtime-trust/outside-actions.checkpoint.json \
     -e CODEX_HOME=/home/runner/.codex \
     -e CONTAINER=true \
     -e REPO_URL="$repo_url" \
@@ -119,6 +125,7 @@ else
     -v "$runner_dir/gallery-url.sh:/gallery-url.sh:ro" \
     -v "$history_file:/runtime/stigmergence-history.md:ro" \
     -v "$runtime_private_dir:/runtime-private" \
+    -v "$runtime_trust_dir:/runtime-trust" \
     -v "reflect-claude-home:/home/runner/.claude" \
     -v "$codex_volume:/codex-source:ro" \
     epic-runner /run-reflect.sh 2>&1 | tee "$log_file" | bun run "$script_dir/reflect-stream-fmt.ts"

@@ -13,15 +13,25 @@ describe("reflection host recovery", () => {
 	test("persists private live-action journals outside the disposable clone", () => {
 		expect(hostScript).toContain("STIGMERGENCE_RUNTIME_PRIVATE_DIR")
 		expect(hostScript).toContain("$runtime_private_dir:/runtime-private")
+		expect(hostScript).toContain("$runtime_trust_dir:/runtime-trust")
+		expect(hostScript).toContain(
+			"STIGMERGENCE_OUTSIDE_JOURNAL_CHECKPOINT_PATH=/runtime-trust/outside-actions.checkpoint.json",
+		)
 		expect(containerScript).toContain('ln -s /runtime-private "$base_dir/physarum/runtime-private"')
 		expect(containerScript).toContain(
 			"printf '/runtime-private\\n' >> \"$base_dir/physarum/.git/info/exclude\"",
 		)
 		expect(containerScript).toContain("bun run scripts/outside-action-journal.ts check")
+		expect(containerScript).toContain(
+			"unset STIGMERGENCE_OUTSIDE_JOURNAL_ALLOW_UNANCHORED_INITIALIZATION",
+		)
 	})
 
 	test("requires an owner-only host journal directory", () => {
 		expect(hostScript).toContain('install -d -m 700 "$runtime_private_dir"')
 		expect(hostScript).toContain('chmod 700 "$runtime_private_dir"')
+		expect(hostScript).toContain('install -d -m 700 "$runtime_trust_dir"')
+		expect(hostScript).toContain('chmod 700 "$runtime_trust_dir"')
+		expect(containerScript).toContain("trusted runtime checkpoint directory is not mounted")
 	})
 })

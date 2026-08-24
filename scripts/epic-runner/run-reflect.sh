@@ -36,6 +36,10 @@ if [ ! -d /runtime-private ]; then
   echo "ERROR: persistent runtime-private directory is not mounted"
   exit 1
 fi
+if [ ! -d /runtime-trust ]; then
+  echo "ERROR: trusted runtime checkpoint directory is not mounted"
+  exit 1
+fi
 if [ -e "$base_dir/physarum/runtime-private" ]; then
   echo "ERROR: runtime-private path already exists in the fresh clone"
   exit 1
@@ -85,6 +89,7 @@ fi
 echo "Dependencies installed."
 
 # Refuse to start if a prior direct outside action has no verified result.
+unset STIGMERGENCE_OUTSIDE_JOURNAL_ALLOW_UNANCHORED_INITIALIZATION
 bun run scripts/outside-action-journal.ts check
 
 # --- Install pre-commit hook (lint) ---
