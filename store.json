@@ -308,8 +308,9 @@
       "item_type": "task",
       "status": "open",
       "priority": 1,
+      "claimed_by": "Michael Daum",
       "created_at": "2026-08-23T20:11:21.991550165Z",
-      "updated_at": "2026-08-23T20:11:21.991550165Z"
+      "updated_at": "2026-08-24T16:19:04.322296087Z"
     },
     "lb-xrot": {
       "id": "lb-xrot",
