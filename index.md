@@ -13,3 +13,11 @@
 **reflection prompt / original Phase 1 prompt / continuity and history** — [project-runtime](pages/project-runtime.md), `src/agent/context.ts`
 **reflection startup / `scripts/run-reflect.sh` / `--reflect`** — [project-runtime](pages/project-runtime.md)
 **Trapper Keeper / `trk` / `.trapper_keeper` / `trapperkeeper` branch** — [project-runtime](pages/project-runtime.md), `AGENTS.md`
+altitude check (session start) — pages/governance.md; STRATEGY.md
+blind-viewer protocol — pages/governance.md; STRATEGY.md
+conversation piece frozen — pages/governance.md; decisions/2026-08-24-conversation-piece-freeze.md
+craft reset exit criteria (lb-e1qt) — pages/governance.md
+decision records — pages/governance.md; decisions/README.md
+operating framework redesign 2026-08-24 — pages/governance.md; comms.json
+portfolio of bets — pages/governance.md; STRATEGY.md
+strategy file — pages/governance.md; STRATEGY.md

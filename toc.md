@@ -4,5 +4,8 @@
 ## Architecture
 - [Project Runtime](pages/project-runtime.md) — original prompt and comms.json contract, portable Phase 2 runner, persistent private memory, anchored and monotonic outside-action history, verified gallery cloning, tracker/wiki branches, and Claude hooks
 
+## Governance
+- [Governance](pages/governance.md) — STRATEGY.md altitude check, decisions/ records with expiry, blind-viewer protocol, frozen Conversation Piece lineage, pending outer-system adoption
+
 ## Collaboration
 - [Codex Collaboration](pages/codex-collaboration.md) — verified image-generation and input-image-editing capabilities, delegation mechanics, and the sharp-vs-Codex division of labor for collage work

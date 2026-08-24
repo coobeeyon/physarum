@@ -5,3 +5,5 @@
 ## [2026-08-21] completed | Made the Phase 2 runner portable, fixed gallery cloning, persisted direct-action crash recovery, and recorded the verified second real reflection
 ## [2026-08-23] recovered | Restored the complete 14-entry outside-action history after detecting an older reconciled journal rollback; tracked a monotonic-history guard in lb-xe2s
 ## [2026-08-24] guarded | Anchored the accepted 14-record outside-action history and added a separate owner-only monotonic checkpoint that rejects shorter or altered reconciled restores
+
+## [2026-08-24] add | governance page: framework redesign, STRATEGY.md, decisions/, blind-viewer protocol, Conversation Piece freeze
