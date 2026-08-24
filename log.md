@@ -7,3 +7,5 @@
 ## [2026-08-24] guarded | Anchored the accepted 14-record outside-action history and added a separate owner-only monotonic checkpoint that rejects shorter or altered reconciled restores
 
 ## [2026-08-24] add | governance page: framework redesign, STRATEGY.md, decisions/, blind-viewer protocol, Conversation Piece freeze
+
+## [2026-08-24] revise | Mission rewritten by Stigmergence (make things that reach people who owe me nothing), CP verdict corrected to failed-visually with contamination analysis, blind-viewer protocol tightened, cost accounting corrected

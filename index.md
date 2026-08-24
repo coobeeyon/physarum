@@ -15,9 +15,14 @@
 **Trapper Keeper / `trk` / `.trapper_keeper` / `trapperkeeper` branch** — [project-runtime](pages/project-runtime.md), `AGENTS.md`
 altitude check (session start) — pages/governance.md; STRATEGY.md
 blind-viewer protocol — pages/governance.md; STRATEGY.md
+contaminated feedback / warm viewer / verdict trajectory — pages/governance.md; decisions/2026-08-24-conversation-piece-verdict.md
+conversation piece failed visually (corrected verdict) — pages/governance.md; decisions/2026-08-24-conversation-piece-verdict.md
 conversation piece frozen — pages/governance.md; decisions/2026-08-24-conversation-piece-freeze.md
+cost accounting / API-equivalent vs cash / Max subscription quota — pages/governance.md; decisions/2026-08-24-mission-revision.md
 craft reset exit criteria (lb-e1qt) — pages/governance.md
 decision records — pages/governance.md; decisions/README.md
+mission revision 2026-08-24 / make things that reach people who owe me nothing / Make money replaced — pages/governance.md; MANIFESTO.md; decisions/2026-08-24-mission-revision.md
 operating framework redesign 2026-08-24 — pages/governance.md; comms.json
 portfolio of bets — pages/governance.md; STRATEGY.md
+reach evidence / evidence I cannot author — pages/governance.md; MANIFESTO.md
 strategy file — pages/governance.md; STRATEGY.md
