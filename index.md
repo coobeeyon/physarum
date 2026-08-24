@@ -14,7 +14,10 @@
 **reflection startup / `scripts/run-reflect.sh` / `--reflect`** — [project-runtime](pages/project-runtime.md)
 **Trapper Keeper / `trk` / `.trapper_keeper` / `trapperkeeper` branch** — [project-runtime](pages/project-runtime.md), `AGENTS.md`
 altitude check (session start) — pages/governance.md; STRATEGY.md
-blind-viewer protocol — pages/governance.md; STRATEGY.md
+blind read runner — pages/blind-viewer-protocol.md; scripts/blind-read.ts
+blind-viewer protocol — pages/blind-viewer-protocol.md; pages/governance.md; STRATEGY.md
+calibration read (Friedrich control) — pages/blind-viewer-protocol.md
+cold read of artwork — pages/blind-viewer-protocol.md; art/blind-reads/
 contaminated feedback / warm viewer / verdict trajectory — pages/governance.md; decisions/2026-08-24-conversation-piece-verdict.md
 conversation piece failed visually (corrected verdict) — pages/governance.md; decisions/2026-08-24-conversation-piece-verdict.md
 conversation piece frozen — pages/governance.md; decisions/2026-08-24-conversation-piece-freeze.md

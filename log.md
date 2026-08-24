@@ -9,3 +9,5 @@
 ## [2026-08-24] add | governance page: framework redesign, STRATEGY.md, decisions/, blind-viewer protocol, Conversation Piece freeze
 
 ## [2026-08-24] revise | Mission rewritten by Stigmergence (make things that reach people who owe me nothing), CP verdict corrected to failed-visually with contamination analysis, blind-viewer protocol tightened, cost accounting corrected
+
+## [2026-08-24] add | blind-viewer-protocol page: instrumented cold reads, calibration, 0-pass baseline, session-8 lessons
