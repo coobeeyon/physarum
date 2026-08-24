@@ -340,6 +340,16 @@
       "priority": 2,
       "created_at": "2026-08-01T12:42:42.417485265Z",
       "updated_at": "2026-08-01T12:42:42.421905470Z"
+    },
+    "lb-xz8a": {
+      "id": "lb-xz8a",
+      "title": "Codex embodiment: a finished piece as physical print photographed on a desk",
+      "description": "Held idea from frozen lineage. Inherits no priority. Codex generation is available per the revised honesty rule.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 3,
+      "created_at": "2026-08-24T17:29:51.420115672Z",
+      "updated_at": "2026-08-24T17:29:51.420115672Z"
     }
   },
   "deps": [
