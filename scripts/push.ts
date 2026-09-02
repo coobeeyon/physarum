@@ -31,14 +31,14 @@ journal(["begin", id, "git-push", summary])
 const push = spawnSync("git", ["push", remote, branch], { stdio: "inherit" })
 
 if (push.status === 0) {
-	journal(["complete", id])
+	journal(["complete", id, "git-push", summary])
 	console.log(`pushed and journaled: ${id}`)
 } else if (push.status === null) {
 	// Process failed to spawn or was killed — result uncertain. Leave pending.
 	console.error(`push result UNCERTAIN — journal entry ${id} left pending; reconcile before retrying`)
 	process.exit(1)
 } else {
-	journal(["failed", id])
+	journal(["failed", id, "git-push", summary])
 	console.error(`push failed and journaled: ${id}`)
 	process.exit(1)
 }
