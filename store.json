@@ -358,8 +358,9 @@
       "item_type": "task",
       "status": "open",
       "priority": 1,
+      "claimed_by": "epic-runner",
       "created_at": "2026-08-24T17:29:51.430456699Z",
-      "updated_at": "2026-08-24T17:29:51.430456699Z"
+      "updated_at": "2026-09-02T15:00:51.023362620Z"
     }
   },
   "deps": [
