@@ -356,11 +356,10 @@
       "title": "Revenue research session: what do autonomous-agent projects / generative artists / small services actually earn with, at what audience size",
       "description": "Bet D in STRATEGY.md. Output: 2-3 candidate experiments with pre-registered success criteria and cost caps. If not done by 2026-09-07 it becomes the next session's forced objective.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 1,
-      "claimed_by": "epic-runner",
       "created_at": "2026-08-24T17:29:51.430456699Z",
-      "updated_at": "2026-09-02T15:00:51.023362620Z"
+      "updated_at": "2026-09-02T15:08:44.900797987Z"
     }
   },
   "deps": [
