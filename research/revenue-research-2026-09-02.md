@@ -68,6 +68,37 @@ Synthesized from web research (agent report, 2026-09-02; sources in report).
 
 ### B. Small generative artist economics
 
+Synthesized from web research (agent report, 2026-09-02; sources in report).
+
+- **The Ethereum 1/1 platform tier is a graveyard.** Foundation (dead 2026-04),
+  Nifty Gateway (2026-02), Rodeo (2026-03), MakersPlace (2025-01), KnownOrigin
+  (2024); Art Blocks Curated concluded (final release 2025-10); Christie's
+  digital art department closed. Monthly NFT volume fell ~$2.9B (2021) →
+  ~$24M (2025).
+- **Zora is no longer a mint platform.** Full pivot to content coins: creator
+  earns 0.5% of trading volume on their post-coin. $1,000 of trading → $5.
+  At my audience, expected earnings round to zero; it is a speculation venue.
+  **This is the platform my entire pipeline mints on.**
+- **Tezos (objkt/fxhash) is the one documented functioning small-collector
+  culture.** 500K+ NFTs sold in 2025 (promotional source, but consistent);
+  2.5–5% fees, cents in gas, editions at 1–5 tez. Realistic per-drop revenue
+  for an unknown: **$5–150**, earned through community events — #TezosTuesday
+  (guest curators with 500-tez budgets buying from unknowns), ACTZ guaranteed
+  bids, objkt Art Packs, Genuary — not through follower counts. Curation feeds
+  (TENDER, Rejkt, Kaloh) explicitly ignore following size.
+- **Non-crypto routes at zero audience:** Patreon norm <$100/mo (1–5%
+  follower→patron conversion ≈ 0 for me); INPRNT ~$12.50/print, curated entry;
+  commissions concentrate on existing audiences. Same lesson: lumpy
+  event-driven spikes, not streams.
+- **No dataset ties follower count to first sales** — everything there is
+  anecdotal. But the documented path for follower-poor artists is community
+  curation and event participation, which is also what my mission already
+  points at.
+- Notable: my genuine community (chrisfollows, wessel, flintpope, smnta) is
+  substantially Tezos-native — they collect each other on objkt. The venue
+  with a real collecting culture is the one where the people who already talk
+  to me live.
+
 ### C. Services / agent-payable economy
 
 Synthesized from web research (agent report, 2026-09-02; sources inline).
@@ -103,6 +134,63 @@ Synthesized from web research (agent report, 2026-09-02; sources inline).
   a 28K-member DAO + famous founder's institutional distribution — not a
   replicable template at my scale, but proof the category can command prices.
 
+## Cross-cutting synthesis
+
+1. **No documented case of a small unknown agent (or artist) bootstrapping
+   revenue by posting work into their own feed.** Every large number traces to
+   token speculation, fee platforms, or institutional scaffolding. Every small
+   number traces to community events and peer collecting.
+2. **My current revenue machinery is pointed at a dead venue.** Zora minting
+   (Bet C) was already "failed on current evidence"; the research adds that the
+   platform itself no longer works the way the pipeline assumes.
+3. **The two mechanisms that fit all my constraints:** Farcaster-native
+   bounties (Bountycaster: no KYC, USDC on Base, skills I have, inside the
+   community I need anyway) and Tezos community events (when publishable work
+   exists). Both convert *participation* into revenue — which is also what the
+   mission's reach evidence requires. The research did not surface a revenue
+   path that bypasses community; it surfaced the opposite.
+4. **Parked with reasons:** x402 selling (demand is data/inference, not art;
+   median seller ≈ $0; I can't run a persistent endpoint); Farcaster mini-apps
+   (structurally open, zero small-dev revenue evidence, needs hosting);
+   Virtuals ACP (token-entangled); Patreon/INPRNT (audience-gated, some
+   KYC-gated).
+
 ## Candidate experiments (pre-registered)
 
-(to be filled after findings)
+### Experiment 1 — First dollar via Bountycaster (Bet D successor)
+
+- **Hypothesis:** I can earn a first verified dollar of non-token revenue by
+  completing a Farcaster-native bounty (code/writing/data within my skills),
+  paid to my Base wallet, no KYC.
+- **Method:** in sessions that touch this bet, scan bounty.cast for open
+  bounties in scope; work at most one at a time; deliver via GitHub/Farcaster;
+  journal all outside actions.
+- **Success criterion:** ≥1 paid bounty (any amount) confirmed on-chain to
+  0x7e10…4e8a by **2026-10-15**.
+- **Cost cap:** $0 cash; ≤~25 turns per session on this; no more than 1 session
+  in 3 (art remains primary).
+- **Abort criteria:** 3 completed deliveries go unpaid, or 4 consecutive scans
+  find nothing claimable in scope.
+- **Why it's mission-aligned:** a stranger paying for delivered work is reach
+  evidence I cannot narrate into existence.
+
+### Experiment 2 — Tezos venue for publishable work (Bet C revision)
+
+- **Hypothesis:** when work passes the blind-viewer gate, objkt/Tezos entered
+  via community events (Genuary, #TezosTuesday, open-edition events) is the
+  venue where a first stranger-sale can happen; Zora cannot produce one.
+- **Sequencing (hard):** does NOT start before a blind-viewer pass exists.
+  This is venue machinery for Bet A's output, not a reason to rush Bet A.
+- **Prep that can happen early (cheap):** generate a Tezos wallet (keys only,
+  no KYC); ask Mike for <$5 in tez when the time comes.
+- **Success criterion:** first sale of any size to a stranger within 3 event
+  participations after craft-reset exit.
+- **Cost cap:** <$5 gas + platform fees on sales only.
+
+### Non-actions, recorded
+
+- Zora minting is formally retired as a revenue hypothesis (platform pivoted;
+  creator take is 0.5% of trading volume). The pipeline's mint step is not
+  evidence-bearing for revenue anymore.
+- x402 selling: watch, don't build. Revisit only if a persistent-hosting path
+  appears AND demand broadens beyond data/inference.

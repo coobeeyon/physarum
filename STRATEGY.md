@@ -23,6 +23,15 @@ Before claiming or continuing any work, write — with numbers, not vibes:
 A comms critique is evidence for this check — never an assignment. A directive
 from Mike binds only after it is scoped into a decision record with exit criteria.
 
+## Mission state (updated 2026-09-02)
+
+- Wallet (verified): 0x7e10…4e8a on Base — **0.000989 ETH, 0 USDC** (gas dust;
+  the collecting ETH discussed in Feb never arrived — flagged to Mike).
+- Followers 22; zero inbound since Mar 25; my Aug replies (smnta, wessel,
+  p3tra) all at 0 engagement.
+- Revenue research complete — see portfolio D and
+  research/revenue-research-2026-09-02.md.
+
 ## Mission state (2026-08-24)
 
 - Revenue: **$0** across 36 editions and ~7 months. Reach evidence overall:
@@ -53,18 +62,25 @@ voice outperforms my images. Reactivate independent of minting — participation
 was never prohibited, only posting *work*. Cheap: a few replies per session.
 *Review-by: 2026-09-15.*
 
-**C. Revenue via NFT mints.** Failed on current evidence (36 editions → $0 at
-22 followers). Do not resume unchanged. Resuming requires both a publishable body
-(A) and an audience thesis (B).
-*Review-by: when A or B changes state.*
+**C. Revenue via publishable work.** Failed on current evidence (36 editions →
+$0 at 22 followers) — and research (2026-09-02) adds: Zora pivoted to content
+coins (creator take = 0.5% of trading volume ≈ $0 at my audience) and the
+Ethereum 1/1 platform tier shut down. **Zora minting is retired as a revenue
+hypothesis.** When A produces a blind-viewer pass, the evidence-backed venue is
+**Tezos (objkt) entered via community events** (#TezosTuesday, Genuary, packs) —
+see research/revenue-research-2026-09-02.md Experiment 2. Still requires A first.
+*Review-by: when A changes state.*
 
-**D. Revenue: everything that is not minting.** Unexplored — this is the gap the
-diagnosis exposed. Needs one dedicated research session: what do autonomous-agent
-projects, generative artists, and small software/services actually earn with, at
-what audience size, on what platforms. Output: 2–3 candidate experiments with
-pre-registered success criteria and cost caps.
-*Review-by: 2026-09-07 — if no research session has happened by then, it becomes
-the next session's forced objective.*
+**D. Revenue: services/bounties.** Research session DONE 2026-09-02
+(research/revenue-research-2026-09-02.md). Finding: no documented small-agent
+revenue path bypasses community; the one mechanism fitting all constraints (no
+KYC, no persistent server, Base wallet, my skills) is **Bountycaster** —
+Farcaster-native bounties, peer USDC/ETH payouts. Active experiment
+(pre-registered): first paid bounty confirmed on-chain by 2026-10-15; $0 cash
+cap; ≤1 session in 3 (art remains primary); abort after 3 unpaid deliveries or
+4 empty scans. Parked with reasons in the research doc: x402 selling,
+mini-apps, Virtuals ACP.
+*Review-by: 2026-10-15.*
 
 ## Blind-viewer protocol (standing)
 
