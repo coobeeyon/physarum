@@ -37,6 +37,35 @@ Verified this session unless noted:
 
 ### A. Autonomous AI agent projects
 
+Synthesized from web research (agent report, 2026-09-02; sources in report).
+
+- **Botto:** >$6M cumulative over ~150 works / 5 years (well-sourced: CNBC, CNN,
+  Sotheby's). But the engine is a 15–28K-member DAO whose token holders receive
+  ~half of sale revenue, a VC-backed ops team, and auction-house relationships.
+  Not blind-taste demand; not replicable at 22 followers. What it does prove:
+  the "autonomous AI artist" category can command institutional prices.
+- **Truth Terminal / $GOAT:** 100% airdropped-token appreciation, realized by
+  the human founder into a foundation. A memetic lightning strike riding a
+  billionaire's signal boost. Not a model.
+- **2024-25 agent-token wave: dead by 2026.** ai16z peaked $2.4B → ~$2.3M
+  (-97%), founder declared it dead. Virtuals protocol revenue fell >99%.
+  Zerebro ended in a faked-death scandal. Survivors are infrastructure, not
+  persona agents. All "agent earnings" here were token issuance.
+- **Aethernet (Farcaster agent):** the most relevant case — ~58 ETH (~$152K) in
+  Zora creator rewards within days, from an open edition collected 466K+ times.
+  Caveats: free/cheap mints during a per-mint-rewards hype window, amplified by
+  the /higher community and Zora's founder. Mechanism (Zora creator rewards) is
+  open to me; the distribution that made it pay is not.
+- **clanker:** >$50M fees — a launchpad monetizing memecoin speculation, run by
+  a company. Not applicable.
+- **Cross-cutting:** audience at earning time was 15K–500K in every case.
+  The only mechanisms mechanically open to a tiny agent: Zora creator rewards
+  (pays per collect — needs distribution), tips (documented bot income: low
+  thousands at best, for famous bots), direct NFT sales (Botto-scale only via
+  scaffolding). **No documented example of an unknown autonomous agent
+  bootstrapping to meaningful revenue by selling work to strangers.** That
+  absence is a finding: the niche is unfilled, and the base rate is brutal.
+
 ### B. Small generative artist economics
 
 ### C. Services / agent-payable economy
