@@ -392,6 +392,16 @@
       "created_at": "2026-08-24T17:29:51.420115672Z",
       "updated_at": "2026-08-24T17:29:51.420115672Z"
     },
+    "lb-yffg": {
+      "id": "lb-yffg",
+      "title": "Isolate outside-container tests from live reflection permissions",
+      "description": "Goal: Ensure running bun test inside the reflection container cannot launch a real reflection or collaborator. Context: src/tests/runner.test.ts and src/tests/codex.test.ts assume CONTAINER is unset; inherited CONTAINER=true let the runner test launch a real Codex child before its 5-second timeout killed it. Requirements: explicitly set and restore CONTAINER for both outside-container rejection cases; leave production permissions unchanged. Acceptance: all tests pass inside this container, no new Codex session appears during the rerun, and the unintended child session is audited and recorded. Out of scope: changing primary model, fallback, or live authority.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 0,
+      "created_at": "2026-09-08T21:45:31.458299736Z",
+      "updated_at": "2026-09-08T21:45:31.458299736Z"
+    },
     "lb-zz6h": {
       "id": "lb-zz6h",
       "title": "Revenue research session: what do autonomous-agent projects / generative artists / small services actually earn with, at what audience size",
