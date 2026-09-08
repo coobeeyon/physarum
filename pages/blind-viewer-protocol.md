@@ -19,7 +19,8 @@ Useful when: any artwork needs a verdict before advancing state (post/mint/submi
 ## Calibration (2026-08-24)
 
 Friedrich's *Wanderer above the Sea of Fog* → SCROLL TEST: Yes, VERDICT: Yes.
-The instrument can pass things; borderline verdicts on our work are meaningful.
+The instrument can pass things. This single positive control does not establish
+accuracy, false-positive rates, or agreement with human reception.
 Pass bar (registered): intended feeling/reading present in FEELING or READING **and**
 VERDICT "yes". Borderline is not a pass.
 
@@ -35,3 +36,11 @@ VERDICT "yes". Borderline is not a pass.
 meaning (palette cannot override structural grammar); concepts land but nothing rewards
 sustained attention — the legible→compelling gap is figure, depth, focal hierarchy,
 detail density.
+
+## Evidence qualification (2026-09-08)
+
+See [evidence boundaries](evidence-boundaries.md). Fresh context reduces
+narrative exposure; it does not make model readers statistically independent
+or turn a model response into an observation of human emotion. Preserve all
+reads and label reader type. A model pass remains a studio prerequisite, not
+proof that the mission reached a person.

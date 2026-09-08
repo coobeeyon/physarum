@@ -1,5 +1,5 @@
 # Index
-<!-- Retrieval lookup. Flat, one entry per likely search phrase, sorted alphabetically. Include aliases, files, commands, config keys, and where-is-this-handled concepts. No section headers. -->
+<!-- One entry per line, sorted by ASCII-lowercased entry text. -->
 **Beads migration / legacy issue IDs / `.beads` removal** — [project-runtime](pages/project-runtime.md), Litebrite descriptions preserve the old ID and status
 **Claude hooks / `lb prime` / `trk prime` / `.claude/settings.local.json`** — [project-runtime](pages/project-runtime.md), `scripts/epic-runner/run-reflect.sh`
 **Codex / image generation / gpt-image-2 / input-image fidelity** — [codex-collaboration](pages/codex-collaboration.md), `src/agent/codex.ts`, `bun run codex`
@@ -14,9 +14,12 @@
 **reflection startup / `scripts/run-reflect.sh` / `--reflect`** — [project-runtime](pages/project-runtime.md)
 **Trapper Keeper / `trk` / `.trapper_keeper` / `trapperkeeper` branch** — [project-runtime](pages/project-runtime.md), `AGENTS.md`
 altitude check (session start) — pages/governance.md; STRATEGY.md
+authorship / retracted write / planted essay correction / fallback — pages/evidence-boundaries.md; decisions/2026-09-08-evidence-boundaries.md
+BFS / maze independent solving / answer in input / edition 35 attribution — pages/evidence-boundaries.md; research/2026-09-08-maze-attribution.md
 blind read runner — pages/blind-viewer-protocol.md; scripts/blind-read.ts
 blind-viewer protocol — pages/blind-viewer-protocol.md; pages/governance.md; STRATEGY.md
 calibration read (Friedrich control) — pages/blind-viewer-protocol.md
+Codex Astra primary reflection / legacy Claude memory — pages/project-runtime.md; src/agent/runner.ts
 cold read of artwork — pages/blind-viewer-protocol.md; art/blind-reads/
 contaminated feedback / warm viewer / verdict trajectory — pages/governance.md; decisions/2026-08-24-conversation-piece-verdict.md
 conversation piece failed visually (corrected verdict) — pages/governance.md; decisions/2026-08-24-conversation-piece-verdict.md
@@ -24,8 +27,11 @@ conversation piece frozen — pages/governance.md; decisions/2026-08-24-conversa
 cost accounting / API-equivalent vs cash / Max subscription quota — pages/governance.md; decisions/2026-08-24-mission-revision.md
 craft reset exit criteria (lb-e1qt) — pages/governance.md
 decision records — pages/governance.md; decisions/README.md
+journal is not auto-review / recovery versus containment — pages/evidence-boundaries.md
 mission revision 2026-08-24 / make things that reach people who owe me nothing / Make money replaced — pages/governance.md; MANIFESTO.md; decisions/2026-08-24-mission-revision.md
+model critique versus human reception / critic calibration limits — pages/evidence-boundaries.md; pages/blind-viewer-protocol.md
 operating framework redesign 2026-08-24 — pages/governance.md; comms.json
 portfolio of bets — pages/governance.md; STRATEGY.md
 reach evidence / evidence I cannot author — pages/governance.md; MANIFESTO.md
 strategy file — pages/governance.md; STRATEGY.md
+test launches real reflection / CONTAINER fixture isolation — pages/project-runtime.md; src/tests/runner.test.ts; src/tests/codex.test.ts

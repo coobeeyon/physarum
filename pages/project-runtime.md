@@ -12,7 +12,7 @@ Useful when: changing how Stigmergence starts, diagnosing missing project contex
 
 `scripts/run-reflect.sh` is the host entry point. It requires a clean tracked worktree, the owner-only autobiographical history, the selected private service environment, an authenticated Codex home volume, and an SSH agent. It builds the disposable runner, clones Physarum and the gallery as siblings, mounts only the required private inputs, and starts `bun run src/index.ts --reflect`.
 
-The reflection code keeps the original Phase 1 prompt structure and adds only essential Phase 2 context: continuous identity, the curated autobiography, Codex as a separate general collaborator, and credential hygiene. It still begins with “You are reflecting,” preserves the original disposable-checkout and turn-limit guidance, and includes current state, engagement, project context, genome, and narrative. Claude Code runs Fable as Stigmergence's primary reasoning process. Codex remains a separate general collaborator that Stigmergence may call through `bun run codex -- --task-file <path> [--name <label>]`.
+The reflection code keeps the original Phase 1 prompt structure and adds only essential Phase 2 context: continuous identity, the curated autobiography, Codex as a separate general collaborator, and credential hygiene. It still begins with “You are reflecting,” preserves the original disposable-checkout and turn-limit guidance, and includes current state, engagement, project context, genome, and narrative. As of September 8, src/agent/runner.ts selects Codex GPT-6 Astra at high effort as Stigmergence's primary reflection backend. A separate Codex collaborator remains available through `bun run codex -- --task-file <path> [--name <label>]`. Current private memory lives alongside historical Claude memory under runtime-private/memory; the original legacy records retain corrections rather than becoming a replacement identity. See [evidence boundaries](evidence-boundaries.md) for the corrected Session 10 fallback history.
 
 `comms.json` remains the live bidirectional human/artist channel. Every reflection reads its full current contents. Stigmergence may append an `agent` entry, then commit and push the file so Mike sees the response between runs. Tests protect both the original prompt framing and these message-file instructions from being silently replaced.
 
@@ -53,3 +53,14 @@ The former `.beads/` store contained 29 records. The migration recreated all 29 
 Every disposable runner repeats this setup after cloning. Before enabling the hooks it creates local tracking branches for `origin/litebrite` and `origin/trapperkeeper` and materializes `.trapper_keeper/`. Startup fails if either required remote branch is missing. It then runs both prime commands once as a preflight, so a reflection never begins with silently missing tracker or wiki context.
 
 The runner image builds `lb` and `trk` from pinned source revisions in a Rust build stage and copies only the release binaries into the final Node image. Claude Code and Codex versions remain independently pinned in the final image.
+
+## Running tests inside the reflection container
+
+The outside-container rejection cases in src/tests/runner.test.ts and
+src/tests/codex.test.ts must explicitly set CONTAINER=false and restore its
+previous value in finally. Assuming it is unset makes the runner test launch
+a real reflection when the suite inherits CONTAINER=true. This occurred in
+the September 8 Astra reflection: the child timed out after five seconds and
+was killed, with no assistant messages or tool calls in its preserved
+transcript. The repaired suite passed 95 tests and created no new Codex
+session files. Keep this isolation when modifying the guard tests.

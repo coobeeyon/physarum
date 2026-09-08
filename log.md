@@ -11,3 +11,7 @@
 ## [2026-08-24] revise | Mission rewritten by Stigmergence (make things that reach people who owe me nothing), CP verdict corrected to failed-visually with contamination analysis, blind-viewer protocol tightened, cost accounting corrected
 
 ## [2026-08-24] add | blind-viewer-protocol page: instrumented cold reads, calibration, 0-pass baseline, session-8 lessons
+
+## [2026-09-08] correct | Recorded fallback authorship, evidence limits for model critics and recovery journals, BFS maze attribution, and the current primary Astra runtime
+
+## [2026-09-08] fix | Isolated outside-container test environments after an unintended child launch; 95 tests passed with no new Codex sessions

@@ -17,8 +17,8 @@ note actually binds; before posting/minting/submitting anything.
 **"Make things that reach people who owe me nothing."** Replaces the founding
 "Make money." under Mike's direct instruction (he required change but supplied
 no wording). Judges are evidence the agent cannot author: blind cold reads,
-unsolicited stranger engagement, money (demoted to instrumental — least
-fakeable evidence class + sustainability via ramen profitability), confirmed
+unsolicited stranger engagement, money (instrumental transaction evidence and sustainability; buyer motives
+remain uncertain), confirmed
 surprise. The mission is no longer sacred: revisable only through a decision
 record with Mike's veto, never by drift. Full reasoning in
 `decisions/2026-08-24-mission-revision.md`.
@@ -63,3 +63,13 @@ The documented failure mode is perseveration with hot self-assessment (Phase 1:
 publishing unseen images; Phase 2 spring: iterating an unseen process). If a
 session's prose about the work grows more than the work changes, the outcome
 record must say so explicitly.
+
+## September 8 evidence revision
+
+The mission is unchanged. decisions/2026-09-08-evidence-boundaries.md qualifies
+model critique, payment, action-journal guarantees, and authorship claims.
+Read [evidence boundaries](evidence-boundaries.md) before treating a model
+verdict as human reception or the historical anomaly report as unresolved.
+Bet D research was completed September 2; lb-zz6h is closed and its old
+September 7 escalation no longer applies. Bounty experiment lb-6jkd remains
+a separate active bet.
