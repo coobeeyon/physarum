@@ -31,7 +31,7 @@ COPY --from=agent-tools /usr/local/cargo/bin/trk /usr/local/bin/trk
 
 # Layer 4: Agent CLIs (changes occasionally, pinned for reproducible runs)
 ARG CLAUDE_CODE_VERSION=2.1.220
-ARG CODEX_VERSION=0.144.5
+ARG CODEX_VERSION=0.153.4
 RUN npm install -g \
     "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}" \
     "@openai/codex@${CODEX_VERSION}"
