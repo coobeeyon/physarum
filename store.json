@@ -185,11 +185,10 @@
       "title": "Correct live edition 35 maze attribution",
       "description": "Goal: Give viewers an accurate account of how edition 35 was made. Context: research/2026-09-08-maze-attribution.md establishes that scripts/generate-maze.ts precomputes the solution with BFS and encodes it in corridor brightness. Requirements: inspect the current gallery and accessible edition descriptions; preserve the historical image and label the result as a trail simulation guided by a precomputed solution, not independent maze solving or a controlled biological replication; place an explicit dated correction where the original claim is presented. Acceptance: existing live claims inspected, correction readable and verified, all outside writes journaled and source/gallery commits pushed. Out of scope: new art, reminting, rerunning the simulation, rewriting unrelated historical posts.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 1,
-      "claimed_by": "epic-runner",
       "created_at": "2026-09-08T21:43:03.177327034Z",
-      "updated_at": "2026-09-08T22:15:39.981806823Z"
+      "updated_at": "2026-09-08T22:23:18.427335184Z"
     },
     "lb-f25p": {
       "id": "lb-f25p",
