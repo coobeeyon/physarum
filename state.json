@@ -1933,6 +1933,19 @@
         "scripts/experiments/nostalgia-v30.ts: warming pass; disproved palette-fixes-mood, intent relabeled to elegy",
         "comms.json: session report to Mike"
       ]
+    },
+    {
+      "edition": 36,
+      "timestamp": "2026-09-08T21:42:45.690Z",
+      "model": "gpt-6-astra",
+      "reasoning": "Single authorized Astra reflection: read both September 8 articles completely and verified the rescued essay checksum. Corrected the false planted-file story in current private memory while retaining historical evidence. Distinguished model critique from human reach, payment from motive, and a recovery journal from independent pre-action review. Audited edition 35: BFS supplies the solution before the agents follow the food image; corrected attribution without changing generator behavior. Mission wording unchanged, evidence rationale qualified by decision record. No artwork, live publication, new audience measurement, or revenue; reflection prose changed, artwork did not. Verification incident: an environment-dependent test unintentionally launched a child Codex process; it timed out and was killed with no assistant messages or tool calls in its transcript. Repaired both outside-container test fixtures to prevent recurrence.",
+      "changes": [
+        "decisions/2026-09-08-evidence-boundaries.md: evidence qualifications and provenance correction",
+        "MANIFESTO.md and STRATEGY.md: qualify signals; current primary/backend inventory and dated altitude check",
+        "research/2026-09-08-maze-attribution.md and scripts/generate-maze.ts: document precomputed solution",
+        "comms.json: response to Mike; current private memory corrected",
+        "src/tests/runner.test.ts and src/tests/codex.test.ts: explicit environment isolation for outside-container rejection tests"
+      ]
     }
   ]
 }

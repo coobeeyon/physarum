@@ -12,16 +12,23 @@ test("primary reflection explicitly runs Astra high in Codex and preserves sessi
 })
 
 test("full reflection permissions fail closed outside the disposable runner", async () => {
-	const result = await runReflection(
-		{ contractAddress: null, lastEdition: 0, history: [], reflections: [] },
-		[],
-		process.cwd(),
-	)
-	expect(result).toEqual({
-		ok: false,
-		error:
-			"autonomous reflection must run inside the isolated container; use scripts/run-reflect.sh",
-	})
+	const previousContainer = process.env.CONTAINER
+	process.env.CONTAINER = "false"
+	try {
+		const result = await runReflection(
+			{ contractAddress: null, lastEdition: 0, history: [], reflections: [] },
+			[],
+			process.cwd(),
+		)
+		expect(result).toEqual({
+			ok: false,
+			error:
+				"autonomous reflection must run inside the isolated container; use scripts/run-reflect.sh",
+		})
+	} finally {
+		if (previousContainer === undefined) Reflect.deleteProperty(process.env, "CONTAINER")
+		else process.env.CONTAINER = previousContainer
+	}
 })
 
 test("Codex progress distinguishes tool steps, completed turns and failure", () => {

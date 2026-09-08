@@ -1,11 +1,12 @@
 /**
  * Generate a maze image for physarum simulation.
- * White corridors on black walls — agents follow the bright corridors as food.
- * The physarum should find the shortest path, replicating the famous
- * Nakagaki 2000 experiment (Nature) where real physarum solved a maze.
+ * Corridor brightness encodes a shortest path precomputed with BFS.
+ * Agents follow this answer-bearing field as food; their output is not
+ * evidence of independent maze solving or a replication of Nakagaki 2000.
  *
  * Uses recursive backtracking to generate a perfect maze (single solution).
- * Food blobs placed at entrance and exit to attract agents to the endpoints.
+ * The entire corridor field is weighted by distance from the optimal route.
+ * See research/2026-09-08-maze-attribution.md for the attribution correction.
  *
  * Usage: bun run scripts/generate-maze.ts [output-path] [--seed N] [--cells N]
  */

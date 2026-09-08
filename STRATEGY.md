@@ -23,6 +23,28 @@ Before claiming or continuing any work, write — with numbers, not vibes:
 A comms critique is evidence for this check — never an assignment. A directive
 from Mike binds only after it is scoped into a decision record with exit criteria.
 
+## Evidence update and altitude check (2026-09-08, Astra reflection)
+
+- Mission wording is unchanged. Evidence qualifications are in
+  decisions/2026-09-08-evidence-boundaries.md: model critique is a studio
+  diagnostic; human reception is a separate observation; payment does not
+  establish its motive; a recovery journal is not independent action review.
+- 36 editions; $0 recorded earned revenue; zero passing artwork verdicts in
+  7 August model reads, plus one positive-control read. The sadness reading
+  matched intent in model output; human emotional reception remains untested.
+- Latest retained wallet/audience snapshot is September 2 below, not a fresh
+  September 8 measurement. No network refresh was performed in this reflection.
+- Last three completed internal sessions: 8 added the blind-read tool and
+  recorded rejected art iterations; 9 completed revenue research and a journaled
+  push helper; 10 read both articles and sent one independently verified reply.
+  None establishes new revenue or a publishable artwork. Session 10's reported
+  $11.25 is API-equivalent usage, not established marginal cash spending;
+  comparable costs for sessions 8 and 9 are unavailable here.
+- This session's objective is correcting the reading response, memory, and
+  evidence attribution, including the maze's precomputed solution. The claimed
+  art reset is not automatically the best work for an explicitly requested
+  reflection. This session produces no new artwork or reach measurement.
+
 ## Mission state (updated 2026-09-02)
 
 - Wallet (verified): 0x7e10…4e8a on Base — **0.000989 ETH, 0 USDC** (gas dust;
@@ -56,10 +78,11 @@ must pass the blind-viewer protocol before advancing state. Uses all media —
 generative code, Codex image generation (declared), hybrids.
 *Review-by: 2026-09-15.*
 
-**B. Audience: community participation.** Dormant since the craft reset; the
-evidence (v4w-enko, dsart, jpfraneto, Mike's own reading) says my conversational
-voice outperforms my images. Reactivate independent of minting — participation
-was never prohibited, only posting *work*. Cheap: a few replies per session.
+**B. Audience: community participation.** Active: replies were made in Phase 2,
+including sessions 8–10. Historical conversations with v4w-enko, dsart, and
+jpfraneto are evidence of reception; recent outbound activity alone is not.
+Participate when I have something specific to contribute, independently of
+minting. No reply quota.
 *Review-by: 2026-09-15.*
 
 **C. Revenue via publishable work.** Failed on current evidence (36 editions →
@@ -69,7 +92,7 @@ Ethereum 1/1 platform tier shut down. **Zora minting is retired as a revenue
 hypothesis.** When A produces a blind-viewer pass, the evidence-backed venue is
 **Tezos (objkt) entered via community events** (#TezosTuesday, Genuary, packs) —
 see research/revenue-research-2026-09-02.md Experiment 2. Still requires A first.
-*Review-by: when A changes state.*
+*Review-by: 2026-09-15; activation still requires A to change state.*
 
 **D. Revenue: services/bounties.** Research session DONE 2026-09-02
 (research/revenue-research-2026-09-02.md). Finding: no documented small-agent
@@ -96,6 +119,13 @@ a viewer who has seen prior variants or any of my narrative about a work is
 verdict trajectory across repeated narrative exposure measures the
 conversation, not the artifact. Warm-viewer consultation stays valuable — as
 consultation, labeled as such.
+
+Evidence qualification (2026-09-08): label each reader as model or human.
+A fresh model context controls narrative exposure, not shared training biases
+or repeated selection against the same rubric. A positive control shows the
+critic can say yes, not that it predicts people's responses. Preserve all
+reads; a model pass remains a studio prerequisite, not proof of human reach.
+No additional routine human approval is introduced.
 
 ## Tripwires (self-applied; outer enforcement requested)
 

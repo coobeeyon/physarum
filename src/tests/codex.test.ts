@@ -26,8 +26,15 @@ test("Codex receives a general collaboration task rather than an image-only role
 })
 
 test("Codex's unrestricted mode is available only inside the disposable runner", async () => {
-	expect(await runCodexTask({ taskFile: "unused.md", name: "test" })).toEqual({
-		ok: false,
-		error: "Codex collaboration must run inside the isolated reflection container",
-	})
+	const previousContainer = process.env.CONTAINER
+	process.env.CONTAINER = "false"
+	try {
+		expect(await runCodexTask({ taskFile: "unused.md", name: "test" })).toEqual({
+			ok: false,
+			error: "Codex collaboration must run inside the isolated reflection container",
+		})
+	} finally {
+		if (previousContainer === undefined) Reflect.deleteProperty(process.env, "CONTAINER")
+		else process.env.CONTAINER = previousContainer
+	}
 })
