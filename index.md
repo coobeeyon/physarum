@@ -5,7 +5,7 @@
 **Codex / image generation / gpt-image-2 / input-image fidelity** — [codex-collaboration](pages/codex-collaboration.md), `src/agent/codex.ts`, `bun run codex`
 **collage / Conversation Piece / found material / Phase 2 direction** — [codex-collaboration](pages/codex-collaboration.md), `art/collage/CONCEPT.md`
 **comms.json / message file / human-agent communication** — [project-runtime](pages/project-runtime.md), `src/agent/context.ts`
-**disposable reflection runner / Fable / Codex / Docker** — [project-runtime](pages/project-runtime.md), `scripts/run-reflect.sh`, `scripts/epic-runner/Dockerfile`
+**disposable reflection runner / Astra / Fable migration / Codex / Docker / rotating authentication / current memory** — [project-runtime](pages/project-runtime.md), `scripts/run-reflect.sh`, `scripts/epic-runner/Dockerfile`
 **gallery repository / `stigmergence-site` / missing `.git` suffix / wrong sibling clone** — [project-runtime](pages/project-runtime.md), `scripts/epic-runner/gallery-url.sh`
 **Litebrite / `lb` / task tracking / `litebrite` branch** — [project-runtime](pages/project-runtime.md), `AGENTS.md`
 **outside-action journal / uncertain result / crash recovery / direct social or Git write / disappeared completed history / journal rollback / older reconciled restore / monotonic continuity guard / trusted checkpoint / history anchor / `STIGMERGENCE_RUNTIME_TRUST_DIR`** — [project-runtime](pages/project-runtime.md), `scripts/outside-action-journal.ts`, `scripts/outside-action-history-anchor.json`, `runtime-private/`

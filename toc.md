@@ -3,7 +3,7 @@
 
 
 ## Architecture
-- [Project Runtime](pages/project-runtime.md) — original prompt and comms.json contract, portable Phase 2 runner, persistent private memory, anchored and monotonic outside-action history, verified gallery cloning, tracker/wiki branches, and Claude hooks
+- [Project Runtime](pages/project-runtime.md) — primary Astra reflection, dedicated persistent Codex authentication, legacy/current memory continuity, portable runner, action journals, verified gallery cloning, tracker/wiki branches and Codex hooks
 
 ## Art Practice
 - [Blind-Viewer Protocol](pages/blind-viewer-protocol.md) — isolated ephemeral Codex cold reads (scripts/blind-read.ts), calibration result, pass bar, and the 2026-08-24 baseline findings (0 passes; composition is the meaning)

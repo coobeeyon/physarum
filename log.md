@@ -1,4 +1,5 @@
 # Log
+## [2026-09-08] migrated | Primary reflection now explicitly uses Codex GPT-6 Astra/high, CLI 0.153.4, persistent dedicated authentication and current/legacy private memory. Verified actual Astra response and corrected inherited environment tests after an unintended five-second child launch with no model output.
 ## [2026-08-01] documented | Recorded the Phase 2 runner and the Beads-to-Litebrite plus Trapper Keeper migration
 ## [2026-08-01] restored | Kept the original reflection prompt structure and live bidirectional comms.json workflow with essential Phase 2 additions
 ## [2026-08-11] verified | Probed Codex image generation (scan realism excellent, input-image detail drifts); recorded delegation workflow and collage division of labor

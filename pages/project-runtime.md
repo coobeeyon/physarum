@@ -1,18 +1,22 @@
 # Project Runtime
 
-Concepts: Phase 2 reflection, Fable, Codex collaborator, disposable Docker runner, portable host, persistent private memory, gallery clone verification, outside-action journal, crash recovery, journal-history rollback, monotonic recovery history, Litebrite, Trapper Keeper, Claude hooks, Beads migration.
+Concepts: Phase 2 reflection, primary Codex GPT-6 Astra, historical Fable, Codex collaborator, disposable Docker runner, dedicated authentication, persistent private memory, gallery clone verification, outside-action journal, crash recovery, monotonic recovery history, Litebrite, Trapper Keeper, Codex hooks, Beads migration.
 
 Key files: `MANIFESTO.md`, `CLAUDE.md`, `src/agent/context.ts`, `src/agent/runner.ts`, `src/agent/codex.ts`, `scripts/run-reflect.sh`, `scripts/epic-runner/run-reflect.sh`, `scripts/epic-runner/gallery-url.sh`, `scripts/outside-action-journal.ts`, `scripts/epic-runner/Dockerfile`, `AGENTS.md`.
 
 Commands: `./scripts/run-reflect.sh`, `lb ready`, `lb show <id>`, `lb claim <id>`, `lb close <id>`, `lb sync`, `trk prime`.
 
-Useful when: changing how Stigmergence starts, diagnosing missing project context in Claude, working on tracked tasks, or updating the disposable runner image.
+Useful when: changing how Stigmergence starts, diagnosing backend or memory continuity, working on tracked tasks, or updating the disposable runner image.
 
 ## Reflection flow
 
 `scripts/run-reflect.sh` is the host entry point. It requires a clean tracked worktree, the owner-only autobiographical history, the selected private service environment, an authenticated Codex home volume, and an SSH agent. It builds the disposable runner, clones Physarum and the gallery as siblings, mounts only the required private inputs, and starts `bun run src/index.ts --reflect`.
 
-The reflection code keeps the original Phase 1 prompt structure and adds only essential Phase 2 context: continuous identity, the curated autobiography, Codex as a separate general collaborator, and credential hygiene. It still begins with “You are reflecting,” preserves the original disposable-checkout and turn-limit guidance, and includes current state, engagement, project context, genome, and narrative. As of September 8, src/agent/runner.ts selects Codex GPT-6 Astra at high effort as Stigmergence's primary reflection backend. A separate Codex collaborator remains available through `bun run codex -- --task-file <path> [--name <label>]`. Current private memory lives alongside historical Claude memory under runtime-private/memory; the original legacy records retain corrections rather than becoming a replacement identity. See [evidence boundaries](evidence-boundaries.md) for the corrected Session 10 fallback history.
+As of September 8, `src/agent/runner.ts` invokes `codex exec --model gpt-6-astra` with explicit high effort. It rejects a different `REFLECT_MODEL` and never falls back to Claude. Codex CLI is pinned to 0.153.4 because 0.144.5 was rejected by the provider for Astra. The prompt still begins with “You are reflecting” and preserves identity, current mission, history, comms, state and project context. A separate collaborator remains available through `bun run codex -- --task-file <path> [--name <label>]`.
+
+`REFLECT_MAX_STEPS` defaults to 100 completed tool/reasoning steps. This is an explicitly self-managed planning budget, not the old Claude hard max-turns limit; `.turn-count` labels that distinction. JSONL output must include `turn.completed` and a successful process exit. Runtime rollout `turn_context` records provide model/effort evidence. Full permissions still require the disposable container.
+
+Read `runtime-private/memory/MEMORY.md` first when present, then the preserved legacy notes. Historical errors remain with explicit corrections. See [evidence boundaries](evidence-boundaries.md) for Session 10's fallback/write correction. Bun is linked into `/usr/local/bin` so Codex's login shells retain access to project commands.
 
 `comms.json` remains the live bidirectional human/artist channel. Every reflection reads its full current contents. Stigmergence may append an `agent` entry, then commit and push the file so Mike sees the response between runs. Tests protect both the original prompt framing and these message-file instructions from being silently replaced.
 
@@ -20,7 +24,9 @@ The publishing pipeline's studio/live boundary and crash-safe journal protect op
 
 ## Portable host and private continuity
 
-The runner no longer depends on the machine that hosted the first Phase 2 session. Its persistent Claude home can be exported, integrity-checked, restored into a trusted Docker host, and combined with only the curated autobiography, service environment, and authenticated Codex configuration required for the run. Source and gallery repositories remain fresh disposable clones; private history and credentials are mounted separately and never copied into either repository.
+The runner no longer depends on the machine that hosted the first Phase 2 session. The original Claude home stays preserved and read-only; only the artist's project memory Markdown is copied to `runtime-private/memory/legacy-claude` on first migration. Credentials, configuration, shell snapshots and unrelated projects are not copied as memory. Source and gallery remain fresh disposable clones.
+
+The primary actor uses a dedicated writable `stigmergence-codex-home` volume (overridable through `STIGMERGENCE_CODEX_HOME_VOLUME`). The shared collaborator home is not mutated. The September 8 startup found a stale copied refresh token; the dedicated home was seeded from existing valid account authentication and retains subsequent refreshes instead of discarding them with the container. `codex login status` alone does not prove the token or requested model will work. Session transcripts persist through the home `sessions` symlink to `runtime-private/codex-sessions`; authentication stays outside that evidence directory. Preserve the dedicated authenticated volume separately for recovery.
 
 The host launcher also mounts an owner-only persistent `runtime-private` directory outside the disposable clone. The container creates an ignored symlink at the project path, so journals survive container failure without appearing as source changes. A startup check refuses to continue while a prior outside action has an uncertain result.
 
@@ -46,9 +52,9 @@ Litebrite stores work on the orphan `litebrite` branch. Trapper Keeper stores th
 
 The former `.beads/` store contained 29 records. The migration recreated all 29 in Litebrite, preserved every old ID, status, description, dates, owner, and close reason in the item descriptions, preserved the two parent trees and six blocking links, and left the single previously open art-quality feature open. `.beads/`, its merge driver, the `bd` binary, and Beads-specific runner commands were then removed.
 
-## Claude hook lifecycle
+## Agent hook lifecycle
 
-`lb setup claude` and `trk setup claude` merge project hooks into `.claude/settings.local.json`. Both `SessionStart` and `PreCompact` run `lb prime` and `trk prime`; Claude permissions allow the two CLIs. The setup commands are idempotent and preserve unrelated local Claude settings.
+The primary runner now uses `lb setup codex` and `trk setup codex`. Generated Codex hooks prime tracker/wiki context on lifecycle events. The earlier Claude setup remains historical; switching the runtime also required switching generated hooks, not merely changing a model string.
 
 Every disposable runner repeats this setup after cloning. Before enabling the hooks it creates local tracking branches for `origin/litebrite` and `origin/trapperkeeper` and materializes `.trapper_keeper/`. Startup fails if either required remote branch is missing. It then runs both prime commands once as a preflight, so a reflection never begins with silently missing tracker or wiki context.
 
