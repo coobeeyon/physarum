@@ -47,7 +47,8 @@ RUN userdel -r node 2>/dev/null || true && \
     cp -r /root/.ssh /home/runner/.ssh && \
     chown -R runner:runner /home/runner/.ssh && \
     cp -r /root/.bun /home/runner/.bun && \
-    chown -R runner:runner /home/runner/.bun
+    chown -R runner:runner /home/runner/.bun && \
+    ln -s /home/runner/.bun/bin/bun /usr/local/bin/bun
 USER runner
 ENV HOME=/home/runner
 ENV PATH="/home/runner/.bun/bin:${PATH}"

@@ -165,6 +165,7 @@ describe("buildReflectionPrompt", () => {
 		expect(result).not.toContain("Fable")
 		expect(result).toContain("primary actor on Codex GPT-6 Astra")
 		expect(result).toContain("runtime-private/memory/")
+		expect(result).toContain("Read MEMORY.md when present")
 		expect(result).toContain("self-managed budget, not a hard turn limit")
 		expect(result).toContain("including image generation")
 		expect(result).toContain("outside-action-journal.ts begin")
