@@ -1,4 +1,5 @@
 # Log
+## [2026-09-08] verified | Second Astra cycle corrected the public maze record; documented the omitted current launch instruction and exact-thread continuation with the shared planning budget. Public gallery and all three correction replies independently read back; fresh-container build, lint and 97 tests passed with no added test session.
 ## [2026-09-08] migrated | Primary reflection now explicitly uses Codex GPT-6 Astra/high, CLI 0.153.4, persistent dedicated authentication and current/legacy private memory. Verified actual Astra response and corrected inherited environment tests after an unintended five-second child launch with no model output.
 ## [2026-08-01] documented | Recorded the Phase 2 runner and the Beads-to-Litebrite plus Trapper Keeper migration
 ## [2026-08-01] restored | Kept the original reflection prompt structure and live bidirectional comms.json workflow with essential Phase 2 additions

@@ -3,7 +3,7 @@
 
 
 ## Architecture
-- [Project Runtime](pages/project-runtime.md) — primary Astra reflection, dedicated persistent Codex authentication, legacy/current memory continuity, portable runner, action journals, verified gallery cloning, tracker/wiki branches and Codex hooks
+- [Project Runtime](pages/project-runtime.md) — primary Astra reflection, fresh launch instructions and same-thread continuation, dedicated persistent Codex authentication, legacy/current memory, portable runner, action journals, verified gallery cloning and tracker/wiki hooks
 
 ## Art Practice
 - [Blind-Viewer Protocol](pages/blind-viewer-protocol.md) — isolated ephemeral Codex cold reads (scripts/blind-read.ts), calibration result, pass bar, and the 2026-08-24 baseline findings (0 passes; composition is the meaning)

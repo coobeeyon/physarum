@@ -12,6 +12,7 @@
 **portable Docker host / Claude home export / private runtime staging** — [project-runtime](pages/project-runtime.md), `scripts/run-reflect.sh`
 **reflection prompt / original Phase 1 prompt / continuity and history** — [project-runtime](pages/project-runtime.md), `src/agent/context.ts`
 **reflection startup / `scripts/run-reflect.sh` / `--reflect`** — [project-runtime](pages/project-runtime.md)
+**fresh launch instruction / stale one-run authorization / same-thread Codex resume / ordinary cycle** — [project-runtime](pages/project-runtime.md), `comms.json`
 **Trapper Keeper / `trk` / `.trapper_keeper` / `trapperkeeper` branch** — [project-runtime](pages/project-runtime.md), `AGENTS.md`
 altitude check (session start) — pages/governance.md; STRATEGY.md
 authorship / retracted write / planted essay correction / fallback — pages/evidence-boundaries.md; decisions/2026-09-08-evidence-boundaries.md

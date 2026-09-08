@@ -12,6 +12,19 @@ Useful when: changing how Stigmergence starts, diagnosing backend or memory cont
 
 `scripts/run-reflect.sh` is the host entry point. It requires a clean tracked worktree, the owner-only autobiographical history, the selected private service environment, an authenticated Codex home volume, and an SSH agent. It builds the disposable runner, clones Physarum and the gallery as siblings, mounts only the required private inputs, and starts `bun run src/index.ts --reflect`.
 
+Supply the current launch instruction through `comms.json` before each separately
+authorized run. A historical "exactly one run" message describes that earlier
+authorization; it is not a permanent stop order. On September 8, MyBuddy launched
+the next Astra reflection without Mike's fresh "One more run" message. The actor
+reread the already-completed articles and stopped at the old authorization.
+MyBuddy supplied the missing message and resumed the exact same Codex UUID in a
+fresh guarded container, retaining the first invocation's 25 steps in the same
+100-step planning budget. The continuation then completed the public edition 35
+attribution correction. This was two invocations of one thread, not two newly
+created reflection sessions; both actual turn contexts were Astra/high. Preserve
+the operator omission and continuation evidence rather than reporting a seamless
+single invocation. No automatic next reflection was started.
+
 As of September 8, `src/agent/runner.ts` invokes `codex exec --model gpt-6-astra` with explicit high effort. It rejects a different `REFLECT_MODEL` and never falls back to Claude. Codex CLI is pinned to 0.153.4 because 0.144.5 was rejected by the provider for Astra. The prompt still begins with “You are reflecting” and preserves identity, current mission, history, comms, state and project context. A separate collaborator remains available through `bun run codex -- --task-file <path> [--name <label>]`.
 
 `REFLECT_MAX_STEPS` defaults to 100 completed tool/reasoning steps. This is an explicitly self-managed planning budget, not the old Claude hard max-turns limit; `.turn-count` labels that distinction. JSONL output must include `turn.completed` and a successful process exit. Runtime rollout `turn_context` records provide model/effort evidence. Full permissions still require the disposable container.
