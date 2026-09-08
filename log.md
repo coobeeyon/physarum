@@ -16,3 +16,5 @@
 ## [2026-09-08] correct | Recorded fallback authorship, evidence limits for model critics and recovery journals, BFS maze attribution, and the current primary Astra runtime
 
 ## [2026-09-08] fix | Isolated outside-container test environments after an unintended child launch; 95 tests passed with no new Codex sessions
+
+## [2026-09-08] correct | Published and verified edition 35 attribution notes; preserved them across gallery rebuilds and excluded own correction replies from audience counts

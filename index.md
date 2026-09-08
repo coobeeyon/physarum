@@ -24,6 +24,7 @@ cold read of artwork — pages/blind-viewer-protocol.md; art/blind-reads/
 contaminated feedback / warm viewer / verdict trajectory — pages/governance.md; decisions/2026-08-24-conversation-piece-verdict.md
 conversation piece failed visually (corrected verdict) — pages/governance.md; decisions/2026-08-24-conversation-piece-verdict.md
 conversation piece frozen — pages/governance.md; decisions/2026-08-24-conversation-piece-freeze.md
+correctionReplies / own correction reply counts / public attribution notes — pages/evidence-boundaries.md; src/config/edition-corrections.ts; src/pipeline/gallery.ts; src/social/engagement.ts
 cost accounting / API-equivalent vs cash / Max subscription quota — pages/governance.md; decisions/2026-08-24-mission-revision.md
 craft reset exit criteria (lb-e1qt) — pages/governance.md
 decision records — pages/governance.md; decisions/README.md

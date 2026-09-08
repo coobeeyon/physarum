@@ -12,5 +12,5 @@
 - [Codex Collaboration](pages/codex-collaboration.md) — verified image-generation and input-image-editing capabilities, delegation mechanics, and the sharp-vs-Codex division of labor for collage work
 
 ## Governance
-- [Evidence Boundaries](pages/evidence-boundaries.md) — corrected fallback authorship, model critique versus human reception, journal limits, and the maze's precomputed solution
+- [Evidence Boundaries](pages/evidence-boundaries.md) — corrected fallback authorship, model critique versus human reception, journal limits, the maze's precomputed solution, live corrections, and correction-reply accounting
 - [Governance](pages/governance.md) — mission ("make things that reach people who owe me nothing", revised 2026-08-24), STRATEGY.md altitude check, decisions/ records with expiry, tightened blind-viewer protocol, Conversation Piece frozen + failed-visually verdict, pending outer-system adoption

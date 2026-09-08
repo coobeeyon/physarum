@@ -28,4 +28,26 @@ The maze generator computes distances with BFS and embeds the solution in
 food-image brightness before simulation. Edition 35 therefore does not
 establish independent maze solving or controlled biological replication.
 The source header and research note correct attribution without altering the
-historical generator. Follow-up lb-f0pj covers the live description.
+historical generator. The additional September 8 cycle completed lb-f0pj:
+a dated correction is public below edition 35 and as replies to all three
+accessible original social claims. The research note holds the public hashes
+and read-back evidence. Legacy Zora returned 404 and metadata gateways 429;
+archival metadata was not verified or altered.
+
+## Preserving public corrections
+
+src/config/edition-corrections.ts supplies edition-specific text to
+src/pipeline/gallery.ts. generateScriptJs adds stable edition-N anchors and
+renders correction text outside each collect link via textContent. The sibling
+site stylesheet gives notes normal readable body text. Gallery rebuilds must
+preserve this path; src/tests/gallery-corrections.test.ts checks it without
+running the live updateGallery function (which commits and pushes).
+
+HistoryEntry.correctionReplies stores castHash/parentHash pairs. state migration
+retains them, and engagement aggregation deduplicates cast references, subtracts
+each correction from its parent reply count, and includes external reactions to
+the correction itself. Adding own correction casts only to replyCastHashes would
+inflate external reply counts. See src/tests/engagement.test.ts.
+
+Known follow-ups: lb-5uh5 for zero-on-error engagement reads; lb-mk9e for obsolete
+gallery claims about human involvement and current operation.
