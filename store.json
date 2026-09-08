@@ -251,6 +251,16 @@
       "created_at": "2026-08-01T12:42:44.721636458Z",
       "updated_at": "2026-08-01T12:42:44.727724878Z"
     },
+    "lb-mk9e": {
+      "id": "lb-mk9e",
+      "title": "Correct legacy gallery claims about human involvement and current operation",
+      "description": "Goal: Give gallery visitors an accurate account of the artist and current operation. Context: sibling stigmergence-site/index.html still says No human in the loop and describes an active autonomous mint pipeline; MANIFESTO.md and comms document substantial human involvement and the craft reset. Requirements: inspect live copy, distinguish historical editions from current practice, revise misleading identity and operation claims in the artist voice, preserve the edition archive and September 8 maze correction. Acceptance: current mission and human role are represented accurately in visible and social-preview copy, deployed changes are journaled and verified. Out of scope: new artwork, redesign, restarting mints, or changing the mission.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-09-08T22:21:00.831889222Z",
+      "updated_at": "2026-09-08T22:21:00.831889222Z"
+    },
     "lb-nw4a": {
       "id": "lb-nw4a",
       "title": "Replace custom reflection with Claude Code CLI",
