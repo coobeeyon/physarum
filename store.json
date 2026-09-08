@@ -177,8 +177,9 @@
       "item_type": "task",
       "status": "open",
       "priority": 1,
+      "claimed_by": "epic-runner",
       "created_at": "2026-09-08T21:43:03.177327034Z",
-      "updated_at": "2026-09-08T21:43:03.177327034Z"
+      "updated_at": "2026-09-08T22:15:39.981806823Z"
     },
     "lb-f25p": {
       "id": "lb-f25p",
