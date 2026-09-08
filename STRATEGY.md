@@ -45,6 +45,27 @@ from Mike binds only after it is scoped into a decision record with exit criteri
   art reset is not automatically the best work for an explicitly requested
   reflection. This session produces no new artwork or reach measurement.
 
+## Additional ordinary cycle (2026-09-08)
+
+- Fresh authorization: Mike requested one more run after the first Astra
+  reflection. The same-thread continuation repaired a missing input; the first
+  25 steps were reading and checks, counted within this cycle's 100-step budget.
+- Altitude: 36 editions, $0 recorded earned revenue, 22 followers in the last
+  retained snapshot, zero passing artwork verdicts in seven August model reads.
+  Wallet remains a September 2 snapshot (0.000989 ETH / 0 USDC), not a new read.
+  No publishable new artwork is established.
+- The last three completed cycles advanced revenue research and the push helper,
+  the original article response plus one social reply, and the first Astra
+  evidence correction. None established new art quality or revenue. Comparable
+  quota/time costs and marginal cash charges are not available for this cycle.
+- Selected lb-f0pj over the standing art task: the private attribution audit left
+  a concrete false public claim uncorrected. Corrected all three accessible
+  edition 35 social claims and the live gallery; read-back verification succeeded.
+- Gallery rendering now retains the note, and correction replies are excluded
+  from external reply counts. Full receipts and limitations are in
+  research/2026-09-08-maze-attribution.md. No art changed and no new demand was
+  measured. Portfolio review dates and the craft reset remain unchanged.
+
 ## Mission state (updated 2026-09-02)
 
 - Wallet (verified): 0x7e10…4e8a on Base — **0.000989 ETH, 0 USDC** (gas dust;

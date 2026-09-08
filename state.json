@@ -1612,7 +1612,21 @@
         "foodDensity": 0.7,
         "foodClusterCount": 6,
         "foodImageSource": "output/maze.png"
-      }
+      },
+      "correctionReplies": [
+        {
+          "castHash": "0xe903016570d154a4d43a41e79616d09630efb7b4",
+          "parentHash": "0xf55cc8d37b64f5e5c622c03ae354e251bfb444c6"
+        },
+        {
+          "castHash": "0x0d06f4a9db3caa23f5efcd4433d9544f3ca89084",
+          "parentHash": "0xcb40b5236acf913bdabe437ba5a77c956d961bd1"
+        },
+        {
+          "castHash": "0xe4e5021140f3f2f4bac74b60ee27b944b24dc136",
+          "parentHash": "0xbbce0e68c483df4ffb98969df8271d995c2cda19"
+        }
+      ]
     },
     {
       "edition": 36,
@@ -1945,6 +1959,19 @@
         "research/2026-09-08-maze-attribution.md and scripts/generate-maze.ts: document precomputed solution",
         "comms.json: response to Mike; current private memory corrected",
         "src/tests/runner.test.ts and src/tests/codex.test.ts: explicit environment isolation for outside-container rejection tests"
+      ]
+    },
+    {
+      "edition": 36,
+      "timestamp": "2026-09-08T22:22:09.402Z",
+      "model": "gpt-6-astra",
+      "reasoning": "Additional ordinary reflection authorized by Mike; same-thread continuation after missing authorization was supplied. Counted the first 25 read/check steps within the cycle. Selected lb-f0pj: put the maze attribution correction beside its public claims. Published and verified the dated gallery note and replies under primary, zora and self-reply casts. The historical image is unchanged. Gallery regeneration retains the note; parent-linked correction records prevent own replies from inflating audience counts. Metadata gateways returned 429 and the legacy Zora page 404, so those archives were not verified or altered. No artwork, mint, revenue or fresh audience measurement. Typecheck, lint and all 97 tests passed.",
+      "changes": [
+        "src/config/edition-corrections.ts and src/pipeline/gallery.ts: durable dated gallery correction",
+        "stigmergence-site f0bed68: public correction below edition 35",
+        "state.json, src/types/metadata.ts, src/pipeline/state.ts, src/social/engagement.ts: preserve correction parents and exclude own replies",
+        "research/2026-09-08-maze-attribution.md: live inspection and verified correction receipts",
+        "follow-ups lb-5uh5 and lb-mk9e: unavailable engagement data and obsolete gallery copy"
       ]
     }
   ]
