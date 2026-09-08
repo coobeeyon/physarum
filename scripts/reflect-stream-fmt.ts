@@ -61,6 +61,11 @@ const formatEvent = (line: string): string | null => {
 	}
 
 	const type = event.type as string
+	if (type === "reflection.launch" || type === "thread.started" || type === "turn.completed" || type === "turn.failed" || type === "error") return line
+	if (type === "item.completed") {
+		const item = event.item as Record<string, unknown> | undefined
+		return typeof item?.text === "string" ? item.text : line
+	}
 
 	if (type === "system" && event.subtype === "init") {
 		const model = (event as Record<string, unknown>).model as string

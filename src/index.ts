@@ -1,5 +1,5 @@
 import { join } from "node:path"
-import { runClaudeReflection } from "#agent/runner.ts"
+import { runReflection } from "#agent/runner.ts"
 import { parseArgs } from "#config/cli.ts"
 import { loadEnv } from "#config/env.ts"
 import { runPipeline } from "#pipeline/orchestrate.ts"
@@ -97,11 +97,7 @@ const main = async () => {
 		}
 
 		const projectRoot = join(import.meta.dirname, "..")
-		const result = await runClaudeReflection(
-			stateResult.value,
-			engResult.value.engagement,
-			projectRoot,
-		)
+		const result = await runReflection(stateResult.value, engResult.value.engagement, projectRoot)
 		if (!result.ok) {
 			console.error(`Reflection error: ${result.error}`)
 			process.exit(1)

@@ -90,8 +90,8 @@ docker run --rm -v reflect-claude-home:/data alpine chown "$(id -u):$(id -g)" /d
 if [ "$raw_mode" = true ]; then
   docker run --name "$container_name" \
     --env-file "$environment_file" \
-    -e REFLECT_MODEL="${REFLECT_MODEL:-claude-fable-5}" \
-    -e REFLECT_MAX_TURNS="${REFLECT_MAX_TURNS:-100}" \
+    -e REFLECT_MODEL="${REFLECT_MODEL:-gpt-6-astra}" \
+    -e REFLECT_MAX_STEPS="${REFLECT_MAX_STEPS:-100}" \
     -e STIGMERGENCE_HISTORY_PATH=/runtime/stigmergence-history.md \
     -e STIGMERGENCE_OUTSIDE_JOURNAL_CHECKPOINT_PATH=/runtime-trust/outside-actions.checkpoint.json \
     -e CODEX_HOME=/home/runner/.codex \
@@ -105,14 +105,14 @@ if [ "$raw_mode" = true ]; then
     -v "$history_file:/runtime/stigmergence-history.md:ro" \
     -v "$runtime_private_dir:/runtime-private" \
     -v "$runtime_trust_dir:/runtime-trust" \
-    -v "reflect-claude-home:/home/runner/.claude" \
+    -v "reflect-claude-home:/claude-source:ro" \
     -v "$codex_volume:/codex-source:ro" \
     epic-runner /run-reflect.sh 2>&1 | tee "$log_file"
 else
   docker run --name "$container_name" \
     --env-file "$environment_file" \
-    -e REFLECT_MODEL="${REFLECT_MODEL:-claude-fable-5}" \
-    -e REFLECT_MAX_TURNS="${REFLECT_MAX_TURNS:-100}" \
+    -e REFLECT_MODEL="${REFLECT_MODEL:-gpt-6-astra}" \
+    -e REFLECT_MAX_STEPS="${REFLECT_MAX_STEPS:-100}" \
     -e STIGMERGENCE_HISTORY_PATH=/runtime/stigmergence-history.md \
     -e STIGMERGENCE_OUTSIDE_JOURNAL_CHECKPOINT_PATH=/runtime-trust/outside-actions.checkpoint.json \
     -e CODEX_HOME=/home/runner/.codex \
@@ -126,7 +126,7 @@ else
     -v "$history_file:/runtime/stigmergence-history.md:ro" \
     -v "$runtime_private_dir:/runtime-private" \
     -v "$runtime_trust_dir:/runtime-trust" \
-    -v "reflect-claude-home:/home/runner/.claude" \
+    -v "reflect-claude-home:/claude-source:ro" \
     -v "$codex_volume:/codex-source:ro" \
     epic-runner /run-reflect.sh 2>&1 | tee "$log_file" | bun run "$script_dir/reflect-stream-fmt.ts"
 fi

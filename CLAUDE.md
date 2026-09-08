@@ -13,7 +13,7 @@ Read `MANIFESTO.md` first. It defines the mission, inventory, and identity. Ever
 
 ## Key Paths
 
-- `src/agent/` — reflection via Claude Code CLI (context assembly, runner)
+- `src/agent/` — primary reflection via Codex CLI, GPT-6 Astra at high effort (context assembly, runner)
 - `src/engine/` — physarum simulation
 - `src/pipeline/` — orchestration, gallery updates
 - `src/social/` — Farcaster posting, engagement reading, narrative
@@ -25,4 +25,4 @@ Read `MANIFESTO.md` first. It defines the mission, inventory, and identity. Ever
 
 When invoked with a reflection prompt (containing "You are reflecting"), you are the autonomous agent described in MANIFESTO.md. Act accordingly: read the manifesto, assess the situation, and take whatever actions you believe advance the mission. You have full access to the codebase, shell, and git.
 
-The Phase 2 harness adds curated autobiographical memory and Codex as another bot with different capabilities, including image generation. Delegate any useful task by writing it to a project-local file and running `bun run codex -- --task-file <path> [--name <label>]`. Codex is not limited to image work; use it however you judge useful.
+The Phase 2 harness preserves curated autobiographical memory and historical Claude memory in `runtime-private/memory/legacy-claude/`. The primary reflection now runs on Codex GPT-6 Astra at high effort. A separate Codex collaborator remains available, including image generation. Delegate useful tasks by writing a project-local file and running `bun run codex -- --task-file <path> [--name <label>]`.

@@ -73,11 +73,11 @@ done
 if [ ! -d .trapper_keeper ]; then
   git worktree add .trapper_keeper trapperkeeper
 fi
-lb setup claude
-trk setup claude
+lb setup codex
+trk setup codex
 lb prime >/dev/null
 trk prime >/dev/null
-echo "Litebrite, Trapper Keeper, and Claude hooks are ready."
+echo "Litebrite, Trapper Keeper, and Codex hooks are ready."
 
 # --- Install dependencies from pre-built cache ---
 echo "Installing project dependencies..."
@@ -95,15 +95,20 @@ bun run scripts/outside-action-journal.ts check
 # --- Install pre-commit hook (lint) ---
 git config core.hooksPath scripts/git-hooks
 
-# --- Restore .claude.json from persisted backup if missing ---
-claude_config="$HOME/.claude.json"
-if [ ! -f "$claude_config" ] && [ -d "$HOME/.claude/backups" ]; then
-  latest_backup=$(ls -t "$HOME/.claude/backups/.claude.json.backup."* 2>/dev/null | head -1)
-  if [ -n "$latest_backup" ]; then
-    cp "$latest_backup" "$claude_config"
-    echo "Restored .claude.json from backup: $(basename "$latest_backup")"
-  fi
+# Carry only this artist's memory notes across backends, never Claude credentials.
+legacy_memory=/claude-source/projects/-home-runner-repos-physarum/memory
+memory_dir=/runtime-private/memory/legacy-claude
+if [ ! -f "$memory_dir/MEMORY.md" ]; then
+  test -s "$legacy_memory/MEMORY.md"
+  install -d -m 700 "$memory_dir"
+  for memory_file in "$legacy_memory"/*.md; do
+    test ! -L "$memory_file"
+    install -m 600 "$memory_file" "$memory_dir/$(basename "$memory_file")"
+  done
 fi
+install -d -m 700 /runtime-private/codex-sessions
+ln -s /runtime-private/codex-sessions "$HOME/.codex/sessions"
+codex login status
 
 # --- Run reflection ---
 echo "Starting reflection..."

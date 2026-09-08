@@ -1,7 +1,7 @@
 # Agent Instructions
 
 This project uses Litebrite for task tracking and Trapper Keeper for the
-LLM-maintained project wiki. Claude setup lives in `.claude/`; the generated
+LLM-maintained project wiki. Codex setup lives in `.codex/`; the generated
 startup and pre-compaction hooks run `lb prime` and `trk prime` automatically.
 
 ## Tracked Work
@@ -30,8 +30,8 @@ The wiki lives at `.trapper_keeper/` as a gitignored worktree.
 
 If a fresh clone does not yet have the local tracker branches or wiki worktree,
 create tracking branches for `origin/litebrite` and `origin/trapperkeeper`, add
-the `.trapper_keeper` worktree, then run `lb setup claude` and
-`trk setup claude`.
+the `.trapper_keeper` worktree, then run `lb setup codex` and
+`trk setup codex`.
 
 ## Landing the Plane (Session Completion)
 
@@ -46,7 +46,7 @@ the `.trapper_keeper` worktree, then run `lb setup claude` and
    ```bash
    git pull --rebase
    lb sync
-   git push
+   bun run scripts/push.ts
    git status  # MUST show "up to date with origin"
    ```
 5. **Clean up** - Clear stashes, prune remote branches
