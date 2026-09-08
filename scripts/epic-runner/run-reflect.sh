@@ -9,19 +9,11 @@ script_dir="$(cd "$(dirname "$0")" && pwd)"
 # shellcheck source=gallery-url.sh
 source "$script_dir/gallery-url.sh"
 
-# Give this disposable runner its own writable Codex home while reusing only
-# the authenticated configuration and installed skills from the shared volume.
+# This artist has a dedicated persistent Codex home. Persist refreshed auth;
+# copying a rotating refresh token into disposable homes loses its successor.
 mkdir -p "$HOME/.codex"
-for codex_file in auth.json config.toml; do
-  if [ -f "/codex-source/$codex_file" ]; then
-    cp "/codex-source/$codex_file" "$HOME/.codex/$codex_file"
-  fi
-done
-if [ -d /codex-source/skills ]; then
-  cp -a /codex-source/skills "$HOME/.codex/skills"
-fi
 if [ ! -f "$HOME/.codex/auth.json" ]; then
-  echo "ERROR: authenticated Codex config was not found in /codex-source"
+  echo "ERROR: authenticated dedicated Stigmergence Codex home was not mounted"
   exit 1
 fi
 chmod 700 "$HOME/.codex"
@@ -107,7 +99,9 @@ if [ ! -f "$memory_dir/MEMORY.md" ]; then
   done
 fi
 install -d -m 700 /runtime-private/codex-sessions
-ln -s /runtime-private/codex-sessions "$HOME/.codex/sessions"
+if [ ! -e "$HOME/.codex/sessions" ]; then
+  ln -s /runtime-private/codex-sessions "$HOME/.codex/sessions"
+fi
 codex login status
 
 # --- Run reflection ---

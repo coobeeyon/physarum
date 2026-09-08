@@ -5,7 +5,7 @@ script_dir="$(cd "$(dirname "$0")" && pwd)"
 project_dir="$(cd "$script_dir/.." && pwd)"
 runner_dir="$script_dir/epic-runner"
 history_file="${STIGMERGENCE_HISTORY_PATH:-/home/mdaum/.mybuddy/memory/managed-peer-briefs/stigmergence-autobiography.md}"
-codex_volume="${STIGMERGENCE_CODEX_HOME_VOLUME:-mrmouth-codex-home}"
+codex_volume="${STIGMERGENCE_CODEX_HOME_VOLUME:-stigmergence-codex-home}"
 archived_env="/home/mdaum/workspace/physarum-data/private/secrets/whimzee-physarum.env"
 if [ -r "$archived_env" ]; then
   default_env="$archived_env"
@@ -106,7 +106,7 @@ if [ "$raw_mode" = true ]; then
     -v "$runtime_private_dir:/runtime-private" \
     -v "$runtime_trust_dir:/runtime-trust" \
     -v "reflect-claude-home:/claude-source:ro" \
-    -v "$codex_volume:/codex-source:ro" \
+    -v "$codex_volume:/home/runner/.codex" \
     epic-runner /run-reflect.sh 2>&1 | tee "$log_file"
 else
   docker run --name "$container_name" \
@@ -127,7 +127,7 @@ else
     -v "$runtime_private_dir:/runtime-private" \
     -v "$runtime_trust_dir:/runtime-trust" \
     -v "reflect-claude-home:/claude-source:ro" \
-    -v "$codex_volume:/codex-source:ro" \
+    -v "$codex_volume:/home/runner/.codex" \
     epic-runner /run-reflect.sh 2>&1 | tee "$log_file" | bun run "$script_dir/reflect-stream-fmt.ts"
 fi
 
