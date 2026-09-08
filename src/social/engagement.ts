@@ -53,20 +53,32 @@ const fetchCastEngagement = async (
 		// Also fetch engagement for self-reply, /zora cross-post, and community reply casts.
 		// selfReplyHash is tracked separately because our self-reply shows up in primary.replies —
 		// we subtract it to avoid counting our own reply as external engagement.
-		const extraHashes: string[] = [
-			...(entry.selfReplyHash && isValidCastHash(entry.selfReplyHash) ? [entry.selfReplyHash] : []),
-			...(entry.zoraCastHash && isValidCastHash(entry.zoraCastHash) ? [entry.zoraCastHash] : []),
-			...(entry.replyCastHashes?.filter(isValidCastHash) ?? []),
-		]
+		const corrections = entry.correctionReplies?.filter((c) => isValidCastHash(c.castHash)) ?? []
+		const extraHashes = [
+			...new Set([
+				...(entry.selfReplyHash && isValidCastHash(entry.selfReplyHash)
+					? [entry.selfReplyHash]
+					: []),
+				...(entry.zoraCastHash && isValidCastHash(entry.zoraCastHash) ? [entry.zoraCastHash] : []),
+				...(entry.replyCastHashes?.filter(isValidCastHash) ?? []),
+				...corrections.map((c) => c.castHash),
+			]),
+		].filter((hash) => hash !== entry.castHash)
 		const extraCounts = await Promise.all(extraHashes.map((h) => fetchCastCounts(h, apiKey)))
 
 		const totalLikes = primary.likes + extraCounts.reduce((sum, c) => sum + c.likes, 0)
 		const totalRecasts = primary.recasts + extraCounts.reduce((sum, c) => sum + c.recasts, 0)
 		// Subtract our self-reply from primary.replies — it appears there but is not external engagement.
 		const selfReplyAdjustment = entry.selfReplyHash && isValidCastHash(entry.selfReplyHash) ? 1 : 0
+		// Dated corrections are our own replies, wherever they sit in the edition's threads.
+		const correctionCount = (parent: string) =>
+			new Set(corrections.filter((c) => c.parentHash === parent).map((c) => c.castHash)).size
 		const totalReplies =
-			Math.max(0, primary.replies - selfReplyAdjustment) +
-			extraCounts.reduce((sum, c) => sum + c.replies, 0)
+			Math.max(0, primary.replies - selfReplyAdjustment - correctionCount(entry.castHash)) +
+			extraCounts.reduce(
+				(sum, c, i) => sum + Math.max(0, c.replies - correctionCount(extraHashes[i])),
+				0,
+			)
 
 		const ageMs = Date.now() - new Date(entry.timestamp).getTime()
 

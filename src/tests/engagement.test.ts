@@ -23,6 +23,38 @@ const neynarResponse = (likes: number, recasts: number, replies: number) => ({
 })
 
 describe("readEngagement", () => {
+	test("excludes our corrections on all edition threads while retaining external responses", async () => {
+		const originalFetch = globalThis.fetch
+		const hashes = ["a", "b", "c", "d", "e", "f"].map((letter) => `0x${letter.repeat(40)}`)
+		const [primary, self, zora, first, second, third] = hashes
+		const replies = [3, 1, 1, 1, 0, 0] // primary: self + correction + stranger; first correction: stranger
+		globalThis.fetch = mock(async (input) => {
+			const hash = new URL(String(input)).searchParams.get("identifier") ?? ""
+			return Response.json(neynarResponse(hash === first ? 2 : 0, 0, replies[hashes.indexOf(hash)]))
+		}) as typeof fetch
+		try {
+			const result = await readEngagement("test-key", [
+				makeEntry({
+					castHash: primary,
+					selfReplyHash: self,
+					zoraCastHash: zora,
+					replyCastHashes: [first], // a duplicate reference must not count twice
+					correctionReplies: [
+						{ castHash: first, parentHash: primary },
+						{ castHash: second, parentHash: self },
+						{ castHash: third, parentHash: zora },
+					],
+				}),
+			])
+			expect(result.ok).toBe(true)
+			if (!result.ok) return
+			expect(result.value.engagement[0].replies).toBe(2)
+			expect(result.value.engagement[0].likes).toBe(2)
+		} finally {
+			globalThis.fetch = originalFetch
+		}
+	})
+
 	beforeEach(() => {
 		mock.restore()
 	})

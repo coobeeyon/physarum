@@ -20,6 +20,7 @@ export type HistoryEntry = {
 	readonly zoraCastHash?: string
 	readonly selfReplyHash?: string
 	readonly replyCastHashes?: string[]
+	readonly correctionReplies?: ReadonlyArray<{ castHash: string; parentHash: string }>
 	readonly imageCid: string
 	readonly metadataCid: string
 	readonly timestamp: string

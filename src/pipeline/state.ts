@@ -24,6 +24,9 @@ const migrateState = (raw: unknown): PipelineState => {
 			...(entry.zoraCastHash ? { zoraCastHash: entry.zoraCastHash as string } : {}),
 			...(entry.selfReplyHash ? { selfReplyHash: entry.selfReplyHash as string } : {}),
 			...(entry.replyCastHashes ? { replyCastHashes: entry.replyCastHashes as string[] } : {}),
+			...(entry.correctionReplies
+				? { correctionReplies: entry.correctionReplies as HistoryEntry["correctionReplies"] }
+				: {}),
 			imageCid: entry.imageCid as string,
 			metadataCid: entry.metadataCid as string,
 			timestamp: entry.timestamp as string,

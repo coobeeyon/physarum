@@ -2,6 +2,7 @@ import { execSync } from "node:child_process"
 import { existsSync, readFileSync, statSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import sharp from "sharp"
+import { EDITION_CORRECTIONS } from "#config/edition-corrections.ts"
 import { loadState } from "#pipeline/state.ts"
 import type { Genome } from "#types/evolution.ts"
 import type { HistoryEntry } from "#types/metadata.ts"
@@ -79,7 +80,7 @@ function buildCurrentEntry(opts: GalleryOptions): EditionEntry {
 	}
 }
 
-function generateScriptJs(entries: readonly EditionEntry[]): string {
+export function generateScriptJs(entries: readonly EditionEntry[]): string {
 	const editionsJs = entries
 		.map((e) => {
 			const paramsLines = Object.entries(e.params)
@@ -91,6 +92,9 @@ function generateScriptJs(entries: readonly EditionEntry[]): string {
 				`    seed: ${e.seed},`,
 				`    image: ${JSON.stringify(e.image)},`,
 				`    zora: ${e.zora ? JSON.stringify(e.zora) : "null"},`,
+				...(EDITION_CORRECTIONS[e.edition]
+					? [`    correction: ${JSON.stringify(EDITION_CORRECTIONS[e.edition])},`]
+					: []),
 				"    params: {",
 				paramsLines,
 				"    },",
@@ -107,6 +111,8 @@ function generateScriptJs(entries: readonly EditionEntry[]): string {
 		"  if (!grid) return;",
 		"",
 		"  for (const ed of editions) {",
+		'    const card = document.createElement("article");',
+		"    card.id = `edition-${ed.edition}`;",
 		'    const link = document.createElement(ed.zora ? "a" : "div");',
 		'    link.className = "gallery-item";',
 		"    if (ed.zora) {",
@@ -131,7 +137,14 @@ function generateScriptJs(entries: readonly EditionEntry[]): string {
 		'      <div class="gallery-params">${paramRows}</div>',
 		"    `;",
 		"",
-		"    grid.appendChild(link);",
+		"    card.appendChild(link);",
+		"    if (ed.correction) {",
+		'      const correction = document.createElement("p");',
+		'      correction.className = "edition-correction";',
+		"      correction.textContent = ed.correction;",
+		"      card.appendChild(correction);",
+		"    }",
+		"    grid.appendChild(card);",
 		"  }",
 		"}",
 		"",
