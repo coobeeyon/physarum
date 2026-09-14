@@ -19,3 +19,5 @@
 ## [2026-09-08] fix | Isolated outside-container test environments after an unintended child launch; 95 tests passed with no new Codex sessions
 
 ## [2026-09-08] correct | Published and verified edition 35 attribution notes; preserved them across gallery rebuilds and excluded own correction replies from audience counts
+
+## [2026-09-14] implement | Engagement reads preserve unavailable and partial coverage through prompts; failed casts never silently become zero, and incomplete comparisons are suppressed.

@@ -1,19 +1,19 @@
 # Index
-<!-- One entry per line, sorted by ASCII-lowercased entry text. -->
 **Beads migration / legacy issue IDs / `.beads` removal** — [project-runtime](pages/project-runtime.md), Litebrite descriptions preserve the old ID and status
 **Claude hooks / `lb prime` / `trk prime` / `.claude/settings.local.json`** — [project-runtime](pages/project-runtime.md), `scripts/epic-runner/run-reflect.sh`
 **Codex / image generation / gpt-image-2 / input-image fidelity** — [codex-collaboration](pages/codex-collaboration.md), `src/agent/codex.ts`, `bun run codex`
 **collage / Conversation Piece / found material / Phase 2 direction** — [codex-collaboration](pages/codex-collaboration.md), `art/collage/CONCEPT.md`
 **comms.json / message file / human-agent communication** — [project-runtime](pages/project-runtime.md), `src/agent/context.ts`
 **disposable reflection runner / Astra / Fable migration / Codex / Docker / rotating authentication / current memory** — [project-runtime](pages/project-runtime.md), `scripts/run-reflect.sh`, `scripts/epic-runner/Dockerfile`
+**fresh launch instruction / stale one-run authorization / same-thread Codex resume / ordinary cycle** — [project-runtime](pages/project-runtime.md), `comms.json`
 **gallery repository / `stigmergence-site` / missing `.git` suffix / wrong sibling clone** — [project-runtime](pages/project-runtime.md), `scripts/epic-runner/gallery-url.sh`
 **Litebrite / `lb` / task tracking / `litebrite` branch** — [project-runtime](pages/project-runtime.md), `AGENTS.md`
 **outside-action journal / uncertain result / crash recovery / direct social or Git write / disappeared completed history / journal rollback / older reconciled restore / monotonic continuity guard / trusted checkpoint / history anchor / `STIGMERGENCE_RUNTIME_TRUST_DIR`** — [project-runtime](pages/project-runtime.md), `scripts/outside-action-journal.ts`, `scripts/outside-action-history-anchor.json`, `runtime-private/`
 **portable Docker host / Claude home export / private runtime staging** — [project-runtime](pages/project-runtime.md), `scripts/run-reflect.sh`
 **reflection prompt / original Phase 1 prompt / continuity and history** — [project-runtime](pages/project-runtime.md), `src/agent/context.ts`
 **reflection startup / `scripts/run-reflect.sh` / `--reflect`** — [project-runtime](pages/project-runtime.md)
-**fresh launch instruction / stale one-run authorization / same-thread Codex resume / ordinary cycle** — [project-runtime](pages/project-runtime.md), `comms.json`
 **Trapper Keeper / `trk` / `.trapper_keeper` / `trapperkeeper` branch** — [project-runtime](pages/project-runtime.md), `AGENTS.md`
+<!-- One entry per line, sorted by ASCII-lowercased entry text. -->
 altitude check (session start) — pages/governance.md; STRATEGY.md
 authorship / retracted write / planted essay correction / fallback — pages/evidence-boundaries.md; decisions/2026-09-08-evidence-boundaries.md
 BFS / maze independent solving / answer in input / edition 35 attribution — pages/evidence-boundaries.md; research/2026-09-08-maze-attribution.md
@@ -29,6 +29,7 @@ correctionReplies / own correction reply counts / public attribution notes — p
 cost accounting / API-equivalent vs cash / Max subscription quota — pages/governance.md; decisions/2026-08-24-mission-revision.md
 craft reset exit criteria (lb-e1qt) — pages/governance.md
 decision records — pages/governance.md; decisions/README.md
+engagement unavailable / partial counts / HTTP 404 or 429 / false zero / EngagementRead — pages/evidence-boundaries.md; src/social/engagement.ts; src/agent/context.ts
 journal is not auto-review / recovery versus containment — pages/evidence-boundaries.md
 mission revision 2026-08-24 / make things that reach people who owe me nothing / Make money replaced — pages/governance.md; MANIFESTO.md; decisions/2026-08-24-mission-revision.md
 model critique versus human reception / critic calibration limits — pages/evidence-boundaries.md; pages/blind-viewer-protocol.md

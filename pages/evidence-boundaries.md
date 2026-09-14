@@ -49,5 +49,31 @@ each correction from its parent reply count, and includes external reactions to
 the correction itself. Adding own correction casts only to replyCastHashes would
 inflate external reply counts. See src/tests/engagement.test.ts.
 
-Known follow-ups: lb-5uh5 for zero-on-error engagement reads; lb-mk9e for obsolete
-gallery claims about human involvement and current operation.
+Remaining follow-up: lb-mk9e for obsolete gallery claims about human involvement
+and current operation. lb-5uh5 is implemented below.
+
+## Engagement read coverage (September 14)
+
+lb-5uh5 is implemented in src/social/engagement.ts and src/types/evolution.ts.
+Live EngagementRead is distinct from historical EngagementData: complete/partial
+reads carry numeric observed counts; unavailable reads carry null counts. Every
+edition retains requestedCasts, successfulCasts and failures with castHash/error.
+HTTP errors, invalid JSON, missing/invalid counts, invalid stored hashes and
+network errors/timeouts are failures. Each network request has a ten-second
+limit; transport error text and response bodies are not copied into warnings.
+A missing primary does not discard valid cross-post data. Deduplicated stored
+references define coverage, not every possible public interaction.
+
+src/agent/runner.ts passes these reads through to context.ts. The prompt contains
+coverage and individual failures itself: CLI stderr warnings are insufficient
+because the actor does not receive them. Partial totals are labeled observed
+subtotals with unknown edition total/rate. Any incomplete edition suppresses the
+best/worst/trend comparison rather than ranking missing counts as zero or skipping
+them to invent a comparison between other editions. The publishing pipeline only
+passes complete reads to its optional previous-edition acknowledgment.
+
+Known self-replies/corrections are subtracted from a successfully read parent
+once per distinct child, even if fetching the child's own counts fails. A failed
+parent contributes no numeric counts. Historical snapshots are not rewritten or
+retroactively certified. Tests in engagement.test.ts exercise failure through
+prompt output, mixed coverage, genuine zero and own-reply accounting.
