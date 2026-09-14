@@ -517,14 +517,14 @@
       "dep_type": "blocks"
     },
     {
-      "from_id": "lb-xrot",
-      "to_id": "lb-oufp",
-      "dep_type": "blocks"
-    },
-    {
       "from_id": "lb-qdnf",
       "to_id": "lb-e1qt",
       "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-xrot",
+      "to_id": "lb-oufp",
+      "dep_type": "blocks"
     }
   ]
 }
