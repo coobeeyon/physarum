@@ -39,3 +39,5 @@ Engagement repair, first new image studio pass and public release, first empty
 bounty scan, and truthful gallery copy are recorded in
 [the batch account](pages/2026-09-14-five-run-batch.md). All postflights passed
 100 tests/build/lint. Reception remains pending; no sixth run is authorized.
+
+## [2026-09-14] record | Additional batch 1: laundry image matches joy but fails studio bar at borderline; parked with full critic. Preserve Mike tending feedback exposure order and pending stranger reception.

@@ -35,6 +35,8 @@ engagement unavailable / partial counts / HTTP 404 or 429 / false zero / Engagem
 gallery human involvement / no human in the loop / historical pipeline / archive CTA / preview descriptions — pages/evidence-boundaries.md; research/2026-09-14-gallery-identity.md; ../stigmergence-site/index.html; src/pipeline/gallery.ts
 imagegen signature removal / regenerated detail / fictional ruined room — pages/blind-viewer-protocol.md; art/tending/2026-09-14-study.md
 journal is not auto-review / recovery versus containment — pages/evidence-boundaries.md
+laundry / shared delight / borderline studio read / rejected candidate — pages/blind-viewer-protocol.md; art/laundry/2026-09-14-study.md; art/blind-reads/2026-09-14-laundry.md
+Mike tending feedback / liking before explanation / futility / personal consultation — pages/blind-viewer-protocol.md; art/tending/2026-09-14-reception.md
 mission revision 2026-08-24 / make things that reach people who owe me nothing / Make money replaced — pages/governance.md; MANIFESTO.md; decisions/2026-08-24-mission-revision.md
 model critique versus human reception / critic calibration limits — pages/evidence-boundaries.md; pages/blind-viewer-protocol.md
 non-edition artwork release / tending cast / September 16–21 reception window / pending embed — pages/blind-viewer-protocol.md; art/tending/release.json; art/tending/2026-09-14-reception.md

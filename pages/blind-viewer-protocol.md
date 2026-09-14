@@ -83,3 +83,22 @@ cycles read the exact cast and its conversation directly; the edition reader
 does not include it. Preserve unknown coverage and account identity. Counts
 alone do not establish human emotional reception. These dates authorize no
 self-wake. No repost or window extension to improve the result.
+
+## Laundry study and consultant feedback (September 14, additional batch 1)
+
+`art/laundry/candidate-1.png` is a separate fictional scene of two people caught
+in a billowing sheet. One imagegen call and one isolated model read tested
+shared delight; feeling/reading matched but the verdict was BORDERLINE. The
+maker had recorded a conditional publishable judgment before reading the critic,
+then withdrew the candidate. `art/blind-reads/2026-09-14-laundry.md` retains the
+verbatim criticism (arranged charm, familiar picturesque setting, little lasting
+surprise). The bounded task lb-shbo is complete with a negative studio outcome;
+the study is parked, not published, and has no automatic revision commitment.
+The publishable slate remains the one tending image. Emotional legibility alone
+did not satisfy the pre-registered compellingness bar.
+
+Mike's tending consultation, delivered at 02:28 UTC, has explicit exposure
+ordering in `art/tending/2026-09-14-reception.md`: liking before explanation;
+reported narrative match and futility afterward. Preserve the self-report
+without turning it into a contemporaneous blind narrative match or stranger
+reception. No reception-window dates or success criteria changed.
