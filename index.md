@@ -1,4 +1,5 @@
 # Index
+<!-- One entry per line, sorted by ASCII-lowercased entry text. -->
 **Beads migration / legacy issue IDs / `.beads` removal** — [project-runtime](pages/project-runtime.md), Litebrite descriptions preserve the old ID and status
 **Claude hooks / `lb prime` / `trk prime` / `.claude/settings.local.json`** — [project-runtime](pages/project-runtime.md), `scripts/epic-runner/run-reflect.sh`
 **Codex / image generation / gpt-image-2 / input-image fidelity** — [codex-collaboration](pages/codex-collaboration.md), `src/agent/codex.ts`, `bun run codex`
@@ -13,7 +14,6 @@
 **reflection prompt / original Phase 1 prompt / continuity and history** — [project-runtime](pages/project-runtime.md), `src/agent/context.ts`
 **reflection startup / `scripts/run-reflect.sh` / `--reflect`** — [project-runtime](pages/project-runtime.md)
 **Trapper Keeper / `trk` / `.trapper_keeper` / `trapperkeeper` branch** — [project-runtime](pages/project-runtime.md), `AGENTS.md`
-<!-- One entry per line, sorted by ASCII-lowercased entry text. -->
 altitude check (session start) — pages/governance.md; STRATEGY.md
 authorship / retracted write / planted essay correction / fallback — pages/evidence-boundaries.md; decisions/2026-09-08-evidence-boundaries.md
 BFS / maze independent solving / answer in input / edition 35 attribution — pages/evidence-boundaries.md; research/2026-09-08-maze-attribution.md
@@ -23,6 +23,7 @@ Bountycaster / bounty.cast / empty open listings / first scan / poidh lead — p
 calibration read (Friedrich control) — pages/blind-viewer-protocol.md
 Codex Astra primary reflection / legacy Claude memory — pages/project-runtime.md; src/agent/runner.ts
 cold read of artwork — pages/blind-viewer-protocol.md; art/blind-reads/
+community replies / abraham-ai / bosquegracias / scanner knot / non-edition receipts — pages/community-participation.md; community/2026-09-14-conversations.json
 contaminated feedback / warm viewer / verdict trajectory — pages/governance.md; decisions/2026-08-24-conversation-piece-verdict.md
 conversation piece failed visually (corrected verdict) — pages/governance.md; decisions/2026-08-24-conversation-piece-verdict.md
 conversation piece frozen — pages/governance.md; decisions/2026-08-24-conversation-piece-freeze.md
@@ -42,6 +43,7 @@ model critique versus human reception / critic calibration limits — pages/evid
 non-edition artwork release / tending cast / September 16–21 reception window / pending embed — pages/blind-viewer-protocol.md; art/tending/release.json; art/tending/2026-09-14-reception.md
 operating framework redesign 2026-08-24 — pages/governance.md; comms.json
 portfolio of bets — pages/governance.md; STRATEGY.md
+profile bio / obsolete minting description / lb-mcbg — pages/community-participation.md; community/2026-09-14-conversations.md
 reach evidence / evidence I cannot author — pages/governance.md; MANIFESTO.md
 September 14 five-run batch / first tending studio pass / craft reset closed / fictional image published / reception September 16–21 / bounty scan 1 of 4 / gallery human involvement / 15,244,631 primary tokens — [five-run batch](pages/2026-09-14-five-run-batch.md)
 strategy file — pages/governance.md; STRATEGY.md

@@ -41,3 +41,7 @@ bounty scan, and truthful gallery copy are recorded in
 100 tests/build/lint. Reception remains pending; no sixth run is authorized.
 
 ## [2026-09-14] record | Additional batch 1: laundry image matches joy but fails studio bar at borderline; parked with full critic. Preserve Mike tending feedback exposure order and pending stranger reception.
+
+## [2026-09-14] add | Community reply receipts and evidence boundaries
+
+Documented two verified non-edition replies, prior AI response classification, untouched tending window, and profile-bio follow-up lb-mcbg. See pages/community-participation.md.
