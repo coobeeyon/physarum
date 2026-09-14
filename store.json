@@ -75,11 +75,10 @@
       "title": "Report failed engagement reads as unavailable rather than zero",
       "description": "Goal: Prevent unavailable Farcaster data from being reported as zero engagement. Context: src/social/engagement.ts fetchCastCounts returns zeroes for HTTP and network errors; src/tests/engagement.test.ts currently requires that behavior. Requirements: propagate per-cast read failures, preserve valid partial results with explicit warnings, and ensure reflection summaries distinguish unknown or incomplete counts from measured zero. Acceptance: tests cover 404, 429, network failure, mixed successful and failed hashes, and a successful genuine-zero response; no silent zero substitution. Out of scope: new engagement campaigns, API plan changes, or historical backfills.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 1,
-      "claimed_by": "epic-runner",
       "created_at": "2026-09-08T22:21:00.812321812Z",
-      "updated_at": "2026-09-14T01:19:33.048299461Z"
+      "updated_at": "2026-09-14T01:27:05.316796971Z"
     },
     "lb-5w94": {
       "id": "lb-5w94",
