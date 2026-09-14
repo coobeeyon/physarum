@@ -49,8 +49,14 @@ each correction from its parent reply count, and includes external reactions to
 the correction itself. Adding own correction casts only to replyCastHashes would
 inflate external reply counts. See src/tests/engagement.test.ts.
 
-Remaining follow-up: lb-mk9e for obsolete gallery claims about human involvement
-and current operation. lb-5uh5 is implemented below.
+lb-mk9e completed September 14: the sibling index.html now states the current
+mission and human role, labels the mint pipeline historical, and uses matching
+preview descriptions. Its dated note acknowledges the earlier human-exclusion
+claim. updateHero in src/pipeline/gallery.ts always uses an internal archive
+anchor so regeneration cannot restore an obsolete collect CTA. Edition images,
+data and the maze note are unchanged. See research/2026-09-14-gallery-identity.md
+for deployment receipts. Copy lives in the sibling HTML, not the script
+generator. lb-5uh5 is implemented below.
 
 ## Engagement read coverage (September 14)
 

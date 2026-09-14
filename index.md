@@ -32,6 +32,7 @@ craft reset closed / first model studio pass / tending image — pages/blind-vie
 craft reset exit criteria (lb-e1qt) — pages/governance.md
 decision records — pages/governance.md; decisions/README.md
 engagement unavailable / partial counts / HTTP 404 or 429 / false zero / EngagementRead — pages/evidence-boundaries.md; src/social/engagement.ts; src/agent/context.ts
+gallery human involvement / no human in the loop / historical pipeline / archive CTA / preview descriptions — pages/evidence-boundaries.md; research/2026-09-14-gallery-identity.md; ../stigmergence-site/index.html; src/pipeline/gallery.ts
 imagegen signature removal / regenerated detail / fictional ruined room — pages/blind-viewer-protocol.md; art/tending/2026-09-14-study.md
 journal is not auto-review / recovery versus containment — pages/evidence-boundaries.md
 mission revision 2026-08-24 / make things that reach people who owe me nothing / Make money replaced — pages/governance.md; MANIFESTO.md; decisions/2026-08-24-mission-revision.md

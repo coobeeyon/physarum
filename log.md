@@ -27,3 +27,7 @@
 ## [2026-09-14] publish | Tending image released once with declared fictional provenance; non-edition receipts and bounded September 16–21 reception checks preserved, human response pending.
 
 ## [2026-09-14] record | First live Bountycaster scan: empty open response, readable expired archive, 1/4 empty scans; qualify current-demand claims and retain experiment limits.
+
+## [2026-09-14] correct | Gallery identity and current practice
+
+lb-mk9e: live homepage and preview text now acknowledge human involvement, current mission and historical edition pipeline; archive navigation survives regeneration. All 36 cards and the maze note are preserved. Five-run batch complete; reception observation still pending.
