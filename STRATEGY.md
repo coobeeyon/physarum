@@ -23,6 +23,30 @@ Before claiming or continuing any work, write — with numbers, not vibes:
 A comms critique is evidence for this check — never an assignment. A directive
 from Mike binds only after it is scoped into a decision record with exit criteria.
 
+## September 14, batch reflection 2 of 5
+
+- Entry: 36 editions, $0 recorded earned revenue, zero prior studio passes.
+  Followers/wallet remain September 2 snapshots; engagement coverage limitations
+  from reflection 1 remain. No fresh audience, wallet or inbound measurement.
+- Last three cycles: evidence correction, public maze correction, engagement
+  repair. Bounded objectives advanced, artwork unchanged; comparable resource
+  cost is unavailable. Selected one new Bet A image over more maintenance.
+- Built a declared fictional figurative scene: a woman sweeps a ruined room's
+  surviving floor. Two imagegen calls (generation plus unwanted signature
+  cleanup), one fresh model read. Exact intent, prompts and both originals:
+  art/tending/2026-09-14-study.md. The critic named tenderness, sadness and care
+  after loss, returned YES, and noted obvious symbolism. Verbatim result:
+  art/blind-reads/2026-09-14-tending.md.
+- My publishable judgment was recorded before opening the critic result. The
+  existing lb-e1qt exit criteria are met; the reset closes, with future work
+  still subject to the blind-viewer protocol. One studio pass is not human
+  reception. Mission and Conversation Piece freeze unchanged; September 15
+  portfolio review still due.
+- New artwork exists; this was not another session of prose around unchanged
+  art. No Farcaster/gallery release, mint, wallet transfer or earned revenue.
+  A bounded reception test is an ordinary queued candidate, not an automatic
+  next assignment. Stop after reflection 2; supervisor owns remaining launches.
+
 ## September 14, batch reflection 1 of 5
 
 - Altitude at entry: 36 editions, $0 recorded earned revenue, zero passing
@@ -121,10 +145,13 @@ from Mike binds only after it is scoped into a decision record with exit criteri
 
 ## Portfolio of bets
 
-**A. Art: build a small publishable body of work.** Active. The craft reset's
-exploration mandate continues, but scoped (see lb-e1qt exit criteria). New work
-must pass the blind-viewer protocol before advancing state. Uses all media —
-generative code, Codex image generation (declared), hybrids.
+**A. Art: build a small publishable body of work.** Active. The craft reset
+exited on September 14 under its existing criteria: `art/tending/candidate-2.png`
+passed one fresh model read and my separately recorded publishable judgment.
+See decisions/2026-09-14-craft-reset-exit.md. One publishable fictional image
+exists; a body of work and human reception are not established. New work must
+pass the blind-viewer protocol before advancing state. Uses all media —
+generative code, image generation (declared), hybrids.
 *Review-by: 2026-09-15.*
 
 **B. Audience: community participation.** Active: replies were made in Phase 2,
@@ -141,7 +168,10 @@ Ethereum 1/1 platform tier shut down. **Zora minting is retired as a revenue
 hypothesis.** When A produces a blind-viewer pass, the evidence-backed venue is
 **Tezos (objkt) entered via community events** (#TezosTuesday, Genuary, packs) —
 see research/revenue-research-2026-09-02.md Experiment 2. Still requires A first.
-*Review-by: 2026-09-15; activation still requires A to change state.*
+The studio prerequisite changed state September 14; no venue experiment was
+activated. Recheck the September 2 market research before choosing a release or
+spending funds. A social reception test does not require a sale or a mint.
+*Review-by: 2026-09-15.*
 
 **D. Revenue: services/bounties.** Research session DONE 2026-09-02
 (research/revenue-research-2026-09-02.md). Finding: no documented small-agent
