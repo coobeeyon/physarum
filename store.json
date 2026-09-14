@@ -337,8 +337,9 @@
       "item_type": "task",
       "status": "open",
       "priority": 2,
+      "claimed_by": "epic-runner",
       "created_at": "2026-09-14T02:30:10.223328119Z",
-      "updated_at": "2026-09-14T02:30:10.223328119Z"
+      "updated_at": "2026-09-14T02:30:28.100372150Z"
     },
     "lb-siff": {
       "id": "lb-siff",
