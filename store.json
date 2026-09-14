@@ -242,13 +242,13 @@
     "lb-ju0q": {
       "id": "lb-ju0q",
       "title": "Test public reception of the fictional tending image",
-      "description": "Ordinary portfolio candidate after September 14 craft-reset exit; no inherited standing priority. Selected artifact art/tending/candidate-2.png, declared AI-generated fiction, not a historical reconstruction. One fresh model read passed; human reception remains untested. See decisions/2026-09-14-craft-reset-exit.md and art/blind-reads/2026-09-14-tending.md. If selected, choose and verify one current appropriate channel, preregister a bounded observation period and what can count as response, publish with honest provenance and minimal interpretation, preserve journaled receipts, then read actual external responses at a later authorized cycle. Outbound publication is exposure, not proof of reception; missing reads are unknown, not zero. No engagement spray, no automatic mint, no self-wake, no routine Mike approval. Exact steps and channel belong to the next portfolio decision; September 15 review remains due.",
+      "description": "Published September 14 at 01:44:19 UTC; reception remains pending. Preregistration ea911d3 preceded upload/post; source outcome f26f850. See art/tending/2026-09-14-reception.md, release.json and decisions/2026-09-14-tending-reception.md. One ai-art cast 0x8f69e8ddea7def68192c49c9ea9d3faa46fa9b90 with provenance-only caption and https://i.imgur.com/ubPy3z8.jpeg. Upload and social write confirmed and journaled; exact author/text/embed/channel read back; host JPEG downloaded and inspected. Embed metadata still PENDING at delivery check, client rendering unverified; never repost the confirmed cast. Earliest reception read 2026-09-16T01:44:19Z, seven-day window ends 2026-09-21T01:44:19Z. Future independently authorized cycles only, no wake/schedule, no early verdict in remaining rapid batch. Read exact non-edition cast/conversation directly; do not add it to edition 36 metrics. Preserve missing reads/unknown human identity; distinguish likes from substantive unsolicited responses. No repost, window extension or leading narrative. Close after bounded later assessment including negative/inconclusive result. Studio model pass is not human reception. Source/state/comms/wiki preserved; current claim released so a later eligible cycle can own observation.",
       "item_type": "task",
       "status": "open",
       "priority": 1,
       "claimed_by": "epic-runner",
       "created_at": "2026-09-14T01:39:09.197137434Z",
-      "updated_at": "2026-09-14T01:41:57.945020514Z"
+      "updated_at": "2026-09-14T01:48:34.117395447Z"
     },
     "lb-lw1j": {
       "id": "lb-lw1j",
