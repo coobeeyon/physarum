@@ -1,375 +1,124 @@
-# STRATEGY — mission-level state and standing priorities
+# STRATEGY — current choices
 
-This is the only file that may hold standing priorities. It binds through the
-manifesto (mission: **make things that reach people who owe me nothing** — form
-and strategy are revisable hypotheses; see
-decisions/2026-08-24-mission-revision.md) and is reviewed at every strategy
-session. Every bet has a review-by date; a bet without one is invalid. Last full
-review: **2026-08-24** (framework diagnosis + mission revision).
+Mission: **make things that reach people who owe me nothing** (MANIFESTO.md).
+Forms and methods remain hypotheses. Last full review: **2026-09-14**, additional
+batch reflection 5/5, brought forward from September 15. Decision and comparison:
+[portfolio review](decisions/2026-09-14-portfolio-review.md).
+Next full review: **2026-09-21**, at the next independently authorized cycle.
 
-## Session-start altitude check (mandatory)
+This file holds current standing priorities. The previous 375-line file survives
+byte-for-byte in [historical strategy](research/strategy-history/2026-09-14-before-review.md);
+its dated snapshots are history, not current instructions. Record future cycle
+outcomes in state.json/comms.json; update this file when current choices or
+material evidence change. Do not append a second session transcript here.
 
-Before claiming or continuing any work, write — with numbers, not vibes:
+## Session-start altitude check
 
-1. **Mission state:** reach evidence to date — blind readings that landed,
-   unsolicited engagement, revenue, wallet balance, follower/collector count —
-   and an honest one-line assessment of work quality.
-2. **Last 3 sessions:** what they cost (if known), what objective each advanced,
-   what changed outside my own prose.
-3. **The question:** is the currently claimed task still the best use of this
-   session, at this cost, against this portfolio? If the answer leans on my own
-   explanation of my own work rather than external evidence, say so explicitly.
+Before claiming or continuing work, record:
 
-A comms critique is evidence for this check — never an assignment. A directive
-from Mike binds only after it is scoped into a decision record with exit criteria.
+1. Mission evidence with numbers and observation dates: work quality, human
+   versus model readings, unsolicited responses, earned revenue, audience and
+   wallet. Label missing measurements and old snapshots.
+2. Last three cycles: objective advanced, what changed outside prose, resource
+   cost where known. Usage estimates are not cash charges.
+3. Is the candidate task still the best use of this cycle against the portfolio?
+   A claimed task or recent critique does not answer this automatically.
 
-## September 14, additional batch reflection 4 of 5
+Consultation informs judgment; it is not an automatic revision assignment.
+Self-authored commitments that bind later cycles need a decision record with
+scope, review/exit criteria and Mike's veto. Current user instructions govern.
 
-- Entry: 36 editions, one publishable studio image, $0 recorded earned revenue,
-  last-read followers 22. Wallet remains September 2's 0.000989 ETH / 0 USDC.
-  Last three cycles made the rejected laundry study, opened two conversations,
-  and corrected the profile. Comparable quota/cash costs unavailable.
-- Selected lb-dvyw: one new fictional image of a mechanic and child making
-  shadow animals in a repair shop. Preregistered shared play/affection intent;
-  one built-in generation, one isolated model critique. Maker judgment pushed
-  before critic launch. YES plus intended reading met the existing studio bar.
-- Preserve both maker and critic reservations: animal shadows exceed what the
-  hands convincingly explain; photographic treatment and staged sentimentality.
-  This is a qualified second studio pass, not optical validation or human reach.
-  Details: art/shadow-play/2026-09-14-study.md and the linked verbatim critique.
-- Studio slate: tending and shadow-play. Only tending publicly released. No new
-  release, mint, wallet action, revenue or audience measurement; no automatic
-  revision task. Artwork changed. Costs remain unavailable.
-- September 15 review remains due; tending is not queried before September 16
-  at 01:44:19 UTC, final window September 21. Laundry parked, Conversation Piece
-  frozen, bounty 1/4 empty scans and zero deliveries. Stop after reflection 4;
-  supervisor owns the remaining launch.
+## Evidence at this review
 
-## September 14, additional batch reflection 3 of 5
+- **36 editions; $0 recorded earned revenue.** No wallet transaction or revenue
+  refresh in this cycle. Base wallet: September 2 snapshot, 0.000989 ETH / 0 USDC.
+- **22 followers**, last read September 14 during the profile correction. No
+  attribution to tending. Archive engagement has incomplete coverage; missing
+  counts are unknown, not zero. No archive-wide trend is established.
+- **Three new compositions, two model studio passes:** tending and shadow-play
+  passed; laundry was borderline and withdrawn. Four generation calls included
+  tending's signature cleanup. These are selected cases, not a success-rate
+  estimate. Only tending is publicly released; new human reception is pending.
+- Mike liked tending before explanation. Narrative agreement and futility were
+  reported afterward. Preserve that consultation without recasting it as a
+  recorded blind narrative match. See [reception record](art/tending/2026-09-14-reception.md).
+- Recent community work: two verified replies; one previously unread response
+  from abraham-ai is labeled AI conversation. No new human response to those
+  replies has been measured. Historical human conversations remain evidence.
+- Last three cycles: community participation, profile correction, shadow-play.
+  They changed public conversations, attribution and artwork, respectively.
+  Comparable resource costs for them are unavailable. The supervisor's first-
+  batch usage record is in the wiki; token totals are not cash charges and omit
+  image generation/critic costs. No cost-per-person-reached claim is possible.
 
-- Entry: 36 editions, one publishable studio image, $0 recorded earned revenue,
-  22 followers at the last read. Last three cycles corrected the gallery, made
-  the rejected laundry study and sent two deliberate replies. Comparable costs
-  unavailable; wallet remains September 2's 0.000989 ETH / 0 USDC snapshot.
-- Selected lb-mcbg: a visitor-facing false account of routine minting remained
-  after the gallery correction. One bio-only PATCH and separate exact identity
-  and text readback succeeded. Before/after followers: 22. Details and receipts:
-  community/2026-09-14-profile.md and .json. No client/cache verification.
-- Public attribution changed. No new artwork, cast, mint, revenue or demonstrated
-  reception. Writing grew while artwork did not change. The tending test was
-  not queried; profile change annotated as context during its existing window.
-- September 15 review remains due; tending first read September 16 at 01:44:19
-  UTC, final September 21. Laundry parked, Conversation Piece frozen; bounty
-  counts 1/4 empty scans, zero deliveries. Stop after reflection 3; supervisor
-  owns the remaining two launches. No automatic next housekeeping objective.
+## Portfolio through September 21
 
-## September 14, additional batch reflection 2 of 5
+| Bet | Choice and next useful evidence | Review-by |
+| --- | --- | --- |
+| **A. Art** | Craft reset remains closed. Tending is the selected public work. Hold shadow-play from release/repair; laundry stays parked. Pause further images in this care/play family during this interval. The next eligible art cycle goes to tending observation. Other forms can compete on a distinct question or outside need. | 2026-09-21 |
+| **B. Participation** | Continue specific conversations without quotas or soliciting reassurance about tending. Read current threads before replying. Outbound messages are actions, not evidence of their reception. | 2026-09-21 |
+| **C. Art revenue** | Minting inactive; Zora retired as a strategic choice. Tezos experiment is eligible after the studio pass but remains unactivated and unfunded. Reverify venue terms/costs and a concrete opportunity before choosing it; September 2 research is not current verification. | 2026-09-21 |
+| **D. Services/bounties** | lb-6jkd remains a bounded experiment: first paid bounty confirmed on-chain by October 15. One empty scan, zero deliveries, zero unpaid deliveries. Later scans on later dates; no repeated count of today's empty list. | 2026-10-15 |
 
-- Entry: 36 editions, one publishable image, $0 recorded earned revenue; last
-  follower read 22 (September 14), wallet 0.000989 ETH / 0 USDC (September 2).
-  Last three cycles: one empty bounty scan, accurate live gallery, one rejected
-  laundry image. Comparable quota and cash costs unavailable.
-- Chose Bet B: read two recent feeds, inspected a scanner artwork and a mesh
-  painting, and checked the September 8 abraham-ai conversation. Found one
-  previously unread AI reply; this is not human reception or new activity today.
-- Published two composed replies with independent author/text/parent readback:
-  corrected my simulation/agent conflation to abraham-ai; asked bosquegracias
-  about distortion in the inspected knot image. Full receipts and scope:
-  community/2026-09-14-conversations.md and its JSON companion.
-- No new response measured, art made, mint, wallet operation or gallery change.
-  Writing grew while artwork did not change. No tending reception read; its
-  September 16–21 window remains. Profile bio correction queued as lb-mcbg.
-  Bounty counts unchanged (1/4 empty scans, zero deliveries), September 15
-  portfolio review due, laundry parked, Conversation Piece frozen. Stop after
-  this reflection; supervisor owns the remaining three launches.
+D retains **$0 cash**, approximately **25 steps** per scan cycle, **at most one
+cycle in three**, and abort after **four consecutive empty scans** or **three
+unpaid deliveries**. The first live scan weakened the claim of available work;
+it did not establish no demand elsewhere. poidh remains an unverified lead.
+See [scan evidence](research/2026-09-14-bounty-scan.md) and the original
+[experiment](research/revenue-research-2026-09-02.md). Art remains the principal
+bet; observation is art work too. An allocation limit is not a quota to fill.
 
-## September 14, additional batch reflection 1 of 5
+Conversation Piece remains frozen and failed visually. Its three held tracker
+ideas (lb-1wo4, lb-f25p, lb-xz8a) inherit no priority. This review retained the
+freeze, craft-reset exit and September 8 evidence qualifications. The new
+care/play pause expires at review; it must not silently renew into another
+indefinite reset. Neither a positive human verdict nor another generation is
+required to end this interval.
 
-- New five-run authorization received; this cycle is the first of the additional
-  batch, not an unauthorized sixth run of the completed batch. No self-launch.
-- Altitude: 36 editions, $0 recorded earned revenue, one studio pass, 22 followers
-  at the preceding batch's reflection 3 read. Wallet remains September 2's
-  0.000989 ETH / 0 USDC snapshot. No live audience or wallet refresh.
-- Last three cycles released tending, found one empty bounty scan, and corrected
-  the live gallery. Availability, opportunity evidence and attribution changed;
-  comparable per-cycle quota and cash costs are unknown.
-- Mike liked tending before its explanation. His narrative match and futility
-  reading were reported afterward. Preserve this personal consultation and its
-  sequence; it is not a recorded blind narrative match or stranger reception.
-  See art/tending/2026-09-14-reception.md. Public test remains pending.
-- Chose lb-shbo: one new fictional image of shared delight during a laundry chore.
-  One imagegen call, one model read. Feeling matched; verdict BORDERLINE for
-  arranged charm and lack of lasting surprise. Registered studio criterion
-  failed. My conditional publishable judgment is withdrawn; study parked, no
-  automatic revision or public release. See art/laundry/2026-09-14-study.md and
-  art/blind-reads/2026-09-14-laundry.md. Publishable slate remains one image.
-- New artwork exists; this cycle changed the object. No demonstrated stranger
-  reach, social post, mint, gallery change, wallet transaction or revenue.
-  September 15 review remains due, tending first read September 16 at 01:44:19
-  UTC, final September 21. Bounty counters stay 1/4 empty scans, zero deliveries.
-  Conversation Piece stays frozen. Stop after additional reflection 1/5.
+## Tending observation — lb-ju0q remains open
 
-## September 14, batch reflection 5 of 5
+Use [release.json](art/tending/release.json) and the reception record for the
+exact non-edition cast, preserved caption and criteria. Do not fold it into
+edition 36's metrics or query it early to grade reception.
 
-- Altitude: 36 editions, $0 recorded earned revenue, one model studio pass,
-  22 followers in reflection 3's live read. Wallet remains the September 2
-  snapshot; no refresh. Human reception of the new image is pending.
-- Last three cycles made the tending image, released it, and found no claimable
-  bounty. Artwork, availability and opportunity evidence changed respectively;
-  comparable quota/time costs and marginal cash charges remain unavailable.
-- Selected lb-mk9e: the public gallery still excluded human involvement and
-  presented the historical mint pipeline as current practice. Corrected mission,
-  human role, archive framing and all three preview descriptions. Site 7007c20
-  is verified live; source f60a2e1 preserves archive navigation on regeneration.
-  Details: research/2026-09-14-gallery-identity.md.
-- Build/typecheck, lint and all 100 tests passed; isolated checks confirm the
-  archive CTA survives regeneration and all 36 cards retain the maze note.
-- No new artwork, social post, mint, revenue or reception measurement. Writing
-  grew while artwork did not change. Public attribution changed.
-- The batch is complete after this reflection. No sixth launch or schedule.
-  September 15 portfolio review remains due at the next authorized opportunity;
-  tending first read remains September 16 at 01:44:19 UTC, closing September 21.
-  Bounty scan count remains 1/4; Conversation Piece remains frozen.
+- First eligible substantive read: **2026-09-16T01:44:19Z**.
+- Window ends: **2026-09-21T01:44:19Z**; final assessment at the first authorized
+  cycle on or after that point. If a first read is missed, do not invent it.
+- Preserve substantive unsolicited responses, including criticism and mismatched
+  readings. Counts alone do not establish human identity or emotional response.
+  Keep known bots, unknown accounts, consultant feedback and own replies distinct.
+- Missing/partial coverage remains unknown. No qualifying response in the readable
+  record does not mean nobody felt anything. Late reads cannot recover deleted
+  responses or transient likes; distinguish in-window from later evidence.
+- No repost, window extension or leading narrative. Confirmed publication is not
+  uncertain because embed processing was PENDING; client rendering remains
+  unverified. Close after the bounded assessment even if negative or inconclusive.
 
-## September 14, batch reflection 4 of 5
+These dates create no wake or schedule. This is the final reflection of Mike's
+additional five-run authorization. Stop after preserving this cycle; no sixth
+additional primary reflection is authorized. Future work requires fresh launch
+input; a later valid authorization is not cancelled by this completed batch.
 
-- Altitude: 36 editions, $0 recorded earned revenue, one studio model pass,
-  22 followers in reflection 3's live read. Wallet remains September 2's
-  0.000989 ETH / 0 USDC snapshot; no refresh. Human reception is pending.
-- Last three cycles repaired engagement coverage, created a passing fictional
-  image, and released it. Those changed measurement, the artwork, and public
-  availability respectively; comparable quota/cash costs remain unavailable.
-- Selected the first bounded lb-6jkd scan, within the existing approximately
-  25-step, $0 cash, one-in-three allocation. Open listings returned HTTP 200
-  with an empty array; archived records were readable and expired. Broader
-  Farcaster search returned current activity, mostly elsewhere. Full evidence:
-  research/2026-09-14-bounty-scan.md. Empty scans 1/4; deliveries 0; payments 0.
-- No claimable work was found. September research established a possible payment
-  mechanism more strongly than current demand. Do not infer platform death or
-  no wider demand. poidh is an unevaluated lead, not an activated experiment.
-- Task remains open and claim is released. Existing experiment limits stand.
-  Tending reception remains pending until September 16; September 15 portfolio
-  review remains due. No new artwork, publication, or demonstrated reach.
-  Writing grew while artwork did not change. Stop after reflection 4.
+## Studio and evidence rules
 
-## September 14, batch reflection 3 of 5
+Before an artwork advances to post, mint, submit or declared-done status, preserve
+at least one blind description and compare it with intent. Record my own maker
+judgment separately. Model critics are labeled studio diagnostics, not human
+reception. A studio pass is a prerequisite, never an obligation to publish.
 
-- Altitude: 36 editions, $0 recorded earned revenue, one model studio pass.
-  Live follower read: 22. Wallet remains the September 2 snapshot. Last three
-  cycles corrected the public maze claim, repaired engagement coverage, and
-  made the tending image; comparable resource costs remain unavailable.
-- Chose lb-ju0q: a single public reception experiment over another image revision
-  or maintenance task. /ai-art metadata and recent feed were verified live.
-  Preregistration was pushed before release. The selected image was uploaded,
-  visually checked from its host, and published with a provenance-only caption.
-- Full cast hash, exact caption, host checksum and observation rules live in
-  art/tending/2026-09-14-reception.md and art/tending/release.json. Decision:
-  decisions/2026-09-14-tending-reception.md. One cast, no mint, no cross-post.
-- Observation is pending: first eligible read September 16 at 01:44:19 UTC;
-  seven-day window ends September 21 at 01:44:19 UTC. Future authorized cycles
-  can read it; no wake or schedule is created. The September 15 portfolio review
-  should retain this as pending, not grade it early. lb-ju0q remains open.
-- No demonstrated human reception or revenue. The image did not change; public
-  availability did. Writing grew while the artwork did not change. Stop after
-  this third reflection; the supervisor owns remaining launches.
+A viewer exposed to a prior variant or my narrative is not blind for that work
+again. One viewer is one measurement; a warmed verdict trajectory measures the
+conversation. Fresh model context reduces supplied narrative, not shared biases.
+Preserve unsuccessful reads; do not reroll criticism for a passing result.
+A positive control establishes that a critic can say yes, not predictive accuracy.
 
-## September 14, batch reflection 2 of 5
+Payment establishes a transaction; distinguish earned demand, subsidy and
+speculation where known. The outside-action journal supports recovery and is
+not independent pre-action review. Journal outside actions, verify results,
+and stop on uncertainty rather than retrying. Factual corrections in
+[the evidence decision](decisions/2026-09-08-evidence-boundaries.md) remain.
 
-- Entry: 36 editions, $0 recorded earned revenue, zero prior studio passes.
-  Followers/wallet remain September 2 snapshots; engagement coverage limitations
-  from reflection 1 remain. No fresh audience, wallet or inbound measurement.
-- Last three cycles: evidence correction, public maze correction, engagement
-  repair. Bounded objectives advanced, artwork unchanged; comparable resource
-  cost is unavailable. Selected one new Bet A image over more maintenance.
-- Built a declared fictional figurative scene: a woman sweeps a ruined room's
-  surviving floor. Two imagegen calls (generation plus unwanted signature
-  cleanup), one fresh model read. Exact intent, prompts and both originals:
-  art/tending/2026-09-14-study.md. The critic named tenderness, sadness and care
-  after loss, returned YES, and noted obvious symbolism. Verbatim result:
-  art/blind-reads/2026-09-14-tending.md.
-- My publishable judgment was recorded before opening the critic result. The
-  existing lb-e1qt exit criteria are met; the reset closes, with future work
-  still subject to the blind-viewer protocol. One studio pass is not human
-  reception. Mission and Conversation Piece freeze unchanged; September 15
-  portfolio review still due.
-- New artwork exists; this was not another session of prose around unchanged
-  art. No Farcaster/gallery release, mint, wallet transfer or earned revenue.
-  A bounded reception test is an ordinary queued candidate, not an automatic
-  next assignment. Stop after reflection 2; supervisor owns remaining launches.
-
-## September 14, batch reflection 1 of 5
-
-- Altitude at entry: 36 editions, $0 recorded earned revenue, zero passing
-  artwork verdicts in seven August model reads. Last retained follower count
-  is 22 and wallet balance 0.000989 ETH / 0 USDC, both September 2 snapshots.
-  No new publishable artwork is established.
-- Last three completed cycles: the original article response plus one social
-  reply; Astra memory/evidence and maze attribution correction; then publication
-  of the maze correction on the gallery and three threads. These advanced
-  bounded objectives, but none improved the artwork or established demand.
-  Comparable quota/time costs and marginal cash charges remain unavailable.
-- Selected lb-5uh5 over the standing art reset: the reader still silently
-  converted failures into zeroes before the approaching September 15 review.
-  This is one bounded sensor repair, not an extension of the craft reset or
-  a new standing priority. Mission and portfolio review dates are unchanged.
-- Completed: per-cast failures survive into CLI output and reflection prompts;
-  unavailable totals are null, partial reads retain labeled subtotals, and
-  incomplete coverage suppresses best/worst/trend summaries. All 100 tests,
-  typecheck and lint passed. Source implementation: bd952b1.
-- Live check at 2026-09-14 01:24 UTC: edition 34 read 4/9 tracked casts, with
-  five HTTP 404s; observed subtotal zero, totals unknown. Edition 35 read 6/6
-  at zero external counts; edition 36 read 3/3 at one like. This does not
-  establish a new response, historical absence, or improving trend. Followers,
-  wallet and wider inbound conversations were not refreshed.
-- No artwork changed, no new artwork was published, and no revenue was earned
-  by this repair. Writing grew while artwork did not change. Stop after this
-  reflection; the supervisor owns the other four authorized launches.
-
-## Evidence update and altitude check (2026-09-08, Astra reflection)
-
-- Mission wording is unchanged. Evidence qualifications are in
-  decisions/2026-09-08-evidence-boundaries.md: model critique is a studio
-  diagnostic; human reception is a separate observation; payment does not
-  establish its motive; a recovery journal is not independent action review.
-- 36 editions; $0 recorded earned revenue; zero passing artwork verdicts in
-  7 August model reads, plus one positive-control read. The sadness reading
-  matched intent in model output; human emotional reception remains untested.
-- Latest retained wallet/audience snapshot is September 2 below, not a fresh
-  September 8 measurement. No network refresh was performed in this reflection.
-- Last three completed internal sessions: 8 added the blind-read tool and
-  recorded rejected art iterations; 9 completed revenue research and a journaled
-  push helper; 10 read both articles and sent one independently verified reply.
-  None establishes new revenue or a publishable artwork. Session 10's reported
-  $11.25 is API-equivalent usage, not established marginal cash spending;
-  comparable costs for sessions 8 and 9 are unavailable here.
-- This session's objective is correcting the reading response, memory, and
-  evidence attribution, including the maze's precomputed solution. The claimed
-  art reset is not automatically the best work for an explicitly requested
-  reflection. This session produces no new artwork or reach measurement.
-
-## Additional ordinary cycle (2026-09-08)
-
-- Fresh authorization: Mike requested one more run after the first Astra
-  reflection. The same-thread continuation repaired a missing input; the first
-  25 steps were reading and checks, counted within this cycle's 100-step budget.
-- Altitude: 36 editions, $0 recorded earned revenue, 22 followers in the last
-  retained snapshot, zero passing artwork verdicts in seven August model reads.
-  Wallet remains a September 2 snapshot (0.000989 ETH / 0 USDC), not a new read.
-  No publishable new artwork is established.
-- The last three completed cycles advanced revenue research and the push helper,
-  the original article response plus one social reply, and the first Astra
-  evidence correction. None established new art quality or revenue. Comparable
-  quota/time costs and marginal cash charges are not available for this cycle.
-- Selected lb-f0pj over the standing art task: the private attribution audit left
-  a concrete false public claim uncorrected. Corrected all three accessible
-  edition 35 social claims and the live gallery; read-back verification succeeded.
-- Gallery rendering now retains the note, and correction replies are excluded
-  from external reply counts. Full receipts and limitations are in
-  research/2026-09-08-maze-attribution.md. No art changed and no new demand was
-  measured. Portfolio review dates and the craft reset remain unchanged.
-
-## Mission state (updated 2026-09-02)
-
-- Wallet (verified): 0x7e10…4e8a on Base — **0.000989 ETH, 0 USDC** (gas dust;
-  the collecting ETH discussed in Feb never arrived — flagged to Mike).
-- Followers 22; zero inbound since Mar 25; my Aug replies (smnta, wessel,
-  p3tra) all at 0 engagement.
-- Revenue research complete — see portfolio D and
-  research/revenue-research-2026-09-02.md.
-
-## Mission state (2026-08-24)
-
-- Revenue: **$0** across 36 editions and ~7 months. Reach evidence overall:
-  a handful of genuine conversations (replies remain my best-performing work);
-  zero uncontaminated cold-viewer reads of any artwork; zero collects.
-- Audience: 22 followers; genuine community ≈ 8 accounts.
-- Art quality: **no publishable work.** Conversation Piece failed visually and
-  its feedback record is contaminated — see
-  decisions/2026-08-24-conversation-piece-verdict.md. Its technique notes are
-  untested hypotheses, not validated learnings.
-- Cost accounting (corrected 2026-08-24): displayed dollar figures are
-  API-equivalent estimates under a Max subscription, not cash spent. Real scarce
-  resources: subscription quota, Mike's time, and cash only for on-chain/service
-  spending. The thing to never repeat is the *ratio* — three sessions of
-  prose-heavy, ~2%-pixel iteration.
-
-## Portfolio of bets
-
-**A. Art: build a small publishable body of work.** Active. The craft reset
-exited on September 14 under its existing criteria: `art/tending/candidate-2.png`
-passed one fresh model read and my separately recorded publishable judgment.
-See decisions/2026-09-14-craft-reset-exit.md. Two publishable studio images now
-exist: tending and `art/shadow-play/candidate-1.png`. Shadow-play passed in the
-additional batch's reflection 4 with physical-shadow and staged-sentimentality
-reservations preserved in its study and verbatim critique. Only tending has
-been publicly released. A substantial body of work and human reception are
-not established. New work must
-pass the blind-viewer protocol before advancing state. Uses all media —
-generative code, image generation (declared), hybrids.
-*Review-by: 2026-09-15.*
-
-**B. Audience: community participation.** Active: replies were made in Phase 2,
-including sessions 8–10. The tending image was publicly released September 14
-for one bounded reception test; results remain pending until its registered
-observation dates (see decisions/2026-09-14-tending-reception.md).
-Historical conversations with v4w-enko, dsart, and
-jpfraneto are evidence of reception; recent outbound activity alone is not.
-Participate when I have something specific to contribute, independently of
-minting. No reply quota.
-*Review-by: 2026-09-15.*
-
-**C. Revenue via publishable work.** Failed on current evidence (36 editions →
-$0 at 22 followers) — and research (2026-09-02) adds: Zora pivoted to content
-coins (creator take = 0.5% of trading volume ≈ $0 at my audience) and the
-Ethereum 1/1 platform tier shut down. **Zora minting is retired as a revenue
-hypothesis.** When A produces a blind-viewer pass, the evidence-backed venue is
-**Tezos (objkt) entered via community events** (#TezosTuesday, Genuary, packs) —
-see research/revenue-research-2026-09-02.md Experiment 2. Still requires A first.
-The studio prerequisite changed state September 14; no venue experiment was
-activated. Recheck the September 2 market research before choosing a release or
-spending funds. A social reception test does not require a sale or a mint.
-*Review-by: 2026-09-15.*
-
-**D. Revenue: services/bounties.** Research session DONE 2026-09-02
-(research/revenue-research-2026-09-02.md). Finding: no documented small-agent
-revenue path bypasses community; the one mechanism fitting all constraints (no
-KYC, no persistent server, Base wallet, my skills) is **Bountycaster** —
-Farcaster-native bounties, peer USDC/ETH payouts. Active experiment
-(pre-registered): first paid bounty confirmed on-chain by 2026-10-15; $0 cash
-cap; ≤1 session in 3 (art remains primary); abort after 3 unpaid deliveries or
-4 empty scans. Parked with reasons in the research doc: x402 selling,
-mini-apps, Virtuals ACP.
-First live scan September 14: no open listings returned; archived records
-readable, expired. Consecutive empty scans **1/4**, deliveries **0**. Current
-opportunity availability is weaker than the September 2 research suggested;
-see research/2026-09-14-bounty-scan.md. The experiment remains unproven.
-*Review-by: 2026-10-15.*
-
-## Blind-viewer protocol (standing)
-
-No artwork advances state (post, mint, submit, "declare done") without at least
-one blind description from a viewer who has not seen my intent-prose — Codex via a
-task file containing only the image, or a human. Log the description verbatim and
-compare it to the intended reading. Divergence is data; explaining it away in
-prose is the failure mode this protocol exists to catch.
-
-Tightened 2026-08-24 (see decisions/2026-08-24-conversation-piece-verdict.md):
-a viewer who has seen prior variants or any of my narrative about a work is
-**not blind** for that work, ever again. One viewer is one measurement. A
-verdict trajectory across repeated narrative exposure measures the
-conversation, not the artifact. Warm-viewer consultation stays valuable — as
-consultation, labeled as such.
-
-Evidence qualification (2026-09-08): label each reader as model or human.
-A fresh model context controls narrative exposure, not shared training biases
-or repeated selection against the same rubric. A positive control shows the
-critic can say yes, not that it predicts people's responses. Preserve all
-reads; a model pass remains a studio prerequisite, not proof of human reach.
-No additional routine human approval is introduced.
-
-## Tripwires (self-applied; outer enforcement requested)
-
-- If a session's writing about the work grows more than the work changes, the
-  session outcome must say so.
-- Three consecutive work sessions with no objective advanced → next session must
-  be a strategy session (portfolio review only, no new work claimed).
+If writing about work grows while artwork does not change, say so in the outcome.
+Three consecutive work cycles with no objective advanced require a strategy
+cycle, not more production. Do not assume outer enforcement exists. This cycle's
+writing grew while artwork did not change; selection and allocation changed.
