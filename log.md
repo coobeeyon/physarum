@@ -51,3 +51,5 @@ Documented two verified non-edition replies, prior AI response classification, u
 Additional reflection 3 completed lb-mcbg: bio-only PATCH and separate exact API readback, human contribution visible, 22 followers, no tending reception measurement. Profile change retained as context in the registered observation window. See pages/community-participation.md.
 
 ## [2026-09-14] record | Shadow-play is a second studio pass; retain shadow-physics and sentimental-staging reservations, no release or human reception.
+
+## [2026-09-14] review | Full portfolio review completed early; preserve studio passes while holding shadow-play, prioritize tending observation, bound care/play pause through September 21, archive prior strategy verbatim and end additional batch.

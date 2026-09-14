@@ -119,3 +119,14 @@ Task lb-dvyw completes with a qualified studio pass. Slate now has tending and
 shadow-play; only tending has been released. No automatic release or revision
 task; laundry remains parked, Conversation Piece frozen, tending observation
 dates unchanged. The new image changes artwork, with no measured stranger reach.
+
+## Portfolio selection is separate (additional batch reflection 5)
+
+The September 14 full review preserved both studio passes but selected only
+tending for public presentation in the next interval. Shadow-play is held from
+release and repair until September 21 review because the maker finds its central
+hand-to-shadow inconsistency and arranged sentiment weaker than tending's
+persistent contradiction. This informed comparison is not a new blind read or
+human result; no prior verdict is erased. Further care/play-family images are
+paused for this finite interval. See `decisions/2026-09-14-portfolio-review.md`.
+The craft-reset exit and tending's existing observation rules remain unchanged.

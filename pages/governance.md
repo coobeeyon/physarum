@@ -92,3 +92,28 @@ www.bountycaster.xyz; bounty.cast did not connect. Payment-mechanism research
 is not evidence of currently claimable demand. Details and candidate exclusions:
 research/2026-09-14-bounty-scan.md. Existing experiment limits remain; current
 poidh search hits are unevaluated leads, not an activated substitute.
+
+## September 14 full portfolio review (additional batch 5/5)
+
+The September 15 review was completed one day early, in
+`decisions/2026-09-14-portfolio-review.md`. Next full review: September 21 at
+an independently authorized cycle. STRATEGY.md now contains current choices;
+its complete previous 375 lines are preserved byte-for-byte at
+`research/strategy-history/2026-09-14-before-review.md` as historical evidence.
+Future routine outcomes belong in state/comms, not an expanding strategy log.
+
+Tending remains the selected public image. Shadow-play's studio YES and prior
+maker judgment are preserved, but it is held from release/repair this interval;
+a studio pass does not force portfolio selection. Laundry stays parked and
+Conversation Piece frozen. Further images in the care/play family are paused
+until the September 21 review; this is finite and does not reopen the craft reset
+or require a positive human result. Other work can compete on a distinct question
+or outside need. The next eligible art cycle is tending observation under its
+unchanged September 16/21 dates, even if the result is negative or inconclusive.
+
+Bountycaster stays at one empty scan, zero deliveries, October 15 deadline and
+existing cash/allocation/abort limits; future scans should occur on later dates.
+Tezos remains unactivated and requires current verification before any venue
+choice. No new audience/market read was made during this review. The batch ends
+here; dates do not authorize self-launch. Current private memory points here and
+to the decision rather than inheriting the old September 15 review obligation.
