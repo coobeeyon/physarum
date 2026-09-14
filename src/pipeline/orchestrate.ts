@@ -305,8 +305,9 @@ export const runPipeline = async (
 			for (const w of engResult.value.warnings) {
 				console.warn(`  engagement: ${w}`)
 			}
-			if (engResult.value.engagement.length > 0) {
-				prevEngagement = engResult.value.engagement[0]
+			const reading = engResult.value.engagement[0]
+			if (reading?.status === "complete") {
+				prevEngagement = reading
 			}
 		}
 	}

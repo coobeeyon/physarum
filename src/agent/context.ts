@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs"
 import { join } from "node:path"
-import type { EngagementData } from "#types/evolution.ts"
+import type { EngagementRead } from "#types/evolution.ts"
 import type { PipelineState } from "#types/metadata.ts"
 
 const readRequests = (projectRoot: string): string => {
@@ -35,23 +35,45 @@ const readSource = (projectRoot: string, relPath: string): string => {
 	}
 }
 
-const formatEngagement = (engagement: ReadonlyArray<EngagementData>): string => {
-	if (engagement.length === 0) return "No engagement data yet."
+const formatEngagement = (engagement: ReadonlyArray<EngagementRead>): string => {
+	if (engagement.length === 0) return "No engagement reads available; this is not a measured zero."
 
 	const lines: string[] = []
 	for (const e of engagement) {
-		const total = e.likes + e.recasts + e.replies
-		const rate = e.ageHours > 0 ? (total / e.ageHours).toFixed(2) : "n/a"
-		lines.push(
-			`  Edition #${e.edition}: ${e.likes} likes, ${e.recasts} recasts, ${e.replies} replies (total: ${total}, rate: ${rate}/hr)`,
-		)
+		const coverage = `${e.successfulCasts}/${e.requestedCasts} casts read`
+		if (e.status === "unavailable") {
+			lines.push(`  Edition #${e.edition}: unavailable (${coverage}); counts unknown.`)
+		} else if (e.status === "partial") {
+			lines.push(
+				`  Edition #${e.edition}: incomplete (${coverage}); observed subtotal: ${e.likes} likes, ${e.recasts} recasts, ${e.replies} replies. Edition totals and rate unknown.`,
+			)
+		} else {
+			const total = e.likes + e.recasts + e.replies
+			const rate = e.ageHours > 0 ? (total / e.ageHours).toFixed(2) : "n/a"
+			lines.push(
+				`  Edition #${e.edition}: ${e.likes} likes, ${e.recasts} recasts, ${e.replies} replies (total: ${total}, rate: ${rate}/hr)`,
+			)
+		}
+		for (const failure of e.failures) {
+			lines.push(`    Unavailable cast ${failure.castHash}: ${failure.error}`)
+		}
 	}
 
-	if (engagement.length >= 2) {
-		const scored = engagement.map((e) => ({
-			edition: e.edition,
-			total: e.likes + e.recasts + e.replies,
-		}))
+	if (engagement.some((e) => e.status !== "complete")) {
+		lines.push(
+			"  Best/worst and trend unavailable: incomplete coverage; missing counts are not zero.",
+		)
+	} else if (engagement.length >= 2) {
+		const scored = engagement.flatMap((e) =>
+			e.status !== "complete"
+				? []
+				: [
+						{
+							edition: e.edition,
+							total: e.likes + e.recasts + e.replies,
+						},
+					],
+		)
 		const sorted = [...scored].sort((a, b) => b.total - a.total)
 		lines.push(
 			`  Best: #${sorted[0].edition} (${sorted[0].total}), Worst: #${sorted[sorted.length - 1].edition} (${sorted[sorted.length - 1].total})`,
@@ -80,7 +102,7 @@ const formatReflections = (state: PipelineState): string => {
 
 export const buildReflectionPrompt = (
 	state: PipelineState,
-	engagement: ReadonlyArray<EngagementData>,
+	engagement: ReadonlyArray<EngagementRead>,
 	projectRoot: string,
 	maxTurns = "100",
 	autobiography = "Curated history has not been installed.",

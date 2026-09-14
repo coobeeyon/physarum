@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import { buildReflectionPrompt } from "#agent/context.ts"
-import type { EngagementData } from "#types/evolution.ts"
+import type { EngagementRead } from "#types/evolution.ts"
 import type { PipelineState } from "#types/metadata.ts"
 import { type Result, err, ok } from "#types/result.ts"
 
@@ -38,7 +38,7 @@ export const recordReflectionEvent = (progress: ReflectionProgress, line: string
 
 export const runReflection = async (
 	state: PipelineState,
-	engagement: ReadonlyArray<EngagementData>,
+	engagement: ReadonlyArray<EngagementRead>,
 	projectRoot: string,
 ): Promise<Result<void>> => {
 	if (process.env.CONTAINER !== "true") {

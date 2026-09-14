@@ -3,10 +3,16 @@ import { mkdirSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { buildReflectionPrompt } from "#agent/context.ts"
-import type { EngagementData } from "#types/evolution.ts"
+import type { EngagementData, EngagementRead } from "#types/evolution.ts"
 import type { PipelineState } from "#types/metadata.ts"
 
-const makeEngagement = (overrides: Partial<EngagementData> = {}): EngagementData => ({
+const makeEngagement = (
+	overrides: Partial<EngagementData> = {},
+): EngagementRead & EngagementData => ({
+	status: "complete",
+	requestedCasts: 1,
+	successfulCasts: 1,
+	failures: [],
 	edition: 1,
 	castHash: "0xabc123",
 	likes: 5,
@@ -45,7 +51,7 @@ describe("buildReflectionPrompt", () => {
 
 	test("includes empty engagement message", () => {
 		const result = buildReflectionPrompt(makeState(), [], "/tmp/fake")
-		expect(result).toContain("No engagement data yet.")
+		expect(result).toContain("No engagement reads available; this is not a measured zero.")
 	})
 
 	test("includes engagement data", () => {

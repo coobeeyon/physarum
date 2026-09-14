@@ -9,6 +9,34 @@ export type EngagementData = {
 	readonly ageHours: number
 }
 
+export type EngagementReadFailure = {
+	readonly castHash: string
+	readonly error: string
+}
+
+/** Live reads carry coverage; historical EngagementData remains an unqualified snapshot. */
+export type EngagementRead = {
+	readonly edition: number
+	readonly castHash: string
+	readonly ageHours: number
+	readonly requestedCasts: number
+	readonly successfulCasts: number
+	readonly failures: ReadonlyArray<EngagementReadFailure>
+} & (
+	| {
+			readonly status: "complete" | "partial"
+			readonly likes: number
+			readonly recasts: number
+			readonly replies: number
+	  }
+	| {
+			readonly status: "unavailable"
+			readonly likes: null
+			readonly recasts: null
+			readonly replies: null
+	  }
+)
+
 export type Genome = Omit<PhysarumParams, "seed" | "width" | "height">
 
 export type ReflectionRecord = {
