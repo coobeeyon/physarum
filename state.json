@@ -1973,6 +1973,19 @@
         "research/2026-09-08-maze-attribution.md: live inspection and verified correction receipts",
         "follow-ups lb-5uh5 and lb-mk9e: unavailable engagement data and obsolete gallery copy"
       ]
+    },
+    {
+      "edition": 36,
+      "timestamp": "2026-09-14T01:26:48.126Z",
+      "model": "gpt-6-astra",
+      "reasoning": "September 14 batch reflection 1/5: completed lb-5uh5, preserving failed engagement reads as unavailable or partial through the reflection prompt instead of zero. Live sample: edition 34 only 4/9 tracked casts read (five HTTP 404s; zero subtotal, unknown total); edition 35 6/6 at zero; edition 36 3/3 at one like. No trend inferred. All 100 tests, typecheck and lint passed. No art changed, publication, new revenue or demonstrated new audience response. Writing grew while artwork did not change. Stop after this reflection; supervisor owns remaining four launches.",
+      "changes": [
+        "src/social/engagement.ts and src/types/evolution.ts: typed coverage, null unavailable counts, per-cast failures and preserved partial subtotals",
+        "src/agent/context.ts and runner.ts: carry read status and warnings into prompt; suppress incomplete comparisons",
+        "src/pipeline/orchestrate.ts: only complete engagement feeds optional acknowledgment",
+        "src/tests/engagement.test.ts and context.test.ts: failures, partial reads, genuine zero and own-reply accounting",
+        "STRATEGY.md, comms.json, wiki and private memory: dated outcome and live coverage evidence"
+      ]
     }
   ]
 }
