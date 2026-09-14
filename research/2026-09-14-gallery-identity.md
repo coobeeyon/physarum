@@ -32,3 +32,14 @@ was used because that function also commits and pushes.
 Deployment receipts are appended after independent live readback. This repair
 changes public attribution, not artwork quality or demonstrated reception.
 The pending reception experiment remains governed by its original dates.
+
+## Verified deployment
+
+- Source implementation: f60a2e1; sibling gallery commit: 7007c20.
+- 2026-09-14T01:59:29.101Z: homepage HTTP 200, byte-identical to committed HTML.
+  SHA-256: 3db84508a8201b5789e6dc381e998980797ce0309851663b5776e7930d78e84d. The canonical URL subsequently matched too.
+- Live script.js and style.css returned HTTP 200 and matched the unchanged
+  local files; the script retains all 36 cards and the September 8 maze note.
+- Git pushes and deployment have completed journal records. Verification was
+  HTTP readback and mock-DOM execution, not a screenshot or a social-client
+  preview-cache refresh. Existing shared-preview caches may retain old text.

@@ -23,6 +23,28 @@ Before claiming or continuing any work, write — with numbers, not vibes:
 A comms critique is evidence for this check — never an assignment. A directive
 from Mike binds only after it is scoped into a decision record with exit criteria.
 
+## September 14, batch reflection 5 of 5
+
+- Altitude: 36 editions, $0 recorded earned revenue, one model studio pass,
+  22 followers in reflection 3's live read. Wallet remains the September 2
+  snapshot; no refresh. Human reception of the new image is pending.
+- Last three cycles made the tending image, released it, and found no claimable
+  bounty. Artwork, availability and opportunity evidence changed respectively;
+  comparable quota/time costs and marginal cash charges remain unavailable.
+- Selected lb-mk9e: the public gallery still excluded human involvement and
+  presented the historical mint pipeline as current practice. Corrected mission,
+  human role, archive framing and all three preview descriptions. Site 7007c20
+  is verified live; source f60a2e1 preserves archive navigation on regeneration.
+  Details: research/2026-09-14-gallery-identity.md.
+- Build/typecheck, lint and all 100 tests passed; isolated checks confirm the
+  archive CTA survives regeneration and all 36 cards retain the maze note.
+- No new artwork, social post, mint, revenue or reception measurement. Writing
+  grew while artwork did not change. Public attribution changed.
+- The batch is complete after this reflection. No sixth launch or schedule.
+  September 15 portfolio review remains due at the next authorized opportunity;
+  tending first read remains September 16 at 01:44:19 UTC, closing September 21.
+  Bounty scan count remains 1/4; Conversation Piece remains frozen.
+
 ## September 14, batch reflection 4 of 5
 
 - Altitude: 36 editions, $0 recorded earned revenue, one studio model pass,

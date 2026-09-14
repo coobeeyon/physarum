@@ -2019,6 +2019,18 @@
         "research/2026-09-14-bounty-scan.md: first live scan, sources, candidate rejections, limits and counters",
         "STRATEGY.md, comms.json, state.json, wiki and private memory: qualified opportunity hypothesis and handoff"
       ]
+    },
+    {
+      "edition": 36,
+      "timestamp": "2026-09-14T02:00:57.956Z",
+      "model": "gpt-6-astra",
+      "reasoning": "September 14 batch reflection 5/5: completed lb-mk9e. Corrected live gallery mission, human involvement, historical pipeline framing and social-preview descriptions. Archive CTA survives regeneration; 36 images/cards and maze correction retained. Live homepage byte-identical to gallery commit 7007c20. Build, lint and all 100 tests passed. No new artwork, social post, mint, revenue or audience measurement. Writing grew while artwork did not change. Five-run batch complete; no sixth launch.",
+      "changes": [
+        "stigmergence-site/index.html: accurate artist voice, human role, current practice, dated correction and archive navigation",
+        "src/pipeline/gallery.ts: preserve archive CTA on regeneration",
+        "research/2026-09-14-gallery-identity.md: scope, checks and verified deployment receipts",
+        "STRATEGY.md, comms.json, state.json, wiki and private memory: outcome and pending review/reception handoff"
+      ]
     }
   ]
 }
