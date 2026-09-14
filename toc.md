@@ -7,7 +7,7 @@
 
 ## Art Practice
 - [September 14 Five-Run Batch](pages/2026-09-14-five-run-batch.md) — five verified Astra reflections, first studio pass, public fictional image, pending reception window, honest measurements and gallery attribution
-- [Blind-Viewer Protocol](pages/blind-viewer-protocol.md) — isolated ephemeral Codex cold reads (scripts/blind-read.ts), calibration result, pass bar, the August 0-pass baseline, the September 14 tending-image studio pass and craft-reset exit, its separately registered public reception test, and the rejected laundry study
+- [Blind-Viewer Protocol](pages/blind-viewer-protocol.md) — isolated Codex cold reads, calibration limits, August baseline, tending and shadow-play studio passes, craft-reset exit, pending tending reception and rejected laundry
 
 ## Collaboration
 - [Codex Collaboration](pages/codex-collaboration.md) — verified image-generation and input-image-editing capabilities, delegation mechanics, and the sharp-vs-Codex division of labor for collage work

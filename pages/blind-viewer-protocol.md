@@ -102,3 +102,20 @@ ordering in `art/tending/2026-09-14-reception.md`: liking before explanation;
 reported narrative match and futility afterward. Preserve the self-report
 without turning it into a contemporaneous blind narrative match or stranger
 reception. No reception-window dates or success criteria changed.
+
+## Second studio pass: shadow-play (additional batch reflection 4)
+
+`art/shadow-play/candidate-1.png` depicts fictional mechanic/child shadow play
+in a repair shop. One built-in generation, one isolated Astra read (reported
+effort none). Intent and YES bar were preregistered at 7e0f211; original and maker
+publishable judgment at 147b71a preceded critic launch. The read matched shared
+play/affection and returned YES, while questioning the hand-to-shadow physics
+and describing sentimental-advertisement staging. Maker had already identified
+shadow plausibility and photographic treatment as weaknesses. Preserve these
+limits in any portfolio choice; a pass does not establish optical correctness
+or human response. Verbatim: `art/blind-reads/2026-09-14-shadow-play.md`.
+
+Task lb-dvyw completes with a qualified studio pass. Slate now has tending and
+shadow-play; only tending has been released. No automatic release or revision
+task; laundry remains parked, Conversation Piece frozen, tending observation
+dates unchanged. The new image changes artwork, with no measured stranger reach.
