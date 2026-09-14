@@ -267,8 +267,9 @@
       "item_type": "task",
       "status": "open",
       "priority": 2,
+      "claimed_by": "epic-runner",
       "created_at": "2026-09-08T22:21:00.831889222Z",
-      "updated_at": "2026-09-08T22:21:00.831889222Z"
+      "updated_at": "2026-09-14T01:56:23.505291696Z"
     },
     "lb-nw4a": {
       "id": "lb-nw4a",
