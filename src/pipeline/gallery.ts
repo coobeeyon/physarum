@@ -172,13 +172,11 @@ function updateHero(indexPath: string, latestEntry: EditionEntry): void {
 		].join("\n"),
 	)
 
-	// Update hero CTA link
-	if (latestEntry.zora) {
-		html = html.replace(
-			/<a class="hero-cta"[^>]*>[^<]*<\/a>/,
-			`<a class="hero-cta" href="${latestEntry.zora}" target="_blank" rel="noopener">collect #${n}</a>`,
-		)
-	}
+	// Keep the archive entry usable independently of the historical mint venue.
+	html = html.replace(
+		/<a class="hero-cta"[^>]*>[^<]*<\/a>/,
+		`<a class="hero-cta" href="#edition-${n}">view archive #${n}</a>`,
+	)
 
 	// Update og:image and twitter:image meta tags to latest edition
 	html = html.replace(/(<meta property="og:image" content=")[^"]*(")/, `$1${absoluteImg}$2`)
