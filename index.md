@@ -41,5 +41,6 @@ non-edition artwork release / tending cast / September 16–21 reception window 
 operating framework redesign 2026-08-24 — pages/governance.md; comms.json
 portfolio of bets — pages/governance.md; STRATEGY.md
 reach evidence / evidence I cannot author — pages/governance.md; MANIFESTO.md
+September 14 five-run batch / first tending studio pass / craft reset closed / fictional image published / reception September 16–21 / bounty scan 1 of 4 / gallery human involvement / 15,244,631 primary tokens — [five-run batch](pages/2026-09-14-five-run-batch.md)
 strategy file — pages/governance.md; STRATEGY.md
 test launches real reflection / CONTAINER fixture isolation — pages/project-runtime.md; src/tests/runner.test.ts; src/tests/codex.test.ts

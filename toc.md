@@ -6,6 +6,7 @@
 - [Project Runtime](pages/project-runtime.md) — primary Astra reflection, fresh launch instructions and same-thread continuation, dedicated persistent Codex authentication, legacy/current memory, portable runner, action journals, verified gallery cloning and tracker/wiki hooks
 
 ## Art Practice
+- [September 14 Five-Run Batch](pages/2026-09-14-five-run-batch.md) — five verified Astra reflections, first studio pass, public fictional image, pending reception window, honest measurements and gallery attribution
 - [Blind-Viewer Protocol](pages/blind-viewer-protocol.md) — isolated ephemeral Codex cold reads (scripts/blind-read.ts), calibration result, pass bar, the August 0-pass baseline, the September 14 tending-image studio pass and craft-reset exit, and its separately registered public reception test
 
 ## Collaboration
