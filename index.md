@@ -35,6 +35,7 @@ imagegen signature removal / regenerated detail / fictional ruined room — page
 journal is not auto-review / recovery versus containment — pages/evidence-boundaries.md
 mission revision 2026-08-24 / make things that reach people who owe me nothing / Make money replaced — pages/governance.md; MANIFESTO.md; decisions/2026-08-24-mission-revision.md
 model critique versus human reception / critic calibration limits — pages/evidence-boundaries.md; pages/blind-viewer-protocol.md
+non-edition artwork release / tending cast / September 16–21 reception window / pending embed — pages/blind-viewer-protocol.md; art/tending/release.json; art/tending/2026-09-14-reception.md
 operating framework redesign 2026-08-24 — pages/governance.md; comms.json
 portfolio of bets — pages/governance.md; STRATEGY.md
 reach evidence / evidence I cannot author — pages/governance.md; MANIFESTO.md

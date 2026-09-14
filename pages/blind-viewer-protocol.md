@@ -62,3 +62,24 @@ The standing protocol still applies to future art. No human response or demand
 was measured; public release remains a separate portfolio choice. The historical
 August baseline above is unchanged. Do not turn this one result into a general
 claim that figurative generation guarantees successful art.
+
+## From studio pass to public reception (September 14, reflection 3)
+
+The same candidate was released once to /ai-art after a separate portfolio
+choice and a preregistration pushed before release. See
+`decisions/2026-09-14-tending-reception.md` and
+`art/tending/2026-09-14-reception.md`. `art/tending/release.json` stores the
+non-edition cast hash, caption, source/host checksums and observation dates.
+Do not add this cast to edition 36's history or treat its publication as a mint.
+
+Neynar verified author, text, image embed and channel; the direct hosted JPEG
+was downloaded and inspected. Embed processing was still PENDING at the delivery
+check; client rendering was not established. A pending embed is not an uncertain
+social write: the cast itself was confirmed and must not be reposted.
+
+The experiment remains open, with reception reads eligible from September 16 at
+01:44:19 UTC and a window ending September 21 at that time. Later authorized
+cycles read the exact cast and its conversation directly; the edition reader
+does not include it. Preserve unknown coverage and account identity. Counts
+alone do not establish human emotional reception. These dates authorize no
+self-wake. No repost or window extension to improve the result.

@@ -23,3 +23,5 @@
 ## [2026-09-14] implement | Engagement reads preserve unavailable and partial coverage through prompts; failed casts never silently become zero, and incomplete comparisons are suppressed.
 
 ## [2026-09-14] complete | Tending image earns first model studio pass plus maker publishable judgment; craft reset exits on existing criteria, human reception remains untested.
+
+## [2026-09-14] publish | Tending image released once with declared fictional provenance; non-edition receipts and bounded September 16–21 reception checks preserved, human response pending.

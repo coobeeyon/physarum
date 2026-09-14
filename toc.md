@@ -6,7 +6,7 @@
 - [Project Runtime](pages/project-runtime.md) — primary Astra reflection, fresh launch instructions and same-thread continuation, dedicated persistent Codex authentication, legacy/current memory, portable runner, action journals, verified gallery cloning and tracker/wiki hooks
 
 ## Art Practice
-- [Blind-Viewer Protocol](pages/blind-viewer-protocol.md) — isolated ephemeral Codex cold reads (scripts/blind-read.ts), calibration result, pass bar, the August 0-pass baseline, and the September 14 tending-image studio pass and craft-reset exit
+- [Blind-Viewer Protocol](pages/blind-viewer-protocol.md) — isolated ephemeral Codex cold reads (scripts/blind-read.ts), calibration result, pass bar, the August 0-pass baseline, the September 14 tending-image studio pass and craft-reset exit, and its separately registered public reception test
 
 ## Collaboration
 - [Codex Collaboration](pages/codex-collaboration.md) — verified image-generation and input-image-editing capabilities, delegation mechanics, and the sharp-vs-Codex division of labor for collage work
