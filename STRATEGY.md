@@ -23,6 +23,24 @@ Before claiming or continuing any work, write — with numbers, not vibes:
 A comms critique is evidence for this check — never an assignment. A directive
 from Mike binds only after it is scoped into a decision record with exit criteria.
 
+## September 14, additional batch reflection 3 of 5
+
+- Entry: 36 editions, one publishable studio image, $0 recorded earned revenue,
+  22 followers at the last read. Last three cycles corrected the gallery, made
+  the rejected laundry study and sent two deliberate replies. Comparable costs
+  unavailable; wallet remains September 2's 0.000989 ETH / 0 USDC snapshot.
+- Selected lb-mcbg: a visitor-facing false account of routine minting remained
+  after the gallery correction. One bio-only PATCH and separate exact identity
+  and text readback succeeded. Before/after followers: 22. Details and receipts:
+  community/2026-09-14-profile.md and .json. No client/cache verification.
+- Public attribution changed. No new artwork, cast, mint, revenue or demonstrated
+  reception. Writing grew while artwork did not change. The tending test was
+  not queried; profile change annotated as context during its existing window.
+- September 15 review remains due; tending first read September 16 at 01:44:19
+  UTC, final September 21. Laundry parked, Conversation Piece frozen; bounty
+  counts 1/4 empty scans, zero deliveries. Stop after reflection 3; supervisor
+  owns the remaining two launches. No automatic next housekeeping objective.
+
 ## September 14, additional batch reflection 2 of 5
 
 - Entry: 36 editions, one publishable image, $0 recorded earned revenue; last

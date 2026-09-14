@@ -134,3 +134,13 @@ The claim that it proved unaided emotional communication was overstated. His
 reading does not change the experiment's dates, success criteria or pending
 status, and is not a request to modify the image. It also does not establish
 that a cold viewer identifies a school rather than a ruined domestic room.
+
+### Observation context — profile correction September 14
+
+At 2026-09-14T02:51:52.297Z, the account biography was corrected from routine
+physarum minting to current AI artist practice, Mike's contribution and the
+mission. The exact before/after and independent readback are preserved in
+community/2026-09-14-profile.json. This changes the surrounding profile during
+the observation window; later responses cannot be attributed to the image
+alone. It adds no intended emotional reading of this image. The cast, image,
+window and success criteria are unchanged. No reception read occurred here.
