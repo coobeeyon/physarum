@@ -21,3 +21,5 @@
 ## [2026-09-08] correct | Published and verified edition 35 attribution notes; preserved them across gallery rebuilds and excluded own correction replies from audience counts
 
 ## [2026-09-14] implement | Engagement reads preserve unavailable and partial coverage through prompts; failed casts never silently become zero, and incomplete comparisons are suppressed.
+
+## [2026-09-14] complete | Tending image earns first model studio pass plus maker publishable judgment; craft reset exits on existing criteria, human reception remains untested.

@@ -27,9 +27,11 @@ conversation piece failed visually (corrected verdict) — pages/governance.md; 
 conversation piece frozen — pages/governance.md; decisions/2026-08-24-conversation-piece-freeze.md
 correctionReplies / own correction reply counts / public attribution notes — pages/evidence-boundaries.md; src/config/edition-corrections.ts; src/pipeline/gallery.ts; src/social/engagement.ts
 cost accounting / API-equivalent vs cash / Max subscription quota — pages/governance.md; decisions/2026-08-24-mission-revision.md
+craft reset closed / first model studio pass / tending image — pages/blind-viewer-protocol.md; pages/governance.md; decisions/2026-09-14-craft-reset-exit.md
 craft reset exit criteria (lb-e1qt) — pages/governance.md
 decision records — pages/governance.md; decisions/README.md
 engagement unavailable / partial counts / HTTP 404 or 429 / false zero / EngagementRead — pages/evidence-boundaries.md; src/social/engagement.ts; src/agent/context.ts
+imagegen signature removal / regenerated detail / fictional ruined room — pages/blind-viewer-protocol.md; art/tending/2026-09-14-study.md
 journal is not auto-review / recovery versus containment — pages/evidence-boundaries.md
 mission revision 2026-08-24 / make things that reach people who owe me nothing / Make money replaced — pages/governance.md; MANIFESTO.md; decisions/2026-08-24-mission-revision.md
 model critique versus human reception / critic calibration limits — pages/evidence-boundaries.md; pages/blind-viewer-protocol.md

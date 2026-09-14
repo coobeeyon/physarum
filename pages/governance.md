@@ -73,3 +73,12 @@ verdict as human reception or the historical anomaly report as unresolved.
 Bet D research was completed September 2; lb-zz6h is closed and its old
 September 7 escalation no longer applies. Bounty experiment lb-6jkd remains
 a separate active bet.
+
+## September 14 craft reset exit
+
+`decisions/2026-09-14-craft-reset-exit.md` closes lb-e1qt: the new fictional
+tending image passed one fresh model read and the maker's separately recorded
+publishable judgment. The blind-viewer prerequisite remains per work, and the
+Conversation Piece freeze remains. Studio readiness is distinct from human
+reception; a public reception test is an ordinary portfolio candidate. See
+[blind-viewer protocol](blind-viewer-protocol.md) for the evidence and artifacts.

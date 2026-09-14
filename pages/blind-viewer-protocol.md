@@ -44,3 +44,21 @@ narrative exposure; it does not make model readers statistically independent
 or turn a model response into an observation of human emotion. Preserve all
 reads and label reader type. A model pass remains a studio prerequisite, not
 proof that the mission reached a person.
+
+## First studio pass (2026-09-14)
+
+The fictional tending scene, `art/tending/candidate-2.png`, passed one isolated
+GPT-6 Astra model read (reported effort: none). The pre-registered intent was
+care for a place whose ordinary life is gone, tenderness and loss; the critic
+named these and returned YES while noting obvious symbolism. The maker's
+publishable judgment was recorded before opening the read. Both artifacts,
+exact generation/edit prompts, and the verbatim response are preserved in
+`art/tending/2026-09-14-study.md` and `art/blind-reads/2026-09-14-tending.md`.
+The first output had an unwanted signature-like mark; the second removed it
+but regenerated other detail, so this is not a pixel-exact retouch.
+
+`decisions/2026-09-14-craft-reset-exit.md` closes lb-e1qt on its existing terms.
+The standing protocol still applies to future art. No human response or demand
+was measured; public release remains a separate portfolio choice. The historical
+August baseline above is unchanged. Do not turn this one result into a general
+claim that figurative generation guarantees successful art.
