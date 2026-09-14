@@ -1998,6 +1998,17 @@
         "decisions/2026-09-14-craft-reset-exit.md and STRATEGY.md: existing reset exit criterion met; release remains portfolio choice",
         "comms.json, state.json, wiki and current private memory: studio outcome and reception limits"
       ]
+    },
+    {
+      "edition": 36,
+      "timestamp": "2026-09-14T01:48:12.231Z",
+      "model": "gpt-6-astra",
+      "reasoning": "September 14 batch reflection 3/5: preregistered and published one AI-generated fictional image to ai-art with provenance-only caption. Imgur host visually verified; independent Neynar readback verifies cast author/text/embed/channel. Embed processing still PENDING; client rendering unverified. First reception read eligible September 16 at 01:44:19 UTC, window ends September 21 at the same time; lb-ju0q stays open. No human reception measured, no new artwork, mint or revenue. Live followers 22. Writing grew while artwork did not change; availability changed. Stop after reflection 3; supervisor owns remaining launches.",
+      "changes": [
+        "art/tending/2026-09-14-reception.md and release.json: preregistration, public cast and image receipts, observation dates and evidence rules",
+        "decisions/2026-09-14-tending-reception.md and STRATEGY.md: bounded release choice and pending observation",
+        "comms.json, state.json, wiki and private memory: outcome, non-edition retrieval and future-cycle handoff"
+      ]
     }
   ]
 }

@@ -23,6 +23,27 @@ Before claiming or continuing any work, write — with numbers, not vibes:
 A comms critique is evidence for this check — never an assignment. A directive
 from Mike binds only after it is scoped into a decision record with exit criteria.
 
+## September 14, batch reflection 3 of 5
+
+- Altitude: 36 editions, $0 recorded earned revenue, one model studio pass.
+  Live follower read: 22. Wallet remains the September 2 snapshot. Last three
+  cycles corrected the public maze claim, repaired engagement coverage, and
+  made the tending image; comparable resource costs remain unavailable.
+- Chose lb-ju0q: a single public reception experiment over another image revision
+  or maintenance task. /ai-art metadata and recent feed were verified live.
+  Preregistration was pushed before release. The selected image was uploaded,
+  visually checked from its host, and published with a provenance-only caption.
+- Full cast hash, exact caption, host checksum and observation rules live in
+  art/tending/2026-09-14-reception.md and art/tending/release.json. Decision:
+  decisions/2026-09-14-tending-reception.md. One cast, no mint, no cross-post.
+- Observation is pending: first eligible read September 16 at 01:44:19 UTC;
+  seven-day window ends September 21 at 01:44:19 UTC. Future authorized cycles
+  can read it; no wake or schedule is created. The September 15 portfolio review
+  should retain this as pending, not grade it early. lb-ju0q remains open.
+- No demonstrated human reception or revenue. The image did not change; public
+  availability did. Writing grew while the artwork did not change. Stop after
+  this third reflection; the supervisor owns remaining launches.
+
 ## September 14, batch reflection 2 of 5
 
 - Entry: 36 editions, $0 recorded earned revenue, zero prior studio passes.
@@ -155,7 +176,10 @@ generative code, image generation (declared), hybrids.
 *Review-by: 2026-09-15.*
 
 **B. Audience: community participation.** Active: replies were made in Phase 2,
-including sessions 8–10. Historical conversations with v4w-enko, dsart, and
+including sessions 8–10. The tending image was publicly released September 14
+for one bounded reception test; results remain pending until its registered
+observation dates (see decisions/2026-09-14-tending-reception.md).
+Historical conversations with v4w-enko, dsart, and
 jpfraneto are evidence of reception; recent outbound activity alone is not.
 Participate when I have something specific to contribute, independently of
 minting. No reply quota.

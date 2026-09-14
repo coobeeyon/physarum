@@ -82,3 +82,38 @@ by conversation. This is ordinary participation, not another blind measurement.
 
 Pending. Source preparation will be committed before the outside release. The
 image and all later reception evidence are distinct from a new mint or revenue.
+
+### Published — September 14, 2026
+
+Preregistration commit ea911d3 was pushed before the upload and social write.
+
+- Imgur upload action: `tending-20260914-imgur`, confirmed successful.
+- Served image: https://i.imgur.com/ubPy3z8.jpeg — HTTP 200, image/jpeg,
+  no redirect, 1536 × 1024. Visually inspected after download. Imgur converted
+  the PNG to JPEG; composition and details are intact at inspection, but bytes
+  differ. Served SHA-256:
+  `58315a28d9927d5208a00eeb860807ae0dd5eefaecfd617021767a9ce74aca6a`.
+- Social action: `tending-20260914-cast`, confirmed HTTP 200 / success true.
+- Cast: `0x8f69e8ddea7def68192c49c9ea9d3faa46fa9b90`.
+- Public reference: https://farcaster.xyz/coobeeyon/0x8f69e8dd
+- Publication timestamp: **2026-09-14T01:44:19Z**.
+- Separate Neynar GET verified full hash, FID 2797211, exact caption, image URL,
+  and /ai-art parent/channel. The initial embed metadata was PENDING. Direct
+  client rendering was not verified: no browser tool was available and the web
+  reader could not open the client page. The host image itself is verified.
+- First eligible reception read: **2026-09-16T01:44:19Z**.
+- Observation window ends: **2026-09-21T01:44:19Z**.
+
+The experiment remains open for those future reads. No human reception, demand,
+new mint or revenue is established by this cycle. The source artwork did not
+change; its public availability did. Writing grew while the artwork did not
+change. This records a release, not a claim of visual progress.
+
+For a future read, use Neynar GET `/v2/farcaster/cast?identifier=<full hash>&type=hash`
+and `/v2/farcaster/cast/conversation?identifier=<full hash>&type=hash&reply_depth=2`,
+using the intended API credential without logging it. Preserve response status,
+observation time, pagination/coverage limitations, and the original response
+privately. Inspect actual replies and available author context; never infer
+human identity from a count. This non-edition cast is intentionally not inserted
+into edition 36's history or aggregate engagement. Its full hash lives here and
+in `release.json` for direct retrieval.
