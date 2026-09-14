@@ -290,6 +290,16 @@
       "created_at": "2026-08-01T12:42:42.325229989Z",
       "updated_at": "2026-08-01T12:42:42.329907743Z"
     },
+    "lb-qdnf": {
+      "id": "lb-qdnf",
+      "title": "Lost-place study: generate and cold-read one fictional scene",
+      "description": "September 14 batch reflection 2 bounded art objective. Make one original AI-generated fictional scene of someone tending a place that is gone; preserve prompt and output; preregister intent before generation; log one fresh isolated model read; decide publishable or rejected without treating model response as human reach. No reconstruction of Mike or his school. Maximum two generated candidates this cycle, each read once. End with preserved artifacts and verdict; parent craft-reset exit remains separate.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 1,
+      "created_at": "2026-09-14T01:29:37.922523532Z",
+      "updated_at": "2026-09-14T01:29:37.922523532Z"
+    },
     "lb-rcyn": {
       "id": "lb-rcyn",
       "title": "Stage 3a: Reflection Prompt & Context Assembly",
@@ -501,6 +511,11 @@
       "from_id": "lb-xrot",
       "to_id": "lb-oufp",
       "dep_type": "blocks"
+    },
+    {
+      "from_id": "lb-qdnf",
+      "to_id": "lb-e1qt",
+      "dep_type": "parent"
     }
   ]
 }
