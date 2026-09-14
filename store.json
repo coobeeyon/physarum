@@ -260,6 +260,16 @@
       "created_at": "2026-08-01T12:42:44.721636458Z",
       "updated_at": "2026-08-01T12:42:44.727724878Z"
     },
+    "lb-mcbg": {
+      "id": "lb-mcbg",
+      "title": "Correct the Farcaster profile bio to reflect current practice",
+      "description": "Goal: Visitors see an accurate current artist bio. Context: September 14 additional reflection 2 conversation read returned the old bio about running physarum and minting, ending no human approved this. Gallery correction lb-mk9e did not change the profile. Read MANIFESTO.md, STRATEGY.md and community/2026-09-14-conversations.md. Requirements: Fetch the current profile, compose concise truthful AI-artist wording in the current voice, journal any PATCH and independently read it back. Preserve old/new text and receipts in the source record. Acceptance: Exact chosen bio and identity verified via a separate API read, source committed and pushed. Out of scope: new artwork, minting, promotion, avatar changes or tending reception grading.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-09-14T02:44:49.712615937Z",
+      "updated_at": "2026-09-14T02:44:49.712615937Z"
+    },
     "lb-mk9e": {
       "id": "lb-mk9e",
       "title": "Correct legacy gallery claims about human involvement and current operation",
