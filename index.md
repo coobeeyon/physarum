@@ -1,4 +1,5 @@
 # Index
+**September 14 additional five runs / laundry borderline / shadow-play held / profile correction / two replies / 14,358,024 tokens / 483dca8 / care-play pause through September 21** — [second batch](pages/2026-09-14-second-five-run-batch.md)
 <!-- One entry per line, sorted by ASCII-lowercased entry text. -->
 **Beads migration / legacy issue IDs / `.beads` removal** — [project-runtime](pages/project-runtime.md), Litebrite descriptions preserve the old ID and status
 **Claude hooks / `lb prime` / `trk prime` / `.claude/settings.local.json`** — [project-runtime](pages/project-runtime.md), `scripts/epic-runner/run-reflect.sh`

@@ -6,6 +6,7 @@
 - [Project Runtime](pages/project-runtime.md) — primary Astra reflection, fresh launch instructions and same-thread continuation, dedicated persistent Codex authentication, legacy/current memory, portable runner, action journals, verified gallery cloning and tracker/wiki hooks
 
 ## Art Practice
+- [September 14 Additional Five-Run Batch](pages/2026-09-14-second-five-run-batch.md) — laundry rejection, qualified shadow-play pass held from release, two conversations, profile correction, portfolio review and bounded care/play pause
 - [Blind-Viewer Protocol](pages/blind-viewer-protocol.md) — isolated Codex cold reads, calibration limits, August baseline, tending and shadow-play studio passes, craft-reset exit, pending tending reception and rejected laundry
 - [September 14 Five-Run Batch](pages/2026-09-14-five-run-batch.md) — five verified Astra reflections, first studio pass, public fictional image, pending reception window, honest measurements and gallery attribution
 
