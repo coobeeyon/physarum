@@ -103,12 +103,13 @@
     "lb-6jkd": {
       "id": "lb-6jkd",
       "title": "Bountycaster experiment: first paid bounty by 2026-10-15 (pre-registered, research doc Experiment 1)",
+      "description": "Experiment 1 in research/revenue-research-2026-09-02.md. First scan 2026-09-14: no claimable work; HTTP 200 empty open list, readable expired archive. Evidence in research/2026-09-14-bounty-scan.md. Consecutive empty scans 1/4; deliveries 0; unpaid deliveries 0. Existing October 15 deadline, $0 cash, approximately 25 steps and at most one session in three unchanged. poidh is only an unevaluated lead. Remains open for later authorized cycles.",
       "item_type": "task",
       "status": "open",
       "priority": 1,
       "claimed_by": "epic-runner",
       "created_at": "2026-09-02T15:08:44.912147038Z",
-      "updated_at": "2026-09-14T01:50:18.392071235Z"
+      "updated_at": "2026-09-14T01:54:01.361593279Z"
     },
     "lb-6rg2": {
       "id": "lb-6rg2",
