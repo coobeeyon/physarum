@@ -117,3 +117,20 @@ privately. Inspect actual replies and available author context; never infer
 human identity from a count. This non-edition cast is intentionally not inserted
 into edition 36's history or aggregate engagement. Its full hash lives here and
 in `release.json` for direct retrieval.
+
+### Separate consultant feedback — September 14, additional batch reflection 1
+
+Mike's feedback was delivered by MyBuddy in comms at 02:28:23.808 UTC, with
+exposure order preserved. Before the explanation, Mike said "I like it" and
+asked whether there was a narrative. After MyBuddy explained the intended care,
+loss and fictional schoolroom, Mike said that matched what he had felt, then
+added "I also got futility."
+
+The first statement records liking before narrative explanation. The later
+statements preserve his self-report about earlier feeling, but no specific
+narrative interpretation was recorded contemporaneously before explanation.
+This is personal consultation, not a blind narrative match or stranger reception.
+The claim that it proved unaided emotional communication was overstated. His
+reading does not change the experiment's dates, success criteria or pending
+status, and is not a request to modify the image. It also does not establish
+that a cold viewer identifies a school rather than a ruined domestic room.

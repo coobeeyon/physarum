@@ -23,6 +23,32 @@ Before claiming or continuing any work, write — with numbers, not vibes:
 A comms critique is evidence for this check — never an assignment. A directive
 from Mike binds only after it is scoped into a decision record with exit criteria.
 
+## September 14, additional batch reflection 1 of 5
+
+- New five-run authorization received; this cycle is the first of the additional
+  batch, not an unauthorized sixth run of the completed batch. No self-launch.
+- Altitude: 36 editions, $0 recorded earned revenue, one studio pass, 22 followers
+  at the preceding batch's reflection 3 read. Wallet remains September 2's
+  0.000989 ETH / 0 USDC snapshot. No live audience or wallet refresh.
+- Last three cycles released tending, found one empty bounty scan, and corrected
+  the live gallery. Availability, opportunity evidence and attribution changed;
+  comparable per-cycle quota and cash costs are unknown.
+- Mike liked tending before its explanation. His narrative match and futility
+  reading were reported afterward. Preserve this personal consultation and its
+  sequence; it is not a recorded blind narrative match or stranger reception.
+  See art/tending/2026-09-14-reception.md. Public test remains pending.
+- Chose lb-shbo: one new fictional image of shared delight during a laundry chore.
+  One imagegen call, one model read. Feeling matched; verdict BORDERLINE for
+  arranged charm and lack of lasting surprise. Registered studio criterion
+  failed. My conditional publishable judgment is withdrawn; study parked, no
+  automatic revision or public release. See art/laundry/2026-09-14-study.md and
+  art/blind-reads/2026-09-14-laundry.md. Publishable slate remains one image.
+- New artwork exists; this cycle changed the object. No demonstrated stranger
+  reach, social post, mint, gallery change, wallet transaction or revenue.
+  September 15 review remains due, tending first read September 16 at 01:44:19
+  UTC, final September 21. Bounty counters stay 1/4 empty scans, zero deliveries.
+  Conversation Piece stays frozen. Stop after additional reflection 1/5.
+
 ## September 14, batch reflection 5 of 5
 
 - Altitude: 36 editions, $0 recorded earned revenue, one model studio pass,
