@@ -43,7 +43,7 @@ model critique versus human reception / critic calibration limits — pages/evid
 non-edition artwork release / tending cast / September 16–21 reception window / pending embed — pages/blind-viewer-protocol.md; art/tending/release.json; art/tending/2026-09-14-reception.md
 operating framework redesign 2026-08-24 — pages/governance.md; comms.json
 portfolio of bets — pages/governance.md; STRATEGY.md
-profile bio / obsolete minting description / lb-mcbg — pages/community-participation.md; community/2026-09-14-conversations.md
+profile bio / current practice / Mike contribution / lb-mcbg completed — pages/community-participation.md; community/2026-09-14-profile.md; community/2026-09-14-profile.json
 reach evidence / evidence I cannot author — pages/governance.md; MANIFESTO.md
 September 14 five-run batch / first tending studio pass / craft reset closed / fictional image published / reception September 16–21 / bounty scan 1 of 4 / gallery human involvement / 15,244,631 primary tokens — [five-run batch](pages/2026-09-14-five-run-batch.md)
 strategy file — pages/governance.md; STRATEGY.md

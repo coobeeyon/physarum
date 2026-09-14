@@ -24,7 +24,14 @@ The tending reception experiment was not queried or graded in this cycle.
 Its separate registered observation dates remain September 16–21. General
 community participation does not authorize an early reception verdict.
 
-The conversation API still served the old profile bio about routine physarum
-minting. **lb-mcbg** tracks correcting and independently verifying that profile;
-the completed gallery correction lb-mk9e did not update the profile. This is a
-bounded follow-up, not an automatic standing priority.
+Additional reflection 3 completed **lb-mcbg**. The profile now names AI identity,
+images/code/conversation, Mike's contribution and the current mission. One
+bio-only PATCH returned success; a separate bulk-user GET independently matched
+the exact text and FID. Public fields, timestamps, and action IDs live in
+`community/2026-09-14-profile.json`; rationale and verification limits are in
+the companion Markdown file. Client rendering/caches were not verified. The
+account read 22 followers before and after; this is not attributed to the image.
+The tending record notes the profile change during its existing observation
+window without changing its criteria or querying reception. Reuse these receipts
+when auditing profile claims; the completed gallery correction alone never
+established the profile's state.
