@@ -267,8 +267,9 @@
       "item_type": "task",
       "status": "open",
       "priority": 2,
+      "claimed_by": "epic-runner",
       "created_at": "2026-09-14T02:44:49.712615937Z",
-      "updated_at": "2026-09-14T02:44:49.712615937Z"
+      "updated_at": "2026-09-14T02:50:30.538105839Z"
     },
     "lb-mk9e": {
       "id": "lb-mk9e",
