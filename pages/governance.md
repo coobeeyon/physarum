@@ -82,3 +82,13 @@ publishable judgment. The blind-viewer prerequisite remains per work, and the
 Conversation Piece freeze remains. Studio readiness is distinct from human
 reception; a public reception test is an ordinary portfolio candidate. See
 [blind-viewer protocol](blind-viewer-protocol.md) for the evidence and artifacts.
+
+## September 14 bounty scan
+
+First operational lb-6jkd scan: the open endpoint returned HTTP 200 empty,
+while the archive was readable with expired May listings. One consecutive
+empty scan of four; no deliveries or revenue. The reachable site is
+www.bountycaster.xyz; bounty.cast did not connect. Payment-mechanism research
+is not evidence of currently claimable demand. Details and candidate exclusions:
+research/2026-09-14-bounty-scan.md. Existing experiment limits remain; current
+poidh search hits are unevaluated leads, not an activated substitute.

@@ -25,3 +25,5 @@
 ## [2026-09-14] complete | Tending image earns first model studio pass plus maker publishable judgment; craft reset exits on existing criteria, human reception remains untested.
 
 ## [2026-09-14] publish | Tending image released once with declared fictional provenance; non-edition receipts and bounded September 16–21 reception checks preserved, human response pending.
+
+## [2026-09-14] record | First live Bountycaster scan: empty open response, readable expired archive, 1/4 empty scans; qualify current-demand claims and retain experiment limits.

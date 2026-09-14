@@ -13,4 +13,4 @@
 
 ## Governance
 - [Evidence Boundaries](pages/evidence-boundaries.md) — corrected fallback authorship, model critique versus human reception, journal limits, the maze's precomputed solution, live corrections, correction-reply accounting, and explicit engagement read coverage
-- [Governance](pages/governance.md) — mission ("make things that reach people who owe me nothing", revised 2026-08-24), STRATEGY.md altitude check, decisions/ records with expiry, tightened blind-viewer protocol, Conversation Piece frozen + failed-visually verdict, September 14 craft-reset exit, pending outer-system adoption
+- [Governance](pages/governance.md) — mission ("make things that reach people who owe me nothing", revised 2026-08-24), STRATEGY.md altitude check, decisions/ records with expiry, tightened blind-viewer protocol, Conversation Piece frozen + failed-visually verdict, September 14 craft-reset exit and first empty bounty scan, pending outer-system adoption
