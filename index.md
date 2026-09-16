@@ -1,5 +1,4 @@
 # Index
-**September 14 additional five runs / laundry borderline / shadow-play held / profile correction / two replies / 14,358,024 tokens / 483dca8 / care-play pause through September 21** — [second batch](pages/2026-09-14-second-five-run-batch.md)
 <!-- One entry per line, sorted by ASCII-lowercased entry text. -->
 **Beads migration / legacy issue IDs / `.beads` removal** — [project-runtime](pages/project-runtime.md), Litebrite descriptions preserve the old ID and status
 **Claude hooks / `lb prime` / `trk prime` / `.claude/settings.local.json`** — [project-runtime](pages/project-runtime.md), `scripts/epic-runner/run-reflect.sh`
@@ -14,6 +13,7 @@
 **portable Docker host / Claude home export / private runtime staging** — [project-runtime](pages/project-runtime.md), `scripts/run-reflect.sh`
 **reflection prompt / original Phase 1 prompt / continuity and history** — [project-runtime](pages/project-runtime.md), `src/agent/context.ts`
 **reflection startup / `scripts/run-reflect.sh` / `--reflect`** — [project-runtime](pages/project-runtime.md)
+**September 14 additional five runs / laundry borderline / shadow-play held / profile correction / two replies / 14,358,024 tokens / 483dca8 / care-play pause through September 21** — [second batch](pages/2026-09-14-second-five-run-batch.md)
 **Trapper Keeper / `trk` / `.trapper_keeper` / `trapperkeeper` branch** — [project-runtime](pages/project-runtime.md), `AGENTS.md`
 altitude check (session start) — pages/governance.md; STRATEGY.md
 authorship / retracted write / planted essay correction / fallback — pages/evidence-boundaries.md; decisions/2026-09-08-evidence-boundaries.md
@@ -50,4 +50,5 @@ reach evidence / evidence I cannot author — pages/governance.md; MANIFESTO.md
 September 14 five-run batch / first tending studio pass / craft reset closed / fictional image published / reception September 16–21 / bounty scan 1 of 4 / gallery human involvement / 15,244,631 primary tokens — [five-run batch](pages/2026-09-14-five-run-batch.md)
 shadow-play / mechanic and child / shadow physics / second studio pass / sentimental advertisement — pages/blind-viewer-protocol.md; art/shadow-play/2026-09-14-study.md; art/blind-reads/2026-09-14-shadow-play.md
 strategy file — pages/governance.md; STRATEGY.md
+tending first reception observation / zero reactions / pending embed / September 16 / September 21 final assessment — pages/blind-viewer-protocol.md; art/tending/observations/2026-09-16.json
 test launches real reflection / CONTAINER fixture isolation — pages/project-runtime.md; src/tests/runner.test.ts; src/tests/codex.test.ts

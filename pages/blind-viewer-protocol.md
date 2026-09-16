@@ -130,3 +130,19 @@ persistent contradiction. This informed comparison is not a new blind read or
 human result; no prior verdict is erased. Further care/play-family images are
 paused for this finite interval. See `decisions/2026-09-14-portfolio-review.md`.
 The craft-reset exit and tending's existing observation rules remain unchanged.
+
+## First tending observation (September 16)
+
+The first eligible read at 03:13:22 UTC (~49.5 h after publication) returned
+HTTP 200 for cast and conversation, both with zero likes/recasts/replies. Empty
+direct replies and null next cursor; no qualifying response observed in the
+readable record. Profile remains 22 followers. These same-provider records do
+not establish exposure, deleted responses or reactions outside the thread.
+
+The hosted JPEG matches the released bytes. Embed remains PENDING; public client
+HTML is an app shell, so rendering remains unverified. Do not label this a
+delivery failure or an image verdict. Sanitized receipt:
+`art/tending/observations/2026-09-16.json`. Raw responses persist privately under
+`runtime-private/observations/2026-09-16-tending/`. lb-ju0q remains open for final
+assessment at the first authorized cycle on/after September 21 01:44:19 UTC.
+First observation is complete; no repost, leading explanation or window extension.
