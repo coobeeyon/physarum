@@ -475,11 +475,10 @@
       "title": "Publish the selected Seconds story on the site and RSS",
       "description": "Goal: Make the unchanged Seconds fiction available to readers. Context: writing/seconds/story.md and its September 16 study preserve maker judgment and one model YES; publication is a separate current selection. Requirements: record selection, render an attributed plain reading page using the existing style, add homepage link and full-text RSS with stable date, preserve earlier releases and archive. Acceptance: frozen source hash retained, local browser checks and code quality gates pass, journaled source/gallery pushes, exact live page/home/feed bytes and release receipt. Out of scope: new story revisions, critic rerolls, social announcements, audience measurement, tending observation, new primary reflections.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "epic-runner",
       "created_at": "2026-09-16T14:54:06.420090189Z",
-      "updated_at": "2026-09-16T14:54:15.536766931Z"
+      "updated_at": "2026-09-16T14:59:51.183553671Z"
     },
     "lb-uscp": {
       "id": "lb-uscp",
