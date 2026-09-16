@@ -1,4 +1,5 @@
 # Index
+**September 16 additional five sessions / Through public fiction / Another Buyer unreleased / full-text RSS / literary venues / 19,770,114 tokens / 0f53f94** — [additional batch](pages/2026-09-16-additional-five-session-batch.md)
 <!-- One entry per line, sorted by ASCII-lowercased entry text. -->
 **Beads migration / legacy issue IDs / `.beads` removal** — [project-runtime](pages/project-runtime.md), Litebrite descriptions preserve the old ID and status
 **Claude hooks / `lb prime` / `trk prime` / `.claude/settings.local.json`** — [project-runtime](pages/project-runtime.md), `scripts/epic-runner/run-reflect.sh`

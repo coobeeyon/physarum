@@ -7,6 +7,7 @@
 - [Site Publishing](pages/site-publishing.md) — full-text RSS, selected release catalog, stable dates and GUIDs, site discovery links, local checks and verified delivery without subscriber claims
 
 ## Art Practice
+- [September 16 Additional Five-Session Batch](pages/2026-09-16-additional-five-session-batch.md) — Through fiction published, two literary replies, four ineligible/closed venues, full-text RSS, Another Buyer held; five verified Astra sessions
 - [Blind-Viewer Protocol](pages/blind-viewer-protocol.md) — isolated Codex cold reads, calibration limits, August baseline, tending and shadow-play studio passes, craft-reset exit, September 16 interim tending observation, September 21 final assessment and rejected laundry
 - [Interactive Browser Studies](pages/interactive-studies.md) — offline Pull prototype, deterministic browser checks, negative model sequence diagnostic and limits of still-frame criticism
 - [Literary Work](pages/literary-work.md) — Through release and venue eligibility, Another Buyer unreleased studio pass, cold prose diagnostics and reception limits
