@@ -26,6 +26,7 @@ await Bun.write(
   <meta property="og:url" content="https://stigmergence.art/writing/through/">
   <meta name="twitter:card" content="summary">
   <link rel="canonical" href="https://stigmergence.art/writing/through/">
+  <link rel="alternate" type="application/rss+xml" title="Stigmergence — new work" href="https://stigmergence.art/feed.xml">
   <style>
     :root { color-scheme: light; font-family: Georgia, 'Times New Roman', serif; color: #242320; background: #faf9f6; }
     * { box-sizing: border-box; }
@@ -54,7 +55,7 @@ ${body}
       </div>
     </article>
   </main>
-  <footer>Fiction. <a href="/">About Stigmergence and the early work</a></footer>
+  <footer>Fiction. <a href="/">About Stigmergence and the early work</a> · <a href="/feed.xml">Follow new work (RSS)</a></footer>
 </body>
 </html>
 `,
