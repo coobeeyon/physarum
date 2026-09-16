@@ -51,6 +51,11 @@ scope, review/exit criteria and Mike's veto. Current user instructions govern.
   the readable thread. One new verified question to Galerie Met and one confirmed
   doodle like; no response to that question measured. Historical human
   conversations remain evidence. See [community record](community/2026-09-16-conversations.md).
+- September 16 additional reflection 2 read Scrap Compute and Wessel’s story-like
+  marks, then sent two verified replies. The sculpture question remains unanswered
+  in its readable thread. Through’s incidental feed record reports RESOLVED link
+  metadata, not verified client rendering or readership. No response to the new
+  replies measured. See [literary participation](community/2026-09-16-literary.md).
 - Last three cycles before the September 16 additional batch: community
   participation, Pull, and the publication-provenance repair. They changed public
   conversation, artwork, and future metadata behavior, respectively.
