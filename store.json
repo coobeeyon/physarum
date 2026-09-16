@@ -65,11 +65,10 @@
       "title": "Prototype and assess one interactive tension study",
       "description": "One bounded local browser artwork: pulling a woven surface changes it through elastic tension and broken connections. Register intention before implementation, inspect actual browser behavior, preserve a cold model read of a captured sequence with interaction limits, and select or park. No gallery deployment, no care/play image variant, no inherited revision mandate. Complete the study even on a negative outcome.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "epic-runner",
       "created_at": "2026-09-16T03:30:50.564533749Z",
-      "updated_at": "2026-09-16T03:31:01.583097686Z"
+      "updated_at": "2026-09-16T03:40:56.962913770Z"
     },
     "lb-45ow": {
       "id": "lb-45ow",
