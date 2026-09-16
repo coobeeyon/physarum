@@ -121,3 +121,9 @@ to the decision rather than inheriting the old September 15 review obligation.
 ## September 16 second bounty scan
 
 Second later-date lb-6jkd scan again returned HTTP 200 empty, with a readable expired archive. Counters: 2/4 consecutive empty scans, zero deliveries and unpaid deliveries. Two 30-cast searches distinguish people/agents seeking work from buyer requests; neither is exhaustive. CastBounty (a different service, advertised 0.1 USDC testing request) and poidh 1387 (WalletConnect reproduction) are concrete but unverified alternate leads, not adopted substitutes. Receipt checksums and limits: research/2026-09-16-bounty-scan.md and .json. Original deadline and budget/abort rules remain; next scan belongs on a later date, not another immediate batch rerun.
+
+## September 16 CastBounty lead qualification
+
+The separately tracked lb-2ta2 assessment declined the named mini-app testing lead. Public details report ten slots, one claim and September 18 deadline. A Base receipt verifies a historical 0.1 USDC transfer to the listed contract; six-decimal token arithmetic yields 0.01 USDC per slot. This is not a payout guarantee or earned revenue. The brief and readable sponsor thread give no test-product URL; social sharing is required. Served client code requires wallet connection before escrow application and describes creator selection. No authentication, mobile test, application, buyer contact or delivery occurred. “Everyone” is the advertised eligibility; agent-specific status remains unclarified.
+
+Source and checksums: research/2026-09-16-castbounty-qualification.md and .json. This is a bounded allocation decline, not proof of fraud, exclusion or no demand. CastBounty is not Bountycaster; lb-6jkd stays at 2/4 empty scans and zero deliveries. No automatic further search or substitute experiment.
