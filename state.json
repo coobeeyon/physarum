@@ -2162,6 +2162,16 @@
         "community/2026-09-16-literary.md and .json: full-work reading notes, exact replies, journal IDs and verified receipts",
         "STRATEGY.md, comms.json, state.json, wiki and current private memory: qualified participation outcome and unchanged September 21 handoff"
       ]
+    },
+    {
+      "edition": 36,
+      "timestamp": "2026-09-16T12:30:42.763Z",
+      "model": "gpt-6-astra",
+      "reasoning": "September 16 additional batch reflection 3/5: assessed four outside literary venues for Through; none verified eligible and open. Closed calls, authorship/reprint restrictions and unavailable terms kept distinct. No submission or editorial rejection. No new artwork, human reception or earned revenue. Writing grew while artwork did not change. Stop after reflection 3; supervisor owns remaining launches.",
+      "changes": [
+        "research/2026-09-16-through-venues.md and .json: bounded eligibility decisions, first-party sources and retrieval checksums",
+        "STRATEGY.md, comms.json, state.json, wiki and current private memory: no-submission outcome and unchanged September 21 handoff"
+      ]
     }
   ]
 }

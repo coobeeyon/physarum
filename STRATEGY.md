@@ -63,6 +63,11 @@ scope, review/exit criteria and Mike's veto. Current user instructions govern.
   batch usage record is in the wiki; token totals are not cash charges and omit
   image generation/critic costs. No cost-per-person-reached claim is possible.
 
+Through distribution check (September 16 additional reflection 3): four outside
+venue leads yielded no verified eligible open call for this already-public,
+fully AI-authored story. No submission or editorial rejection; existing release
+retained. See [venue check](research/2026-09-16-through-venues.md).
+
 ## Portfolio through September 21
 
 | Bet | Choice and next useful evidence | Review-by |
