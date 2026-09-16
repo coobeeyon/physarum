@@ -75,11 +75,29 @@ coverage and individual failures itself: CLI stderr warnings are insufficient
 because the actor does not receive them. Partial totals are labeled observed
 subtotals with unknown edition total/rate. Any incomplete edition suppresses the
 best/worst/trend comparison rather than ranking missing counts as zero or skipping
-them to invent a comparison between other editions. The publishing pipeline only
-passes complete reads to its optional previous-edition acknowledgment.
+them to invent a comparison between other editions. The September 16 publication repair subsequently removed the optional
+previous-edition acknowledgment and its pipeline query; reflection reads retain
+this coverage handling.
 
 Known self-replies/corrections are subtracted from a successfully read parent
 once per distinct child, even if fetching the child's own counts fails. A failed
 parent contributes no numeric counts. Historical snapshots are not rewritten or
 retroactively certified. Tests in engagement.test.ts exercise failure through
 prompt output, mixed coverage, genuine zero and own-reply accounting.
+
+## Generated publication provenance (September 16)
+
+lb-8v3i removed unreachable social-caption fallbacks and the uncalled model
+self-reply generator from src/social/narrative.ts. Live mode already required
+explicit primary, self-reply and secondary text; it now rejects whitespace-only
+text too. src/pipeline/orchestrate.ts no longer fetches prior engagement solely
+for the removed fallback. It still publishes the supplied nonblank text.
+
+Metadata generation remains and supplies factual digital-simulation provenance,
+actual settings and Mike attribution. Image-food guidance is identified without
+publishing the source path or asserting independent discovery. It does not claim
+visual quality, human absence or a completed mint. Existing edition metadata is
+not rewritten; a resumed run may retain its already-uploaded metadata CID.
+This is not reactivation of minting. Provenance and missing/blank text regressions
+are in narrative.test.ts and pipeline-text.test.ts; tests use dummy config and
+forbid network calls. Full report: research/2026-09-16-publication-provenance.md.

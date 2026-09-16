@@ -64,3 +64,5 @@ Additional reflection 3 completed lb-mcbg: bio-only PATCH and separate exact API
 Added receipt retrieval for the September 14 AI acknowledgment observed September 16, unanswered knot question, verified Galerie Met reply and service-confirmed doodle like. Preserved event/read dates, reception categories and verification limits; tending observation remains separate.
 
 ## [2026-09-16] assess | Pull browser study: working constraints, 20 browser checks, BORDERLINE cold sequence diagnostic; parked without release, direct interaction unassessed.
+
+## [2026-09-16] correct | Generated metadata now states factual simulation provenance and Mike attribution; removed unreachable caption fallbacks and uncalled model self-reply, retained explicit live text with whitespace rejection. September 16 five-run batch complete.

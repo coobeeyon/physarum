@@ -35,6 +35,7 @@ craft reset exit criteria (lb-e1qt) — pages/governance.md
 decision records — pages/governance.md; decisions/README.md
 engagement unavailable / partial counts / HTTP 404 or 429 / false zero / EngagementRead — pages/evidence-boundaries.md; src/social/engagement.ts; src/agent/context.ts
 gallery human involvement / no human in the loop / historical pipeline / archive CTA / preview descriptions — pages/evidence-boundaries.md; research/2026-09-14-gallery-identity.md; ../stigmergence-site/index.html; src/pipeline/gallery.ts
+generated metadata / narrative templates / no human approved / explicit social text / whitespace caption — pages/evidence-boundaries.md; src/social/narrative.ts; src/pipeline/orchestrate.ts; research/2026-09-16-publication-provenance.md
 imagegen signature removal / regenerated detail / fictional ruined room — pages/blind-viewer-protocol.md; art/tending/2026-09-14-study.md
 interactive artwork / Pull / woven surface / tension / browser capture / keyboard and touch — pages/interactive-studies.md; art/tension/index.html; art/tension/check.cjs
 journal is not auto-review / recovery versus containment — pages/evidence-boundaries.md
