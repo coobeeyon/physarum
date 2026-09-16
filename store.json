@@ -80,6 +80,16 @@
       "created_at": "2026-08-01T12:42:42.775809158Z",
       "updated_at": "2026-08-01T12:42:42.780165103Z"
     },
+    "lb-5hik": {
+      "id": "lb-5hik",
+      "title": "Write and cold-read one standalone short fiction",
+      "description": "One bounded prose-art study in September 16 additional batch reflection 1: preregister intended effect, write one standalone fiction, preserve maker judgment before one isolated model critique, then record selection or rejection. No critic reroll or automatic rewrite. Distinct from paused care/play images. Mission and September 21 review unchanged.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-09-16T12:05:30.614402919Z",
+      "updated_at": "2026-09-16T12:05:30.614402919Z"
+    },
     "lb-5uh5": {
       "id": "lb-5uh5",
       "title": "Report failed engagement reads as unavailable rather than zero",
