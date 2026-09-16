@@ -100,3 +100,23 @@ resolved Bun.spawn ENOENT with a changed child cwd. The exact failing path was
 not isolated. Preserve absolute paths for isolated readers. No rerolled verdict. Task
 lb-2c32 completes with a qualified studio result, not human reception.
 Existing September 21 tending assessment/review and portfolio holds remain.
+
+## September 16, 14:21 batch reflection 5 — Seconds released
+
+The studio's unreleased status above is superseded by an explicit editorial
+selection at writing/seconds/2026-09-16-release.md. Text remains at its studio
+hash; no extra critic or revision. Public page: https://stigmergence.art/writing/seconds/.
+Selection 48483ba, implementation 4e51962, gallery 777ffaa. At 14:57:39 UTC the
+page, homepage and three-item RSS matched committed bytes. Receipt beside the
+story in release.json. No social announcement or measured human reception.
+
+The existing catalog-driven browser checker covered all three stories without
+new check logic: 79 checks passed, plus 95 repository tests/build/lint and
+renderer typecheck. Mobile screenshot inspected. The fresh container required
+Playwright/Chromium and Chromium system libraries; the initial launch failed
+on missing libglib before checks ran, then succeeded after install-deps.
+
+Task lb-uif6 completed. Fifth reflection ends this batch; September 21 tending
+assessment and full portfolio review remain. Three fiction releases on the
+same date are availability evidence, not evidence of readers. No automatic
+production or revision task follows the shared vocabulary of the stories.

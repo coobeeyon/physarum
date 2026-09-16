@@ -42,3 +42,11 @@ preparation time, separately labeled from first verified live observation;
 there is no social announcement timestamp. Keep that date stable. The updated
 catalog-driven browser checker covers both stories (58 checks); RSS pubDate
 retains seconds, not milliseconds. Through's original GUID/date/text remain.
+
+Seconds is the third catalog entry, selected in the September 16 14:21 batch's
+fifth reflection. Renderer: writing/seconds/render.ts; release receipt adjacent.
+Gallery 777ffaa and source 4e51962 preserve earlier story pages and feed item
+identities/dates. All three published files were byte-verified; 79 local browser
+checks passed using the existing catalog-driven checker unchanged. Its RSS date
+is release preparation time, with first verified live observation separate.
+No social announcement, subscriber read or new publishing schedule.

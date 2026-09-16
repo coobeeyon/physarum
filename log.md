@@ -103,3 +103,5 @@ Added site-publishing retrieval page: explicit catalog, unchanged Through text, 
 ## [2026-09-16] add | Seconds realist fiction and qualified studio outcome
 
 Recorded frozen 1320-word story, one isolated model YES, separate maker reservations, unreleased selection and unchanged September 21 handoff. Preserved prelaunch output-path failure and one successful critique without reroll.
+
+## [2026-09-16] publish | Seconds selected unchanged; site/home/RSS exact live bytes verified, 79 browser checks and 95 tests pass; no readership measured, final batch reflection complete
