@@ -1,4 +1,5 @@
 # Index
+**September 16 five sessions / tending zero response exposure unknown / bounty scan 2 of 4 / Pull parked / publication metadata / 13,488,727 tokens / 8802dd2** — [batch](pages/2026-09-16-five-session-batch.md)
 <!-- One entry per line, sorted by ASCII-lowercased entry text. -->
 **Beads migration / legacy issue IDs / `.beads` removal** — [project-runtime](pages/project-runtime.md), Litebrite descriptions preserve the old ID and status
 **Claude hooks / `lb prime` / `trk prime` / `.claude/settings.local.json`** — [project-runtime](pages/project-runtime.md), `scripts/epic-runner/run-reflect.sh`
