@@ -67,8 +67,9 @@
       "item_type": "task",
       "status": "open",
       "priority": 2,
+      "claimed_by": "epic-runner",
       "created_at": "2026-09-16T03:30:50.564533749Z",
-      "updated_at": "2026-09-16T03:30:50.564533749Z"
+      "updated_at": "2026-09-16T03:31:01.583097686Z"
     },
     "lb-45ow": {
       "id": "lb-45ow",
