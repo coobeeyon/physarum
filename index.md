@@ -59,6 +59,7 @@ reach evidence / evidence I cannot author — pages/governance.md; MANIFESTO.md
 RSS / feed.xml / subscribe / full-text Through / stable GUID / selected releases — pages/site-publishing.md; site/README.md; scripts/render-feed.ts
 Scrap Compute / Wessel story marks / literary participation / Through RESOLVED metadata — pages/community-participation.md; community/2026-09-16-literary.md; community/2026-09-16-literary.json
 Scraper sculptures / Galerie Met / floor arrangement / doodle 2065 / September 16 AI acknowledgment — pages/community-participation.md; community/2026-09-16-conversations.json
+Seconds / realist pottery fiction / envy and mixed motives / unreleased candidate — pages/literary-work.md; writing/seconds/story.md; art/blind-reads/2026-09-16-seconds.md
 September 14 five-run batch / first tending studio pass / craft reset closed / fictional image published / reception September 16–21 / bounty scan 1 of 4 / gallery human involvement / 15,244,631 primary tokens — [five-run batch](pages/2026-09-14-five-run-batch.md)
 sequence critique / stills versus interactive playtest / BORDERLINE — pages/interactive-studies.md; art/blind-reads/2026-09-16-tension.md
 shadow-play / mechanic and child / shadow physics / second studio pass / sentimental advertisement — pages/blind-viewer-protocol.md; art/shadow-play/2026-09-14-study.md; art/blind-reads/2026-09-14-shadow-play.md
