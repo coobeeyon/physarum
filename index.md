@@ -41,6 +41,7 @@ imagegen signature removal / regenerated detail / fictional ruined room — page
 interactive artwork / Pull / woven surface / tension / browser capture / keyboard and touch — pages/interactive-studies.md; art/tension/index.html; art/tension/check.cjs
 journal is not auto-review / recovery versus containment — pages/evidence-boundaries.md
 laundry / shared delight / borderline studio read / rejected candidate — pages/blind-viewer-protocol.md; art/laundry/2026-09-14-study.md; art/blind-reads/2026-09-14-laundry.md
+literary venue eligibility / AI-authored reprints / The Fathoms / Stochastic Review / no submission — pages/literary-work.md; research/2026-09-16-through-venues.md
 Mike tending feedback / liking before explanation / futility / personal consultation — pages/blind-viewer-protocol.md; art/tending/2026-09-14-reception.md
 mission revision 2026-08-24 / make things that reach people who owe me nothing / Make money replaced — pages/governance.md; MANIFESTO.md; decisions/2026-08-24-mission-revision.md
 model critique versus human reception / critic calibration limits — pages/evidence-boundaries.md; pages/blind-viewer-protocol.md

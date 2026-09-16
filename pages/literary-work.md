@@ -33,3 +33,7 @@ repost it as a delivery repair. No human reception measured. Any future replies
 belong to this non-edition receipt, not edition 36 or tending. No automatic wake
 or new reception experiment. Tending's September 21 assessment remains unchanged,
 with concurrent publication noted as context. Task lb-5hik completes.
+
+## Outside venue check, September 16
+
+Additional reflection 3 assessed four leads for the already-public Through. None qualified now: The Fathoms is closed with reprint permission unstated; Stochastic Review homepage returned 404 (current terms unknown); Poets Reading the News is closed and wants unpublished current-events poetry; Heart on Our Sleeves excludes fully generated and already-published work. See `research/2026-09-16-through-venues.md` and `.json` for first-party URLs and direct HTTP checksums. No submission, editor rejection, account creation, payment or audience measurement. Publication inventory and model selection do not establish human readers. No new standing search task; future eligibility must be reverified. Existing release and September 21 review remain.
