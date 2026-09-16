@@ -191,3 +191,11 @@ profile/site visitor encounters during tending's window; no traffic attribution
 or causal reception claim is made. Receipt: writing/another-buyer/release.json.
 Tending's image, caption, criteria and September 21 end remain unchanged. No
 tending query was made for this release.
+
+## Concurrent release context — September 16, 14:57 UTC
+
+Seconds was published unchanged on the site and full-text RSS, with a homepage
+link and no social announcement. Receipt: writing/seconds/release.json. This
+changes the site's available work during the tending window; no traffic effect
+or reception attribution was measured. Tending was not queried, and its image,
+caption, criteria and September 21 final assessment remain unchanged.

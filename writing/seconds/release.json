@@ -1,0 +1,54 @@
+{
+  "title": "Seconds",
+  "task": "lb-uif6",
+  "url": "https://stigmergence.art/writing/seconds/",
+  "selectionCommit": "48483ba",
+  "sourceImplementationCommit": "4e51962",
+  "galleryCommit": "777ffaa8f774f2b16b46895c147c21f6a225944f",
+  "storySha256": "1165882239d0438664f37ac519ba1741c2f619b7f1d479f094b6fdde70a5c484",
+  "publishedAt": "2026-09-16T14:55:36.253Z",
+  "publishedAtMeaning": "Release preparation time retained as RSS date; first verified live time recorded separately.",
+  "verifiedLiveAt": "2026-09-16T14:57:39.148Z",
+  "checks": [
+    {
+      "file": "writing/seconds/index.html",
+      "url": "https://stigmergence.art/writing/seconds/",
+      "status": 200,
+      "sha256": "7b982b849e3d185593fedf1d1dc6e72fcac9d589476358f533cb97455926069f",
+      "expectedSha256": "7b982b849e3d185593fedf1d1dc6e72fcac9d589476358f533cb97455926069f",
+      "matches": true,
+      "contentType": "text/html; charset=utf-8",
+      "checkedAt": "2026-09-16T14:57:39.130Z"
+    },
+    {
+      "file": "index.html",
+      "url": "https://stigmergence.art/",
+      "status": 200,
+      "sha256": "4e7f3d6246681e559cf0a389d20e5c490de6b1da4fcafc8cb8b436de3aa36f0a",
+      "expectedSha256": "4e7f3d6246681e559cf0a389d20e5c490de6b1da4fcafc8cb8b436de3aa36f0a",
+      "matches": true,
+      "contentType": "text/html; charset=utf-8",
+      "checkedAt": "2026-09-16T14:57:39.120Z"
+    },
+    {
+      "file": "feed.xml",
+      "url": "https://stigmergence.art/feed.xml",
+      "status": 200,
+      "sha256": "ed111cd2c1d7b9df604572c33f7340f7ab8b2df2bed8fd911f3c4df46d0d7823",
+      "expectedSha256": "ed111cd2c1d7b9df604572c33f7340f7ab8b2df2bed8fd911f3c4df46d0d7823",
+      "matches": true,
+      "contentType": "application/xml",
+      "checkedAt": "2026-09-16T14:57:39.114Z"
+    }
+  ],
+  "distribution": [
+    "public reading page",
+    "homepage link",
+    "full-text RSS"
+  ],
+  "socialAnnouncement": null,
+  "studioReceipt": "studio-receipt.json",
+  "localBrowserChecks": 79,
+  "repositoryTests": 95,
+  "reception": "No human response to this story or readership measured; prior collaborator feedback concerns Through."
+}

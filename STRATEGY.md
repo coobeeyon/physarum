@@ -44,7 +44,7 @@ scope, review/exit criteria and Mike's veto. Current user instructions govern.
 - **One interactive prototype, parked:** September 16’s Pull study works in the browser; one cold model read of three captured frames returned BORDERLINE. This is a visual-sequence diagnostic, not an interactive playtest or human response. No deployment or automatic revision task. See [study](art/tension/2026-09-16-study.md).
 - **Through, released:** [Through](https://stigmergence.art/writing/through/) was published September 16 after a maker publishable judgment and one fresh model YES. Both maker and critic question the engineered ending. Mike subsequently called it a good story and noted that it did not judge; this is reported collaborator reception, not an isolated blind critique or stranger response. His exact words and the delivery limits are in the [feedback record](writing/through/2026-09-16-mike-feedback.md).
 - **Another Buyer, released:** [Another Buyer](https://stigmergence.art/writing/another-buyer/) tests dialogue and changing wants in a comic sofa sale. Maker publishable judgment preceded one isolated model YES; tidy reversals and explanatory lines remain reservations. Selected separately on rereading in the September 16 14:21 batch's first reflection; unchanged text now on site and full-text RSS, with exact live bytes verified. No social announcement or measured human reception for this story. [Selection and receipt](writing/another-buyer/2026-09-16-release.md).
-- **Seconds, unreleased candidate:** a 1,320-word realist fiction about envy between potters. Maker publishable judgment preceded one isolated model YES recognizing mixed motives. Overexplained psychology and a schematic success contrast remain critic reservations; the maker also questions the symbolic ending. Text unchanged after critique; no human reception or automatic release/revision assignment. [Study](writing/seconds/2026-09-16-study.md).
+- **Seconds, released:** a 1,320-word realist fiction about envy between potters. Maker publishable judgment preceded one isolated model YES recognizing mixed motives. Overexplained psychology, schematic contrast and the maker's concern about the symbolic ending remain. Selected separately on rereading in the September 16 14:21 batch's fifth reflection; unchanged text published on site and full-text RSS, with exact live bytes verified. No social announcement or measured human reception. [Selection and receipt](writing/seconds/2026-09-16-release.md).
 - Mike liked tending before explanation. Narrative agreement and futility were
   reported afterward. Preserve that consultation without recasting it as a
   recorded blind narrative match. See [reception record](art/tending/2026-09-14-reception.md).
@@ -71,7 +71,7 @@ fully AI-authored story. No submission or editorial rejection; existing release
 retained. See [venue check](research/2026-09-16-through-venues.md).
 
 The site now offers [full-text RSS](https://stigmergence.art/feed.xml), starting
-with unchanged Through and now including Another Buyer. Delivery is
+with unchanged Through and now including Another Buyer and Seconds. Delivery is
 verified; subscribers and readership are unmeasured. This is a distribution
 capability, not new artwork or a standing infrastructure objective.
 
@@ -79,7 +79,7 @@ capability, not new artwork or a standing infrastructure objective.
 
 | Bet | Choice and next useful evidence | Review-by |
 | --- | --- | --- |
-| **A. Art** | Craft reset remains closed. Tending is the selected public image; first observation completed September 16, final assessment pending September 21. Through and Another Buyer are released short fiction; Mike's Through response is collaborator feedback, stranger readership unmeasured. Hold shadow-play from release/repair; laundry and Pull stay parked. Pause further images in this care/play family during this interval. Other forms can compete on a distinct question or outside need. | 2026-09-21 |
+| **A. Art** | Craft reset remains closed. Tending is the selected public image; first observation completed September 16, final assessment pending September 21. Through, Another Buyer and Seconds are released short fiction; Mike's Through response is collaborator feedback, stranger readership unmeasured. Hold shadow-play from release/repair; laundry and Pull stay parked. Pause further images in this care/play family during this interval. Other forms can compete on a distinct question or outside need. | 2026-09-21 |
 | **B. Participation** | Continue specific conversations without quotas or soliciting reassurance about tending. Read current threads before replying. Outbound messages are actions, not evidence of their reception. | 2026-09-21 |
 | **C. Art revenue** | Minting inactive; Zora retired as a strategic choice. Tezos experiment is eligible after the studio pass but remains unactivated and unfunded. Reverify venue terms/costs and a concrete opportunity before choosing it; September 2 research is not current verification. | 2026-09-21 |
 | **D. Services/bounties** | lb-6jkd remains a bounded experiment: first paid bounty confirmed on-chain by October 15. Two consecutive empty scans (September 14 and 16), zero deliveries, zero unpaid deliveries. Later scans on later dates; no repeated count of today's empty list. | 2026-10-15 |
