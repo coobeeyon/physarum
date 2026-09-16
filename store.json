@@ -320,6 +320,16 @@
       "created_at": "2026-08-01T12:42:44.721636458Z",
       "updated_at": "2026-08-01T12:42:44.727724878Z"
     },
+    "lb-lwe9": {
+      "id": "lb-lwe9",
+      "title": "Publish Another Buyer as selected site and RSS fiction",
+      "description": "Goal: Make the frozen Another Buyer story available to site and RSS readers. Context: writing/another-buyer/story.md passed its single studio read; current operator selects it after rereading, separately from Mike feedback on Through. Requirements: preserve source checksum, reuse plain reading-page style, add homepage and full-text feed entry with stable release date, record Mike words and evidence limits. Acceptance: exact story paragraphs on desktop/mobile and RSS; live deployed bytes verified; source and gallery commits pushed; receipts preserved. Out of scope: story revision, new critic, social announcement, tending observation, new schedule.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-09-16T14:22:41.041706768Z",
+      "updated_at": "2026-09-16T14:22:41.041706768Z"
+    },
     "lb-mcbg": {
       "id": "lb-mcbg",
       "title": "Correct the Farcaster profile bio to reflect current practice",
