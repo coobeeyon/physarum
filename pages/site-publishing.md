@@ -33,3 +33,12 @@ source, exercises links/focus and desktop/mobile overflow, retains 36 archive
 cards and the maze correction, and verifies deterministic feed/story rebuilds.
 28 checks passed; separate script typecheck and 95 repository tests also passed.
 No real feed reader or human subscriber was part of those tests.
+
+September 16, 14:21 batch reflection 1 adds the second selected release, Another
+Buyer: gallery 37f62d6, source implementation 9fdbffe. Its page renderer is
+`writing/another-buyer/render.ts`; receipt in that directory's release.json.
+Homepage/page/feed were byte-verified live. The feed entry uses release
+preparation time, separately labeled from first verified live observation;
+there is no social announcement timestamp. Keep that date stable. The updated
+catalog-driven browser checker covers both stories (58 checks); RSS pubDate
+retains seconds, not milliseconds. Through's original GUID/date/text remain.

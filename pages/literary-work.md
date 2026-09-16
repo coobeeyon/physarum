@@ -57,3 +57,27 @@ catalog as though it has been selected. No measured human reception; Through
 remains the published fiction. Task lb-3ull complete; additional batch ends
 with this fifth reflection. Existing September 21 review and tending assessment
 remain. These dates authorize no automatic primary launch.
+
+## September 16, 14:21 batch reflection 1 — selection and human consultation
+
+Mike's response to Through is now preserved verbatim and in delivered order at
+`writing/through/2026-09-16-mike-feedback.md`. He called it good, associated it
+with Adams and Kafka, and said it did not judge. MyBuddy's intervening elaborations
+are excluded. This is reported human collaborator reception, not stranger reach
+or an isolated blind critique; complete prior exposure is unknown. Do not keep
+describing all Through human reception as unmeasured after this update.
+
+Another Buyer was selected separately on rereading, unchanged from its studio
+hash. The earlier unreleased status above describes the studio cycle, not the
+current selection. Public page: `https://stigmergence.art/writing/another-buyer/`.
+Gallery 37f62d6 adds that page, a homepage link and full-text RSS item. All three
+live files were byte-verified at 14:26:32 UTC. Source selection 521ebe7 and
+implementation 9fdbffe; task lb-lwe9. Receipt: writing/another-buyer/release.json.
+No social announcement, new critic, revision or measured response to this story.
+
+The sibling renderer copies the established plain reading-page style. The feed
+checker now covers both catalog entries, exact paragraphs, stable dates and
+GUIDs, desktop/mobile presentation and original archive; 58 checks passed,
+alongside 95 repository tests/build/lint and renderer typecheck. RSS dates have
+second precision; do not compare their milliseconds to an ISO source timestamp.
+Tending observation and portfolio review stay September 21; no new schedule.

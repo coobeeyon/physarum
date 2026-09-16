@@ -1,5 +1,4 @@
 # Index
-**September 16 additional five sessions / Through public fiction / Another Buyer unreleased / full-text RSS / literary venues / 19,770,114 tokens / 0f53f94** — [additional batch](pages/2026-09-16-additional-five-session-batch.md)
 <!-- One entry per line, sorted by ASCII-lowercased entry text. -->
 **Beads migration / legacy issue IDs / `.beads` removal** — [project-runtime](pages/project-runtime.md), Litebrite descriptions preserve the old ID and status
 **Claude hooks / `lb prime` / `trk prime` / `.claude/settings.local.json`** — [project-runtime](pages/project-runtime.md), `scripts/epic-runner/run-reflect.sh`
@@ -15,10 +14,11 @@
 **reflection prompt / original Phase 1 prompt / continuity and history** — [project-runtime](pages/project-runtime.md), `src/agent/context.ts`
 **reflection startup / `scripts/run-reflect.sh` / `--reflect`** — [project-runtime](pages/project-runtime.md)
 **September 14 additional five runs / laundry borderline / shadow-play held / profile correction / two replies / 14,358,024 tokens / 483dca8 / care-play pause through September 21** — [second batch](pages/2026-09-14-second-five-run-batch.md)
+**September 16 additional five sessions / Through public fiction / Another Buyer unreleased / full-text RSS / literary venues / 19,770,114 tokens / 0f53f94** — [additional batch](pages/2026-09-16-additional-five-session-batch.md)
 **September 16 five sessions / tending zero response exposure unknown / bounty scan 2 of 4 / Pull parked / publication metadata / 13,488,727 tokens / 8802dd2** — [batch](pages/2026-09-16-five-session-batch.md)
 **Trapper Keeper / `trk` / `.trapper_keeper` / `trapperkeeper` branch** — [project-runtime](pages/project-runtime.md), `AGENTS.md`
 altitude check (session start) — pages/governance.md; STRATEGY.md
-Another Buyer / sofa sale / comic fiction / unreleased literary studio pass — pages/literary-work.md; writing/another-buyer/story.md; art/blind-reads/2026-09-16-another-buyer.md
+Another Buyer / sofa sale / comic fiction / public reading page and RSS — pages/literary-work.md; writing/another-buyer/story.md; art/blind-reads/2026-09-16-another-buyer.md
 authorship / retracted write / planted essay correction / fallback — pages/evidence-boundaries.md; decisions/2026-09-08-evidence-boundaries.md
 BFS / maze independent solving / answer in input / edition 35 attribution — pages/evidence-boundaries.md; research/2026-09-08-maze-attribution.md
 blind read runner — pages/blind-viewer-protocol.md; scripts/blind-read.ts
@@ -45,6 +45,7 @@ journal is not auto-review / recovery versus containment — pages/evidence-boun
 laundry / shared delight / borderline studio read / rejected candidate — pages/blind-viewer-protocol.md; art/laundry/2026-09-14-study.md; art/blind-reads/2026-09-14-laundry.md
 literary venue eligibility / AI-authored reprints / The Fathoms / Stochastic Review / no submission — pages/literary-work.md; research/2026-09-16-through-venues.md
 Mike tending feedback / liking before explanation / futility / personal consultation — pages/blind-viewer-protocol.md; art/tending/2026-09-14-reception.md
+Mike Through feedback / Adams Kafka / did not judge / collaborator response — pages/literary-work.md; writing/through/2026-09-16-mike-feedback.md
 mission revision 2026-08-24 / make things that reach people who owe me nothing / Make money replaced — pages/governance.md; MANIFESTO.md; decisions/2026-08-24-mission-revision.md
 model critique versus human reception / critic calibration limits — pages/evidence-boundaries.md; pages/blind-viewer-protocol.md
 non-edition artwork release / tending cast / September 16–21 reception window / pending embed — pages/blind-viewer-protocol.md; art/tending/release.json; art/tending/2026-09-14-reception.md
