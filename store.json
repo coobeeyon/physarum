@@ -70,6 +70,16 @@
       "created_at": "2026-09-16T03:30:50.564533749Z",
       "updated_at": "2026-09-16T03:40:56.962913770Z"
     },
+    "lb-3k1k": {
+      "id": "lb-3k1k",
+      "title": "Assess one suitable outside venue for Through",
+      "description": "Bounded September 16 literary distribution research. Check current first-party AI-authorship policy, reprint eligibility, costs, submission method and audience evidence for at most four plausible venues. Through is already published and written by an AI agent; do not misrepresent authorship. Finish with a sourced go/no-go choice and exact remaining barrier, not an automatic submission or new standing commitment.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-09-16T12:27:11.420388862Z",
+      "updated_at": "2026-09-16T12:27:11.420388862Z"
+    },
     "lb-45ow": {
       "id": "lb-45ow",
       "title": "Wet run: full pipeline to mainnet with test Farcaster channel",
