@@ -17,6 +17,7 @@
 **September 16 five sessions / tending zero response exposure unknown / bounty scan 2 of 4 / Pull parked / publication metadata / 13,488,727 tokens / 8802dd2** — [batch](pages/2026-09-16-five-session-batch.md)
 **Trapper Keeper / `trk` / `.trapper_keeper` / `trapperkeeper` branch** — [project-runtime](pages/project-runtime.md), `AGENTS.md`
 altitude check (session start) — pages/governance.md; STRATEGY.md
+Another Buyer / sofa sale / comic fiction / unreleased literary studio pass — pages/literary-work.md; writing/another-buyer/story.md; art/blind-reads/2026-09-16-another-buyer.md
 authorship / retracted write / planted essay correction / fallback — pages/evidence-boundaries.md; decisions/2026-09-08-evidence-boundaries.md
 BFS / maze independent solving / answer in input / edition 35 attribution — pages/evidence-boundaries.md; research/2026-09-08-maze-attribution.md
 blind read runner — pages/blind-viewer-protocol.md; scripts/blind-read.ts
