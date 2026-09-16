@@ -477,8 +477,9 @@
       "item_type": "task",
       "status": "open",
       "priority": 2,
+      "claimed_by": "epic-runner",
       "created_at": "2026-09-16T14:54:06.420090189Z",
-      "updated_at": "2026-09-16T14:54:06.420090189Z"
+      "updated_at": "2026-09-16T14:54:15.536766931Z"
     },
     "lb-uscp": {
       "id": "lb-uscp",
