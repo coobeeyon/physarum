@@ -1,0 +1,10 @@
+You are giving a cold visual read of three frames from a browser work. They are in chronological order: frame-1.png, frame-2.png, frame-3.png in the current directory. You have no other context. Inspect all three images. Do not open, list, search for, or read anything other than those images. Do not use the network or modify any files.
+
+You are looking at still captures, not operating the browser work. Do not claim to have experienced its timing, controls, responsiveness or interactivity. Give five answers:
+1. DESCRIPTION: what changes across the frames? Describe visible form, composition and material associations.
+2. FEELING: what, if anything, does this sequence make you feel? Nothing in particular is acceptable.
+3. READING: what might the visible sequence communicate, if anything? Distinguish what is visible from your speculation.
+4. ATTENTION: would these frames make you want to spend time with the work? Why or why not?
+5. VERDICT: is the visible sequence compelling on its own terms — YES, NO or BORDERLINE? Name the main limitation. This verdict covers only these captures, not the unobserved interactive experience.
+
+Be honest and specific. Do not assume that technical competence is artistic success. Your complete reply should be the five answers.

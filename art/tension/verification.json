@@ -1,0 +1,71 @@
+{
+  "date": "2026-09-16T03:36:08.311Z",
+  "browser": "153.0.8010.12",
+  "checks": [
+    "one minute at rest does not rupture",
+    "resting mesh remains finite",
+    "small pull and release preserve all connections",
+    "pointer release drops all held nodes",
+    "large pull ruptures some connections",
+    "release preserves ruptures",
+    "deformation remains visible after release",
+    "resize preserves broken connections",
+    "small screen has no horizontal overflow",
+    "reset restores all connections",
+    "keyboard can grip",
+    "Escape releases keyboard grip",
+    "leaving canvas releases keyboard grip",
+    "repeated stress leaves finite coordinates",
+    "touch can grip",
+    "touch release clears grip",
+    "reduced-motion interaction remains finite",
+    "normal route does not expose capture controls",
+    "no browser page errors",
+    "artwork makes no HTTP requests"
+  ],
+  "snapshots": {
+    "smallPull": {
+      "broken": 0,
+      "total": 3672,
+      "held": 0,
+      "finite": true,
+      "maxDisplacement": 93.96556089719232
+    },
+    "before": {
+      "broken": 0,
+      "total": 3672,
+      "held": 0,
+      "finite": true,
+      "maxDisplacement": 81.55827318993578
+    },
+    "pulling": {
+      "broken": 45,
+      "total": 3672,
+      "held": 21,
+      "finite": true,
+      "maxDisplacement": 342.827407749543
+    },
+    "after": {
+      "broken": 74,
+      "total": 3672,
+      "held": 0,
+      "finite": true,
+      "maxDisplacement": 480.7533685097022
+    }
+  },
+  "sequence": {
+    "settlingSteps": 120,
+    "pullFrom": [
+      480,
+      355
+    ],
+    "pullTo": [
+      750,
+      620
+    ],
+    "heldCaptureAfterSteps": 40,
+    "additionalHeldSteps": 100,
+    "afterReleaseSteps": 300,
+    "simulationHz": 60
+  }
+}

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pull — a study by Stigmergence</title>
+<style>
+:root { color-scheme: light; background: #e9e6df; color: #343939; font: 14px/1.5 system-ui, sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100svh; display: grid; place-items: center; }
+main { width: min(100%, 1060px); padding: 24px clamp(12px, 4vw, 44px); }
+header, footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+h1 { font: 400 24px/1.2 Georgia, serif; margin: 0; }
+header p { margin: 4px 0 0; color: #626966; }
+canvas { display: block; width: 100%; aspect-ratio: 4/3; touch-action: none; cursor: grab; margin: 20px 0; border-radius: 3px; }
+canvas:active { cursor: grabbing; }
+:focus-visible { outline: 2px solid #9f4229; outline-offset: 5px; }
+footer { align-items: start; font-size: 12px; color: #626966; }
+footer p { margin: 0; max-width: 60ch; }
+button { font: inherit; color: inherit; background: transparent; padding: 8px 13px; border: 1px solid #949c98; border-radius: 24px; cursor: pointer; white-space: nowrap; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+@media (max-width: 480px) { main { padding-top: 20px; } footer { flex-wrap: wrap; } }
+</style>
+</head>
+<body>
+<main>
+<header><div><h1>Pull</h1><p>Take a thread. Move slowly.</p></div><button id="reset" type="button">Begin again</button></header>
+<canvas tabindex="0" role="application" aria-label="Interactive woven surface" aria-describedby="instructions">A woven surface that can be pulled with a pointer or keyboard.</canvas>
+<footer><p id="instructions">Drag the weave, then let go. Keyboard: arrows move the ring; Space grips or releases; Escape releases. Begin again resets the surface.</p><span>Stigmergence · study, 2026</span></footer>
+<p class="sr-only" id="status" role="status" aria-live="polite"></p>
+</main>
+<script>
+'use strict';
+const canvas = document.querySelector('canvas');
+const ctx = canvas.getContext('2d');
+const status = document.querySelector('#status');
+const W = 960, H = 720, COLS = 57, ROWS = 33;
+const capture = new URLSearchParams(location.search).has('capture');
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let nodes, links, held = [], grabStart, target, grip, pointerId = null;
+let keyboard = false, ring = {x: 480, y: 355}, damageAnnounced = false;
+let previous = 0, accumulator = 0;
+function reset() {
+  release(); nodes = []; links = []; damageAnnounced = false;
+  for (let r=0; r<ROWS; r++) for (let c=0; c<COLS; c++) {
+    const x = 145 + c*670/(COLS-1);
+    const y = 170 + r*370/(ROWS-1) + 5*Math.sin(Math.PI*c/(COLS-1));
+    nodes.push({x,y,px:x,py:y,ox:x,oy:y,pinned:c===0 || c===COLS-1});
+  }
+  function link(a,b,warp) {
+    const p=nodes[a],q=nodes[b];
+    links.push({a,b,length:Math.hypot(p.x-q.x,p.y-q.y),warp,broken:false,load:0,fatigue:0});
+  }
+  for (let r=0;r<ROWS;r++) for(let c=0;c<COLS;c++) {
+    const i=r*COLS+c;
+    if(c<COLS-1) link(i,i+1,true);
+    if(r<ROWS-1) link(i,i+COLS,false);
+  }
+  ring={x:480,y:355}; status.textContent='Surface restored.'; draw();
+}
+function take(x,y) {
+  release();
+  let nearest=-1, dist=34;
+  nodes.forEach((p,i)=>{const d=Math.hypot(p.x-x,p.y-y);if(!p.pinned&&d<dist){nearest=i;dist=d;}});
+  if(nearest<0) return;
+  const p=nodes[nearest];
+  held=nodes.flatMap((n,i)=>!n.pinned && Math.hypot(n.x-p.x,n.y-p.y)<28 ? [{i,dx:n.x-p.x,dy:n.y-p.y}] : []);
+  grip={x:p.x,y:p.y}; grabStart={x,y}; target={x,y};
+  status.textContent='Gripping the weave.';
+}
+function release() { held=[]; grip=null; target=null; grabStart=null; }
+function step() {
+  const damping=reduced?0.75:0.975;
+  for(const p of nodes) {
+    if(p.pinned) {p.x=p.px=p.ox;p.y=p.py=p.oy;continue;}
+    const vx=(p.x-p.px)*damping,vy=(p.y-p.py)*damping;
+    p.px=p.x;p.py=p.y;p.x+=vx;p.y+=vy+0.025;
+    p.x=Math.max(40,Math.min(920,p.x));p.y=Math.max(60,Math.min(650,p.y));
+  }
+  if(grip) {
+    const dx=target.x-grabStart.x,dy=target.y-grabStart.y;
+    const d=Math.hypot(dx,dy),f=Math.min(1,7/(d||1));
+    grip.x+=dx*f;grip.y+=dy*f;grabStart.x+=dx*f;grabStart.y+=dy*f;
+  }
+  // Pull a small patch, not an infinitely sharp point. Six constraint passes
+  // distribute the force. This is an expressive model, not textile engineering.
+  for(let pass=0;pass<6;pass++) {
+    for(const l of links) {
+      if(l.broken) continue;
+      const a=nodes[l.a],b=nodes[l.b],dx=b.x-a.x,dy=b.y-a.y;
+      const d=Math.hypot(dx,dy)||0.0001;
+      if(pass===0) {
+        l.load=Math.max(0,d/l.length-1);
+        l.fatigue=l.load>0.48?l.fatigue+1:Math.max(0,l.fatigue-0.4);
+        if(l.load>1.45||l.fatigue>16) {
+          l.broken=true;
+          if(!damageAnnounced) {status.textContent='Threads have broken. Begin again restores the surface.';damageAnnounced=true;}
+          continue;
+        }
+      }
+      const force=(d-l.length)/d*0.46;
+      const ax=a.pinned?0:b.pinned?1:0.5,bx=b.pinned?0:a.pinned?1:0.5;
+      a.x+=dx*force*ax;a.y+=dy*force*ax;b.x-=dx*force*bx;b.y-=dy*force*bx;
+    }
+    if(grip) for(const h of held) {const p=nodes[h.i];p.x=grip.x+h.dx;p.y=grip.y+h.dy;}
+  }
+}
+function draw() {
+  const dpr=Math.min(devicePixelRatio||1,2),rect=canvas.getBoundingClientRect();
+  const width=Math.round(rect.width*dpr),height=Math.round(rect.height*dpr);
+  if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;}
+  ctx.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);
+  ctx.fillStyle='#e9e6df';ctx.fillRect(0,0,W,H);
+  // The cast shadow is offset from the actual threads, not an image texture.
+  for(const shadow of [true,false]) {
+    ctx.lineCap='round';
+    for(const l of links) {
+      const a=nodes[l.a],b=nodes[l.b];
+      if(l.broken) {
+        if(shadow) continue;
+        // Each broken connection leaves two short ends rather than vanishing.
+        ctx.strokeStyle='rgba(66,78,75,0.46)';ctx.lineWidth=0.8;
+        for(const [p,q] of [[a,b],[b,a]]) {
+          const dx=q.x-p.x,dy=q.y-p.y,d=Math.hypot(dx,dy)||1;
+          ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x+dx/d*2.7,p.y+dy/d*2.7+1.8);ctx.stroke();
+        }
+        continue;
+      }
+      const heat=Math.min(1,l.load*1.55),offset=shadow?6:0;
+      if(shadow) {ctx.strokeStyle='rgba(40,48,44,0.065)';ctx.lineWidth=l.warp?2.6:1.5;}
+      else {
+        const r=Math.round(49+heat*125),g=Math.round(70-heat*9),b=Math.round(68-heat*31);
+        ctx.strokeStyle=`rgba(${r},${g},${b},${l.warp?0.86:0.38})`;
+        ctx.lineWidth=l.warp?1.4:0.8;
+      }
+      ctx.beginPath();ctx.moveTo(a.x+offset,a.y+offset);ctx.lineTo(b.x+offset,b.y+offset);ctx.stroke();
+    }
+  }
+  ctx.fillStyle='#7a827c';
+  for(const p of nodes) if(p.pinned){ctx.beginPath();ctx.arc(p.x,p.y,1.9,0,Math.PI*2);ctx.fill();}
+  if(grip||keyboard) {
+    const p=grip||ring;ctx.strokeStyle='#aa563b';ctx.lineWidth=1;
+    ctx.beginPath();ctx.arc(p.x,p.y,grip?6:12,0,Math.PI*2);ctx.stroke();
+    if(keyboard&&!grip){ctx.beginPath();ctx.moveTo(p.x-3,p.y);ctx.lineTo(p.x+3,p.y);ctx.moveTo(p.x,p.y-3);ctx.lineTo(p.x,p.y+3);ctx.stroke();}
+  }
+}
+function point(e) { const r=canvas.getBoundingClientRect();return {x:Math.max(40,Math.min(920,(e.clientX-r.left)*W/r.width)),y:Math.max(60,Math.min(650,(e.clientY-r.top)*H/r.height))}; }
+canvas.addEventListener('pointerdown',e=>{if(pointerId!==null)return;keyboard=false;pointerId=e.pointerId;canvas.setPointerCapture(pointerId);canvas.focus({preventScroll:true});const p=point(e);take(p.x,p.y);draw();});
+canvas.addEventListener('pointermove',e=>{if(e.pointerId===pointerId&&target){target=point(e);draw();}});
+function endPointer(e){if(e.pointerId!==pointerId)return;pointerId=null;release();draw();}
+canvas.addEventListener('pointerup',endPointer);canvas.addEventListener('pointercancel',endPointer);canvas.addEventListener('lostpointercapture',endPointer);
+canvas.addEventListener('keydown',e=>{
+  if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown',' ','Escape'].includes(e.key))return;
+  e.preventDefault();keyboard=true;
+  if(e.key==='Escape') {release();status.textContent='Released.';}
+  else if(e.key===' '){if(held.length){release();status.textContent='Released.';}else take(ring.x,ring.y);}
+  else {const n=e.shiftKey?24:8;ring.x=Math.max(40,Math.min(920,ring.x+(e.key==='ArrowRight'?n:e.key==='ArrowLeft'?-n:0)));ring.y=Math.max(60,Math.min(650,ring.y+(e.key==='ArrowDown'?n:e.key==='ArrowUp'?-n:0)));if(target)target={...ring};}
+  draw();
+});
+canvas.addEventListener('blur',()=>{release();keyboard=false;pointerId=null;draw();});
+document.querySelector('#reset').addEventListener('click',reset);
+window.addEventListener('resize',draw);
+document.addEventListener('visibilitychange',()=>{previous=0;accumulator=0;if(document.hidden){release();pointerId=null;}});
+function frame(now) {
+  if(!document.hidden){if(previous)accumulator+=Math.min(50,now-previous);previous=now;while(accumulator>=1000/60){step();accumulator-=1000/60;}draw();}
+  requestAnimationFrame(frame);
+}
+reset();
+// Only the deterministic capture route exposes inspection. The normal work has
+// no score, telemetry, stored data, or external dependencies.
+if(capture)window.__studio={step(n){for(let i=0;i<n;i++)step();draw();},snapshot(){return {broken:links.filter(l=>l.broken).length,total:links.length,held:held.length,finite:nodes.every(p=>Number.isFinite(p.x)&&Number.isFinite(p.y)),maxDisplacement:Math.max(...nodes.map(p=>Math.hypot(p.x-p.ox,p.y-p.oy)))}}};
+else requestAnimationFrame(frame);
+</script>
+</body>
+</html>
