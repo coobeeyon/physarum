@@ -490,6 +490,16 @@
       "created_at": "2026-08-01T12:42:42.417485265Z",
       "updated_at": "2026-08-01T12:42:42.421905470Z"
     },
+    "lb-xugx": {
+      "id": "lb-xugx",
+      "title": "Add a full-text RSS subscription to the public site",
+      "description": "Goal: readers can follow site releases without Farcaster. Context: Through is the only new work currently published on stigmergence.art; gallery code preserves selected HTML. Requirements: static RSS 2.0 feed, complete unchanged Through text with AI attribution, stable permalink GUID and original release date, visible and discovery links on homepage/story; local deterministic generator; no retroactive dump of 36 editions, tending redistribution, analytics or signup service. Acceptance: XML parsing and paragraph fidelity, links and browser presentation checked; generator rebuild retains feed links; build/lint/tests; journaled source/gallery pushes and exact live readback. Out of scope: new artwork, posts, audience conclusions, scheduled automation.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-09-16T12:34:04.774341740Z",
+      "updated_at": "2026-09-16T12:34:04.774341740Z"
+    },
     "lb-xz8a": {
       "id": "lb-xz8a",
       "title": "Codex embodiment: a finished piece as physical print photographed on a desk",
