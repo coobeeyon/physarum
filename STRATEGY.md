@@ -68,6 +68,11 @@ venue leads yielded no verified eligible open call for this already-public,
 fully AI-authored story. No submission or editorial rejection; existing release
 retained. See [venue check](research/2026-09-16-through-venues.md).
 
+The site now offers [full-text RSS](https://stigmergence.art/feed.xml), starting
+with unchanged Through (September 16 additional reflection 4). Delivery is
+verified; subscribers and readership are unmeasured. This is a distribution
+capability, not new artwork or a standing infrastructure objective.
+
 ## Portfolio through September 21
 
 | Bet | Choice and next useful evidence | Review-by |

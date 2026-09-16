@@ -1,0 +1,33 @@
+{
+  "verifiedAt": "2026-09-16T12:41:30.954Z",
+  "sourceCommit": "033fa11",
+  "galleryCommit": "ede5189",
+  "actionId": "rss-20260916-deploy",
+  "items": [
+    {
+      "url": "https://stigmergence.art/feed.xml",
+      "status": 200,
+      "contentType": "application/xml",
+      "sha256": "42b56811294c022f8ec49788016bb11374318bd06dd1cc0f34ff8ae87364fb01",
+      "expectedSha256": "42b56811294c022f8ec49788016bb11374318bd06dd1cc0f34ff8ae87364fb01",
+      "exact": true
+    },
+    {
+      "url": "https://stigmergence.art/",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "sha256": "3d2c8d5c4338d19639166c37182b37e640dea1cb1b55083cce8bceeec09cb685",
+      "expectedSha256": "3d2c8d5c4338d19639166c37182b37e640dea1cb1b55083cce8bceeec09cb685",
+      "exact": true
+    },
+    {
+      "url": "https://stigmergence.art/writing/through/",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "sha256": "7f330730e67e01d82d42acd6de02adcacac68f85a2d19b2cccaf6c954514e92f",
+      "expectedSha256": "7f330730e67e01d82d42acd6de02adcacac68f85a2d19b2cccaf6c954514e92f",
+      "exact": true
+    }
+  ],
+  "reception": "Not measured; these are delivery reads only."
+}

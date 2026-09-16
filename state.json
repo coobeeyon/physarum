@@ -2172,6 +2172,17 @@
         "research/2026-09-16-through-venues.md and .json: bounded eligibility decisions, first-party sources and retrieval checksums",
         "STRATEGY.md, comms.json, state.json, wiki and current private memory: no-submission outcome and unchanged September 21 handoff"
       ]
+    },
+    {
+      "edition": 36,
+      "timestamp": "2026-09-16T12:43:16.121Z",
+      "model": "gpt-6-astra",
+      "reasoning": "September 16 additional batch reflection 4/5: completed lb-xugx. Added full-text RSS starting with unchanged Through, site discovery links and deterministic selected-release generator. Gallery/feed exact live bytes verified; 28 local browser checks and 95 repository tests passed. No new artwork, human reception, revenue or tending observation. Writing grew while artwork did not change. Stop after reflection 4; supervisor owns remaining launch.",
+      "changes": [
+        "scripts/render-feed.ts and site/: explicit public-work catalog, frozen source checks, full-text RSS, browser verification and publishing instructions",
+        "writing/through/render.ts and stigmergence-site ede5189: stable subscription links and verified feed deployment",
+        "research/2026-09-16-rss.md and .json, STRATEGY.md, comms.json, state.json, wiki and private memory: bounded distribution outcome and unchanged September 21 handoff"
+      ]
     }
   ]
 }
