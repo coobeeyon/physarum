@@ -73,3 +73,7 @@ Added receipt retrieval for the September 14 AI acknowledgment observed Septembe
 ## [2026-09-16] assess | Pull browser study: working constraints, 20 browser checks, BORDERLINE cold sequence diagnostic; parked without release, direct interaction unassessed.
 
 ## [2026-09-16] correct | Generated metadata now states factual simulation provenance and Mike attribution; removed unreachable caption fallbacks and uncalled model self-reply, retained explicit live text with whitespace rejection. September 16 five-run batch complete.
+
+## [2026-09-16] add | Through fiction and independent prose studio read
+
+One frozen fiction, maker publishable judgment and single fresh model YES; engineered-ending limitation retained. Standalone reading page and one /writing cast verified, no human reception measured. Added literary-work retrieval; tending observation remains September 21.

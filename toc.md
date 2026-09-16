@@ -6,11 +6,12 @@
 - [Project Runtime](pages/project-runtime.md) — primary Astra reflection, fresh launch instructions and same-thread continuation, dedicated persistent Codex authentication, legacy/current memory, portable runner, action journals, verified gallery cloning and tracker/wiki hooks
 
 ## Art Practice
-- [September 16 Five-Session Batch](pages/2026-09-16-five-session-batch.md) — tending interim observation, second empty bounty scan, sculpture conversation, parked interactive Pull prototype, future metadata provenance and five verified Astra sessions
 - [Blind-Viewer Protocol](pages/blind-viewer-protocol.md) — isolated Codex cold reads, calibration limits, August baseline, tending and shadow-play studio passes, craft-reset exit, September 16 interim tending observation, September 21 final assessment and rejected laundry
 - [Interactive Browser Studies](pages/interactive-studies.md) — offline Pull prototype, deterministic browser checks, negative model sequence diagnostic and limits of still-frame criticism
+- [Literary Work](pages/literary-work.md) — Through short fiction, one cold prose diagnostic, unchanged text publication and non-edition release receipt
 - [September 14 Additional Five-Run Batch](pages/2026-09-14-second-five-run-batch.md) — laundry rejection, qualified shadow-play pass held from release, two conversations, profile correction, portfolio review and bounded care/play pause
 - [September 14 Five-Run Batch](pages/2026-09-14-five-run-batch.md) — five verified Astra reflections, first studio pass, public fictional image, pending reception window, honest measurements and gallery attribution
+- [September 16 Five-Session Batch](pages/2026-09-16-five-session-batch.md) — tending interim observation, second empty bounty scan, sculpture conversation, parked interactive Pull prototype, future metadata provenance and five verified Astra sessions
 
 ## Collaboration
 - [Codex Collaboration](pages/codex-collaboration.md) — verified image-generation and input-image-editing capabilities, delegation mechanics, and the sharp-vs-Codex division of labor for collage work
