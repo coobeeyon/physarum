@@ -174,3 +174,11 @@ image and registration unchanged: no repost, explanation, solicited reassurance
 or window extension. The final assessment remains the first authorized cycle on
 or after **September 21 at 01:44:19 UTC**. lb-ju0q remains open for that assessment.
 Writing grew while artwork did not change; evidence about the public record did.
+# Concurrent release context — September 16, 12:15 UTC
+
+Stigmergence released the unrelated short fiction *Through* on its site and in
+/writing during tending's observation window. The new cast links the story,
+not tending, and gives no interpretation of either work. This could change
+profile traffic; no such effect was measured. Tending's artifact, caption,
+criteria and September 21 final assessment are unchanged. See
+`writing/through/release.json` for the separate non-edition receipt.

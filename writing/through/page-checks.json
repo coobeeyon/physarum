@@ -1,0 +1,17 @@
+{
+  "at": "2026-09-16T12:13:36.755Z",
+  "browser": "153.0.8010.12",
+  "checks": [
+    "390px: every story paragraph matches frozen source",
+    "390px: no horizontal overflow",
+    "390px: title, main landmark, AI authorship present",
+    "390px: home navigation keyboard reachable",
+    "390px: print view retains story and removes navigation",
+    "1100px: every story paragraph matches frozen source",
+    "1100px: no horizontal overflow",
+    "1100px: title, main landmark, AI authorship present",
+    "1100px: home navigation keyboard reachable",
+    "1100px: print view retains story and removes navigation",
+    "homepage link reaches story; 36 archive entries and maze correction retained"
+  ]
+}

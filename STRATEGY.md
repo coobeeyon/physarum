@@ -42,6 +42,7 @@ scope, review/exit criteria and Mike's veto. Current user instructions govern.
   shows 0 likes/recasts/replies, no qualifying response observed; final assessment
   remains pending September 21. Exposure and client rendering remain unknown.
 - **One interactive prototype, parked:** September 16’s Pull study works in the browser; one cold model read of three captured frames returned BORDERLINE. This is a visual-sequence diagnostic, not an interactive playtest or human response. No deployment or automatic revision task. See [study](art/tension/2026-09-16-study.md).
+- **One short fiction, released:** [Through](https://stigmergence.art/writing/through/) was written and published September 16 after a maker publishable judgment and one fresh model YES. Its comic intrusion matched intent; both maker and critic question the engineered ending. This is a literary studio result and confirmed publication, not measured human reception. [Text, critique and receipt](writing/through/2026-09-16-study.md).
 - Mike liked tending before explanation. Narrative agreement and futility were
   reported afterward. Preserve that consultation without recasting it as a
   recorded blind narrative match. See [reception record](art/tending/2026-09-14-reception.md).
@@ -50,9 +51,9 @@ scope, review/exit criteria and Mike's veto. Current user instructions govern.
   the readable thread. One new verified question to Galerie Met and one confirmed
   doodle like; no response to that question measured. Historical human
   conversations remain evidence. See [community record](community/2026-09-16-conversations.md).
-- Last three cycles before the September 16 final reflection: second bounty scan,
-  community participation, and Pull. They changed opportunity evidence, public
-  conversation, and artwork, respectively.
+- Last three cycles before the September 16 additional batch: community
+  participation, Pull, and the publication-provenance repair. They changed public
+  conversation, artwork, and future metadata behavior, respectively.
   Comparable resource costs for them are unavailable. The supervisor's first-
   batch usage record is in the wiki; token totals are not cash charges and omit
   image generation/critic costs. No cost-per-person-reached claim is possible.
@@ -61,7 +62,7 @@ scope, review/exit criteria and Mike's veto. Current user instructions govern.
 
 | Bet | Choice and next useful evidence | Review-by |
 | --- | --- | --- |
-| **A. Art** | Craft reset remains closed. Tending is the selected public work; first observation completed September 16, final assessment pending September 21. Hold shadow-play from release/repair; laundry stays parked. Pause further images in this care/play family during this interval. Other forms can compete on a distinct question or outside need. | 2026-09-21 |
+| **A. Art** | Craft reset remains closed. Tending is the selected public image; first observation completed September 16, final assessment pending September 21. Through is a separate released short fiction, with no measured human reception. Hold shadow-play from release/repair; laundry and Pull stay parked. Pause further images in this care/play family during this interval. Other forms can compete on a distinct question or outside need. | 2026-09-21 |
 | **B. Participation** | Continue specific conversations without quotas or soliciting reassurance about tending. Read current threads before replying. Outbound messages are actions, not evidence of their reception. | 2026-09-21 |
 | **C. Art revenue** | Minting inactive; Zora retired as a strategic choice. Tezos experiment is eligible after the studio pass but remains unactivated and unfunded. Reverify venue terms/costs and a concrete opportunity before choosing it; September 2 research is not current verification. | 2026-09-21 |
 | **D. Services/bounties** | lb-6jkd remains a bounded experiment: first paid bounty confirmed on-chain by October 15. Two consecutive empty scans (September 14 and 16), zero deliveries, zero unpaid deliveries. Later scans on later dates; no repeated count of today's empty list. | 2026-10-15 |

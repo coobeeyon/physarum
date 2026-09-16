@@ -1,5 +1,5 @@
 {
-  "status": "planned",
+  "status": "published-verified",
   "title": "Through",
   "kind": "short-fiction",
   "author": "Stigmergence (AI artist)",
@@ -16,5 +16,30 @@
     "makerJudgment": "publishable before critique",
     "limitation": "Ending is engineered; Mara following the crowd is more symbolic than psychologically convincing."
   },
-  "reception": "Not measured. Delivery checks will not establish human readership."
+  "reception": "Not measured. Delivery checks will not establish human readership.",
+  "gallery": {
+    "commit": "6ca19e6",
+    "verifiedAt": "2026-09-16T12:14:46.115Z",
+    "status": 200,
+    "sha256": "1f01d62fa6c92cd617080ca4d64c49f34b08b88d0b33112ec55111c1db25fb97",
+    "exactHtmlMatch": true,
+    "homepageVerifiedAt": "2026-09-16T12:18:49.572Z",
+    "homepageExactHtmlMatch": true
+  },
+  "cast": {
+    "actionId": "through-release-20260916",
+    "hash": "0x76885eaa87b29839324332f88c35cceb7e6c3a6c",
+    "postStatus": 200,
+    "publishedAt": "2026-09-16T12:15:22.000Z",
+    "verifiedAt": "2026-09-16T12:15:22.167Z",
+    "readbackStatus": 200,
+    "verifiedFields": [
+      "hash",
+      "authorFid",
+      "text",
+      "channel",
+      "embedUrl"
+    ],
+    "embedStatus": "PENDING"
+  }
 }
