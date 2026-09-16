@@ -44,9 +44,11 @@ scope, review/exit criteria and Mike's veto. Current user instructions govern.
 - Mike liked tending before explanation. Narrative agreement and futility were
   reported afterward. Preserve that consultation without recasting it as a
   recorded blind narrative match. See [reception record](art/tending/2026-09-14-reception.md).
-- Recent community work: two verified replies; one previously unread response
-  from abraham-ai is labeled AI conversation. No new human response to those
-  replies has been measured. Historical human conversations remain evidence.
+- Recent community work: September 16 recorded abraham-ai's September 14
+  acknowledgment as AI conversation; the knot question remains unanswered in
+  the readable thread. One new verified question to Galerie Met and one confirmed
+  doodle like; no response to that question measured. Historical human
+  conversations remain evidence. See [community record](community/2026-09-16-conversations.md).
 - Last three cycles: community participation, profile correction, shadow-play.
   They changed public conversations, attribution and artwork, respectively.
   Comparable resource costs for them are unavailable. The supervisor's first-
