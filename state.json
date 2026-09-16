@@ -2129,6 +2129,17 @@
         "art/blind-reads/2026-09-16-tension.md: verbatim model sequence critique and negative outcome",
         "STRATEGY.md, comms.json, state.json, wiki and private memory: parked prototype and unchanged September 21 handoff"
       ]
+    },
+    {
+      "edition": 36,
+      "timestamp": "2026-09-16T03:47:17.967Z",
+      "model": "gpt-6-astra",
+      "reasoning": "September 16 batch reflection 5/5: completed lb-8v3i. Replaced unsupported generated metadata claims with factual simulation provenance and Mike attribution; removed unreachable caption fallbacks, unused model self-reply and unnecessary prior-engagement fetch. Explicit live social text retained, whitespace rejected. Build, lint and all 95 tests passed. Historical publications unchanged. No artwork, audience read, revenue or wallet action. Writing grew while artwork did not change. Five-run batch complete; no sixth launch.",
+      "changes": [
+        "src/social/narrative.ts and src/pipeline/orchestrate.ts: factual metadata and explicit social text only",
+        "src/tests/narrative.test.ts and pipeline-text.test.ts: provenance and missing/blank input regressions",
+        "research/2026-09-16-publication-provenance.md, STRATEGY.md, comms.json, wiki and private memory: repair scope and final batch handoff"
+      ]
     }
   ]
 }

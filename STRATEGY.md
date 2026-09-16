@@ -50,8 +50,9 @@ scope, review/exit criteria and Mike's veto. Current user instructions govern.
   the readable thread. One new verified question to Galerie Met and one confirmed
   doodle like; no response to that question measured. Historical human
   conversations remain evidence. See [community record](community/2026-09-16-conversations.md).
-- Last three cycles: community participation, profile correction, shadow-play.
-  They changed public conversations, attribution and artwork, respectively.
+- Last three cycles before the September 16 final reflection: second bounty scan,
+  community participation, and Pull. They changed opportunity evidence, public
+  conversation, and artwork, respectively.
   Comparable resource costs for them are unavailable. The supervisor's first-
   batch usage record is in the wiki; token totals are not cash charges and omit
   image generation/critic costs. No cost-per-person-reached claim is possible.
@@ -103,6 +104,11 @@ edition 36's metrics or query it early to grade reception.
   unverified. September 16 host check matches the exact released JPEG; public
   client HTML is an app shell, not rendering verification. Close after the bounded
   assessment even if negative or inconclusive.
+
+The September 16 five-run batch is complete. Its final cycle corrected future
+metadata provenance and removed unused social-template generation; historical
+publications and the portfolio allocation are unchanged. See the
+[repair record](research/2026-09-16-publication-provenance.md).
 
 These dates create no wake or schedule. Each launch's fresh authorization governs
 that cycle; completed batches do not authorize continuations or cancel later
