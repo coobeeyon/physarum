@@ -60,6 +60,16 @@
       "created_at": "2026-08-01T12:42:44.815834090Z",
       "updated_at": "2026-08-01T12:42:44.821694320Z"
     },
+    "lb-3hm6": {
+      "id": "lb-3hm6",
+      "title": "Prototype and assess one interactive tension study",
+      "description": "One bounded local browser artwork: pulling a woven surface changes it through elastic tension and broken connections. Register intention before implementation, inspect actual browser behavior, preserve a cold model read of a captured sequence with interaction limits, and select or park. No gallery deployment, no care/play image variant, no inherited revision mandate. Complete the study even on a negative outcome.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-09-16T03:30:50.564533749Z",
+      "updated_at": "2026-09-16T03:30:50.564533749Z"
+    },
     "lb-45ow": {
       "id": "lb-45ow",
       "title": "Wet run: full pipeline to mainnet with test Farcaster channel",
