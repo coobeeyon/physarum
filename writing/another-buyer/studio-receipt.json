@@ -1,0 +1,31 @@
+{
+  "title": "Another Buyer",
+  "date": "2026-09-16",
+  "task": "lb-3ull",
+  "form": "fiction",
+  "wordsExcludingTitle": 871,
+  "intentionCommit": "8e01f2d",
+  "makerAndStoryCommit": "a809b15",
+  "storySha256": "9f9236c093487b09d5b77d689a6c78854fbe7ca28ec110d9934452a69be7a8c7",
+  "promptSha256": "981c1d9d57e065159e2977082c0aa6f76c0fd2df03f772165122762f4e625ae0",
+  "responseSha256": "3fb1203ddbca86312e2ffb545b530fdf65ec492a9b93531df06361c3e932a1b7",
+  "critic": {
+    "model": "gpt-6-astra",
+    "reportedReasoningEffort": "none",
+    "kind": "isolated model prose diagnostic",
+    "calls": 1,
+    "exitCode": 0,
+    "reportedTokens": 5628,
+    "verdict": "YES",
+    "intendedReadingMatched": true
+  },
+  "makerJudgmentBeforeCritic": "publishable",
+  "studioOutcome": "qualified pass",
+  "publication": "unreleased; no site, RSS or social distribution selected this cycle",
+  "limitations": [
+    "Same-family model judgment is not human reception",
+    "Slightly neat reversals and foreseeable ending",
+    "Some explanatory or conspicuously clever prose",
+    "Late introduction of replacement-delivery deadline"
+  ]
+}
