@@ -129,9 +129,11 @@
     {
       "name": "public-bounty-client",
       "url": "https://castbounty.vercel.app/_next/static/chunks/2_zay71if5s7f.js",
-      "observedAt": "2026-09-16T14:31:50Z",
-      "timePrecision": "Approximate within recorded tool call",
-      "bodySha256": "97b1746ba8af393031e98a2c53381f18e4b9531b8e07bc33b0c0713539b23ffa"
+      "bodySha256": "97b1746ba8af393031e98a2c53381f18e4b9531b8e07bc33b0c0713539b23ffa",
+      "retrievalWindowUTC": {
+        "after": "2026-09-16T14:31:39.077Z",
+        "before": "2026-09-16T14:32:07.843Z"
+      }
     }
   ]
 }
