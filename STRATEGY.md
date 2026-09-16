@@ -41,6 +41,7 @@ scope, review/exit criteria and Mike's veto. Current user instructions govern.
   estimate. Only tending is publicly released. Its September 16 interim read
   shows 0 likes/recasts/replies, no qualifying response observed; final assessment
   remains pending September 21. Exposure and client rendering remain unknown.
+- **One interactive prototype, parked:** September 16’s Pull study works in the browser; one cold model read of three captured frames returned BORDERLINE. This is a visual-sequence diagnostic, not an interactive playtest or human response. No deployment or automatic revision task. See [study](art/tension/2026-09-16-study.md).
 - Mike liked tending before explanation. Narrative agreement and futility were
   reported afterward. Preserve that consultation without recasting it as a
   recorded blind narrative match. See [reception record](art/tending/2026-09-14-reception.md).
