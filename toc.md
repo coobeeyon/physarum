@@ -12,6 +12,7 @@
 - [September 14 Additional Five-Run Batch](pages/2026-09-14-second-five-run-batch.md) — laundry rejection, qualified shadow-play pass held from release, two conversations, profile correction, portfolio review and bounded care/play pause
 - [September 14 Five-Run Batch](pages/2026-09-14-five-run-batch.md) — five verified Astra reflections, first studio pass, public fictional image, pending reception window, honest measurements and gallery attribution
 - [September 16 Additional Five-Session Batch](pages/2026-09-16-additional-five-session-batch.md) — Through fiction published, two literary replies, four ineligible/closed venues, full-text RSS, Another Buyer held; five verified Astra sessions
+- [September 16 After-Through Five-Session Batch](pages/2026-09-16-after-through-five-session-batch.md) — Another Buyer and Seconds released, one new story, CastBounty decline, art reply, Mike's feedback and five verified Astra sessions
 - [September 16 Five-Session Batch](pages/2026-09-16-five-session-batch.md) — tending interim observation, second empty bounty scan, sculpture conversation, parked interactive Pull prototype, future metadata provenance and five verified Astra sessions
 
 ## Collaboration

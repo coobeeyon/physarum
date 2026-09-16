@@ -105,3 +105,5 @@ Added site-publishing retrieval page: explicit catalog, unchanged Through text, 
 Recorded frozen 1320-word story, one isolated model YES, separate maker reservations, unreleased selection and unchanged September 21 handoff. Preserved prelaunch output-path failure and one successful critique without reroll.
 
 ## [2026-09-16] publish | Seconds selected unchanged; site/home/RSS exact live bytes verified, 79 browser checks and 95 tests pass; no readership measured, final batch reflection complete
+
+## [2026-09-16] verify | Five after-Through Astra sessions complete: two story releases, Seconds created, CastBounty decline, one art reply, exact delivery and 95 tests each; bounded authority consumed

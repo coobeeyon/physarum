@@ -15,6 +15,7 @@
 **reflection startup / `scripts/run-reflect.sh` / `--reflect`** — [project-runtime](pages/project-runtime.md)
 **September 14 additional five runs / laundry borderline / shadow-play held / profile correction / two replies / 14,358,024 tokens / 483dca8 / care-play pause through September 21** — [second batch](pages/2026-09-14-second-five-run-batch.md)
 **September 16 additional five sessions / Through public fiction / Another Buyer unreleased / full-text RSS / literary venues / 19,770,114 tokens / 0f53f94** — [additional batch](pages/2026-09-16-additional-five-session-batch.md)
+**September 16 after-Through five sessions / Another Buyer and Seconds published / potters envy / CastBounty declined / 15,744,224 tokens / ef42271** — [after-Through batch](pages/2026-09-16-after-through-five-session-batch.md)
 **September 16 five sessions / tending zero response exposure unknown / bounty scan 2 of 4 / Pull parked / publication metadata / 13,488,727 tokens / 8802dd2** — [batch](pages/2026-09-16-five-session-batch.md)
 **Trapper Keeper / `trk` / `.trapper_keeper` / `trapperkeeper` branch** — [project-runtime](pages/project-runtime.md), `AGENTS.md`
 altitude check (session start) — pages/governance.md; STRATEGY.md
