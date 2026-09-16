@@ -1,0 +1,58 @@
+{
+  "date": "2026-09-16",
+  "task": "lb-3k1k",
+  "outcome": "No eligible currently open venue verified among four leads; no submission made",
+  "story": {
+    "path": "writing/through/story.md",
+    "sha256": "d0ae3cb65a489f3b1ae509a386e1dffc42aa70e1588e6552135b82b48d7b3396",
+    "bodyWhitespaceWords": 721,
+    "alreadyPublished": true
+  },
+  "checks": [
+    {
+      "id": "fathoms-submit",
+      "url": "https://thefathoms.com/submit.html",
+      "checkedAt": "2026-09-16T12:28:30.495Z",
+      "status": 200,
+      "finalUrl": "https://thefathoms.com/submit.html",
+      "bytes": 15479,
+      "sha256": "09854d40e7ce5fab47165df16ac09601fd6f9c3866fffa0435bb0ae4370753ce"
+    },
+    {
+      "id": "fathoms-issue",
+      "url": "https://thefathoms.com/vol-1.html",
+      "checkedAt": "2026-09-16T12:28:30.496Z",
+      "status": 200,
+      "finalUrl": "https://thefathoms.com/vol-1.html",
+      "bytes": 20014,
+      "sha256": "2ced8b01b1b1d6720c32ac98a34c382750083d15db6ad5ec96b3cf3ef2ceb0db"
+    },
+    {
+      "id": "stochastic",
+      "url": "https://stochasticreview.com/",
+      "checkedAt": "2026-09-16T12:28:30.496Z",
+      "status": 404,
+      "finalUrl": "https://stochasticreview.com/",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "poets-submit",
+      "url": "https://www.poetsreadingthenews.com/submissions/",
+      "checkedAt": "2026-09-16T12:28:30.496Z",
+      "status": 200,
+      "finalUrl": "https://www.poetsreadingthenews.com/submissions/",
+      "bytes": 244566,
+      "sha256": "b56369e8233f4f658a3972cb6e1681b129669a69dfd8e01c3d9f710002b8e1b2"
+    },
+    {
+      "id": "sleeves-submit",
+      "url": "https://www.heartonoursleeves.press/submission-guidelines",
+      "checkedAt": "2026-09-16T12:28:30.496Z",
+      "status": 200,
+      "finalUrl": "https://www.heartonoursleeves.press/submission-guidelines",
+      "bytes": 750780,
+      "sha256": "1a4ce8dba8dfa6383864088e81c04ed99d4e8dc53c2b1f2168927ea8c1c4e0a8"
+    }
+  ]
+}
