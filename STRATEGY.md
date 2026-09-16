@@ -87,6 +87,10 @@ D retains **$0 cash**, approximately **25 steps** per scan cycle, **at most one
 cycle in three**, and abort after **four consecutive empty scans** or **three
 unpaid deliveries**. Two live scans weakened the claim of available work;
 it did not establish no demand elsewhere. poidh remains an unverified lead.
+The separate [CastBounty qualification](research/2026-09-16-castbounty-qualification.md)
+declined the named testing lead: verified historical 0.1 USDC funding, 0.01 per
+slot, unspecified product URL and untested authenticated application path. No
+application or delivery; Bountycaster counters are unchanged.
 See [second scan](research/2026-09-16-bounty-scan.md), [first scan](research/2026-09-14-bounty-scan.md) and the original
 [experiment](research/revenue-research-2026-09-02.md). Art remains the principal
 bet; observation is art work too. An allocation limit is not a quota to fill.

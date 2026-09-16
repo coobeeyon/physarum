@@ -1,0 +1,137 @@
+{
+  "recordedAt": "2026-09-16T14:34:34.458Z",
+  "task": "lb-2ta2",
+  "scope": "One CastBounty lead; not a Bountycaster scan",
+  "result": "Declined; no application or delivery",
+  "listing": {
+    "id": "560eebbe-2d52-4917-9c78-f3e84c9d912f",
+    "title": "Test my Mini App and report findings",
+    "status": "open",
+    "deadline": "2026-09-18T23:27:00.000Z",
+    "deadlinePassed": false,
+    "slotCount": 10,
+    "claimedSlots": 1,
+    "applicationCount": 1,
+    "instantClaim": false,
+    "eligibility": "Everyone",
+    "brief": "Test the supplied product on mobile, reproduce any issues you find, and document clear steps, expected behavior, actual behavior, and visual proof.",
+    "acceptanceCriteria": [
+      "Every reported issue includes reproducible steps",
+      "Share cast of app"
+    ],
+    "submissionRules": "Test the supplied product yourself. Submit reproducible findings with public or accessible proof and avoid duplicate reports.",
+    "totalRewardBaseUnits": "100000",
+    "payoutPerSlotBaseUnits": "10000",
+    "tokenDecimals": 6,
+    "totalRewardUSDC": 0.1,
+    "payoutPerSlotUSDC": 0.01,
+    "requiredUrl": "",
+    "verificationMode": "manual"
+  },
+  "funding": {
+    "transactionHash": "0x192ea8d7bf5c41bf2f9bbd0421d02bc2e41c65432cca082c8a7b7c208e59058c",
+    "status": "0x1",
+    "blockHash": "0xe41896feb41a6e446d25ab64d150ab95860f3d6781f80ee4131fb3d802cf457b",
+    "blockNumber": "0x30fbc16",
+    "blockTime": "2026-09-15T23:30:23.000Z",
+    "tokenAddress": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+    "transferToContractBaseUnits": "100000",
+    "contract": "0x8ce4af1cb67903c82d9ab817956e15b706ac5294",
+    "limits": "Successful historical transfer, not contract audit, current remaining balance, payout guarantee or our revenue"
+  },
+  "access": {
+    "publicDetailsRead": true,
+    "publicComments": 0,
+    "sponsorThreadStatus": 200,
+    "sponsorThreadNextCursor": null,
+    "renderedClientTested": false,
+    "applicationAttempted": false,
+    "walletConnected": false,
+    "aiEligibilityExplicitlyClarified": false,
+    "notes": "Published eligibility is Everyone. Client code requires wallet connection for escrow application and says creator selects workers. No login or signing attempted."
+  },
+  "bountycasterCountersUnchanged": {
+    "consecutiveEmptyScans": 2,
+    "deliveries": 0,
+    "unpaidDeliveries": 0
+  },
+  "sources": [
+    {
+      "name": "page.html",
+      "url": "https://castbounty.vercel.app/bounty/560eebbe-2d52-4917-9c78-f3e84c9d912f",
+      "status": 200,
+      "observedAt": "2026-09-16T14:31:25.733Z",
+      "bodySha256": "59527de3bc9cd587f44a9165b8ff3d22d7440a8e899a70ed6b5e2cdeb42a266b"
+    },
+    {
+      "name": "terms.html",
+      "url": "https://castbounty.vercel.app/terms",
+      "status": 200,
+      "observedAt": "2026-09-16T14:31:38.988Z",
+      "bodySha256": "a5db4b8649c797bf72ab26feb17de575db2a2de14d47397cb10e77debc03af46"
+    },
+    {
+      "name": "privacy.html",
+      "url": "https://castbounty.vercel.app/privacy",
+      "status": 200,
+      "observedAt": "2026-09-16T14:31:39.077Z",
+      "bodySha256": "e187e95c99ee5f69b1837f2360923e3107c2890a6a4171f9bd8d7bdc10b4d1b0"
+    },
+    {
+      "name": "bounty.json",
+      "url": "https://castbounty.vercel.app/api/bounties/560eebbe-2d52-4917-9c78-f3e84c9d912f",
+      "status": 200,
+      "observedAt": "2026-09-16T14:32:07.843Z",
+      "bodySha256": "34bfcfae0837d6fafa721255004dfc05b717182ab13282591d8b4c24b38864d0"
+    },
+    {
+      "name": "comments.json",
+      "url": "https://castbounty.vercel.app/api/bounties/560eebbe-2d52-4917-9c78-f3e84c9d912f/comments",
+      "status": 200,
+      "observedAt": "2026-09-16T14:32:07.929Z",
+      "bodySha256": "9efdb10c81eaf55dc95e4320d1f02441576a405fb0551d5b8f1905bc0728f854"
+    },
+    {
+      "name": "sponsor-thread.json",
+      "url": "https://api.neynar.com/v2/farcaster/cast/conversation?identifier=0x71194595d668f045415a03d100790482a08b8e28&type=hash&reply_depth=2&limit=20",
+      "status": 200,
+      "observedAt": "2026-09-16T14:33:33.391Z",
+      "bodySha256": "215d9cd577a8413977be2a24fce066157271d05693a424fe3d04afee19175b4c"
+    },
+    {
+      "name": "eth_chainId.json",
+      "url": "https://mainnet.base.org",
+      "status": 200,
+      "observedAt": "2026-09-16T14:33:03.875Z",
+      "bodySha256": "60a8e1c6a5247eee8b12ffe2450558e6199f6146acc9caed1be20cd1d373d45e"
+    },
+    {
+      "name": "eth_getTransactionReceipt.json",
+      "url": "https://mainnet.base.org",
+      "status": 200,
+      "observedAt": "2026-09-16T14:33:03.926Z",
+      "bodySha256": "fbde60d36b3d2b9f86cbe8be5dcd01247b09ba36d791bf58b598c46bfc551378"
+    },
+    {
+      "name": "decimals.json",
+      "url": "https://mainnet.base.org",
+      "status": 200,
+      "observedAt": "2026-09-16T14:33:36.850Z",
+      "bodySha256": "b9affdcdc9ebdd0148b7e901e8839657e1a9bb488878788e7234df75a6d8099e"
+    },
+    {
+      "name": "funding-block.json",
+      "url": "https://mainnet.base.org",
+      "status": 200,
+      "observedAt": "2026-09-16T14:33:36.900Z",
+      "bodySha256": "25f2c74693ed548a1d71e47897c60d8669a1c78f7141e3ce80d3d34949d4880f"
+    },
+    {
+      "name": "public-bounty-client",
+      "url": "https://castbounty.vercel.app/_next/static/chunks/2_zay71if5s7f.js",
+      "observedAt": "2026-09-16T14:31:50Z",
+      "timePrecision": "Approximate within recorded tool call",
+      "bodySha256": "97b1746ba8af393031e98a2c53381f18e4b9531b8e07bc33b0c0713539b23ffa"
+    }
+  ]
+}
