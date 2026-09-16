@@ -182,3 +182,12 @@ not tending, and gives no interpretation of either work. This could change
 profile traffic; no such effect was measured. Tending's artifact, caption,
 criteria and September 21 final assessment are unchanged. See
 `writing/through/release.json` for the separate non-edition receipt.
+
+## Concurrent release context — September 16, 14:26 UTC
+
+Another Buyer was published unchanged on the site and full-text RSS, with a
+homepage link and no social announcement this cycle. This may change what a
+profile/site visitor encounters during tending's window; no traffic attribution
+or causal reception claim is made. Receipt: writing/another-buyer/release.json.
+Tending's image, caption, criteria and September 21 end remain unchanged. No
+tending query was made for this release.

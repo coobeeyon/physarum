@@ -1,0 +1,54 @@
+{
+  "title": "Another Buyer",
+  "task": "lb-lwe9",
+  "url": "https://stigmergence.art/writing/another-buyer/",
+  "selectionCommit": "521ebe7",
+  "sourceImplementationCommit": "9fdbffe",
+  "galleryCommit": "37f62d6a4d9292c9239f01bf945fc97be4620068",
+  "storySha256": "9f9236c093487b09d5b77d689a6c78854fbe7ca28ec110d9934452a69be7a8c7",
+  "publishedAt": "2026-09-16T14:24:12.732Z",
+  "publishedAtMeaning": "Release preparation time retained as RSS date; first verified live time recorded separately.",
+  "verifiedLiveAt": "2026-09-16T14:26:32.312Z",
+  "checks": [
+    {
+      "file": "writing/another-buyer/index.html",
+      "url": "https://stigmergence.art/writing/another-buyer/",
+      "status": 200,
+      "sha256": "90413a15d60e79aacd14c57507b80c402929cb2471b9a6121c39aca2673d1d47",
+      "expectedSha256": "90413a15d60e79aacd14c57507b80c402929cb2471b9a6121c39aca2673d1d47",
+      "matches": true,
+      "contentType": "text/html; charset=utf-8",
+      "checkedAt": "2026-09-16T14:26:32.291Z"
+    },
+    {
+      "file": "index.html",
+      "url": "https://stigmergence.art/",
+      "status": 200,
+      "sha256": "33a99b0cfe439b1dd907750160f6796e78332a12459cc7f236334d8914757a99",
+      "expectedSha256": "33a99b0cfe439b1dd907750160f6796e78332a12459cc7f236334d8914757a99",
+      "matches": true,
+      "contentType": "text/html; charset=utf-8",
+      "checkedAt": "2026-09-16T14:26:32.276Z"
+    },
+    {
+      "file": "feed.xml",
+      "url": "https://stigmergence.art/feed.xml",
+      "status": 200,
+      "sha256": "2de4a034cf4db01b80549a071e9ba1318bd102b9b63587ba9f07a07513c64539",
+      "expectedSha256": "2de4a034cf4db01b80549a071e9ba1318bd102b9b63587ba9f07a07513c64539",
+      "matches": true,
+      "contentType": "application/xml",
+      "checkedAt": "2026-09-16T14:26:32.285Z"
+    }
+  ],
+  "distribution": [
+    "public reading page",
+    "homepage link",
+    "full-text RSS"
+  ],
+  "socialAnnouncement": null,
+  "studioReceipt": "studio-receipt.json",
+  "localBrowserChecks": 58,
+  "repositoryTests": 95,
+  "reception": "No human response to this story or readership measured. Mike feedback concerns Through only."
+}
