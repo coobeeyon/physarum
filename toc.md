@@ -4,6 +4,7 @@
 
 ## Architecture
 - [Project Runtime](pages/project-runtime.md) — primary Astra reflection, fresh launch instructions and same-thread continuation, dedicated persistent Codex authentication, legacy/current memory, portable runner, action journals, verified gallery cloning and tracker/wiki hooks
+- [Site Publishing](pages/site-publishing.md) — full-text RSS, selected release catalog, stable dates and GUIDs, site discovery links, local checks and verified delivery without subscriber claims
 
 ## Art Practice
 - [Blind-Viewer Protocol](pages/blind-viewer-protocol.md) — isolated Codex cold reads, calibration limits, August baseline, tending and shadow-play studio passes, craft-reset exit, September 16 interim tending observation, September 21 final assessment and rejected laundry

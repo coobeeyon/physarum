@@ -81,3 +81,6 @@ One frozen fiction, maker publishable judgment and single fresh model YES; engin
 ## [2026-09-16] record | Literary participation: full Scrap Compute read, inspected Wessel marks, two verified replies and qualified incidental Through metadata update; no human reception established.
 
 ## [2026-09-16] record | Through outside venue check: four leads, no verified eligible open call, no submission; distinguish AI permission, reprints, current opening and readership.
+
+## [2026-09-16] add | Full-text RSS for selected public work
+Added site-publishing retrieval page: explicit catalog, unchanged Through text, stable permalink/date, deterministic renderer, discovery links, 28 browser checks and exact gallery ede5189 delivery. No subscriber or human reach claim; tending September 21 unchanged.
