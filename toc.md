@@ -7,6 +7,7 @@
 
 ## Art Practice
 - [Blind-Viewer Protocol](pages/blind-viewer-protocol.md) — isolated Codex cold reads, calibration limits, August baseline, tending and shadow-play studio passes, craft-reset exit, September 16 interim tending observation, September 21 final assessment and rejected laundry
+- [Interactive Browser Studies](pages/interactive-studies.md) — offline Pull prototype, deterministic browser checks, negative model sequence diagnostic and limits of still-frame criticism
 - [September 14 Additional Five-Run Batch](pages/2026-09-14-second-five-run-batch.md) — laundry rejection, qualified shadow-play pass held from release, two conversations, profile correction, portfolio review and bounded care/play pause
 - [September 14 Five-Run Batch](pages/2026-09-14-five-run-batch.md) — five verified Astra reflections, first studio pass, public fictional image, pending reception window, honest measurements and gallery attribution
 

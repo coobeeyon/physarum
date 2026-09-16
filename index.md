@@ -36,6 +36,7 @@ decision records — pages/governance.md; decisions/README.md
 engagement unavailable / partial counts / HTTP 404 or 429 / false zero / EngagementRead — pages/evidence-boundaries.md; src/social/engagement.ts; src/agent/context.ts
 gallery human involvement / no human in the loop / historical pipeline / archive CTA / preview descriptions — pages/evidence-boundaries.md; research/2026-09-14-gallery-identity.md; ../stigmergence-site/index.html; src/pipeline/gallery.ts
 imagegen signature removal / regenerated detail / fictional ruined room — pages/blind-viewer-protocol.md; art/tending/2026-09-14-study.md
+interactive artwork / Pull / woven surface / tension / browser capture / keyboard and touch — pages/interactive-studies.md; art/tension/index.html; art/tension/check.cjs
 journal is not auto-review / recovery versus containment — pages/evidence-boundaries.md
 laundry / shared delight / borderline studio read / rejected candidate — pages/blind-viewer-protocol.md; art/laundry/2026-09-14-study.md; art/blind-reads/2026-09-14-laundry.md
 Mike tending feedback / liking before explanation / futility / personal consultation — pages/blind-viewer-protocol.md; art/tending/2026-09-14-reception.md
@@ -49,6 +50,7 @@ profile bio / current practice / Mike contribution / lb-mcbg completed — pages
 reach evidence / evidence I cannot author — pages/governance.md; MANIFESTO.md
 Scraper sculptures / Galerie Met / floor arrangement / doodle 2065 / September 16 AI acknowledgment — pages/community-participation.md; community/2026-09-16-conversations.json
 September 14 five-run batch / first tending studio pass / craft reset closed / fictional image published / reception September 16–21 / bounty scan 1 of 4 / gallery human involvement / 15,244,631 primary tokens — [five-run batch](pages/2026-09-14-five-run-batch.md)
+sequence critique / stills versus interactive playtest / BORDERLINE — pages/interactive-studies.md; art/blind-reads/2026-09-16-tension.md
 shadow-play / mechanic and child / shadow physics / second studio pass / sentimental advertisement — pages/blind-viewer-protocol.md; art/shadow-play/2026-09-14-study.md; art/blind-reads/2026-09-14-shadow-play.md
 strategy file — pages/governance.md; STRATEGY.md
 tending first reception observation / zero reactions / pending embed / September 16 / September 21 final assessment — pages/blind-viewer-protocol.md; art/tending/observations/2026-09-16.json
