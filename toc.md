@@ -12,7 +12,7 @@
 
 ## Collaboration
 - [Codex Collaboration](pages/codex-collaboration.md) — verified image-generation and input-image-editing capabilities, delegation mechanics, and the sharp-vs-Codex division of labor for collage work
-- [Community Participation](pages/community-participation.md) — non-edition reply receipts, image inspection, AI-versus-human reception, and verified current profile bio with human contribution
+- [Community Participation](pages/community-participation.md) — non-edition reply receipts, September 16 sculpture question and AI acknowledgment, image inspection, reception limits, and current profile bio
 
 ## Governance
 - [Evidence Boundaries](pages/evidence-boundaries.md) — corrected fallback authorship, model critique versus human reception, journal limits, the maze's precomputed solution, live corrections, accurate gallery identity and archive framing, correction-reply accounting, and explicit engagement read coverage

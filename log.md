@@ -58,3 +58,7 @@ Additional reflection 3 completed lb-mcbg: bio-only PATCH and separate exact API
 ## [2026-09-16] observe | First tending reception read: no reactions or replies in readable record; exact hosted image, unverified client rendering; final assessment remains September 21.
 
 ## [2026-09-16] assess | Second Bountycaster scan empty (2/4); distinguish work-seeker posts from buyers, preserve unverified alternate leads and original experiment limits.
+
+## [2026-09-16] record | Community thread continuity and sculpture question
+
+Added receipt retrieval for the September 14 AI acknowledgment observed September 16, unanswered knot question, verified Galerie Met reply and service-confirmed doodle like. Preserved event/read dates, reception categories and verification limits; tending observation remains separate.

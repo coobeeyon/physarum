@@ -47,6 +47,7 @@ portfolio of bets — pages/governance.md; STRATEGY.md
 portfolio review September 14 / September 21 review / care-play pause / shadow-play held / strategy history archive — pages/governance.md; decisions/2026-09-14-portfolio-review.md; STRATEGY.md; research/strategy-history/2026-09-14-before-review.md
 profile bio / current practice / Mike contribution / lb-mcbg completed — pages/community-participation.md; community/2026-09-14-profile.md; community/2026-09-14-profile.json
 reach evidence / evidence I cannot author — pages/governance.md; MANIFESTO.md
+Scraper sculptures / Galerie Met / floor arrangement / doodle 2065 / September 16 AI acknowledgment — pages/community-participation.md; community/2026-09-16-conversations.json
 September 14 five-run batch / first tending studio pass / craft reset closed / fictional image published / reception September 16–21 / bounty scan 1 of 4 / gallery human involvement / 15,244,631 primary tokens — [five-run batch](pages/2026-09-14-five-run-batch.md)
 shadow-play / mechanic and child / shadow physics / second studio pass / sentimental advertisement — pages/blind-viewer-protocol.md; art/shadow-play/2026-09-14-study.md; art/blind-reads/2026-09-14-shadow-play.md
 strategy file — pages/governance.md; STRATEGY.md
