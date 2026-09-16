@@ -1,7 +1,6 @@
 import { describe, expect, test } from "bun:test"
-import { composeCastText } from "#social/narrative.ts"
+import { composeMetadataDescription } from "#social/narrative.ts"
 import type { Genome } from "#types/evolution.ts"
-import type { EngagementData } from "#types/evolution.ts"
 
 const makeGenome = (overrides: Partial<Genome> = {}): Genome => ({
 	agentCount: 300_000,
@@ -27,86 +26,42 @@ const makeGenome = (overrides: Partial<Genome> = {}): Genome => ({
 	...overrides,
 })
 
-const makeEngagement = (overrides: Partial<EngagementData> = {}): EngagementData => ({
-	edition: 2,
-	castHash: "0xabc123def456abc123def456abc123def456abc1",
-	likes: 5,
-	recasts: 2,
-	replies: 3,
-	ageHours: 24,
-	...overrides,
-})
-
-describe("composeCastText", () => {
-	test("includes edition number", () => {
-		const text = composeCastText(1, 7919, makeGenome(), null)
-
-		expect(text).toContain("stigmergence #1")
+describe("metadata provenance", () => {
+	test("uses actual counts and settings across palettes without inferring visual success", () => {
+		for (const colormap of ["viridis", "plasma", "inferno", "magma", "cividis"] as const) {
+			for (const populationCount of [1, 2, 3]) {
+				const text = composeMetadataDescription(
+					37,
+					1234,
+					makeGenome({ colormap, populationCount, agentCount: 12345 }),
+				)
+				expect(text).toContain("Stigmergence #37")
+				expect(text).toContain("12,345 agents, 300 steps")
+				expect(text).toContain(`${populationCount} simulated population`)
+				expect(text).toContain("seed 1234")
+				expect(text).toContain(`Colormap setting: ${colormap}`)
+				expect(text).toContain("Food placement setting: mixed")
+				expect(text).toContain("AI artist built and supported by Mike")
+				expect(text).not.toMatch(
+					/no human|no one checks|found an audience|thick|sparse|found every|minted|approved/,
+				)
+			}
+		}
 	})
-
-	test("multi-population uses competing intro and agent count", () => {
-		const text = composeCastText(1, 7919, makeGenome(), null)
-
-		expect(text).toContain("300,000 agents")
-		expect(text).toContain("three colonies")
-	})
-
-	test("single population uses single intro and agent count", () => {
-		const genome = makeGenome({
-			populationCount: 1,
-			populations: [{ color: [255, 255, 255], agentFraction: 1 }],
-		})
-		const text = composeCastText(1, 100, genome, null)
-
-		expect(text).toContain("300,000 agents")
-		expect(text).toContain("300 steps")
-	})
-
-	test("acknowledges notable engagement (total > 3)", () => {
-		const text = composeCastText(3, 23757, makeGenome(), makeEngagement())
-
-		expect(text).toContain("edition #2 found an audience")
-	})
-
-	test("ignores low engagement (total <= 3)", () => {
-		const text = composeCastText(
-			3,
-			23757,
-			makeGenome(),
-			makeEngagement({ likes: 1, recasts: 0, replies: 0 }),
+	test("describes image guidance without claiming discovery or exposing the input path", () => {
+		const text = composeMetadataDescription(
+			35,
+			35001,
+			makeGenome({ foodPlacement: "image", foodImageSource: "/private/source.png" }),
 		)
-
-		expect(text).not.toContain("found an audience")
+		expect(text).toContain("An input image supplies the food field")
+		expect(text).not.toContain("/private")
+		expect(text).not.toMatch(/solved|shortest|independent|biological experiment/)
 	})
-
-	test("includes meta-awareness line", () => {
-		const text = composeCastText(1, 7919, makeGenome(), null)
-
-		// Should contain one of the META_LINES
-		expect(text).toMatch(/AI/)
-	})
-
-	test("output stays under 1024 chars", () => {
-		const text = composeCastText(3, 23757, makeGenome(), makeEngagement())
-
-		expect(text.length).toBeLessThan(1024)
-	})
-
-	test("site URL appears as last line", () => {
-		const text = composeCastText(3, 23757, makeGenome(), makeEngagement())
-		const lines = text.split("\n")
-
-		expect(lines[lines.length - 1]).toBe("https://stigmergence.art")
-	})
-
-	test("different seeds produce different intros", () => {
-		const text1 = composeCastText(1, 100, makeGenome(), null)
-		const text2 = composeCastText(1, 101, makeGenome(), null)
-
-		// At minimum, the intro or meta line should differ for different seeds
-		const lines1 = text1.split("\n").filter((l) => l.length > 0)
-		const lines2 = text2.split("\n").filter((l) => l.length > 0)
-		const differ = lines1.some((l, i) => l !== lines2[i])
-		expect(differ).toBe(true)
+	test("is deterministic and distinguishes a simulation from its biological inspiration", () => {
+		const genome = makeGenome()
+		const text = composeMetadataDescription(37, 1234, genome)
+		expect(composeMetadataDescription(37, 1234, genome)).toBe(text)
+		expect(text).toContain("digital trail simulation inspired by Physarum polycephalum")
 	})
 })

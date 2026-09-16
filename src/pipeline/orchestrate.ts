@@ -22,10 +22,8 @@ import {
 import { loadState, saveState } from "#pipeline/state.ts"
 import { renderPng } from "#render/canvas.ts"
 import { engageWithCommunity } from "#social/discover.ts"
-import { readEngagement } from "#social/engagement.ts"
 import { type NeynarConfig, postCast, postReply } from "#social/farcaster.ts"
-import { composeCastText, composeMetadataDescription, composeZoraCast } from "#social/narrative.ts"
-import type { EngagementData } from "#types/evolution.ts"
+import { composeMetadataDescription } from "#social/narrative.ts"
 import type { NftMetadata } from "#types/metadata.ts"
 import type { PhysarumParams } from "#types/physarum.ts"
 import { type Result, err, ok } from "#types/result.ts"
@@ -48,6 +46,8 @@ export const runPipeline = async (
 	config: EnvConfig | undefined,
 	options: PipelineOptions,
 ): Promise<Result<{ edition: number; mode: RunMode; outputPath: string }>> => {
+	const { castText, selfReplyText, zoraCastText } = options
+
 	// Load state
 	const stateResult = loadState()
 	if (!stateResult.ok) return stateResult
@@ -59,7 +59,7 @@ export const runPipeline = async (
 
 	if (options.mode === "live") {
 		if (!config) return err("live mode requires a complete environment configuration")
-		if (!options.castText || !options.selfReplyText || !options.zoraCastText) {
+		if (!castText?.trim() || !selfReplyText?.trim() || !zoraCastText?.trim()) {
 			return err(
 				"live mode requires explicit --cast-text, --self-reply-text, and --zora-text from Stigmergence",
 			)
@@ -173,7 +173,9 @@ export const runPipeline = async (
 		console.log("  studio mode: no uploads, wallet calls, posts, gallery changes, or state writes")
 		return ok({ edition, mode: options.mode, outputPath: pngPath })
 	}
-	if (!config || !journal) return err("live mode was not prepared")
+	if (!config || !journal || !castText || !selfReplyText || !zoraCastText) {
+		return err("live mode was not prepared")
+	}
 
 	// 3. Upload to IPFS
 	console.log("uploading to IPFS...")
@@ -194,7 +196,7 @@ export const runPipeline = async (
 	}
 	console.log(`  image CID: ${imageCid}`)
 
-	// Extract genome (everything except seed/width/height) — needed for metadata and narrative
+	// Extract genome (everything except seed/width/height) — needed for metadata
 	const { seed: _seed, width: _width, height: _height, ...genome } = params
 
 	const metadata: NftMetadata = {
@@ -296,25 +298,7 @@ export const runPipeline = async (
 		fid: config.farcasterFid,
 	}
 
-	// Fetch engagement for previous edition
-	let prevEngagement: EngagementData | null = null
-	if (state.history.length > 0 && config.neynarApiKey) {
-		const lastEntry = state.history[state.history.length - 1]
-		const engResult = await readEngagement(config.neynarApiKey, [lastEntry])
-		if (engResult.ok) {
-			for (const w of engResult.value.warnings) {
-				console.warn(`  engagement: ${w}`)
-			}
-			const reading = engResult.value.engagement[0]
-			if (reading?.status === "complete") {
-				prevEngagement = reading
-			}
-		}
-	}
-
-	// Compose narrative text — prefer hand-written text when provided
-	const castText = options.castText ?? composeCastText(edition, seed, genome, prevEngagement)
-
+	// Live mode requires explicit social text before any rendering or outside action.
 	// Alternate channels to reach different audiences: odd editions → /ai-art, even → /art
 	// /genart is dead (3 members, last post 5+ months ago). /ai-art has 24.8K followers.
 	const postChannel =
@@ -343,7 +327,6 @@ export const runPipeline = async (
 	// Self-reply: deeper reflection on what this simulation actually does.
 	// Creates a visible thread on our post — people browsing see it has replies and click in.
 	// Include the Zora mint URL as an embed so anyone reading the thread can collect directly.
-	const selfReplyText = options.selfReplyText ?? ""
 	if (!selfReplyHash) {
 		const begun = beginLiveOperation(journal, "post-self-reply")
 		if (!begun.ok) return begun
@@ -368,8 +351,7 @@ export const runPipeline = async (
 			const begun = beginLiveOperation(journal, "post-zora")
 			if (!begun.ok) return begun
 			journal = begun.value
-			const zoraText = options.zoraCastText ?? composeZoraCast(edition, genome)
-			const zoraTextWithLink = `${zoraText}\n\n${mintUrl}`
+			const zoraTextWithLink = `${zoraCastText}\n\n${mintUrl}`
 			const zoraResult = await postCast(neynarConfig, zoraTextWithLink, imageUrl, undefined, "zora")
 			if (!zoraResult.ok) return zoraResult
 			zoraCastHash = zoraResult.value.castHash
