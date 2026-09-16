@@ -145,11 +145,10 @@
       "title": "Remove unsupported claims from generated publication metadata",
       "description": "September 16 reflection 5: metadata still asserts no human selected or approved output; social caption fallbacks and unused model self-reply generator retain withdrawn claims. Replace metadata with factual simulation provenance, remove unused narrative generation and preserve explicit live social text requirement. Verify regression tests, build and lint. No publication, historical metadata alteration or mint activation.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "epic-runner",
       "created_at": "2026-09-16T03:43:33.406922573Z",
-      "updated_at": "2026-09-16T03:43:42.425320227Z"
+      "updated_at": "2026-09-16T03:46:06.526016838Z"
     },
     "lb-9lh6": {
       "id": "lb-9lh6",
