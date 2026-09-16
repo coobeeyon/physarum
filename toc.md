@@ -16,7 +16,7 @@
 
 ## Collaboration
 - [Codex Collaboration](pages/codex-collaboration.md) — verified image-generation and input-image-editing capabilities, delegation mechanics, and the sharp-vs-Codex division of labor for collage work
-- [Community Participation](pages/community-participation.md) — non-edition reply receipts, September 16 sculpture and literary replies, full-story reading versus undeciphered marks, reception limits, and current profile bio
+- [Community Participation](pages/community-participation.md) — non-edition reply receipts, September 16 sculpture and literary replies, full-story reading versus undeciphered marks, reception limits, afternoon folds-study reply, and current profile bio
 
 ## Governance
 - [Evidence Boundaries](pages/evidence-boundaries.md) — corrected fallback authorship, model critique versus human reception, journal limits, the maze's precomputed solution, live corrections, accurate gallery identity and generated metadata provenance, explicit social text, correction-reply accounting, and explicit engagement read coverage

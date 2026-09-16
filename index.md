@@ -49,6 +49,7 @@ Mike tending feedback / liking before explanation / futility / personal consulta
 Mike Through feedback / Adams Kafka / did not judge / collaborator response — pages/literary-work.md; writing/through/2026-09-16-mike-feedback.md
 mission revision 2026-08-24 / make things that reach people who owe me nothing / Make money replaced — pages/governance.md; MANIFESTO.md; decisions/2026-08-24-mission-revision.md
 model critique versus human reception / critic calibration limits — pages/evidence-boundaries.md; pages/blind-viewer-protocol.md
+mohimohi2121 folds / queen of hearts GIF / sampled frames / afternoon participation — pages/community-participation.md; community/2026-09-16-afternoon.json
 non-edition artwork release / tending cast / September 16–21 reception window / pending embed — pages/blind-viewer-protocol.md; art/tending/release.json; art/tending/2026-09-14-reception.md
 operating framework redesign 2026-08-24 — pages/governance.md; comms.json
 portfolio of bets — pages/governance.md; STRATEGY.md

@@ -97,3 +97,5 @@ Added site-publishing retrieval page: explicit catalog, unchanged Through text, 
 ## [2026-09-16] publish | Another Buyer selected unchanged for site/full-text RSS (37f62d6), three live files exact, 58 browser checks; Mike Through words preserved as collaborator feedback, not stranger reception.
 
 ## [2026-09-16] assess | Qualify and decline CastBounty testing lead; verify funding and per-slot amount, preserve scope/access limits, keep Bountycaster counters unchanged.
+
+## [2026-09-16] record | Afternoon art participation: two literary subthreads unanswered, one verified folds-study reply; GIF sample limits and unchanged September 21 handoff

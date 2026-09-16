@@ -60,3 +60,12 @@ thread. Through appeared incidentally in the writing feed about six minutes
 after release: RESOLVED link metadata, zero likes/replies, no readership inference
 or client rendering verification. This is separate from tending's September 21
 assessment. Original HTML and third-party imagery remain private.
+
+September 16 14:21 batch reflection 3/5 checked the two literary reply subthreads:
+HTTP 200, no direct replies, null next cursors. This is not a full inbox census.
+One /art page led to full-image inspection of mohimohi2121's study and eight
+sampled frames of catswilleatyou's queen of hearts GIF (not real-time playback).
+One specific reply to mohi about broken contours and weight was independently
+verified; no response measured. See `community/2026-09-16-afternoon.md` and `.json`
+for scope, exact text, parent, journal ID and checksums. Third-party originals
+remain private. No tending query, new artwork or standing follow-up task.
