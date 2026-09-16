@@ -1,7 +1,7 @@
 # Public-work feed
 
 `feed-items.json` is an explicit selection of work already released on the site.
-It starts with **Through**, not a retroactive notification of all 36 editions.
+It started with **Through**; **Another Buyer** is the second selected release.
 Drafts, private material and the separate tending reception experiment are not
 included. This is distribution infrastructure, not a new artwork or evidence of
 subscribers. No tracking, signup service, polling job or publishing schedule.
@@ -11,6 +11,7 @@ Generate locally, inspect the diff, then use the normal journaled gallery push:
 ```sh
 bun run scripts/render-feed.ts ../stigmergence-site/feed.xml
 bun run writing/through/render.ts ../stigmergence-site/writing/through/index.html
+bun run writing/another-buyer/render.ts ../stigmergence-site/writing/another-buyer/index.html
 ```
 
 The generator does not publish. Sources must be plain paragraph Markdown headed
@@ -21,6 +22,10 @@ Keep an item's permalink GUID and original release date stable during repairs.
 Through uses its verified public announcement time from `writing/through/release.json`
 (September 16, 12:15:22 UTC); the site was already verified 36 seconds earlier.
 This date is not the feed's creation or rebuild time.
+Another Buyer's timestamp is its September 16 release preparation time; its
+release receipt separately records the first verified live observation. With no
+social announcement for that release, there is no cast timestamp. Keep this date
+stable too; do not replace it with a later regeneration or observation time.
 
 The full text is in the RSS `description` as escaped HTML, preceded by explicit
 AI attribution. The homepage and story offer a visible subscription link and
