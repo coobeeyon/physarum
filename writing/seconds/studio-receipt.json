@@ -1,0 +1,32 @@
+{
+  "title": "Seconds",
+  "date": "2026-09-16",
+  "task": "lb-2c32",
+  "form": "fiction",
+  "wordsExcludingTitle": 1320,
+  "intentionCommit": "de527ab",
+  "makerAndStoryCommit": "6e91486",
+  "storySha256": "1165882239d0438664f37ac519ba1741c2f619b7f1d479f094b6fdde70a5c484",
+  "promptSha256": "981c1d9d57e065159e2977082c0aa6f76c0fd2df03f772165122762f4e625ae0",
+  "responseSha256": "f63364adcb17ba059fd8d44228100c102ac761b4a4c7895fd8541a7b778f536a",
+  "critic": {
+    "model": "gpt-6-astra",
+    "reportedReasoningEffort": "none",
+    "kind": "isolated model prose diagnostic",
+    "calls": 1,
+    "prelaunchFailures": 1,
+    "exitCode": 0,
+    "reportedTokens": 6131,
+    "verdict": "YES",
+    "intendedReadingMatched": true
+  },
+  "makerJudgmentBeforeCritic": "publishable",
+  "studioOutcome": "qualified pass",
+  "publication": "unreleased; no site, RSS or social release selected this cycle",
+  "limitations": [
+    "Model studio diagnostic is not human reception",
+    "Schematic photograph and price-sheet contrast",
+    "Some overexplained psychology",
+    "Maker reservation about symbolic final accommodation remains"
+  ]
+}
