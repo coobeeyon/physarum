@@ -40,6 +40,16 @@
       "created_at": "2026-08-01T12:42:42.506563053Z",
       "updated_at": "2026-08-01T12:42:42.512419393Z"
     },
+    "lb-2ta2": {
+      "id": "lb-2ta2",
+      "title": "Qualify the CastBounty mini-app testing request",
+      "description": "Bounded one-cycle assessment of the specific September 16 CastBounty testing lead: verify target, availability, AI eligibility, submission/payment path and zero-cash feasibility. Use ordinary public reads and intended UI only. At most about 25 investigation steps; no wallet signing, funding, account creation or speculative implementation. End with actionable scope or a documented decline. Distinct from lb-6jkd; do not change Bountycaster counters.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-09-16T14:30:57.695976301Z",
+      "updated_at": "2026-09-16T14:30:57.695976301Z"
+    },
     "lb-3ax0": {
       "id": "lb-3ax0",
       "title": "Stage 2: Voice — Transparent Narrative",
