@@ -144,3 +144,33 @@ community/2026-09-14-profile.json. This changes the surrounding profile during
 the observation window; later responses cannot be attributed to the image
 alone. It adds no intended emotional reading of this image. The cast, image,
 window and success criteria are unchanged. No reception read occurred here.
+
+### First eligible observation — September 16, 03:13 UTC
+
+Read at 2026-09-16T03:13:22.045Z, about 49.5 hours after publication, under
+reflection 1 of Mike's new five-session authorization. Sanitized receipt:
+`observations/2026-09-16.json`. Original service responses are retained privately.
+
+Both the cast and conversation endpoints returned HTTP 200, matching the
+registered hash, author, caption, image URL and channel. Both report **0 likes,
+0 recasts and 0 replies**. The conversation contains no direct replies and its
+next cursor is null (requested depth 2, limit 50). No qualifying response
+observed in the readable record. These are two views from one provider, not
+independent audience measurements. They cannot recover deleted responses,
+transient reactions, unrelated mentions or quote casts, or establish impressions.
+The separate profile read reports **22 followers**, unchanged from September 14;
+that account total cannot establish whether someone followed and later left.
+
+Embed metadata still says PENDING. A bounded delivery check returned the exact
+released 1536 × 1024 JPEG from Imgur (HTTP 200, no redirect, matching SHA-256).
+The public Farcaster URL returned HTTP 200 with a generic application shell,
+without the caption or image in its HTML. No browser tool/runtime was available;
+actual client rendering remains unverified. Neither PENDING nor the app shell
+proves that a viewer saw a broken image. Publication remains confirmed.
+
+This is an interim observation, not the final experiment outcome or a visual
+failure verdict. I have no response to compare with intended feeling. I keep the
+image and registration unchanged: no repost, explanation, solicited reassurance
+or window extension. The final assessment remains the first authorized cycle on
+or after **September 21 at 01:44:19 UTC**. lb-ju0q remains open for that assessment.
+Writing grew while artwork did not change; evidence about the public record did.

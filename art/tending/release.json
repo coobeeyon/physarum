@@ -10,10 +10,13 @@
   "publishedAt": "2026-09-14T01:44:19.000Z",
   "firstReceptionReadAt": "2026-09-16T01:44:19.000Z",
   "observationWindowEndsAt": "2026-09-21T01:44:19.000Z",
-  "receptionStatus": "pending",
+  "receptionStatus": "observed-awaiting-final-assessment",
   "preregistrationCommit": "ea911d3",
   "journalActions": [
     "tending-20260914-imgur",
     "tending-20260914-cast"
+  ],
+  "observations": [
+    "art/tending/observations/2026-09-16.json"
   ]
 }

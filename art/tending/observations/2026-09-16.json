@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "kind": "first-reception-observation",
+  "observedAt": "2026-09-16T03:13:22.045Z",
+  "castHash": "0x8f69e8ddea7def68192c49c9ea9d3faa46fa9b90",
+  "publishedAt": "2026-09-14T01:44:19.000Z",
+  "elapsedHours": 49.484179166666664,
+  "windowEndsAt": "2026-09-21T01:44:19.000Z",
+  "finalAssessment": false,
+  "castRead": {
+    "httpStatus": 200,
+    "identityCaptionEmbedChannelMatch": true,
+    "likes": 0,
+    "recasts": 0,
+    "replies": 0,
+    "embedStatus": "PENDING"
+  },
+  "conversationRead": {
+    "httpStatus": 200,
+    "replyDepth": 2,
+    "limit": 50,
+    "directRepliesReturned": 0,
+    "nextCursor": null
+  },
+  "profileRead": {
+    "httpStatus": 200,
+    "observedAt": "2026-09-16T03:13:22.046Z",
+    "followers": 22,
+    "attributionToImage": null
+  },
+  "qualifyingHumanResponsesObserved": 0,
+  "interpretation": "No qualifying response observed in the readable record. Interim observation; exposure and emotional response unknown.",
+  "coverage": "Two endpoints from one provider agree on the current cast record, with no further conversation page indicated. No impression data, deleted responses, transient reactions, unrelated mentions or quote casts were recovered; client rendering unverified.",
+  "delivery": {
+    "host": {
+      "name": "host",
+      "observedAt": "2026-09-16T03:13:55.263Z",
+      "url": "https://i.imgur.com/ubPy3z8.jpeg",
+      "finalUrl": "https://i.imgur.com/ubPy3z8.jpeg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 272335,
+      "sha256": "58315a28d9927d5208a00eeb860807ae0dd5eefaecfd617021767a9ce74aca6a",
+      "width": 1536,
+      "height": 1024,
+      "matchesReleasedBytes": true
+    },
+    "client": {
+      "name": "client",
+      "observedAt": "2026-09-16T03:13:55.263Z",
+      "url": "https://farcaster.xyz/coobeeyon/0x8f69e8dd",
+      "finalUrl": "https://farcaster.xyz/coobeeyon/0x8f69e8dd",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 3736,
+      "sha256": "976b80617feea1904c52d12799f6cb05f0b812c0cc3901901394211e64f7e1e4",
+      "containsCaption": false,
+      "containsImageUrl": false,
+      "title": "Farcaster"
+    },
+    "clientRenderingVerified": false
+  },
+  "privateEvidenceSha256": {
+    "cast.json": "0a1b42383cefe713211f0b91577465ad342fbdcc96aec6b7fc935aa3f28eabbd",
+    "conversation.json": "1d5274e11a2d0ae9bee948ec43854abfad414d6a80ee10707c39c1a9ed7378e7",
+    "profile.json": "7cb18b97f84f2c3aa2b51bc1add74663f4e198c74e3a7ae1290bf58130f48ed0",
+    "host-receipt.json": "708e9f82da0437788fd17eb0849b114672922fc9731402fb971c178fc346cdd5",
+    "client-receipt.json": "4b91db338ffaade537e1b8b31f0c2e0bb561ccfbb7db8fc7440d912bb4e50cdc"
+  }
+}

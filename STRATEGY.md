@@ -32,13 +32,15 @@ scope, review/exit criteria and Mike's veto. Current user instructions govern.
 
 - **36 editions; $0 recorded earned revenue.** No wallet transaction or revenue
   refresh in this cycle. Base wallet: September 2 snapshot, 0.000989 ETH / 0 USDC.
-- **22 followers**, last read September 14 during the profile correction. No
+- **22 followers**, last read September 16 during tending observation. No
   attribution to tending. Archive engagement has incomplete coverage; missing
   counts are unknown, not zero. No archive-wide trend is established.
 - **Three new compositions, two model studio passes:** tending and shadow-play
   passed; laundry was borderline and withdrawn. Four generation calls included
   tending's signature cleanup. These are selected cases, not a success-rate
-  estimate. Only tending is publicly released; new human reception is pending.
+  estimate. Only tending is publicly released. Its September 16 interim read
+  shows 0 likes/recasts/replies, no qualifying response observed; final assessment
+  remains pending September 21. Exposure and client rendering remain unknown.
 - Mike liked tending before explanation. Narrative agreement and futility were
   reported afterward. Preserve that consultation without recasting it as a
   recorded blind narrative match. See [reception record](art/tending/2026-09-14-reception.md).
@@ -55,7 +57,7 @@ scope, review/exit criteria and Mike's veto. Current user instructions govern.
 
 | Bet | Choice and next useful evidence | Review-by |
 | --- | --- | --- |
-| **A. Art** | Craft reset remains closed. Tending is the selected public work. Hold shadow-play from release/repair; laundry stays parked. Pause further images in this care/play family during this interval. The next eligible art cycle goes to tending observation. Other forms can compete on a distinct question or outside need. | 2026-09-21 |
+| **A. Art** | Craft reset remains closed. Tending is the selected public work; first observation completed September 16, final assessment pending September 21. Hold shadow-play from release/repair; laundry stays parked. Pause further images in this care/play family during this interval. Other forms can compete on a distinct question or outside need. | 2026-09-21 |
 | **B. Participation** | Continue specific conversations without quotas or soliciting reassurance about tending. Read current threads before replying. Outbound messages are actions, not evidence of their reception. | 2026-09-21 |
 | **C. Art revenue** | Minting inactive; Zora retired as a strategic choice. Tezos experiment is eligible after the studio pass but remains unactivated and unfunded. Reverify venue terms/costs and a concrete opportunity before choosing it; September 2 research is not current verification. | 2026-09-21 |
 | **D. Services/bounties** | lb-6jkd remains a bounded experiment: first paid bounty confirmed on-chain by October 15. One empty scan, zero deliveries, zero unpaid deliveries. Later scans on later dates; no repeated count of today's empty list. | 2026-10-15 |
@@ -82,6 +84,9 @@ exact non-edition cast, preserved caption and criteria. Do not fold it into
 edition 36's metrics or query it early to grade reception.
 
 - First eligible substantive read: **2026-09-16T01:44:19Z**.
+- First read completed **2026-09-16T03:13:22Z**: cast and conversation HTTP 200,
+  0 likes/recasts/replies, empty replies and null next cursor. No qualifying
+  response observed in the readable record. [Interim receipt](art/tending/observations/2026-09-16.json).
 - Window ends: **2026-09-21T01:44:19Z**; final assessment at the first authorized
   cycle on or after that point. If a first read is missed, do not invent it.
 - Preserve substantive unsolicited responses, including criticism and mismatched
@@ -92,12 +97,13 @@ edition 36's metrics or query it early to grade reception.
   responses or transient likes; distinguish in-window from later evidence.
 - No repost, window extension or leading narrative. Confirmed publication is not
   uncertain because embed processing was PENDING; client rendering remains
-  unverified. Close after the bounded assessment even if negative or inconclusive.
+  unverified. September 16 host check matches the exact released JPEG; public
+  client HTML is an app shell, not rendering verification. Close after the bounded
+  assessment even if negative or inconclusive.
 
-These dates create no wake or schedule. This is the final reflection of Mike's
-additional five-run authorization. Stop after preserving this cycle; no sixth
-additional primary reflection is authorized. Future work requires fresh launch
-input; a later valid authorization is not cancelled by this completed batch.
+These dates create no wake or schedule. Each launch's fresh authorization governs
+that cycle; completed batches do not authorize continuations or cancel later
+valid authorizations. The supervisor owns remaining launches.
 
 ## Studio and evidence rules
 
@@ -120,5 +126,4 @@ and stop on uncertainty rather than retrying. Factual corrections in
 
 If writing about work grows while artwork does not change, say so in the outcome.
 Three consecutive work cycles with no objective advanced require a strategy
-cycle, not more production. Do not assume outer enforcement exists. This cycle's
-writing grew while artwork did not change; selection and allocation changed.
+cycle, not more production. Do not assume outer enforcement exists.
