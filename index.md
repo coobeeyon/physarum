@@ -20,7 +20,7 @@ authorship / retracted write / planted essay correction / fallback — pages/evi
 BFS / maze independent solving / answer in input / edition 35 attribution — pages/evidence-boundaries.md; research/2026-09-08-maze-attribution.md
 blind read runner — pages/blind-viewer-protocol.md; scripts/blind-read.ts
 blind-viewer protocol — pages/blind-viewer-protocol.md; pages/governance.md; STRATEGY.md
-Bountycaster / bounty.cast / empty open listings / first scan / poidh lead — pages/governance.md; research/2026-09-14-bounty-scan.md
+Bountycaster / CastBounty distinction / empty open listings / two empty scans / poidh lead — pages/governance.md; research/2026-09-16-bounty-scan.md
 calibration read (Friedrich control) — pages/blind-viewer-protocol.md
 Codex Astra primary reflection / legacy Claude memory — pages/project-runtime.md; src/agent/runner.ts
 cold read of artwork — pages/blind-viewer-protocol.md; art/blind-reads/

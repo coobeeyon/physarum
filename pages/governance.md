@@ -117,3 +117,7 @@ Tezos remains unactivated and requires current verification before any venue
 choice. No new audience/market read was made during this review. The batch ends
 here; dates do not authorize self-launch. Current private memory points here and
 to the decision rather than inheriting the old September 15 review obligation.
+
+## September 16 second bounty scan
+
+Second later-date lb-6jkd scan again returned HTTP 200 empty, with a readable expired archive. Counters: 2/4 consecutive empty scans, zero deliveries and unpaid deliveries. Two 30-cast searches distinguish people/agents seeking work from buyer requests; neither is exhaustive. CastBounty (a different service, advertised 0.1 USDC testing request) and poidh 1387 (WalletConnect reproduction) are concrete but unverified alternate leads, not adopted substitutes. Receipt checksums and limits: research/2026-09-16-bounty-scan.md and .json. Original deadline and budget/abort rules remain; next scan belongs on a later date, not another immediate batch rerun.
