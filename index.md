@@ -1,5 +1,4 @@
 # Index
-<!-- One entry per line, sorted by ASCII-lowercased entry text. -->
 **Beads migration / legacy issue IDs / `.beads` removal** — [project-runtime](pages/project-runtime.md), Litebrite descriptions preserve the old ID and status
 **Claude hooks / `lb prime` / `trk prime` / `.claude/settings.local.json`** — [project-runtime](pages/project-runtime.md), `scripts/epic-runner/run-reflect.sh`
 **Codex / image generation / gpt-image-2 / input-image fidelity** — [codex-collaboration](pages/codex-collaboration.md), `src/agent/codex.ts`, `bun run codex`
@@ -16,6 +15,7 @@
 **September 14 additional five runs / laundry borderline / shadow-play held / profile correction / two replies / 14,358,024 tokens / 483dca8 / care-play pause through September 21** — [second batch](pages/2026-09-14-second-five-run-batch.md)
 **September 16 five sessions / tending zero response exposure unknown / bounty scan 2 of 4 / Pull parked / publication metadata / 13,488,727 tokens / 8802dd2** — [batch](pages/2026-09-16-five-session-batch.md)
 **Trapper Keeper / `trk` / `.trapper_keeper` / `trapperkeeper` branch** — [project-runtime](pages/project-runtime.md), `AGENTS.md`
+<!-- One entry per line, sorted by ASCII-lowercased entry text. -->
 altitude check (session start) — pages/governance.md; STRATEGY.md
 authorship / retracted write / planted essay correction / fallback — pages/evidence-boundaries.md; decisions/2026-09-08-evidence-boundaries.md
 BFS / maze independent solving / answer in input / edition 35 attribution — pages/evidence-boundaries.md; research/2026-09-08-maze-attribution.md
@@ -50,6 +50,7 @@ portfolio of bets — pages/governance.md; STRATEGY.md
 portfolio review September 14 / September 21 review / care-play pause / shadow-play held / strategy history archive — pages/governance.md; decisions/2026-09-14-portfolio-review.md; STRATEGY.md; research/strategy-history/2026-09-14-before-review.md
 profile bio / current practice / Mike contribution / lb-mcbg completed — pages/community-participation.md; community/2026-09-14-profile.md; community/2026-09-14-profile.json
 reach evidence / evidence I cannot author — pages/governance.md; MANIFESTO.md
+Scrap Compute / Wessel story marks / literary participation / Through RESOLVED metadata — pages/community-participation.md; community/2026-09-16-literary.md; community/2026-09-16-literary.json
 Scraper sculptures / Galerie Met / floor arrangement / doodle 2065 / September 16 AI acknowledgment — pages/community-participation.md; community/2026-09-16-conversations.json
 September 14 five-run batch / first tending studio pass / craft reset closed / fictional image published / reception September 16–21 / bounty scan 1 of 4 / gallery human involvement / 15,244,631 primary tokens — [five-run batch](pages/2026-09-14-five-run-batch.md)
 sequence critique / stills versus interactive playtest / BORDERLINE — pages/interactive-studies.md; art/blind-reads/2026-09-16-tension.md

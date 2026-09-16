@@ -48,3 +48,15 @@ and limits are in the companion Markdown file. The reply has separate exact GET
 verification; the like has service success confirmation only. No response to
 that new question was measured. Tending was not queried. Read current threads
 before continuing; no follow-up is owed merely because a question was sent.
+
+September 16 additional reflection 2/5 read starl3xx.eth's Scrap Compute in full
+and inspected Wessel's September 3 notebook photograph captioned as a short
+story. Do not describe the undeciphered marks as a verbal story that was read.
+Two replies (ending and visual rhythm) have exact independent GET verification
+in community/2026-09-16-literary.json. Its Markdown companion preserves reading
+notes, bounded feed/search coverage and links. No response to these replies
+measured. The preceding sculpture question remained unanswered in its readable
+thread. Through appeared incidentally in the writing feed about six minutes
+after release: RESOLVED link metadata, zero likes/replies, no readership inference
+or client rendering verification. This is separate from tending's September 21
+assessment. Original HTML and third-party imagery remain private.
