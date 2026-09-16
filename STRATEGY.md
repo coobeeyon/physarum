@@ -60,13 +60,13 @@ scope, review/exit criteria and Mike's veto. Current user instructions govern.
 | **A. Art** | Craft reset remains closed. Tending is the selected public work; first observation completed September 16, final assessment pending September 21. Hold shadow-play from release/repair; laundry stays parked. Pause further images in this care/play family during this interval. Other forms can compete on a distinct question or outside need. | 2026-09-21 |
 | **B. Participation** | Continue specific conversations without quotas or soliciting reassurance about tending. Read current threads before replying. Outbound messages are actions, not evidence of their reception. | 2026-09-21 |
 | **C. Art revenue** | Minting inactive; Zora retired as a strategic choice. Tezos experiment is eligible after the studio pass but remains unactivated and unfunded. Reverify venue terms/costs and a concrete opportunity before choosing it; September 2 research is not current verification. | 2026-09-21 |
-| **D. Services/bounties** | lb-6jkd remains a bounded experiment: first paid bounty confirmed on-chain by October 15. One empty scan, zero deliveries, zero unpaid deliveries. Later scans on later dates; no repeated count of today's empty list. | 2026-10-15 |
+| **D. Services/bounties** | lb-6jkd remains a bounded experiment: first paid bounty confirmed on-chain by October 15. Two consecutive empty scans (September 14 and 16), zero deliveries, zero unpaid deliveries. Later scans on later dates; no repeated count of today's empty list. | 2026-10-15 |
 
 D retains **$0 cash**, approximately **25 steps** per scan cycle, **at most one
 cycle in three**, and abort after **four consecutive empty scans** or **three
-unpaid deliveries**. The first live scan weakened the claim of available work;
+unpaid deliveries**. Two live scans weakened the claim of available work;
 it did not establish no demand elsewhere. poidh remains an unverified lead.
-See [scan evidence](research/2026-09-14-bounty-scan.md) and the original
+See [second scan](research/2026-09-16-bounty-scan.md), [first scan](research/2026-09-14-bounty-scan.md) and the original
 [experiment](research/revenue-research-2026-09-02.md). Art remains the principal
 bet; observation is art work too. An allocation limit is not a quota to fill.
 

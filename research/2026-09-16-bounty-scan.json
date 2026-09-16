@@ -1,0 +1,62 @@
+{
+  "observedAt": "2026-09-16T03:22:15.778Z",
+  "experiment": "lb-6jkd",
+  "scan": 2,
+  "consecutiveEmptyScans": 2,
+  "deliveries": 0,
+  "unpaidDeliveries": 0,
+  "result": "No claimable Bountycaster listing found in this bounded scan",
+  "sources": [
+    {
+      "name": "open",
+      "url": "https://www.bountycaster.xyz/api/v1/bounties/open",
+      "status": 200,
+      "observedAt": "2026-09-16T03:19:17.410Z",
+      "bodySha256": "9ebd64c63b942e08130e85c8d7727332777ae069c429623be205eb9d51a1257f",
+      "bountyCount": 0
+    },
+    {
+      "name": "all",
+      "url": "https://www.bountycaster.xyz/?status=all",
+      "status": 200,
+      "observedAt": "2026-09-16T03:19:22.450Z",
+      "bodySha256": "f3df880b8a7581c3f3eb0bd738b3902054712033ec1f8826e971aec467af010a"
+    },
+    {
+      "name": "bountycaster-search",
+      "url": "https://api.neynar.com/v2/farcaster/cast/search?q=bountycaster&limit=30&sort_type=desc_chron",
+      "status": 200,
+      "observedAt": "2026-09-16T03:19:24.196Z",
+      "bodySha256": "980d8ad2e3f108f5ae7857491007fbdec60c597a6453cfd5e5b71833dcf873f5",
+      "returned": 30,
+      "newestReturned": "2026-09-04T00:18:31.000Z",
+      "oldestReturned": "2026-04-26T23:04:25.000Z",
+      "moreResultsAvailable": true
+    },
+    {
+      "name": "bounty-search",
+      "url": "https://api.neynar.com/v2/farcaster/cast/search?q=bounty&limit=30&sort_type=desc_chron",
+      "status": 200,
+      "observedAt": "2026-09-16T03:19:24.488Z",
+      "bodySha256": "ec9e42bf8538766f1658907ce23fbe99407ee204f9435fd7a5ac9a8c04a27b84",
+      "returned": 30,
+      "newestReturned": "2026-09-16T00:40:05.000Z",
+      "oldestReturned": "2026-09-15T00:01:46.000Z",
+      "moreResultsAvailable": true
+    },
+    {
+      "name": "castbounty",
+      "url": "https://castbounty.vercel.app/bounty/560eebbe-2d52-4917-9c78-f3e84c9d912f",
+      "status": 200,
+      "observedAt": "2026-09-16T03:19:57.979Z",
+      "bodySha256": "beae82aebf3edeeca6818ef7d0bd15e9d63b260db80c25d746c65ac4d4552738"
+    },
+    {
+      "name": "poidh-1387",
+      "url": "https://poidh.xyz/base/bounty/1387",
+      "status": 200,
+      "observedAt": "2026-09-16T03:19:58.782Z",
+      "bodySha256": "c3818ec9f712f8379538e8e0c24540448774f7f99f6df046fda7266419c8f45f"
+    }
+  ]
+}
