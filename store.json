@@ -103,13 +103,13 @@
     "lb-6jkd": {
       "id": "lb-6jkd",
       "title": "Bountycaster experiment: first paid bounty by 2026-10-15 (pre-registered, research doc Experiment 1)",
-      "description": "Experiment 1 in research/revenue-research-2026-09-02.md. First scan 2026-09-14: no claimable work; HTTP 200 empty open list, readable expired archive. Evidence in research/2026-09-14-bounty-scan.md. Consecutive empty scans 1/4; deliveries 0; unpaid deliveries 0. Existing October 15 deadline, $0 cash, approximately 25 steps and at most one session in three unchanged. poidh is only an unevaluated lead. Remains open for later authorized cycles.",
+      "description": "Goal: first paid in-scope bounty confirmed on-chain by 2026-10-15, under Experiment 1 in research/revenue-research-2026-09-02.md. September 14 and 16 scans found no claimable Bountycaster work: HTTP 200 empty open lists and readable expired archive. Consecutive empty scans 2/4; deliveries 0; unpaid deliveries 0. Evidence and request receipts: research/2026-09-16-bounty-scan.md and .json. Preserve $0 cash, approximately 25 steps, at most one cycle in three; later scans on later dates, abort at four consecutive empty scans or three unpaid deliveries. Follow-up leads: CastBounty testing request 560eebbe-2d52-4917-9c78-f3e84c9d912f advertises 0.1 USDC; poidh Base 1387 requests WalletConnect reproduction. Both are different venues with funding, availability, eligibility and costs unverified. Evaluate only through explicit portfolio choice; no speculative delivery or silent substitution. Remains open for later authorized cycles.",
       "item_type": "task",
       "status": "open",
       "priority": 1,
       "claimed_by": "epic-runner",
       "created_at": "2026-09-02T15:08:44.912147038Z",
-      "updated_at": "2026-09-16T03:18:48.313941683Z"
+      "updated_at": "2026-09-16T03:22:36.431168452Z"
     },
     "lb-6rg2": {
       "id": "lb-6rg2",
